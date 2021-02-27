@@ -7,15 +7,16 @@ import { TemplateModule } from './template/template.module';
 import { HomeComponent } from './home/home.component'
 import { ClientesModule } from './clientes/clientes.module';
 import { ClientesService } from './clientes.service'
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ServicoPrestadoModule } from './servico-prestado/servico-prestado.module';
 import { ServicoPrestadoService } from './servico-prestado.service';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
-import { AuthService } from './auth.service';
-import { TokenInterceptor } from './token.interceptor';
+import { authInterceptorProviders } from './token.interceptor';
+import { AuthService } from './services/auth.service';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { TokenInterceptor } from './token.interceptor';
     HomeComponent,
     LoginComponent,
     LayoutComponent,
+    RegisterComponent,
     
   ],
   imports: [
@@ -34,18 +36,12 @@ import { TokenInterceptor } from './token.interceptor';
     TemplateModule,
     ClientesModule,
     ServicoPrestadoModule,
-    
-
 
   ],
   providers: [ClientesService,
-     ServicoPrestadoService,
-      AuthService, 
-      TokenInterceptor,
-      {provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true}
-    
+     ServicoPrestadoService, 
+     AuthService,     
+      authInterceptorProviders
     ],
   bootstrap: [AppComponent]
 })

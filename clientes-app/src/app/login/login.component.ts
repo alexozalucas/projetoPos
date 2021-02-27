@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { Usuario } from './usuario';
+import { AuthService } from '../services/auth.service';
+import { AppConstants } from '../constants/app.constants';
+import { TokenStorageService } from '../services/token-storage.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 
 
@@ -10,64 +13,74 @@ import { Usuario } from './usuario';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  username: string;
-  password: string;
-  cadastrando: boolean;
-  mensagemSucesso: string;
-  errors: string[];
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  currentUser: any;
+  googleURL = AppConstants.GOOGLE_AUTH_URL;
 
+  constructor(private authService: AuthService,
+               private tokenStorage: TokenStorageService,
+               private route: ActivatedRoute, 
+               private userService: UserService,
+               private router: Router) { }
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-
-  ) { }
-
-  onSubmit() {
-    this.authService
-      .tentarLogar(this.username, this.password)
-      .subscribe(response => {
-
-        const access_token = JSON.stringify(response);
-        localStorage.setItem('access_token', access_token)
-        this.router.navigate(['/home'])
-      }, errorResponse => {
-        this.errors = ['Usuário e/ou senha incorreto(s).']
-      })
+  ngOnInit(): void {
+    const token: string = this.route.snapshot.queryParamMap.get('token');
+    const error: string = this.route.snapshot.queryParamMap.get('error');
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.currentUser = this.tokenStorage.getUser();
+    }
+    else if (token) {
+      this.tokenStorage.saveToken(token);
+      this.userService.getCurrentUser().subscribe(
+        data => {
+          this.login(data);
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
+        }
+      );
+    }
+    else if (error) {
+      this.errorMessage = error;
+      this.isLoginFailed = true;
+    }
   }
 
-  preparaCadastrar(event) {
-    event.preventDefault();
-    this.cadastrando = true;
-
+  onSubmit(): void {
+    this.authService.login(this.form).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.login(data.user); 
+        this.router.navigate(['/home'])         
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
   }
 
-  cancelaCadastro() {
-    this.cadastrando = false;
-
+  login(user): void {
+    this.tokenStorage.saveUser(user);
+    this.isLoginFailed = false;
+    this.isLoggedIn = true;
+    this.currentUser = this.tokenStorage.getUser();
+    this.router.navigate(['/home']) 
+    //window.location.reload();
   }
 
-  cadastrar() {
-    const usuario: Usuario = new Usuario();
-    usuario.username = this.username;
-    usuario.password = this.password;
-    this.authService
-      .salvar(usuario)
-      .subscribe(response => {
-        this.mensagemSucesso = "Cadastro realizado com sucesso! Efetue o login.";
-        this.cadastrando = false;
-        this.username = '';
-        this.password = '';
-        this.errors = []
-      }, errorResponse => {
-        this.mensagemSucesso = null;
-        this.errors = errorResponse.error.erros
-      })
-  }
-
-
-
+  
 
 }
+
+
+
+
+
