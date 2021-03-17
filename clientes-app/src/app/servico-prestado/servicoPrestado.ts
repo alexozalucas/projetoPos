@@ -4,5 +4,6 @@ export class ServicoPrestado{
 	value: string;
     idClient: number;	
     date: string;
+    idTypeService: number;
     
 }

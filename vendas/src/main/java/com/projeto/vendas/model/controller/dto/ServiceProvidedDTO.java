@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ServiceProvidedDTO {
 	
+	private Integer id;
+	
 	@NotEmpty (message = "{campo.descricao.obrigatorio}")
 	private String description;	
 	
@@ -21,6 +23,9 @@ public class ServiceProvidedDTO {
 	
 	@NotEmpty (message = "{campo.data.obrigatorio}")
 	private String date;
+	
+	@NotNull (message = "{campo.type.obrigatorio}") 
+	private Long idTypeService;	
 	
 	
 

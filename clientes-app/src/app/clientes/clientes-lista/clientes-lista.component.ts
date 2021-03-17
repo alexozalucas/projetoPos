@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { timeStamp } from 'console';
 import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from '../cliente';
+
 
 
 @Component({
@@ -30,6 +31,7 @@ export class ClientesListaComponent implements OnInit {
       });
   }
 
+  
   public novoCadastro() {
     this.router.navigate(['/clientes/form']);
   }
@@ -37,7 +39,6 @@ export class ClientesListaComponent implements OnInit {
   preparaDelecao(cliente: Cliente) {
     this.clienteSelecionado = cliente;
   }
-
 
   deletarCliente(cliente: Cliente) {
     this.service.deletar(this.clienteSelecionado)

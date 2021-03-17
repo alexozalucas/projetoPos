@@ -1,0 +1,94 @@
+<h1 class="mt-4">Prestação de Contas</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+                {{mensagemSucesso}}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+                {{mensagemErro}}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-warning" (click)="novoCadastro()">
+                <i class="fa fa-plus"></i> Novo
+            </button>
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço Prestado</th>
+                        <th>Cliente</th>
+                        <th>Tipo de Pagamento</th>
+                        <th>Desconto</th>
+                        <th>Acrescimo</th>
+                        <th>Observação</th>                       
+                        <th>Valor Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let prestacaoConta of prestacaoContas">
+                        <td>{{ prestacaoConta.id }}</td>
+                        <td>{{ prestacaoConta.serviceProvided.description }}</td>
+                        <td>{{ prestacaoConta.serviceProvided.client.name }}</td>
+                        <td>{{ prestacaoConta.typePayment.type }}</td>
+                        <td>{{ prestacaoConta.discountValue }}</td>
+                        <td>{{ prestacaoConta.additionValue }}</td>
+                        <td>{{ prestacaoConta.observation }}</td>
+                        <td>{{ prestacaoConta.totalValue }}</td>
+                        <td>
+                            <button class="btn btn-primary m-1" routerLink="/prestacao/conta/{{ prestacaoConta.id }}">
+                                <i class="fa fa-edit"></i>
+                            </button>
+
+                            <button class="btn btn-secondary m-1"  routerLink="/prestacao/conta/{{ prestacaoConta.id}}/true">
+                                <i class="fa fa-print" aria-hidden="true"></i>
+                            </button>                             
+
+                            <button class="btn btn-danger m-1" (click)="preparaDelecao(prestacaoConta)" data-toggle="modal"
+                                data-target="#modalDeSelecao">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="modalDeSelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+
+                </div>
+                <div class="modal-body" *ngIf="prestacaoContasSelecionado">
+                    Confirma a exclusão do(a) prestação de contas: {{ prestacaoContasSelecionado.service }}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="deletarPrestacaoConta()" data-dismiss="modal">
+                        Confirma</button>
+                    <button class="btn btn-default" data-dismiss="modal"> Cancela</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

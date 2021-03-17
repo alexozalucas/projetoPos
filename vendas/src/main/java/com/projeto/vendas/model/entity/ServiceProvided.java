@@ -1,5 +1,6 @@
 package com.projeto.vendas.model.entity;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -43,6 +44,9 @@ public class ServiceProvided {
 	@Column(name = "date")
 	private LocalDate date;
 	
+	@ManyToOne
+	@JoinColumn(name= "id_typeService")
+	private TypeService typeService;
 	
 	
 	

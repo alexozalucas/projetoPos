@@ -1,0 +1,261 @@
+<div class="prestacao" *ngIf="!relatorio">
+    <h1 class="mt-4">Prestação de contas</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">{{prestacaoContasBuscar.id ? 'Edição' :'Cadastro'}}</li>
+    </ol>
+
+    <div class="container-fluid">
+        <form #tipoPagamentoForm="ngForm" (ngSubmit)="onSubmit()">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert" *ngIf="success == true">
+                        Prestação de Contas Salva com Sucesso
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                        {{erro}}
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="prestacaoContasBuscar.id">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            ID:
+                        </label>
+                        <input type="text" class="form-control" disabled="true" [ngModel]="prestacaoContasBuscar.id"
+                            name="id" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="!prestacaoContasBuscar.id">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Competência</label>
+                        <input class="form-control" placeholder="MM/YYYY" type="text" id="data"
+                            (change)="buscarPorData($event)" mask="00/0000">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=row *ngIf="!prestacaoContasBuscar.id">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Serviço Prestado:</label>
+                        <select class="form-control" [ngModelOptions]="{standalone:true}"
+                            [(ngModel)]="servicoPrestadoBuscaSelecionado">
+                            <option value="">Selecione...</option>
+                            <option *ngFor="let servicoPrestadosBusca of servicoPrestadoBusca"
+                                [ngValue]="servicoPrestadosBusca">
+                                {{ servicoPrestadosBusca.id +" - "+ servicoPrestadosBusca.description}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="servicoPrestadoBuscaSelecionado.id">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Cliente:</label>
+                        <input class="form-control" disabled="true"
+                            [(ngModel)]="servicoPrestadoBuscaSelecionado.client.name" type="text" name="name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tipo Serviço:</label>
+                        <input class="form-control" disabled="true"
+                            [(ngModel)]="servicoPrestadoBuscaSelecionado.typeService.service" type="text"
+                            name="service">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="servicoPrestadoBuscaSelecionado.id">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Preço:</label>
+                        <input class="form-control" disabled="true" [(ngModel)]="servicoPrestadoBuscaSelecionado.value"
+                            type="text" name="value">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Descrição:</label>
+                        <input class="form-control" disabled="true"
+                            [(ngModel)]="servicoPrestadoBuscaSelecionado.description" type="text" name="description">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=row>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Tipo de Pagamento:</label>
+                        <select class="form-control" name="pagamento" [(ngModel)]="tipoPagamentoSelecionado.id"
+                            [ngModelOptions]="{standalone:true}">
+                            <option value="">selecionar...</option>
+                            <option *ngFor="let tiposPagamento of tipoPagamento" [ngValue]="tiposPagamento.id">
+                                {{ tiposPagamento.id + " - "+tiposPagamento.type }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Desconto:</label>
+                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.discountValue" type="text"
+                            name="discountValue" id="inputValue">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Acrescimo:</label>
+                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.additionValue" type="text"
+                            name="additionValue" id="inputValue">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Valor Total:</label>
+                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.totalValue" type="text"
+                            name="totalValue" id="inputValue">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Data de pagamento:</label>
+                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.datePayment"
+                            placeholder="DD/MM/YYYY" type="text" id="data" name="datePayment" mask="00/00/0000">
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label>Observação:</label>
+                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.observation" type="text"
+                            name="observation">
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success dimensaobotao m-1 " *ngIf="!prestacaoContasBuscar.id">
+                        <i class="fa fa-save"></i> Salvar
+                    </button>
+                    <button type="submit" class="btn btn-primary dimensaobotao m-1 " *ngIf="prestacaoContasBuscar.id">
+                        <i class="fa fa-sync-alt"></i> Atualizar
+                    </button>
+                    <button type="button" class="btn btn-danger dimensaobotao m-1" (click)="voltarParaListagem()">
+                        <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+                    </button>
+                    <button type="button" class="btn btn-secondary m-1" (click)="teste()"
+                        *ngIf="prestacaoContasBuscar.id">
+                        <i class="fa fa-print" aria-hidden="true"></i> Relatório
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="relatorio-prestacao" *ngIf="relatorio">
+    <h1 class="mt-4">Relátório Prestação de contas</h1>
+
+    <h4 class="mt-4">Cliente:</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <span>Nome: {{prestacaoContasBuscar.serviceProvided.client.name}} </span>
+            <span class="ml-3">CPF: {{prestacaoContasBuscar.serviceProvided.client.cpf}} </span>
+        </div>
+    </div>
+
+    <h4 class="mt-4">Serviço Prestado:</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3">ID: {{prestacaoContasBuscar.serviceProvided.id}} </span>
+            <span class="mr-3">Descrição: {{prestacaoContasBuscar.serviceProvided.description}} </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3">Data: {{prestacaoContasBuscar.serviceProvided.date}} </span>
+            <span class="mr-3">Tipo de Serviço: {{prestacaoContasBuscar.serviceProvided.typeService.service}} </span>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3">Valor Combinado: R$ {{prestacaoContasBuscar.serviceProvided.value}} </span>
+        </div>
+    </div>
+
+    <h4 class="mt-4">Prestação de conta</h4>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3">Valor de Desconto: R$ {{prestacaoContasBuscar.discountValue}} </span>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3">Valor de Acrescimo: R$ {{prestacaoContasBuscar.additionValue}} </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3">Valor Total: R$ {{prestacaoContasBuscar.totalValue}} </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3">Observação: {{prestacaoContasBuscar.observation}} </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3 mb-10">Tipo de pagamento: {{prestacaoContasBuscar.typePayment.type}} </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="mr-3 mb-10">Tipo de pagamento: {{prestacaoContasBuscar.datePayment}} </span>
+        </div>
+    </div>
+
+
+    <br /><br />
+    <br /><br />
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-secondary " onclick="window.print()" *ngIf="prestacaoContasBuscar.id">
+                <i class="fa fa-print" aria-hidden="true"></i> Imprimir
+            </button>
+        </div>
+    </div>
+</div>

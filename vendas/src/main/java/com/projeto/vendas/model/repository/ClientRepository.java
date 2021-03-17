@@ -6,6 +6,8 @@ import com.projeto.vendas.model.entity.Client;
 
 public interface ClientRepository extends JpaRepository<Client, Integer>{
 	
+	Boolean existsByCpf(String cpf);
+	
 	
 
 }

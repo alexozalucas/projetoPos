@@ -17,6 +17,16 @@ import { LayoutComponent } from './layout/layout.component';
 import { authInterceptorProviders } from './token.interceptor';
 import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './register/register.component';
+import { DefinicaoModule } from './definicao/definicao.module';
+import { PagamentoModule } from './pagamento/pagamento.module';
+import { PagamentoService } from './pagamento.services';
+import { DefinicaoService } from './definicao.service';
+import { PrestaContasService } from './presta-contas.services';
+import { PrestacaoContasModule } from './prestacao/prestacao-contas.module';
+import { GraficoModule } from './grafico/grafico.module';
+import { GraficoService } from './grafico-services';
+
+
 
 
 @NgModule({
@@ -25,7 +35,9 @@ import { RegisterComponent } from './register/register.component';
     HomeComponent,
     LoginComponent,
     LayoutComponent,
-    RegisterComponent,
+    RegisterComponent
+
+    
     
   ],
   imports: [
@@ -36,12 +48,20 @@ import { RegisterComponent } from './register/register.component';
     TemplateModule,
     ClientesModule,
     ServicoPrestadoModule,
+    DefinicaoModule,
+    PagamentoModule,
+    PrestacaoContasModule,
+    GraficoModule
 
   ],
   providers: [ClientesService,
+      DefinicaoService,      
      ServicoPrestadoService, 
+     PagamentoService,
+     PrestaContasService,
      AuthService,     
-      authInterceptorProviders
+      authInterceptorProviders,
+      GraficoService
     ],
   bootstrap: [AppComponent]
 })

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class BigDecimalConvert {
 
 	
-	public BigDecimal convert(String value) {
+	public static BigDecimal convert(String value) {
 		if(value == null) {
 			return null;
 		}

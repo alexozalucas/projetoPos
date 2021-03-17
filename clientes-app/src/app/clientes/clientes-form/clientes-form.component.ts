@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ClientesModule } from '../clientes.module';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Cliente } from '../cliente';
 import { ClientesService } from 'src/app/clientes.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { url } from 'inspector';
+import { NgxMaskModule } from 'ngx-mask'
 
 
 @Component({
@@ -26,33 +25,21 @@ export class ClientesFormComponent implements OnInit {
     this.cliente = new Cliente();
   }
 
+
+
   ngOnInit() {
     let params: Observable<Params> = this.activatedRouter.params
     params.subscribe(urlParams => {
       this.id = urlParams['id'];
-      if(this.id){
+      if (this.id) {
         this.service
-        .getClientesById(this.id)
-        .subscribe(
-          response => this.cliente = response
-          , reject => this.cliente = new Cliente()          
-        )
-
+          .getClientesById(this.id)
+          .subscribe(
+            response => this.cliente = response
+            , reject => this.cliente = new Cliente()
+          )
       }
-
-    })
-
-   /* if (params && params.value && params.value.id) {
-      this.id = params.value.id;
-      this.service
-        .getClientesById(this.id)
-        .subscribe(
-          response => this.cliente = response
-          , reject => this.cliente = new Cliente()
-        )
-    }*/
-
-
+    });
   }
 
 

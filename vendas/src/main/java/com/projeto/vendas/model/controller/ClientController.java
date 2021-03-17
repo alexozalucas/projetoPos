@@ -1,6 +1,7 @@
 package com.projeto.vendas.model.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -30,15 +31,18 @@ public class ClientController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Client salve(@RequestBody @Valid Client client) {
-	
+
+		if (repository.existsByCpf(client.getCpf())) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "CPF já cadastrado");
+		}
 		return repository.save(client);
 	}
 
 	@GetMapping("{id}")
 	public Client getClientById(@PathVariable Integer id) {
 
-		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "cliente não encontrado"));
-
+		return repository.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "cliente não encontrado"));
 	}
 
 	@DeleteMapping("{id}")
@@ -51,30 +55,28 @@ public class ClientController {
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
 	}
-	
-	
-	@PutMapping("{id}")	
-	public Client updateClient(@PathVariable Integer id, @RequestBody @Valid Client updatedClient ) {
-		
-		
-		if(repository.existsById(id)) {
-			repository.save(updatedClient);	
-			 
-		} else {
-						
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado");
+
+	@PutMapping("{id}")
+	public Client updateClient(@PathVariable Integer id, @RequestBody @Valid Client updatedClient) {
+
+		Optional<Client> cliente = repository.findById(updatedClient.getId());
+		boolean exists = repository.existsByCpf(updatedClient.getCpf());
+
+		if (!cliente.get().getCpf().equals(updatedClient.getCpf()) && exists) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "CPF já cadastrado");
 		}
-		
-				
+		if (cliente.isPresent()) {
+			repository.save(updatedClient);
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
+		}
 		return updatedClient;
-		
+
 	}
-	
-	@GetMapping	
-	public List<Client> obterTodos(){
-		
+
+	@GetMapping
+	public List<Client> obterTodos() {
 		return repository.findAll();
 	}
-	
 
 }

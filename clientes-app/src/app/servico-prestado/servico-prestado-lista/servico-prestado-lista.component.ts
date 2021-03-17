@@ -32,6 +32,7 @@ export class ServicoPrestadoListaComponent implements OnInit {
       .buscar(this.nome, this.mes)
       .subscribe(response => {
         this.lista = response;
+        
         if(this.lista.length <= 0){
           this.message = "Nenhum Registro Encontrado!";
 

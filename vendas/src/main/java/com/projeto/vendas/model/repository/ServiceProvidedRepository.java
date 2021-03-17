@@ -1,5 +1,6 @@
 package com.projeto.vendas.model.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,7 @@ public interface ServiceProvidedRepository extends JpaRepository<ServiceProvided
 	List<ServiceProvided> findByNameClientAndMes(		
 			@Param("name") String name, @Param("mes") Integer mes);
 	
+	List<ServiceProvided> findByDateBetween(LocalDate start, LocalDate end);
 	
 
 }

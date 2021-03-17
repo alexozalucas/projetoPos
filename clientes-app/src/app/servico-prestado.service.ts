@@ -14,7 +14,7 @@ export class ServicoPrestadoService {
 
   apiURL: string = environment.apiURLBase + '/api/servicos-prestados'
 
-  salvar(servicoPrestado: ServicoPrestado): Observable<ServicoPrestado> {
+  salvar(servicoPrestado : ServicoPrestado): Observable<ServicoPrestado> {
     return this.http.post<ServicoPrestado>(this.apiURL, servicoPrestado);
   }
 
@@ -24,7 +24,21 @@ export class ServicoPrestadoService {
     
     const url = this.apiURL + "?" + httpParams.toString();
     return this.http.get<any>(url);
-
   }
 
+  buscarTodos() : Observable<ServicoPrestadoBusca[]>{
+    return this.http.get<ServicoPrestadoBusca[]>(`${this.apiURL}`+'/all');
+    
+  }
+
+  buscarDate(dateInitial: string, dateFinal: string): Observable<ServicoPrestadoBusca[]> {
+    const httpParams = new HttpParams()
+      .set("dateInitial", dateInitial).set("dateFinal",dateFinal);
+    
+    const url = this.apiURL +"/date?" + httpParams.toString();
+    return this.http.get<any>(url);
+  }
+
+
+  
 }

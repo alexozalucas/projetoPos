@@ -3,6 +3,8 @@ import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from 'src/app/clientes/cliente';
 import { ServicoPrestadoService } from 'src/app/servico-prestado.service';
 import { ServicoPrestado } from '../servicoPrestado';
+import { TipoServico} from '../../definicao/tipo-servico';
+import { DefinicaoService } from 'src/app/definicao.service';
 
 
 
@@ -14,12 +16,14 @@ import { ServicoPrestado } from '../servicoPrestado';
 export class ServicoPrestadoFormComponent implements OnInit {
 
   clientes: Cliente[] = []
+  tipoServico: TipoServico[] = []
   servico: ServicoPrestado;
   success: boolean = false;
   errors: String[];
 
   constructor(
     private clienteService: ClientesService,
+    private definicaoService: DefinicaoService,
     private service: ServicoPrestadoService
   ) {
     this.servico = new ServicoPrestado();
@@ -31,6 +35,11 @@ export class ServicoPrestadoFormComponent implements OnInit {
       .getClientes()
       .subscribe(response =>
         this.clientes = response);
+
+    this.definicaoService.getTipoServicos()
+    .subscribe(response =>
+        this.tipoServico =response );
+
   }
 
   onSubmit() {
