@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { PagamentoTipoLista } from './tipo-lista/pagamento-tipo-lista.component';
 import { Pagamento } from './tiipo/pagamento-tipo.component';
 import { PagamentoRoutingModule} from './pagamento-routing,module'
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { PagamentoRoutingModule} from './pagamento-routing,module'
       FormsModule,
       RouterModule,
       PagamentoRoutingModule,
+      NgxPaginationModule
     ],
     exports : [
         PagamentoTipoLista,

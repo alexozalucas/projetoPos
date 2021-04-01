@@ -17,6 +17,7 @@ export class Pagamento implements OnInit {
   success: boolean = false;
   errors: String[];
   id: number;
+  messageSuccess : String;
 
 
   constructor(private service: PagamentoService,
@@ -48,11 +49,12 @@ export class Pagamento implements OnInit {
 
     if (this.tipoPagamento.id) {
 
-      this.service.salvar(this.tipoPagamento)
+      this.service.atualizar(this.tipoPagamento)
         .subscribe(response => {
           this.success = true;
           this.errors = null;
           this.tipoPagamento = response;
+          this.messageSuccess = "Tipo de pagamento atualizado com sucesso";
         }, reject => {
           this.errors = reject.error.erros;
           this.success = false;
@@ -66,8 +68,7 @@ export class Pagamento implements OnInit {
           this.success = true;
           this.errors = null;
           this.tipoPagamento = response;
-
-
+          this.messageSuccess = "Tipo de pagamento salvo com sucesso";
         }, errorResponse => {
           this.errors = errorResponse.error.erros;
           this.success = false;

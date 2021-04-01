@@ -1,6 +1,6 @@
 <h1 class="mt-4">Serviço Prestado</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-bitem active">Novo</li>
+    <li class="breadcrumb-item active">{{servico.id ? 'Edição' : 'Cadastro'}}</li>
 </ol>
 
 <div class="container-fluid">
@@ -9,10 +9,21 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-success" role="alert" *ngIf="success == true">
-                    Serviço Prestado Salvo com Sucesso!
+                    {{servico.id ? 'Serviço atualizado com sucesso' : 'Serviço Prestado Salvo com Sucesso!'}}
                 </div>
                 <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
                     {{erro}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="servico.id">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>
+                        ID:
+                    </label>
+                    <input type="text" class="form-control" disabled="true" [ngModel]="servico.id" name="id" />
                 </div>
             </div>
         </div>
@@ -60,30 +71,33 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Data:</label>
-                    <input class="form-control" [(ngModel)]="servico.date" type="text" name="date" id="inputData">
+                    <input class="form-control" [(ngModel)]="servico.date"  placeholder="DD/MM/YYYY" mask="00/00/0000" 
+                        type="text" name="date" id="inputData">
                 </div>
             </div>
+     
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Preço:</label>
-                    <input class="form-control" [(ngModel)]="servico.value" type="text" name="value" id="inputValue">
+                    <label>Valor Inicial </label>
+                    <input class="form-control" [(ngModel)]="servico.value" type="text" name="value" id="inputValue"
+                     mask="separator.2" thousandSeparator="." prefix="R$ ">
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-success">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success m-1" *ngIf="!servico.id">
                     <i class="fa fa-save"></i> Salvar
                 </button>
-
+                <button type="submit" class="btn btn-primary m-1 " *ngIf="servico.id">
+                    <i class="fa fa-sync-alt" ></i> Atualizar
+                </button>
                 <button type="button" routerLink="/servicos-prestados/lista" class="btn btn-danger m-1">
                     <i class="fa fa-arrow-alt-circle-left"></i> Voltar
                 </button>
 
-
             </div>
         </div>
-
     </form>
 </div>

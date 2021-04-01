@@ -31,4 +31,8 @@ export class PagamentoService {
       return this.http.delete<any>(`${this.apiURL}/${tipoPagamento.id}`);
     }
   
+    atualizar(tipoPagamento: TipoPagamento): Observable<any> {
+      return this.http.put<TipoPagamento>(`${this.apiURL}/`, tipoPagamento)
+    }
+
   }

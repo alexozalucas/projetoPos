@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagamentoService } from 'src/app/pagamento.services';
 import { TipoPagamento } from '../tipo-pagamento';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @Component({
@@ -16,6 +17,9 @@ export class PagamentoTipoLista implements OnInit {
   tipoPagamentoSelecionado: TipoPagamento;
   mensagemSucesso: String;
   mensagemErro: String;
+  public paginaAtual = 1;
+  tipoPagamentoFilter: TipoPagamento[];
+  valorPesquisado: String = "";
 
   constructor(
     private service: PagamentoService,
@@ -26,6 +30,8 @@ export class PagamentoTipoLista implements OnInit {
     this.service.getTipoPagamento()
       .subscribe(response => {
         this.tipoPagamento = response;
+        this.tipoPagamentoFilter = response;
+        this.filtrar(this.valorPesquisado)
       });
   }
 
@@ -41,12 +47,22 @@ export class PagamentoTipoLista implements OnInit {
   deletarTipoPagamento(tipoPagamento: TipoPagamento) {
     this.service.deletar(this.tipoPagamentoSelecionado)
       .subscribe(response => {
-        this.mensagemSucesso = "Tipo de serviço deletado com sucesso"
+        this.mensagemSucesso = "Tipo de pagamento deletado com sucesso: "
         this.ngOnInit();
       },
-        erro => this.mensagemErro = "Ocorreu erro ao deletar tipo de serviço"
+        erro => this.mensagemErro = "Ocorreu erro ao deletar tipo de pagamento"
       );
+  }
 
+  filtrar(value: String) {
+    if (!value) {
+      this.tipoPagamento = this.tipoPagamentoFilter;
+    } else {
+      this.tipoPagamento = this.tipoPagamentoFilter.filter(x => 
+        x.type.trim().toLowerCase().includes(value.trim().toLowerCase())
+      );
+    }
+    this.valorPesquisado = value;
   }
 
 }

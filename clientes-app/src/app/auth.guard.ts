@@ -13,15 +13,30 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService,
     private router: Router,
     private token : TokenStorageService
+    
   ){}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
 
-    const authenticated =  this.authService.isAuthenticated();
+    const user = this.token.getUser();  
+    const authenticated =  this.authService.isAuthenticated();  
+    var role = next.data.roles;
+    if(role){
+      var userRole = user.roles.includes('ROLE_ADMIN');
+    }
+    
+      
 
-    if(authenticated){
+    if(role == 'ROLE_ADMIN' && authenticated && userRole){  
+      return true;
+    }else 
+    if(role == 'ROLE_ADMIN' && authenticated && !userRole){
+      this.router.navigate(['/home'])     
+      return false;
+    }else
+    if(authenticated && role != 'ROLE_ADMIN'){
       return true;
     }else{
       this.router.navigate(['/login'])

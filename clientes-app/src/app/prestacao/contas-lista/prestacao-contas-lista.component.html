@@ -17,14 +17,21 @@
         </div>
     </div>
 
-
-    <div class="row">
-        <div class="col-md-2">
+    <form class="form">
+        <div class="row">
+          <div class="col-md-1 mr-3 m-1">
+            <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
+          </div>
+          <div class="col-md-3 m-1">
+            <input class="form-control" type="text" name="search" id="pesquisar" (keyup)="filtrar($event.target.value)" />
+          </div>
+          <div class="col-md-5 m-1">
             <button class="btn btn-warning" (click)="novoCadastro()">
-                <i class="fa fa-plus"></i> Novo
+              <i class="fa fa-plus"></i> Novo
             </button>
+          </div>
         </div>
-    </div>
+      </form>
 
     <br />
     <div class="row">
@@ -40,18 +47,19 @@
                         <th>Acrescimo</th>
                         <th>Observação</th>                       
                         <th>Valor Total</th>
+                        <th></th>                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let prestacaoConta of prestacaoContas">
+                    <tr *ngFor="let prestacaoConta of prestacaoContas | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index">
                         <td>{{ prestacaoConta.id }}</td>
                         <td>{{ prestacaoConta.serviceProvided.description }}</td>
                         <td>{{ prestacaoConta.serviceProvided.client.name }}</td>
                         <td>{{ prestacaoConta.typePayment.type }}</td>
-                        <td>{{ prestacaoConta.discountValue }}</td>
-                        <td>{{ prestacaoConta.additionValue }}</td>
+                        <td>R$ {{ prestacaoConta.discountValue | mask: 'separator':',' }}</td>
+                        <td>R$ {{ prestacaoConta.additionValue | mask: 'separator':',' }}</td>
                         <td>{{ prestacaoConta.observation }}</td>
-                        <td>{{ prestacaoConta.totalValue }}</td>
+                        <td>R$ {{ prestacaoConta.totalValue | mask: 'separator':',' }}</td>
                         <td>
                             <button class="btn btn-primary m-1" routerLink="/prestacao/conta/{{ prestacaoConta.id }}">
                                 <i class="fa fa-edit"></i>
@@ -69,6 +77,7 @@
                     </tr>
                 </tbody>
             </table>
+            <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
         </div>
     </div>
 
@@ -80,7 +89,7 @@
 
                 </div>
                 <div class="modal-body" *ngIf="prestacaoContasSelecionado">
-                    Confirma a exclusão do(a) prestação de contas: {{ prestacaoContasSelecionado.service }}
+                    Confirma a exclusão do(a) prestação de contas: {{prestacaoContasSelecionado.id +" - "+ prestacaoContasSelecionado.serviceProvided.description }}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" (click)="deletarPrestacaoConta()" data-dismiss="modal">

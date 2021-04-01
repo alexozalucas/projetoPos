@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,6 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name ="users")
 public class User implements Serializable {
 
 	
@@ -40,7 +42,7 @@ public class User implements Serializable {
 
 	private String email;
 
-	@Column(name = "enabled", columnDefinition = "BIT", length = 1)
+	@Column(name = "enabled")//, columnDefinition = "BOOLEAN")
 	private boolean enabled;
 
 	@Column(name = "DISPLAY_NAME")

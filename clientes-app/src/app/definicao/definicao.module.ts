@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { DefinicaoTipoServico } from './tipo/definicao-tipo-servico.component';
 import { DefinicaoRoutingModule } from './definicao-routing.module';
 import { TipoServicoListaComponent } from './tipo-lista/definicao-tipo-lista.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -19,6 +20,7 @@ import { TipoServicoListaComponent } from './tipo-lista/definicao-tipo-lista.com
     FormsModule,
     RouterModule,
     DefinicaoRoutingModule,
+    NgxPaginationModule
   ],
   exports : [
     DefinicaoTipoServico,

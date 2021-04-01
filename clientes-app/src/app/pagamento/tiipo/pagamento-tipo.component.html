@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-success" role="alert" *ngIf="success == true">
-                    Tipo Pagamento Salvo com Sucesso
+                   {{messageSuccess}}
                 </div>
                 <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
                     {{erro}}
@@ -50,7 +50,7 @@
             </div>            
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <button type="submit" class="btn btn-success m-1 " *ngIf="!tipoPagamento.id">
                     <i class="fa fa-save"></i> Salvar
                 </button>

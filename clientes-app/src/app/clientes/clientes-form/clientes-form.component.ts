@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../cliente';
 import { ClientesService } from 'src/app/clientes.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { NgxMaskModule } from 'ngx-mask'
 
 
 @Component({
@@ -17,14 +16,13 @@ export class ClientesFormComponent implements OnInit {
   success: boolean = false;
   errors: String[];
   id: number;
-
+  
 
   constructor(private service: ClientesService,
     private router: Router,
     private activatedRouter: ActivatedRoute) {
     this.cliente = new Cliente();
   }
-
 
 
   ngOnInit() {

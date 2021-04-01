@@ -8,4 +8,5 @@ import com.projeto.vendas.model.entity.TypePayment;
 @Repository
 public interface TypePaymentRepository extends JpaRepository<TypePayment, Long> {
 
+	Boolean existsBytypeIgnoreCase(String type);
 }

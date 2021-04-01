@@ -6,6 +6,8 @@ import { PrestacaoContasRoutingModule } from './prestacao-routing.module';
 import { PrestacaoContasListaComponent } from './contas-lista/prestacao-contas-lista.component';
 import { PrestacaoContasComponent } from './contas/prestacao-contas.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { DateUtil } from '../util/Date-Util';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
     FormsModule,
     RouterModule,
     PrestacaoContasRoutingModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    DateUtil,
+    NgxPaginationModule
   ],
   exports : [
     PrestacaoContasListaComponent,

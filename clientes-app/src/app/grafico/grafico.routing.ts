@@ -7,7 +7,9 @@ import { GraficoComponent } from './grafico.component';
 
 
 const routes: Routes = [
-  {path:'graficos' , component: LayoutComponent, canActivate:[AuthGuard], children: [
+  {path:'graficos' , component: LayoutComponent, canActivate:[AuthGuard], data :{
+    roles:['ROLE_ADMIN']
+  }, children: [
     {path: 'listar' , component: GraficoComponent},   
     {path: '', redirectTo: '/graficos/listar', pathMatch: 'full'}
     

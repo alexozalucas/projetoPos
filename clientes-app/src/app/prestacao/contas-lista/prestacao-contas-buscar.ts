@@ -5,12 +5,12 @@ export class PrestacaoContasBuscar {
 
     id: number;
     serviceProvided: ServicoPrestadoBusca;
-    discountValue: number;
-    additionValue: number;  
+    discountValue: string;
+    additionValue: string;  
     observation: string;
     typePayment :TipoPagamento;
-    totalValue: number;
-    datePayment: String;
+    totalValue: string;
+    datePayment: string;
     
 
 

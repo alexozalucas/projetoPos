@@ -28,5 +28,10 @@ export class DefinicaoService {
     deletar(tipoServico: TipoServico): Observable<any> {
       return this.http.delete<any>(`${this.apiURL}/${tipoServico.id}`);
     }
+
+    atualizar(typeService: TipoServico): Observable<TipoServico> {
+      return this.http.put<TipoServico>(`${this.apiURL}/${typeService.id}`, typeService)
+    }
+
   
   }

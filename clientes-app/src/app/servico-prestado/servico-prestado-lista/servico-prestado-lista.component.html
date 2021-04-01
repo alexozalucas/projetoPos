@@ -1,75 +1,123 @@
 <h1 class="mt-4">Serviço Prestado</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-bitem active">Consulta</li>
+  <li class="breadcrumb-bitem active">Consulta</li>
 </ol>
 
-<div class="container">
-    <form #consultaForm="ngForm" (submit)="consultar()">
-        <div class=row>
-            <div class="col-md-6">
-                <label for="inputNome">Nome Cliente:</label>
-                <input type="text" [(ngModel)]="nome" name="nome" class="form-control" id="inputNome">
-
-            </div>
-
-            <div class="col-md-6">
-                <label for="inputMes">Mês:</label>
-                <select type="text" [(ngModel)]="mes" name="mes" class="form-control" id="inputmes">
-                    <option value="">Selecionar...</option>
-                    <option *ngFor="let mes of meses" [value]="mes">
-                        {{mes}}
-                    </option>
-                </select>
-            </div>
-        </div>
+<div class="container-fluid">
 
 
-        <br />
-        <div class=row>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-search"></i>Consultar
-                </button>
+  <form #consultaForm="ngForm">
 
-                <button type="button" class="btn btn-warning m-1" routerLink="/servicos-prestados/form"> 
-                    <i class="fa fa-plus"></i>Novo
-                </button>
-            </div>
-        </div>
-
-
-    </form>
-
-
-    <br />
     <div class="row">
-        <div class="col-md-12">
-
-            <div class="alert alert-warning" role="alert" *ngIf="message">
-               {{message}}
-            </div>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Descrição</th>
-                        <th>Preço</th>
-                        <th>Tipo de serviço</th>
-                        <th>Data</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let s of lista">
-                        <td>{{ s.client.name }}</td>
-                        <td>{{ s.description }}</td>
-                        <td>{{ s.value }}</td>
-                        <td>{{ s.typeService.service }}</td>  
-                        <td>{{ s.date }}</td>   
-                    </tr>
-                </tbody>
-            </table>
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+          {{mensagemSucesso}}
         </div>
+        <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+          {{mensagemErro}}
+        </div>
+      </div>
     </div>
+
+    <div class=row>
+      <div class="col-md-1 mr-4 m-1">
+        <label for="competencia" class="col-form-label ">Competência:</label>
+      </div>
+      <div class="col-md-2 m-1">
+        <input class="form-control" placeholder="MM/YYYY" type="text" id="inputMes" (change)="montaData($event)"
+          mask="00/0000">
+      </div>
+      <div class="col-md-1 mr-3 m-1" *ngIf="listaFiltro.length > 0">
+        <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
+      </div>
+      <div class="col-md-3 m-1" *ngIf="listaFiltro.length > 0">
+        <input class="form-control" type="text" name="search" id="pesquisar" (keyup)="filtrar($event.target.value)" />
+      </div>
+      <div class="col-md-2 m-1">
+        <button class="btn btn-warning" routerLink="/servicos-prestados/form">
+          <i class="fa fa-plus"></i> Novo
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <br />
+  <div class="form-check form-check-inline m-2" *ngIf="listaFiltro.length > 0">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" (click)="buscaPorStatus($event.target.checked,2)" checked>
+    <label class="form-check-label" for="inlineCheckbox1">Em aberto</label>
+  </div>
+  <div class="form-check form-check-inline mb-2" *ngIf="listaFiltro.length > 0">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" (click)="buscaPorStatus($event.target.checked,1)" checked>
+    <label class="form-check-label" for="inlineCheckbox2">Fechado</label>
+  </div>
+  <br />
+
+
+
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="alert alert-warning" role="alert" *ngIf="message">
+        {{message}}
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Tipo de serviço</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of lista | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+            <td>{{ s.client.name }}</td>
+            <td>{{ s.description }}</td>
+            <td>R$ {{ s.value  | mask: 'separator':','}}</td>
+            <td>{{ s.typeService.service }}</td>
+            <td>{{ s.date }}</td>
+            <td>{{ s.releasedPayment ? 'Fechado' :'Em Aberto'  }}</td>
+            <td>
+
+              <button class="btn btn-primary m-1" *ngIf="!s.releasedPayment" routerLink="/servicos-prestados/form/{{s.id}}">
+                <i class="fa fa-edit"></i>
+              </button>
+
+              <button class="btn btn-danger m-1" *ngIf="!s.releasedPayment" (click)="preparaDelecao(s)" data-toggle="modal"
+                data-target="#modalDeSelecao">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+      </pagination-controls>
+    </div>
+  </div>
+
+  <div id="modalDeSelecao" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Confirmação</h4>
+
+        </div>
+        <div class="modal-body" *ngIf="servicoPrestadoSelecionado">
+          Confirma a exclusão do serviço prestado: {{ servicoPrestadoSelecionado.description }}
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="deletarServicoPrestado()" data-dismiss="modal"> Confirma</button>
+          <button class="btn btn-default" data-dismiss="modal"> Cancela</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>

@@ -16,7 +16,21 @@ public interface ServiceProvidedRepository extends JpaRepository<ServiceProvided
 	List<ServiceProvided> findByNameClientAndMes(		
 			@Param("name") String name, @Param("mes") Integer mes);
 	
-	List<ServiceProvided> findByDateBetween(LocalDate start, LocalDate end);
+	 
+	@Query(" select s from ServiceProvided s join s.client c " +
+			" where (upper(c.name) like upper(:name)) and ((s.date) >= :dataInicial and (s.date) <= :dataFinal)" )
+			List<ServiceProvided> findByNameClientAndCompetencia(		
+					@Param("name") String name,	@Param("dataInicial") LocalDate dataInicial, 
+					@Param("dataFinal") LocalDate dataFinal);
+					
+	
+	List<ServiceProvided> findByDateBetweenAndReleasedPaymentFalse(LocalDate start, LocalDate end);
+	
+	
+
+
+	
+	
 	
 
 }

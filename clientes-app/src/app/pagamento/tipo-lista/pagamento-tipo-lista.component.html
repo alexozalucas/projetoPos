@@ -18,13 +18,21 @@
     </div>  
 
 
-    <div class="row">
-        <div class="col-md-2">
+    <form class="form">
+        <div class="row">
+          <div class="col-md-1 mr-3 m-1">
+            <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
+          </div>
+          <div class="col-md-3 m-1">
+            <input class="form-control" type="text" name="search" id="pesquisar" (keyup)="filtrar($event.target.value)" />
+          </div>
+          <div class="col-md-5 m-1">
             <button class="btn btn-warning" (click)="novoCadastro()">
-                <i class="fa fa-plus"></i> Novo
+              <i class="fa fa-plus"></i> Novo
             </button>
+          </div>
         </div>
-    </div>
+      </form>
 
     <br />
     <div class="row">
@@ -39,7 +47,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let tipoPagamentos of tipoPagamento">
+                    <tr *ngFor="let tipoPagamentos of tipoPagamento | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index">
                         <td>{{ tipoPagamentos.id }}</td>
                         <td>{{ tipoPagamentos.type }}</td>
                         <td>{{ tipoPagamentos.observation }}</td>                        
@@ -56,6 +64,7 @@
                     </tr>
                 </tbody>
             </table>
+            <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
         </div>
     </div>
 
@@ -66,8 +75,8 @@
                     <h4>Confirmação</h4>
 
                 </div>
-                <div class="modal-body" *ngIf="tipoServicoSelecionado">
-                    Confirma a exclusão do(a) tipo de serviço: {{ tipoPagamentoSelecionado.type }}
+                <div class="modal-body" *ngIf="tipoPagamentoSelecionado">
+                    Confirma a exclusão do(a) tipo de pagamento: {{ tipoPagamentoSelecionado.type }}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" (click)="deletarTipoPagamento()" data-dismiss="modal"> Confirma</button>

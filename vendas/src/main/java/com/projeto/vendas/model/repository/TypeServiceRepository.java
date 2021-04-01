@@ -7,5 +7,7 @@ import com.projeto.vendas.model.entity.TypeService;
 
 @Repository
 public interface TypeServiceRepository extends JpaRepository<TypeService, Long > {
+	
+	Boolean existsByServiceIgnoreCase(String service);
 
 }

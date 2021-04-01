@@ -8,7 +8,9 @@ import { PrestacaoContasComponent } from './contas/prestacao-contas.component';
 
 const routes: Routes = [
   {
-    path: 'prestacao', component: LayoutComponent,  canActivate : [AuthGuard], children: [
+    path: 'prestacao', component: LayoutComponent,  canActivate : [AuthGuard], data :{
+      roles:['ROLE_ADMIN']
+    }, children: [
       { path: 'conta', component: PrestacaoContasComponent },  
       { path: 'conta/lista', component: PrestacaoContasListaComponent },      
       {path: 'conta/:id' , component: PrestacaoContasComponent},           

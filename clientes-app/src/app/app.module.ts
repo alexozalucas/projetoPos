@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TemplateModule } from './template/template.module';
@@ -8,7 +7,6 @@ import { HomeComponent } from './home/home.component'
 import { ClientesModule } from './clientes/clientes.module';
 import { ClientesService } from './clientes.service'
 import { HttpClientModule } from '@angular/common/http';
-
 import { ServicoPrestadoModule } from './servico-prestado/servico-prestado.module';
 import { ServicoPrestadoService } from './servico-prestado.service';
 import { LoginComponent } from './login/login.component';
@@ -25,6 +23,11 @@ import { PrestaContasService } from './presta-contas.services';
 import { PrestacaoContasModule } from './prestacao/prestacao-contas.module';
 import { GraficoModule } from './grafico/grafico.module';
 import { GraficoService } from './grafico-services';
+import { DateUtil } from './util/Date-Util';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { NgxMaskModule } from 'ngx-mask';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 
 
@@ -35,11 +38,10 @@ import { GraficoService } from './grafico-services';
     HomeComponent,
     LoginComponent,
     LayoutComponent,
-    RegisterComponent
-
-    
-    
+    RegisterComponent,
+    UsuarioComponent    
   ],
+
   imports: [
     FormsModule,
     HttpClientModule,
@@ -51,7 +53,11 @@ import { GraficoService } from './grafico-services';
     DefinicaoModule,
     PagamentoModule,
     PrestacaoContasModule,
-    GraficoModule
+    GraficoModule,
+    DateUtil,
+    NgxMaskModule,
+    NgxPaginationModule
+    
 
   ],
   providers: [ClientesService,

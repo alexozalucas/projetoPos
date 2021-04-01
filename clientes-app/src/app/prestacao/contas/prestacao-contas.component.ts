@@ -7,8 +7,8 @@ import { ServicoPrestadoBusca } from 'src/app/servico-prestado/servico-prestado-
 import { PrestacaoContasBuscar } from '../contas-lista/prestacao-contas-buscar';
 import { PagamentoService } from '../../pagamento.services';
 import { TipoPagamento } from 'src/app/pagamento/tipo-pagamento';
-import { NgxMaskModule } from 'ngx-mask'
-import { formatDate } from '@angular/common';
+import { PrestacaoContas } from '../prestacao-conta';
+import { DateUtil } from 'src/app/util/Date-Util';
 
 
 
@@ -31,6 +31,9 @@ export class PrestacaoContasComponent implements OnInit {
   dataInicial: string;
   dataFinal: string;
   relatorio: boolean;
+  prestacaoContas: PrestacaoContas;
+  valorTotal : string;
+  messageSuccess : string;
 
 
   constructor(
@@ -44,7 +47,7 @@ export class PrestacaoContasComponent implements OnInit {
     this.prestacaoContasBuscar = new PrestacaoContasBuscar();
     this.servicoPrestadoBuscaSelecionado = new ServicoPrestadoBusca();
     this.tipoPagamentoSelecionado = new TipoPagamento();
-
+    this.prestacaoContas = new PrestacaoContas();    
   }
 
   ngOnInit() {
@@ -75,31 +78,63 @@ export class PrestacaoContasComponent implements OnInit {
 
   }
 
+
+  emitirRelatorio(){
+    this.relatorio = true;
+  }
+
   onSubmit() {
 
     if (!this.prestacaoContasBuscar.id) {
       this.prestacaoContasBuscar.serviceProvided = this.servicoPrestadoBuscaSelecionado;
     }
-    this.prestacaoContasBuscar.typePayment = this.tipoPagamentoSelecionado;
-    this.service.salvar(this.prestacaoContasBuscar)
+   
+  
+    this.prestacaoContas.id = this.prestacaoContasBuscar.id;
+    this.prestacaoContas.id_serviceProvided = this.prestacaoContasBuscar.serviceProvided.id;
+    this.prestacaoContas.datePayment = DateUtil.dateFormat(this.prestacaoContasBuscar.datePayment);
+    this.prestacaoContas.additionValue = DateUtil.validarValorDefault(this.prestacaoContasBuscar.additionValue);
+    this.prestacaoContas.discountValue = DateUtil.validarValorDefault(this.prestacaoContasBuscar.discountValue);
+    this.prestacaoContas.observation = this.prestacaoContasBuscar.observation;
+    this.prestacaoContas.totalValue =   DateUtil.validarValorDefault(this.valorTotal);
+
+    this.prestacaoContas.idTypePayment = this.tipoPagamentoSelecionado.id;
+    this.service.salvar(this.prestacaoContas)
       .subscribe(response => {
         this.success = true;
         this.errors = null;
+        
+        if(this.prestacaoContasBuscar.id != undefined){
+          this.messageSuccess = "Pestação de contas atualizado com sucesso!";          
+        }else {
+          this.messageSuccess = "Pestação de contas salvo com sucesso!";
+        }
+        
         this.prestacaoContasBuscar = response;
+        
       }, reject => {
         this.errors = reject.error.erros;
         this.success = false;
       })
   }
 
-
-
   voltarParaListagem() {
     this.router.navigate(['/prestacao/conta/lista']);
   }
 
 
+
+  somarTotal(value: string, additionValue: string, discountValue: string) {
+
+    this.valorTotal = ((parseFloat(DateUtil.validarValorDefault(value)) + parseFloat(DateUtil.validarValorDefault(additionValue))) - parseFloat(DateUtil.validarValorDefault(discountValue))).toString();
+    if(this.valorTotal < "0"){
+      this.valorTotal = "0";
+    }
+    return this.valorTotal.replace(".",",");
+  }
+
   
+
 
   buscarPorData(event) {
     var dataRecebida = event.target.value;
@@ -131,10 +166,8 @@ export class PrestacaoContasComponent implements OnInit {
     }
   }
 
-  teste() {
-
-    this.relatorio = true;
-
+  retornaDatePaymentFormat(data : string): string {   
+    return DateUtil.dateFormat(data);
   }
 
 

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { PrestacaoContasBuscar } from "./prestacao/contas-lista/prestacao-contas-buscar";
+import { PrestacaoContas } from "./prestacao/prestacao-conta";
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class PrestaContasService {
   
     constructor(private http: HttpClient) { }
   
-    salvar(prestacaoContas: PrestacaoContasBuscar): Observable<PrestacaoContasBuscar> {
+    salvar(prestacaoContas: PrestacaoContas): Observable<PrestacaoContasBuscar> {
       return this.http.post<PrestacaoContasBuscar>(`${this.apiURL}`, prestacaoContas)
     }  
      

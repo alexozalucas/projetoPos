@@ -46,7 +46,7 @@ export class DefinicaoTipoServico implements OnInit {
 
     if (this.tipoServico.id) {
 
-      this.service.salvar(this.tipoServico)
+      this.service.atualizar(this.tipoServico)
         .subscribe(response => {
           this.success = true;
           this.errors = null;

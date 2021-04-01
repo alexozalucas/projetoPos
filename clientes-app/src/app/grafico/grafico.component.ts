@@ -13,7 +13,7 @@ import { NgxMaskModule } from 'ngx-mask'
 export class GraficoComponent implements OnInit {
   @ViewChild("meuCanvas", { static: true }) elemento: ElementRef;
   chart: Chart
-  dataSelecionada : boolean;
+  dataSelecionada: boolean;
   grafico: Grafico[] = [];
 
   dataset: any
@@ -29,14 +29,11 @@ export class GraficoComponent implements OnInit {
       fill: ''
     }
 
-    
-
   }
 
 
-  ngOnInit() {
-
-      // todo o grafico funciona nesta instancia 
+  inicializarGrafico() {
+    // todo o grafico funciona nesta instancia 
     this.chart = new Chart(this.elemento.nativeElement, {
       type: 'line',
       data: {
@@ -49,25 +46,31 @@ export class GraficoComponent implements OnInit {
         }
       }
     });
+  }
+
+
+  ngOnInit() {
+
+    this.inicializarGrafico();
 
   }
 
 
- 
+
   buscarPorData(event) {
     var ano = event.target.value;
+    this.inicializarGrafico()
 
     if (ano.length == 4) {
-      var dataInicial = "01/" + "01/"+ano;
+      var dataInicial = "01/" + "01/" + ano;
       var dataFinal = "31" + "/12/" + ano;
       this.service.getAll(dataInicial, dataFinal)
         .subscribe(response => {
-         this.grafico = response;
-         this.dataSelecionada = true;
+          this.grafico = response;
+          this.dataSelecionada = true;
         }, reject => {
           this.dataSelecionada = false;
-       
-        })
+        });
     } else {
       this.dataSelecionada = false;
     }
@@ -91,8 +94,8 @@ export class GraficoComponent implements OnInit {
     if (exists == false) {
       this.dataset.label = "Recebido por Mês";
       this.dataset.borderColor = "#1E90FF";
-      this.dataset.fill = false;      
-      this.grafico.forEach(element =>{
+      this.dataset.fill = false;
+      this.grafico.forEach(element => {
         this.dataset.data.push(element.recebido);
       })
       this.chart.data.datasets.push(this.dataset);
@@ -120,7 +123,7 @@ export class GraficoComponent implements OnInit {
       this.dataset.label = "Descontos por mês";
       this.dataset.borderColor = "#4F4F4F"
       this.dataset.fill = false
-      this.grafico.forEach(element =>{
+      this.grafico.forEach(element => {
         this.dataset.data.push(element.desconto);
       })
       this.chart.data.datasets.push(this.dataset);
@@ -148,7 +151,7 @@ export class GraficoComponent implements OnInit {
       this.dataset.label = "Acréscimos por mês";
       this.dataset.borderColor = "#32CD32"
       this.dataset.fill = false
-      this.grafico.forEach(element =>{
+      this.grafico.forEach(element => {
         this.dataset.data.push(element.acrescimo);
       })
       this.chart.data.datasets.push(this.dataset);
@@ -177,10 +180,10 @@ export class GraficoComponent implements OnInit {
       this.dataset.label = "Serviços por mês";
       this.dataset.borderColor = "#FF0000"
       this.dataset.fill = false
-      this.grafico.forEach(element =>{
+      this.grafico.forEach(element => {
         this.dataset.data.push(element.servico);
       })
-      
+
       this.chart.data.datasets.push(this.dataset);
     }
 
@@ -207,7 +210,7 @@ export class GraficoComponent implements OnInit {
       this.dataset.label = "Valor contratado";
       this.dataset.borderColor = "#FFFF00"
       this.dataset.fill = false
-      this.grafico.forEach(element =>{
+      this.grafico.forEach(element => {
         this.dataset.data.push(element.contratado);
       })
       this.chart.data.datasets.push(this.dataset);
@@ -228,67 +231,6 @@ export class GraficoComponent implements OnInit {
     }
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  teste() {
-
-
-
-
-
-
-
-    /*
-        for(var i=0;i<12;i++){
-          var x =i + 10;
-          this.chart.data.datasets[2].data[i].add(i);      
-          
-        }
-        */
-
-
-
-    /* this.chart.data.datasets[1].label = "teste";
-    for(var i=0;i<12;i++){
-      var x =i + 10;
-      this.chart.data.datasets[1].data[i] = x;
-      console.log(i)
-    
-
-      
-      this.chart.update();
-    } */
-
-
-
-
-  }
-
-
-
-
-
-
-
-
 
 
 

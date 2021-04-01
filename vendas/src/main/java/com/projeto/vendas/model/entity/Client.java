@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -29,11 +30,11 @@ import lombok.NoArgsConstructor;
 public class Client {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Integer id;
 
 	@Column(name = "name", nullable = false)
-	@NotEmpty (message = "{campo.nome.obrigatorio}")
+	@NotBlank (message = "{campo.nome.obrigatorio}")
 	private String name;
 
 	@Column(name = "cpf", nullable = false, unique = true )

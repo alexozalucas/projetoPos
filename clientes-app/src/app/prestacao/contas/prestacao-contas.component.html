@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="alert alert-success" role="alert" *ngIf="success == true">
-                        Prestação de Contas Salva com Sucesso
+                        {{messageSuccess}}
                     </div>
                     <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
                         {{erro}}
@@ -79,7 +79,7 @@
                     <div class="form-group">
                         <label>Preço:</label>
                         <input class="form-control" disabled="true" [(ngModel)]="servicoPrestadoBuscaSelecionado.value"
-                            type="text" name="value">
+                            type="text" name="value" >
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -114,27 +114,26 @@
                     <div class="form-group">
                         <label>Desconto:</label>
                         <input class="form-control" [(ngModel)]="prestacaoContasBuscar.discountValue" type="text"
-                            name="discountValue" id="inputValue">
+                            name="discountValue" id="inputValue" mask="separator.2" thousandSeparator="." prefix="R$ " >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Acrescimo:</label>
                         <input class="form-control" [(ngModel)]="prestacaoContasBuscar.additionValue" type="text"
-                            name="additionValue" id="inputValue">
+                            name="additionValue" id="inputValue" mask="separator.2" thousandSeparator="." prefix="R$ " >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Valor Total:</label>
-                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.totalValue" type="text"
-                            name="totalValue" id="inputValue">
+                            <input class="form-control" [ngModel]="somarTotal(servicoPrestadoBuscaSelecionado.value, prestacaoContasBuscar.additionValue, prestacaoContasBuscar.discountValue)" type="text"
+                            name="totalValue" id="inputValue" mask="separator.2" thousandSeparator="." prefix="R$ " disabled="true"  > 
                     </div>
                 </div>
             </div>
 
             <div class="row">
-
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Data de pagamento:</label>
@@ -166,7 +165,7 @@
                     <button type="button" class="btn btn-danger dimensaobotao m-1" (click)="voltarParaListagem()">
                         <i class="fa fa-arrow-alt-circle-left"></i> Voltar
                     </button>
-                    <button type="button" class="btn btn-secondary m-1" (click)="teste()"
+                    <button type="button" class="btn btn-secondary m-1" (click)="emitirRelatorio()"
                         *ngIf="prestacaoContasBuscar.id">
                         <i class="fa fa-print" aria-hidden="true"></i> Relatório
                     </button>
@@ -244,7 +243,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <span class="mr-3 mb-10">Tipo de pagamento: {{prestacaoContasBuscar.datePayment}} </span>
+            <span class="mr-3 mb-10">Tipo de pagamento: {{retornaDatePaymentFormat(prestacaoContasBuscar.datePayment)}} </span>
         </div>
     </div>
 

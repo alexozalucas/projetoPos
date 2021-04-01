@@ -12,7 +12,7 @@ public class ServiceProvidedDTO {
 	
 	private Integer id;
 	
-	@NotEmpty (message = "{campo.descricao.obrigatorio}")
+	@NotEmpty (message = "campo.description.obrigatorio")
 	private String description;	
 	
 	@NotEmpty (message = "{campo.preco.obrigatorio}") 
@@ -26,6 +26,8 @@ public class ServiceProvidedDTO {
 	
 	@NotNull (message = "{campo.type.obrigatorio}") 
 	private Long idTypeService;	
+	
+	private boolean releasedPayment;
 	
 	
 

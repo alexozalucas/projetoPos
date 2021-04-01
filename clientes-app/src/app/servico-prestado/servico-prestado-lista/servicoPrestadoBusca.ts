@@ -6,9 +6,11 @@ export class ServicoPrestadoBusca {
 
     id: number;
     description: string;
-    value: number;
+    value: string;
     date: string;
     client: Cliente;
     typeService: TipoServico;
+    releasedPayment : Boolean
+
 
 }

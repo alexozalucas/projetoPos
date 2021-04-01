@@ -13,7 +13,8 @@ public class BigDecimalConvert {
 			return null;
 		}
 		
-		value = value.replace(".", "").replace(",", ".");
+		value = value.replace(",", ".");
+		//value = value.replace(".", "").replace(",", ".");
 		return new BigDecimal(value);
 				
 		

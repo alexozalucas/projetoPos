@@ -12,8 +12,6 @@ import com.projeto.vendas.model.entity.ServiceProvided;
 
 public interface AccountabilityRepository extends JpaRepository<Accountability, Long> {
 	
-	
-
 	List<Accountability> findByDatePaymentBetween(LocalDate start, LocalDate end);
 	
 	@Query(" select s from ServiceProvided s join s.client c " +
