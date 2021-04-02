@@ -11,7 +11,7 @@ import { PrestacaoContas } from "./prestacao/prestacao-conta";
   })
 export class PrestaContasService {
 
-    apiURL: string = environment.apiURLBase + '/api/accountability';
+    apiURL: string = environment.API_BASE_URL + '/api/accountability';
   
     constructor(private http: HttpClient) { }
   

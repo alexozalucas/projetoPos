@@ -10,7 +10,7 @@ import { Grafico } from "./grafico/grafico"
   })
 export class GraficoService {
 
-    apiURL: string = environment.apiURLBase + '/api/graphic';
+    apiURL: string = environment.API_BASE_URL + '/api/graphic';
   
     constructor(private http: HttpClient) { }
   

@@ -26,7 +26,9 @@ export class LoginComponent implements OnInit {
                private tokenStorage: TokenStorageService,
                private route: ActivatedRoute, 
                private userService: UserService,
-               private router: Router) { }
+               private router: Router) {
+                 console.log(this.googleURL)
+                }
 
   ngOnInit(): void {
     const token: string = this.route.snapshot.queryParamMap.get('token');

@@ -9,7 +9,7 @@ import { TipoServico } from "./definicao/tipo-servico";
   })
 export class DefinicaoService {
 
-    apiURL: string = environment.apiURLBase + '/api/typeservice';
+    apiURL: string = environment.API_BASE_URL + '/api/typeservice';
   
     constructor(private http: HttpClient) { }
   

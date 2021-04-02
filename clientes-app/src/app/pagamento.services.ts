@@ -11,7 +11,7 @@ import { PrestacaoContas } from "./prestacao/prestacao-conta";
   })
 export class PagamentoService {
 
-    apiURL: string = environment.apiURLBase + '/api/accountability/typepayment';
+    apiURL: string = environment.API_BASE_URL + '/api/accountability/typepayment';
   
     constructor(private http: HttpClient) { }
   
