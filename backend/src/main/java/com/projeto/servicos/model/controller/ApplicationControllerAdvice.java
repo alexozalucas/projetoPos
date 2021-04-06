@@ -17,7 +17,7 @@ import com.projeto.servicos.model.controller.exception.ApiErrors;
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
 
-	/*@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiErrors handleValidationErros(MethodArgumentNotValidException ex) {
 
@@ -27,7 +27,7 @@ public class ApplicationControllerAdvice {
 
 		return new ApiErrors(messages);
 
-	}*/
+	}
 
 	@ExceptionHandler(ResponseStatusException.class)	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -42,16 +42,5 @@ public class ApplicationControllerAdvice {
 	}
 	
 	
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public ResponseEntity<ApiErrors> handleValidationErros(ResponseStatusException ex) {
-
-		
-		String mensagemErro = ex.getReason();
-		HttpStatus codigoStatus = ex.getStatus();
-		ApiErrors apiErrors = new ApiErrors(mensagemErro);
-		return new ResponseEntity<ApiErrors>(apiErrors, codigoStatus);
-
-	}
 
 }
