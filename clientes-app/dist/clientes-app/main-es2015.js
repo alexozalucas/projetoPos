@@ -347,7 +347,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{cliente.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #clienteForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"success == true\">\n                    Cliente Salvo com sucesso\n                </div>\n                <div class=\"alert alert-danger\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                </div>\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"cliente.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.id\" name=\"id\" />\n                </div>\n            </div>\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Data Cadastro:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.dateRegister\"\n                        name=\"dateRegister\" />\n                </div>\n            </div>\n\n        </div>\n\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Nome: *\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.name\" name=\"name\" />\n\n                </div>\n            </div>\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        CPF: *\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.cpf\" name=\"cpf\" \n                        type=\"text\" placeholder=\"000.000.000-00\" mask=\"000.000.000-00\" />\n                </div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-2\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!cliente.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"cliente.id\">\n                    <i class=\"fa fa-sync-alt\" ></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n\n        </div>\n\n    </form>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">{{cliente.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n  <form #clienteForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"success == true\">\n          Cliente Salvo com sucesso\n        </div>\n        <div class=\"alert alert-danger\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n        </div>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"cliente.id\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            ID:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.id\" name=\"id\" />\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Data Cadastro:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.dateRegister\"\n            name=\"dateRegister\" />\n        </div>\n      </div>\n\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Nome: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.name\" name=\"name\" />\n\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            CPF: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.cpf\" name=\"cpf\" type=\"text\"\n            placeholder=\"000.000.000-00\" mask=\"000.000.000-00\" />\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!cliente.id\">\n          <i class=\"fa fa-save\"></i> Salvar\n        </button>\n        <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"cliente.id\">\n          <i class=\"fa fa-sync-alt\"></i> Atualizar\n        </button>\n        <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n          <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n        </button>\n\n      </div>\n\n    </div>\n\n  </form>\n</div>\n");
 
 /***/ }),
 
@@ -438,7 +438,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n\t<div class=\"card card-container\">\n\t\t<img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n\t\t<form *ngIf=\"!isLoggedIn\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"username\">Email</label> <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"form.username\" required #username=\"ngModel\" />\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && username.invalid\">É necessário informar o nome do usuário!</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"form.password\" required minlength=\"6\"\n\t\t\t\t\t#password=\"ngModel\" />\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && password.invalid\">\n\t\t\t\t\t<div *ngIf=\"password.errors.required\">É necessário informar a senha!</div>\n\t\t\t\t\t<div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres </div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<button class=\"btn btn-primary btn-block\" >Login</button>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"isLoginFailed\">Login falhou: {{ errorMessage }}</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<p class=\"content-divider center mt-3\">\n\t\t\t\t\t<span>Ou</span>\n\t\t\t\t</p>\n\t\t\t\t<p class=\"social-login text-center\">\n\t\t\t\t\tEntrar com:\n\t\t\t\t\t\n\n\t\t\t\t\t<a href=\"{{ googleURL }}\" class=\"ml-2\" >\n\t\t\t\t\t\t<img alt=\"Login com Google\" src=\"/assets/img/google.png\" class=\"btn-img\" >\n\t\t\t\t\t</a>\t\t\t\t\t\n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</form>\n\t\t\n\t\t  \n\t\t<!-- <button class=\"btn\"  >\n\t\t\t<img alt=\"Login com Google\" src=\"/assets/img/google.png\" class=\"btn-img\" (click)=\"verificarToken()\"></button> -->\n\t\t<div class=\"card-footer text-center\">\n\t\t\t<div class=\"small\">\n\t\t\t\t<a routerLink=\"/register\">\n\t\t\t\t\tNão possui Usuário? Cadastre-se!\n\t\t\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n  <div class=\"card card-container\">\n    <img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n    <form *ngIf=\"!isLoggedIn && !isLoading\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"username\">Email</label> <input type=\"text\" class=\"form-control\" name=\"username\"\n          [(ngModel)]=\"form.username\" required #username=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && username.invalid\">É necessário informar o\n          nome do usuário!</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n          [(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && password.invalid\">\n          <div *ngIf=\"password.errors.required\">É necessário informar a senha!</div>\n          <div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <button class=\"btn btn-primary btn-block\">Login</button>\n      </div>\n      <div class=\"form-group\">\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"isLoginFailed\">Login falhou: {{ errorMessage }}</div>\n      </div>\n      <div class=\"form-group\">\n        <p class=\"content-divider center mt-2\">\n          <span>Ou</span>\n\n          <!--\t</p>\n \t\t\t<p class=\"social-login text-center\">\n\t\t\t\t\tEntrar com:\n\t\t\t\t\t\n\t\t\t\t\t<button class=\"btn btn-outline-danger btn-block\"  (click)=\"signInWithGoogle()\">\n\t\t\t\t\t\t<i class=\"fab fa-google\"></i> Google</button>\n\n\t\t\t\t\t<a href=\"{{ googleURL }}\" class=\"ml-2\"  >\n\t\t\t\t\t\t<img alt=\"Login com Google\" src=\"/assets/img/google.png\" class=\"btn-img\" >\n\t\t\t\t\t</a>\t\t\t\t\t \n\t\t\t\t</p> -->\n\n      </div>\n    </form>\n\n\n\n    <p class=\"social-login text-center\" *ngIf=\"!isLoading\">\n      Entrar com:\n      <button class=\"btn btn-danger btn-block\" (click)=\"signInWithGoogle()\">\n        <i class=\"fab fa-google\"></i> Google</button>\n    </p>\n\n    <div class=\"card-footer text-center\" *ngIf=\"!isLoading\">\n      <div class=\"small\">\n        <a routerLink=\"/register\">\n          Não possui Usuário? Cadastre-se!\n        </a>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n\n  </div>\n\n\n</div>\n");
 
 /***/ }),
 
@@ -503,7 +503,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n\t<div class=\"card card-container\">\n\t\t<img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n\t\t<form *ngIf=\"!isSuccessful\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"displayName\">Nome</label> <input type=\"text\" class=\"form-control\" name=\"displayName\"\n\t\t\t\t\t[(ngModel)]=\"form.displayName\" required minlength=\"3\" maxlength=\"20\" #displayName=\"ngModel\" />\n\t\t\t\t<div class=\"alert-danger\" *ngIf=\"f.submitted && displayName.invalid\">\n\t\t\t\t\t<div *ngIf=\"displayName.errors.required\">É necessário informar o nome</div>\n\t\t\t\t\t<div *ngIf=\"displayName.errors.minlength\">O nome deve ter pelo menos 3 caracteres</div>\n\t\t\t\t\t<div *ngIf=\"displayName.errors.maxlength\">O nome deve ter no máximo 20 caracteres </div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"email\">Email</label> <input type=\"email\" class=\"form-control\" name=\"email\"\n\t\t\t\t\t[(ngModel)]=\"form.email\" required email #email=\"ngModel\" />\n\t\t\t\t<div class=\"alert-danger\" *ngIf=\"f.submitted && email.invalid\">\n\t\t\t\t\t<div *ngIf=\"email.errors.required\">É necessário informar o email</div>\n\t\t\t\t\t<div *ngIf=\"email.errors.email\">O email deve ser um endereço de email válido</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n\t\t\t\t\t[(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n\t\t\t\t<div class=\"alert-danger\" *ngIf=\"f.submitted && password.invalid\">\n\t\t\t\t\t<div *ngIf=\"password.errors.required\">É necessário informar a senha</div>\n\t\t\t\t\t<div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"matchingPassword\">Confirmar Senhar</label> <input type=\"password\" class=\"form-control\"\n\t\t\t\t\tname=\"matchingPassword\" [(ngModel)]=\"form.matchingPassword\" required minlength=\"6\"\n\t\t\t\t\t#matchingPassword=\"ngModel\" />\n\t\t\t\t<div class=\"alert-danger\" *ngIf=\"f.submitted && matchingPassword.invalid\">\n\t\t\t\t\t<div *ngIf=\"matchingPassword.errors.required\"> É necessário confirmar a senha</div>\n\t\t\t\t\t<div *ngIf=\"matchingPassword.errors.minlength\">A senha de confirmação deve ter pelo menos 6 caracteres</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<button class=\"btn btn-primary btn-block\">Cadastrar</button>\n\t\t\t</div>\n\t\t\t<div class=\"alert alert-warning\" *ngIf=\"f.submitted && isSignUpFailed\">\n\t\t\t\tO cadastro falhou!<br />{{ errorMessage }}\n\t\t\t</div>\n\t\t</form>\n\t\t<div class=\"alert alert-success\" *ngIf=\"isSuccessful\">você foi registrado com sucesso! <br/><br/>\n\t\t\t<div class=\"card-footer text-center\">\n\t\t\t\t<div class=\"small\">\n\t\t\t\t\t<a routerLink=\"/login\">\n\t\t\t\t\t\tClique aqui para retornar para tela de login\n\t\t\t\t\t</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n  <div class=\"card card-container\">\n    <img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n    <form *ngIf=\"!isSuccessful && !isLoading\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\"\n      novalidate>\n      <div class=\"form-group\">\n        <label for=\"displayName\">Nome</label> <input type=\"text\" class=\"form-control\" name=\"displayName\"\n          [(ngModel)]=\"form.displayName\" required minlength=\"3\" maxlength=\"20\" #displayName=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && displayName.invalid\">\n          <div *ngIf=\"displayName.errors.required\">É necessário informar o nome</div>\n          <div *ngIf=\"displayName.errors.minlength\">O nome deve ter pelo menos 3 caracteres</div>\n          <div *ngIf=\"displayName.errors.maxlength\">O nome deve ter no máximo 20 caracteres </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"email\">Email</label> <input type=\"email\" class=\"form-control\" name=\"email\" [(ngModel)]=\"form.email\"\n          required email #email=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && email.invalid\">\n          <div *ngIf=\"email.errors.required\">É necessário informar o email</div>\n          <div *ngIf=\"email.errors.email\">O email deve ser um endereço de email válido</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n          [(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && password.invalid\">\n          <div *ngIf=\"password.errors.required\">É necessário informar a senha</div>\n          <div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"matchingPassword\">Confirmar Senhar</label> <input type=\"password\" class=\"form-control\"\n          name=\"matchingPassword\" [(ngModel)]=\"form.matchingPassword\" required minlength=\"6\"\n          #matchingPassword=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && matchingPassword.invalid\">\n          <div *ngIf=\"matchingPassword.errors.required\"> É necessário confirmar a senha</div>\n          <div *ngIf=\"matchingPassword.errors.minlength\">A senha de confirmação deve ter pelo menos 6 caracteres</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n\n        <button class=\"btn btn-primary btn-block\">Cadastrar</button>\n      </div>\n      <div class=\"alert alert-warning\" *ngIf=\"f.submitted && isSignUpFailed\">\n        O cadastro falhou!<br />{{ errorMessage }}\n      </div>\n    </form>\n\n    <div class=\"alert alert-success text-center\" *ngIf=\"isSuccessful\">Você foi registrado com sucesso! <br /><br />\n      <p class=\"social-login text-center\">\n        <button class=\"btn btn-info btn-block\" routerLink=\"/login\">\n          <i class=\"fas fa-sign-in-alt\"></i> Efetuar login</button>\n      </p>\n\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -948,20 +948,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _layout_layout_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./layout/layout.component */ "./src/app/layout/layout.component.ts");
 /* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./token.interceptor */ "./src/app/token.interceptor.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
-/* harmony import */ var _definicao_definicao_module__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./definicao/definicao.module */ "./src/app/definicao/definicao.module.ts");
-/* harmony import */ var _pagamento_pagamento_module__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pagamento/pagamento.module */ "./src/app/pagamento/pagamento.module.ts");
-/* harmony import */ var _pagamento_services__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pagamento.services */ "./src/app/pagamento.services.ts");
-/* harmony import */ var _definicao_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./definicao.service */ "./src/app/definicao.service.ts");
-/* harmony import */ var _presta_contas_services__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./presta-contas.services */ "./src/app/presta-contas.services.ts");
-/* harmony import */ var _prestacao_prestacao_contas_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./prestacao/prestacao-contas.module */ "./src/app/prestacao/prestacao-contas.module.ts");
-/* harmony import */ var _grafico_grafico_module__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./grafico/grafico.module */ "./src/app/grafico/grafico.module.ts");
-/* harmony import */ var _grafico_services__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./grafico-services */ "./src/app/grafico-services.ts");
-/* harmony import */ var _util_Date_Util__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./util/Date-Util */ "./src/app/util/Date-Util.ts");
-/* harmony import */ var _usuario_usuario_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./usuario/usuario.component */ "./src/app/usuario/usuario.component.ts");
-/* harmony import */ var ngx_mask__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ngx-mask */ "./node_modules/ngx-mask/fesm2015/ngx-mask.js");
-/* harmony import */ var ngx_pagination__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ngx-pagination */ "./node_modules/ngx-pagination/dist/ngx-pagination.js");
+/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
+/* harmony import */ var _definicao_definicao_module__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./definicao/definicao.module */ "./src/app/definicao/definicao.module.ts");
+/* harmony import */ var _pagamento_pagamento_module__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pagamento/pagamento.module */ "./src/app/pagamento/pagamento.module.ts");
+/* harmony import */ var _pagamento_services__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pagamento.services */ "./src/app/pagamento.services.ts");
+/* harmony import */ var _definicao_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./definicao.service */ "./src/app/definicao.service.ts");
+/* harmony import */ var _presta_contas_services__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./presta-contas.services */ "./src/app/presta-contas.services.ts");
+/* harmony import */ var _prestacao_prestacao_contas_module__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./prestacao/prestacao-contas.module */ "./src/app/prestacao/prestacao-contas.module.ts");
+/* harmony import */ var _grafico_grafico_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./grafico/grafico.module */ "./src/app/grafico/grafico.module.ts");
+/* harmony import */ var _grafico_services__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./grafico-services */ "./src/app/grafico-services.ts");
+/* harmony import */ var _util_Date_Util__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./util/Date-Util */ "./src/app/util/Date-Util.ts");
+/* harmony import */ var _usuario_usuario_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./usuario/usuario.component */ "./src/app/usuario/usuario.component.ts");
+/* harmony import */ var ngx_mask__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ngx-mask */ "./node_modules/ngx-mask/fesm2015/ngx-mask.js");
+/* harmony import */ var ngx_pagination__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ngx-pagination */ "./node_modules/ngx-pagination/dist/ngx-pagination.js");
+/* harmony import */ var _services_auth_services__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./services/auth.services */ "./src/app/services/auth.services.ts");
 
 
 
@@ -1001,8 +1001,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"],
             _login_login_component__WEBPACK_IMPORTED_MODULE_12__["LoginComponent"],
             _layout_layout_component__WEBPACK_IMPORTED_MODULE_14__["LayoutComponent"],
-            _register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"],
-            _usuario_usuario_component__WEBPACK_IMPORTED_MODULE_27__["UsuarioComponent"]
+            _register_register_component__WEBPACK_IMPORTED_MODULE_16__["RegisterComponent"],
+            _usuario_usuario_component__WEBPACK_IMPORTED_MODULE_26__["UsuarioComponent"]
         ],
         imports: [
             _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"],
@@ -1012,22 +1012,22 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _template_template_module__WEBPACK_IMPORTED_MODULE_5__["TemplateModule"],
             _clientes_clientes_module__WEBPACK_IMPORTED_MODULE_7__["ClientesModule"],
             _servico_prestado_servico_prestado_module__WEBPACK_IMPORTED_MODULE_10__["ServicoPrestadoModule"],
-            _definicao_definicao_module__WEBPACK_IMPORTED_MODULE_18__["DefinicaoModule"],
-            _pagamento_pagamento_module__WEBPACK_IMPORTED_MODULE_19__["PagamentoModule"],
-            _prestacao_prestacao_contas_module__WEBPACK_IMPORTED_MODULE_23__["PrestacaoContasModule"],
-            _grafico_grafico_module__WEBPACK_IMPORTED_MODULE_24__["GraficoModule"],
-            _util_Date_Util__WEBPACK_IMPORTED_MODULE_26__["DateUtil"],
-            ngx_mask__WEBPACK_IMPORTED_MODULE_28__["NgxMaskModule"],
-            ngx_pagination__WEBPACK_IMPORTED_MODULE_29__["NgxPaginationModule"]
+            _definicao_definicao_module__WEBPACK_IMPORTED_MODULE_17__["DefinicaoModule"],
+            _pagamento_pagamento_module__WEBPACK_IMPORTED_MODULE_18__["PagamentoModule"],
+            _prestacao_prestacao_contas_module__WEBPACK_IMPORTED_MODULE_22__["PrestacaoContasModule"],
+            _grafico_grafico_module__WEBPACK_IMPORTED_MODULE_23__["GraficoModule"],
+            _util_Date_Util__WEBPACK_IMPORTED_MODULE_25__["DateUtil"],
+            ngx_mask__WEBPACK_IMPORTED_MODULE_27__["NgxMaskModule"],
+            ngx_pagination__WEBPACK_IMPORTED_MODULE_28__["NgxPaginationModule"]
         ],
         providers: [_clientes_service__WEBPACK_IMPORTED_MODULE_8__["ClientesService"],
-            _definicao_service__WEBPACK_IMPORTED_MODULE_21__["DefinicaoService"],
+            _definicao_service__WEBPACK_IMPORTED_MODULE_20__["DefinicaoService"],
             _servico_prestado_service__WEBPACK_IMPORTED_MODULE_11__["ServicoPrestadoService"],
-            _pagamento_services__WEBPACK_IMPORTED_MODULE_20__["PagamentoService"],
-            _presta_contas_services__WEBPACK_IMPORTED_MODULE_22__["PrestaContasService"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_16__["AuthService"],
+            _pagamento_services__WEBPACK_IMPORTED_MODULE_19__["PagamentoService"],
+            _presta_contas_services__WEBPACK_IMPORTED_MODULE_21__["PrestaContasService"],
+            _services_auth_services__WEBPACK_IMPORTED_MODULE_29__["AuthServices"],
             _token_interceptor__WEBPACK_IMPORTED_MODULE_15__["authInterceptorProviders"],
-            _grafico_services__WEBPACK_IMPORTED_MODULE_25__["GraficoService"]
+            _grafico_services__WEBPACK_IMPORTED_MODULE_24__["GraficoService"],
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
     })
@@ -1050,7 +1050,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_auth_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/auth.services */ "./src/app/services/auth.services.ts");
 /* harmony import */ var _services_token_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/token-storage.service */ "./src/app/services/token-storage.service.ts");
 
 
@@ -1087,7 +1087,7 @@ let AuthGuard = class AuthGuard {
     }
 };
 AuthGuard.ctorParameters = () => [
-    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
+    { type: _services_auth_services__WEBPACK_IMPORTED_MODULE_3__["AuthServices"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
     { type: _services_token_storage_service__WEBPACK_IMPORTED_MODULE_4__["TokenStorageService"] }
 ];
@@ -2297,10 +2297,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _services_token_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/token-storage.service */ "./src/app/services/token-storage.service.ts");
-/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _services_token_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/token-storage.service */ "./src/app/services/token-storage.service.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _services_auth_services__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/auth.services */ "./src/app/services/auth.services.ts");
 
 
 
@@ -2320,23 +2320,10 @@ let LoginComponent = class LoginComponent {
         this.isLoggedIn = false;
         this.isLoginFailed = false;
         this.errorMessage = '';
-        this.googleURL = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].GOOGLE_AUTH_URL;
-        this.route.queryParams.subscribe((params) => {
-            console.log(params);
-        });
+        this.googleURL = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].GOOGLE_AUTH_URL;
+        this.isLoading = false;
     }
     ngOnInit() {
-        this.route.queryParams.forEach((params) => {
-            var state = params['state'];
-            this.token = params['token'];
-            console.log(state, +'\n' + this.token);
-        });
-        console.log(window.location.href);
-        // this.route.queryParams.subscribe(queryParams => {
-        // this.token = queryParams['token'];
-        //this.verificarToken();
-        //console.log(this.token)
-        //});
         //this.route.queryParams.subscribe((params) => console.log(params))
         this.token = this.route.snapshot.queryParamMap.get('token');
         this.error = this.route.snapshot.queryParamMap.get('error');
@@ -2351,23 +2338,29 @@ let LoginComponent = class LoginComponent {
             }, err => {
                 this.errorMessage = err.error.message;
                 this.isLoginFailed = true;
+                this.isLoading = false;
             });
         }
         else if (this.error) {
             this.errorMessage = this.error;
             this.isLoginFailed = true;
+            this.isLoading = false;
         }
     }
     onSubmit() {
+        this.isLoading = true;
         this.authService.login(this.form).subscribe(data => {
             this.tokenStorage.saveToken(data.accessToken);
             this.login(data.user);
-            this.router.navigate(['/home']);
         }, err => {
+            this.isLoading = false;
             this.errorMessage = err.error.message;
             this.isLoginFailed = true;
             if (!this.errorMessage) {
                 this.errorMessage = "Não foi possivel se comunicar com o servidor!";
+            }
+            if (err.error.status = 401) {
+                this.errorMessage = "Usuário/senha incorreto!";
             }
         });
     }
@@ -2378,6 +2371,10 @@ let LoginComponent = class LoginComponent {
         this.currentUser = this.tokenStorage.getUser();
         this.router.navigate(['/home']);
         //window.location.reload();
+    }
+    signInWithGoogle() {
+        window.location.href = this.googleURL;
+        this.isLoading = true;
     }
     verificarToken() {
         // window.location.href = this.googleURL;
@@ -2390,10 +2387,10 @@ let LoginComponent = class LoginComponent {
     }
 };
 LoginComponent.ctorParameters = () => [
-    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
-    { type: _services_token_storage_service__WEBPACK_IMPORTED_MODULE_4__["TokenStorageService"] },
+    { type: _services_auth_services__WEBPACK_IMPORTED_MODULE_6__["AuthServices"] },
+    { type: _services_token_storage_service__WEBPACK_IMPORTED_MODULE_3__["TokenStorageService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
 LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -3256,7 +3253,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_auth_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.services */ "./src/app/services/auth.services.ts");
 
 
 
@@ -3270,21 +3267,25 @@ let RegisterComponent = class RegisterComponent {
         this.isSuccessful = false;
         this.isSignUpFailed = false;
         this.errorMessage = '';
+        this.isLoading = false;
     }
     ngOnInit() {
     }
     onSubmit() {
+        this.isLoading = true;
         this.authService.register(this.form).subscribe(data => {
             this.isSuccessful = true;
             this.isSignUpFailed = false;
+            this.isLoading = false;
         }, err => {
             this.errorMessage = err.error.message;
             this.isSignUpFailed = true;
+            this.isLoading = false;
         });
     }
 };
 RegisterComponent.ctorParameters = () => [
-    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
+    { type: _services_auth_services__WEBPACK_IMPORTED_MODULE_3__["AuthServices"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
@@ -3300,16 +3301,16 @@ RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/services/auth.service.ts":
-/*!******************************************!*\
-  !*** ./src/app/services/auth.service.ts ***!
-  \******************************************/
-/*! exports provided: AuthService */
+/***/ "./src/app/services/auth.services.ts":
+/*!*******************************************!*\
+  !*** ./src/app/services/auth.services.ts ***!
+  \*******************************************/
+/*! exports provided: AuthServices */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthServices", function() { return AuthServices; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
@@ -3325,7 +3326,7 @@ __webpack_require__.r(__webpack_exports__);
 const httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
 };
-let AuthService = class AuthService {
+let AuthServices = class AuthServices {
     constructor(http, token) {
         this.http = http;
         this.token = token;
@@ -3356,15 +3357,15 @@ let AuthService = class AuthService {
         return false;
     }
 };
-AuthService.ctorParameters = () => [
+AuthServices.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
     { type: _token_storage_service__WEBPACK_IMPORTED_MODULE_3__["TokenStorageService"] }
 ];
-AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+AuthServices = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     })
-], AuthService);
+], AuthServices);
 
 
 
@@ -4029,7 +4030,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var src_app_services_auth_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/auth.services */ "./src/app/services/auth.services.ts");
 /* harmony import */ var src_app_services_token_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/token-storage.service */ "./src/app/services/token-storage.service.ts");
 
 
@@ -4060,7 +4061,7 @@ let SidebarComponent = class SidebarComponent {
     }
 };
 SidebarComponent.ctorParameters = () => [
-    { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
+    { type: src_app_services_auth_services__WEBPACK_IMPORTED_MODULE_3__["AuthServices"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
     { type: src_app_services_token_storage_service__WEBPACK_IMPORTED_MODULE_4__["TokenStorageService"] }
 ];
@@ -4284,15 +4285,15 @@ __webpack_require__.r(__webpack_exports__);
 
 const environment = {
     production: false,
-    //API_BASE_URL: 'http://localhost:8080',
-    // API_URL: "http://localhost:8080/api/",
-    //AUTH_API: "http://localhost:8080/api/auth/",
-    //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:4200/login",
+    API_BASE_URL: 'http://localhost:8080',
+    API_URL: "http://localhost:8080/api/",
+    AUTH_API: "http://localhost:8080/api/auth/",
+    GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:4200/login",
     //production: true,
-    API_BASE_URL: 'https://servicosprestados.herokuapp.com',
-    API_URL: "https://servicosprestados.herokuapp.com/api/",
-    AUTH_API: "https://servicosprestados.herokuapp.com/api/auth/",
-    GOOGLE_AUTH_URL: "https://servicosprestados.herokuapp.com/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app",
+    //API_BASE_URL: 'https://servicosprestados.herokuapp.com',
+    //API_URL: "https://servicosprestados.herokuapp.com/api/",
+    //AUTH_API: "https://servicosprestados.herokuapp.com/api/auth/",
+    //GOOGLE_AUTH_URL: "https://servicosprestados.herokuapp.com/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app",
     ClientId: 'my-angular-app',
     clientSecret: '@321',
     obterTokenUrl: '/oauth/token',
