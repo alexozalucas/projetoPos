@@ -1,80 +1,78 @@
 <h1 class="mt-4">Clientes</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">{{cliente.id ? 'Edição' :'Cadastro'}}</li>
+  <li class="breadcrumb-item active">{{cliente.id ? 'Edição' :'Cadastro'}}</li>
 </ol>
 
 <div class="container-fluid">
-    <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
+  <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success" role="alert" *ngIf="success == true">
-                    Cliente Salvo com sucesso
-                </div>
-                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
-                    {{erro}}
-                </div>
-            </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success == true">
+          Cliente Salvo com sucesso
         </div>
-        <div class="row" *ngIf="cliente.id">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>
-                        ID:
-                    </label>
-                    <input type="text" class="form-control" disabled="true" [ngModel]="cliente.id" name="id" />
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>
-                        Data Cadastro:
-                    </label>
-                    <input type="text" class="form-control" disabled="true" [ngModel]="cliente.dateRegister"
-                        name="dateRegister" />
-                </div>
-            </div>
-
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+          {{erro}}
         </div>
-
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>
-                        Nome: *
-                    </label>
-                    <input type="text" class="form-control" [(ngModel)]="cliente.name" name="name" />
-
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>
-                        CPF: *
-                    </label>
-                    <input type="text" class="form-control" [(ngModel)]="cliente.cpf" name="cpf" 
-                        type="text" placeholder="000.000.000-00" mask="000.000.000-00" />
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="cliente.id">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            ID:
+          </label>
+          <input type="text" class="form-control" disabled="true" [ngModel]="cliente.id" name="id" />
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-success m-1 " *ngIf="!cliente.id">
-                    <i class="fa fa-save"></i> Salvar
-                </button>
-                <button type="submit" class="btn btn-primary m-1 " *ngIf="cliente.id">
-                    <i class="fa fa-sync-alt" ></i> Atualizar
-                </button>
-                <button type="button" class="btn btn-danger m-1" (click)="voltarParaListagem()">
-                    <i class="fa fa-arrow-alt-circle-left"></i> Voltar
-                </button>
+      </div>
 
-            </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            Data Cadastro:
+          </label>
+          <input type="text" class="form-control" disabled="true" [ngModel]="cliente.dateRegister"
+            name="dateRegister" />
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            Nome: *
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.name" name="name" />
 
         </div>
+      </div>
 
-    </form>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            CPF: *
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.cpf" name="cpf" type="text"
+            placeholder="000.000.000-00" mask="000.000.000-00" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-success m-1 " *ngIf="!cliente.id">
+          <i class="fa fa-save"></i> Salvar
+        </button>
+        <button type="submit" class="btn btn-primary m-1 " *ngIf="cliente.id">
+          <i class="fa fa-sync-alt"></i> Atualizar
+        </button>
+        <button type="button" class="btn btn-danger m-1" (click)="voltarParaListagem()">
+          <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
 </div>
