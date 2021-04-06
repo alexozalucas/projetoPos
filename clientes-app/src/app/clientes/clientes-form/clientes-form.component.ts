@@ -54,7 +54,6 @@ export class ClientesFormComponent implements OnInit {
         }, reject => {
           this.errors = reject.error.erros;
           this.success = false;
-
         })
 
     } else {
@@ -67,6 +66,7 @@ export class ClientesFormComponent implements OnInit {
 
 
         }, errorResponse => {
+          console.log(errorResponse)
           this.errors = errorResponse.error.erros;
           this.success = false;
         })

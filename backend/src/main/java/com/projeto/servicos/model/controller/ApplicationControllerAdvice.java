@@ -43,6 +43,7 @@ public class ApplicationControllerAdvice {
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ResponseEntity<ApiErrors> handleValidationErros(ResponseStatusException ex) {
 
 		
