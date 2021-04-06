@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { AppConstants } from '../constants/app.constants';
+
 import { TokenStorageService } from '../services/token-storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { environment } from 'src/environments/environment';
+import { AuthServices } from '../services/auth.services';
+
+
 
 
 
@@ -20,51 +23,75 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   currentUser: any;
-  googleURL = AppConstants.GOOGLE_AUTH_URL;
+  googleURL = environment.GOOGLE_AUTH_URL;
+  token: string ;
+  error: string;
+  isLoading: boolean = false;
 
-  constructor(private authService: AuthService,
-               private tokenStorage: TokenStorageService,
-               private route: ActivatedRoute, 
-               private userService: UserService,
-               private router: Router) {
-                 console.log(this.googleURL)
-                }
+
+  constructor(private authService: AuthServices,
+    private tokenStorage: TokenStorageService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private router: Router) {
+        
+  }
+
 
   ngOnInit(): void {
-    const token: string = this.route.snapshot.queryParamMap.get('token');
-    const error: string = this.route.snapshot.queryParamMap.get('error');
+  
+   
+    //this.route.queryParams.subscribe((params) => console.log(params))
+    
+    this.token = this.route.snapshot.queryParamMap.get('token');
+    this.error = this.route.snapshot.queryParamMap.get('error');
+  
+
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.currentUser = this.tokenStorage.getUser();
     }
-    else if (token) {
-      this.tokenStorage.saveToken(token);
+    else if (this.token) {
+      this.tokenStorage.saveToken(this.token);
       this.userService.getCurrentUser().subscribe(
-        data => {          
+        data => {
           this.login(data);
         },
         err => {
           this.errorMessage = err.error.message;
           this.isLoginFailed = true;
+          this.isLoading = false;
         }
       );
     }
-    else if (error) {
-      this.errorMessage = error;
+    else if (this.error) {
+      this.errorMessage = this.error;
       this.isLoginFailed = true;
+      this.isLoading = false;
     }
   }
 
   onSubmit(): void {
+
+    this.isLoading = true;
     this.authService.login(this.form).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
-        this.login(data.user); 
-        this.router.navigate(['/home'])         
+        this.login(data.user);
       },
       err => {
+       
+        this.isLoading = false;
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
+        
+        if (!this.errorMessage) {
+          this.errorMessage = "Não foi possivel se comunicar com o servidor!"
+        }
+
+        if(err.error.status = 401){
+          this.errorMessage = "Usuário/senha incorreto!"
+        }
       }
     );
   }
@@ -74,13 +101,41 @@ export class LoginComponent implements OnInit {
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
-    this.router.navigate(['/home']) 
+    this.router.navigate(['/home'])
     //window.location.reload();
   }
 
+
+  signInWithGoogle(){
+    window.location.href = this.googleURL;
+
+    this.isLoading = true;
+
+  }
+  verificarToken()  {
+
+   // window.location.href = this.googleURL;
+
+    
+    
+    //const routeFragment: Observable<string> = this.route.fragment;      
+    //routeFragment.subscribe(fragment => {
+      //let token: string = window.location.href = this.googleURL;
+      //this.token = fragment.match(/^(.*?)&/)[1].replace('token=', '');
+      //console.log(this.token)
+    //});
+
+    
   
+ }
+
+
+
 
 }
+
+
+
 
 
 

@@ -10007,8 +10007,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-width: 0;
+  justify-content: space-between; 
   flex-grow: 1;
   min-height: calc(100vh - 56px);
   margin-left: -225px;
@@ -10055,7 +10054,7 @@ body {
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
   width: 225px;
-  height: 100vh;
+  height: 100%;
   z-index: 1038;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav {

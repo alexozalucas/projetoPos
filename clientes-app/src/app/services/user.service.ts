@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AppConstants } from '../constants/app.constants';
+import { environment } from '../../environments/environment';
 
 
 const httpOptions = {
@@ -17,22 +17,18 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getPublicContent(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'all', { responseType: 'text' });
+    return this.http.get(environment.API_URL + 'all', { responseType: 'text' });
   }
 
   getUserBoard(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'user', { responseType: 'text' });
-  }
-
-  getModeratorBoard(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'mod', { responseType: 'text' });
+    return this.http.get(environment.API_URL + 'user', { responseType: 'text' });
   }
 
   getAdminBoard(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'admin', { responseType: 'text' });
+    return this.http.get(environment.API_URL + 'admin', { responseType: 'text' });
   }
 
   getCurrentUser(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'user/me', httpOptions);
+    return this.http.get(environment.API_URL + 'user/me', httpOptions);
   }
 }

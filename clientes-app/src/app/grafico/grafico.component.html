@@ -4,18 +4,25 @@
 <div class="row ">
   <div class="col-md-2 container-fluid">
     <div class="form-group">
-      <label  for="data">Ano:</label>
-      <input class="form-control" placeholder="YYYY" type="text" id="data" (change)="buscarPorData($event)"
-        mask="0000" name="competencia">
+      <label for="data">Ano:</label>
+      <input class="form-control" placeholder="YYYY" type="text" id="data" (change)="buscarPorData($event)" mask="0000"
+        name="competencia">
     </div>
   </div>
 
 </div>
 
+
+
+
 <div class="container">
-  <div>
-    <canvas #meuCanvas></canvas>
+
+
+  <div class="chart-container">
+    <canvas class="grafico" #meuCanvas></canvas>
   </div>
+
+
   <br />
   <div class=row *ngIf="dataSelecionada">
     <button type="button" class="btn btn-primary m-1" (click)="recebido()">

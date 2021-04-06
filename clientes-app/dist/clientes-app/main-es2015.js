@@ -399,7 +399,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4 \">Gráfico</h1>\n\n\n<div class=\"row \">\n  <div class=\"col-md-2 container-fluid\">\n    <div class=\"form-group\">\n      <label  for=\"data\">Ano:</label>\n      <input class=\"form-control\" placeholder=\"YYYY\" type=\"text\" id=\"data\" (change)=\"buscarPorData($event)\"\n        mask=\"0000\" name=\"competencia\">\n    </div>\n  </div>\n\n</div>\n\n<div class=\"container\">\n  <div>\n    <canvas #meuCanvas></canvas>\n  </div>\n  <br />\n  <div class=row *ngIf=\"dataSelecionada\">\n    <button type=\"button\" class=\"btn btn-primary m-1\" (click)=\"recebido()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Recebido por Mês\n    </button>\n    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"desconto()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Descontos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-success m-1\" (click)=\"acrescimo()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Acréscimos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"servico()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Serviços por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-warning m-1\" (click)=\"contrato()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Valor contratado\n    </button>\n  </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4 \">Gráfico</h1>\n\n\n<div class=\"row \">\n  <div class=\"col-md-2 container-fluid\">\n    <div class=\"form-group\">\n      <label for=\"data\">Ano:</label>\n      <input class=\"form-control\" placeholder=\"YYYY\" type=\"text\" id=\"data\" (change)=\"buscarPorData($event)\" mask=\"0000\"\n        name=\"competencia\">\n    </div>\n  </div>\n\n</div>\n\n\n\n\n<div class=\"container\">\n\n\n  <div class=\"chart-container\">\n    <canvas class=\"grafico\" #meuCanvas></canvas>\n  </div>\n\n\n  <br />\n  <div class=row *ngIf=\"dataSelecionada\">\n    <button type=\"button\" class=\"btn btn-primary m-1\" (click)=\"recebido()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Recebido por Mês\n    </button>\n    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"desconto()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Descontos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-success m-1\" (click)=\"acrescimo()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Acréscimos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"servico()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Serviços por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-warning m-1\" (click)=\"contrato()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Valor contratado\n    </button>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -438,7 +438,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n\t<div class=\"card card-container\">\n\t\t<img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n\t\t<form *ngIf=\"!isLoggedIn\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"username\">Email</label> <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"form.username\" required #username=\"ngModel\" />\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && username.invalid\">É necessário informar o nome do usuário!</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"form.password\" required minlength=\"6\"\n\t\t\t\t\t#password=\"ngModel\" />\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && password.invalid\">\n\t\t\t\t\t<div *ngIf=\"password.errors.required\">É necessário informar a senha!</div>\n\t\t\t\t\t<div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres </div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<button class=\"btn btn-primary btn-block\">Login</button>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"isLoginFailed\">Login failed: {{ errorMessage }}</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<p class=\"content-divider center mt-3\">\n\t\t\t\t\t<span>Ou</span>\n\t\t\t\t</p>\n\t\t\t\t<p class=\"social-login text-center\">\n\t\t\t\t\tEntrar com:\n\t\t\t\t\t<a href=\"{{ googleURL }}\" class=\"ml-2\">\n\t\t\t\t\t\t<img alt=\"Login com Google\" src=\"/assets/img/google.png\" class=\"btn-img\">\n\t\t\t\t\t</a>\t\t\t\t\t\n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</form>\n\t\t\n\t\t<div class=\"card-footer text-center\">\n\t\t\t<div class=\"small\">\n\t\t\t\t<a routerLink=\"/register\">\n\t\t\t\t\tNão possui Usuário? Cadastre-se!\n\t\t\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n\t<div class=\"card card-container\">\n\t\t<img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n\t\t<form *ngIf=\"!isLoggedIn\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"username\">Email</label> <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"form.username\" required #username=\"ngModel\" />\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && username.invalid\">É necessário informar o nome do usuário!</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"form.password\" required minlength=\"6\"\n\t\t\t\t\t#password=\"ngModel\" />\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && password.invalid\">\n\t\t\t\t\t<div *ngIf=\"password.errors.required\">É necessário informar a senha!</div>\n\t\t\t\t\t<div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres </div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<button class=\"btn btn-primary btn-block\" >Login</button>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"isLoginFailed\">Login falhou: {{ errorMessage }}</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<p class=\"content-divider center mt-3\">\n\t\t\t\t\t<span>Ou</span>\n\t\t\t\t</p>\n\t\t\t\t<p class=\"social-login text-center\">\n\t\t\t\t\tEntrar com:\n\t\t\t\t\t\n\n\t\t\t\t\t<a href=\"{{ googleURL }}\" class=\"ml-2\" >\n\t\t\t\t\t\t<img alt=\"Login com Google\" src=\"/assets/img/google.png\" class=\"btn-img\" >\n\t\t\t\t\t</a>\t\t\t\t\t\n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</form>\n\t\t\n\t\t  \n\t\t<!-- <button class=\"btn\"  >\n\t\t\t<img alt=\"Login com Google\" src=\"/assets/img/google.png\" class=\"btn-img\" (click)=\"verificarToken()\"></button> -->\n\t\t<div class=\"card-footer text-center\">\n\t\t\t<div class=\"small\">\n\t\t\t\t<a routerLink=\"/register\">\n\t\t\t\t\tNão possui Usuário? Cadastre-se!\n\t\t\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t\n</div>\n");
 
 /***/ }),
 
@@ -1457,32 +1457,6 @@ ClientesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/constants/app.constants.ts":
-/*!********************************************!*\
-  !*** ./src/app/constants/app.constants.ts ***!
-  \********************************************/
-/*! exports provided: AppConstants */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppConstants", function() { return AppConstants; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-
-
-class AppConstants {
-}
-//private static API_BASE_URL = 'http://localhost:8080';    
-AppConstants.OAUTH2_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_BASE_URL + "/oauth2/authorization/";
-AppConstants.REDIRECT_URL = "?redirect_uri=http://localhost:4200/login";
-AppConstants.API_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_BASE_URL + "/api/";
-AppConstants.AUTH_API = AppConstants.API_URL + "auth/";
-AppConstants.GOOGLE_AUTH_URL = AppConstants.OAUTH2_URL + "google" + AppConstants.REDIRECT_URL;
-
-
-/***/ }),
-
 /***/ "./src/app/definicao.service.ts":
 /*!**************************************!*\
   !*** ./src/app/definicao.service.ts ***!
@@ -1889,7 +1863,7 @@ GraficoService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dyYWZpY28vZ3JhZmljby5jb21wb25lbnQuY3NzIn0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".chart-container {\n  position: relative;\n  margin: auto;\n  height: 60vh;\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ3JhZmljby9ncmFmaWNvLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLFlBQVk7O0FBRWQiLCJmaWxlIjoic3JjL2FwcC9ncmFmaWNvL2dyYWZpY28uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jaGFydC1jb250YWluZXIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIG1hcmdpbjogYXV0bztcbiAgaGVpZ2h0OiA2MHZoO1xuXG59XG4iXX0= */");
 
 /***/ }),
 
@@ -1935,7 +1909,9 @@ let GraficoComponent = class GraficoComponent {
             options: {
                 legend: {
                     display: true
-                }
+                },
+                maintainAspectRatio: false,
+                responsive: true
             }
         });
     }
@@ -2322,9 +2298,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _constants_app_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants/app.constants */ "./src/app/constants/app.constants.ts");
-/* harmony import */ var _services_token_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/token-storage.service */ "./src/app/services/token-storage.service.ts");
-/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var _services_token_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/token-storage.service */ "./src/app/services/token-storage.service.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
 
 
 
@@ -2344,18 +2320,32 @@ let LoginComponent = class LoginComponent {
         this.isLoggedIn = false;
         this.isLoginFailed = false;
         this.errorMessage = '';
-        this.googleURL = _constants_app_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].GOOGLE_AUTH_URL;
-        console.log(this.googleURL);
+        this.googleURL = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].GOOGLE_AUTH_URL;
+        this.route.queryParams.subscribe((params) => {
+            console.log(params);
+        });
     }
     ngOnInit() {
-        const token = this.route.snapshot.queryParamMap.get('token');
-        const error = this.route.snapshot.queryParamMap.get('error');
+        this.route.queryParams.forEach((params) => {
+            var state = params['state'];
+            this.token = params['token'];
+            console.log(state, +'\n' + this.token);
+        });
+        console.log(window.location.href);
+        // this.route.queryParams.subscribe(queryParams => {
+        // this.token = queryParams['token'];
+        //this.verificarToken();
+        //console.log(this.token)
+        //});
+        //this.route.queryParams.subscribe((params) => console.log(params))
+        this.token = this.route.snapshot.queryParamMap.get('token');
+        this.error = this.route.snapshot.queryParamMap.get('error');
         if (this.tokenStorage.getToken()) {
             this.isLoggedIn = true;
             this.currentUser = this.tokenStorage.getUser();
         }
-        else if (token) {
-            this.tokenStorage.saveToken(token);
+        else if (this.token) {
+            this.tokenStorage.saveToken(this.token);
             this.userService.getCurrentUser().subscribe(data => {
                 this.login(data);
             }, err => {
@@ -2363,8 +2353,8 @@ let LoginComponent = class LoginComponent {
                 this.isLoginFailed = true;
             });
         }
-        else if (error) {
-            this.errorMessage = error;
+        else if (this.error) {
+            this.errorMessage = this.error;
             this.isLoginFailed = true;
         }
     }
@@ -2376,6 +2366,9 @@ let LoginComponent = class LoginComponent {
         }, err => {
             this.errorMessage = err.error.message;
             this.isLoginFailed = true;
+            if (!this.errorMessage) {
+                this.errorMessage = "Não foi possivel se comunicar com o servidor!";
+            }
         });
     }
     login(user) {
@@ -2386,12 +2379,21 @@ let LoginComponent = class LoginComponent {
         this.router.navigate(['/home']);
         //window.location.reload();
     }
+    verificarToken() {
+        // window.location.href = this.googleURL;
+        //const routeFragment: Observable<string> = this.route.fragment;      
+        //routeFragment.subscribe(fragment => {
+        //let token: string = window.location.href = this.googleURL;
+        //this.token = fragment.match(/^(.*?)&/)[1].replace('token=', '');
+        //console.log(this.token)
+        //});
+    }
 };
 LoginComponent.ctorParameters = () => [
     { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
-    { type: _services_token_storage_service__WEBPACK_IMPORTED_MODULE_5__["TokenStorageService"] },
+    { type: _services_token_storage_service__WEBPACK_IMPORTED_MODULE_4__["TokenStorageService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"] },
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
 LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -3311,9 +3313,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _constants_app_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants/app.constants */ "./src/app/constants/app.constants.ts");
-/* harmony import */ var _token_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./token-storage.service */ "./src/app/services/token-storage.service.ts");
-/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/fesm2015/auth0-angular-jwt.js");
+/* harmony import */ var _token_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./token-storage.service */ "./src/app/services/token-storage.service.ts");
+/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/fesm2015/auth0-angular-jwt.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
 
 
 
@@ -3327,16 +3329,17 @@ let AuthService = class AuthService {
     constructor(http, token) {
         this.http = http;
         this.token = token;
-        this.jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_5__["JwtHelperService"]();
+        this.googleURL = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].GOOGLE_AUTH_URL;
+        this.jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JwtHelperService"]();
     }
     login(credentials) {
-        return this.http.post(_constants_app_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].AUTH_API + 'signin', {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].AUTH_API + 'signin', {
             email: credentials.username,
             password: credentials.password
         }, httpOptions);
     }
     register(user) {
-        return this.http.post(_constants_app_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].AUTH_API + 'signup', {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].AUTH_API + 'signup', {
             displayName: user.displayName,
             email: user.email,
             password: user.password,
@@ -3355,7 +3358,7 @@ let AuthService = class AuthService {
 };
 AuthService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
-    { type: _token_storage_service__WEBPACK_IMPORTED_MODULE_4__["TokenStorageService"] }
+    { type: _token_storage_service__WEBPACK_IMPORTED_MODULE_3__["TokenStorageService"] }
 ];
 AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -3426,7 +3429,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _constants_app_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants/app.constants */ "./src/app/constants/app.constants.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 
 
 
@@ -3439,19 +3442,16 @@ let UserService = class UserService {
         this.http = http;
     }
     getPublicContent() {
-        return this.http.get(_constants_app_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].API_URL + 'all', { responseType: 'text' });
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + 'all', { responseType: 'text' });
     }
     getUserBoard() {
-        return this.http.get(_constants_app_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].API_URL + 'user', { responseType: 'text' });
-    }
-    getModeratorBoard() {
-        return this.http.get(_constants_app_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].API_URL + 'mod', { responseType: 'text' });
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + 'user', { responseType: 'text' });
     }
     getAdminBoard() {
-        return this.http.get(_constants_app_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].API_URL + 'admin', { responseType: 'text' });
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + 'admin', { responseType: 'text' });
     }
     getCurrentUser() {
-        return this.http.get(_constants_app_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].API_URL + 'user/me', httpOptions);
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + 'user/me', httpOptions);
     }
 };
 UserService.ctorParameters = () => [
@@ -4284,7 +4284,15 @@ __webpack_require__.r(__webpack_exports__);
 
 const environment = {
     production: false,
-    API_BASE_URL: 'http://localhost:8080',
+    //API_BASE_URL: 'http://localhost:8080',
+    // API_URL: "http://localhost:8080/api/",
+    //AUTH_API: "http://localhost:8080/api/auth/",
+    //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:4200/login",
+    //production: true,
+    API_BASE_URL: 'https://servicosprestados.herokuapp.com',
+    API_URL: "https://servicosprestados.herokuapp.com/api/",
+    AUTH_API: "https://servicosprestados.herokuapp.com/api/auth/",
+    GOOGLE_AUTH_URL: "https://servicosprestados.herokuapp.com/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app",
     ClientId: 'my-angular-app',
     clientSecret: '@321',
     obterTokenUrl: '/oauth/token',

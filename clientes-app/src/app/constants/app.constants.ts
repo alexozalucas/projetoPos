@@ -8,4 +8,6 @@ export class AppConstants {
     public static API_URL = environment.API_BASE_URL + "/api/";
     public static AUTH_API = AppConstants.API_URL + "auth/";
     public static GOOGLE_AUTH_URL = AppConstants.OAUTH2_URL + "google" + AppConstants.REDIRECT_URL;
+
+ 
 }

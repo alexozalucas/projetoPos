@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthServices } from '../services/auth.services';
 
 
 @Component({
@@ -14,8 +14,9 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  isLoading: boolean = false;
 
-  constructor(private authService: AuthService,
+  constructor(private authService: AuthServices,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -23,14 +24,17 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     this.authService.register(this.form).subscribe(
       data => {        
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.isLoading = false
       },
       err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
+        this.isLoading = false
       }
     );
   }

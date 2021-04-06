@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AppConstants } from '../constants/app.constants';
 import { TokenStorageService } from './token-storage.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 
 const httpOptions = {
@@ -13,7 +13,10 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthServices {
+
+  googleURL = environment.GOOGLE_AUTH_URL;
+
   constructor(private http: HttpClient ,
               private token: TokenStorageService   
     ) { }
@@ -21,14 +24,14 @@ export class AuthService {
     jwtHelper: JwtHelperService = new JwtHelperService();
 
   login(credentials): Observable<any> {
-    return this.http.post(AppConstants.AUTH_API + 'signin', {
+    return this.http.post(environment.AUTH_API + 'signin', {
       email: credentials.username,
       password: credentials.password
     }, httpOptions);
   }
 
   register(user): Observable<any> {
-    return this.http.post(AppConstants.AUTH_API + 'signup', {
+    return this.http.post(environment.AUTH_API + 'signup', {
       displayName: user.displayName,
       email: user.email,
       password: user.password,
@@ -45,6 +48,6 @@ export class AuthService {
     }
     return false;
   }
- 
+
 
 }

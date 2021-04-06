@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
-import { BrowserStack } from 'protractor/built/driverProviders';
 import { GraficoService } from '../grafico-services';
 import { Grafico } from "./grafico"
-import { NgxMaskModule } from 'ngx-mask'
+
 
 @Component({
   selector: 'app-grafico',
@@ -36,6 +35,7 @@ export class GraficoComponent implements OnInit {
     // todo o grafico funciona nesta instancia 
     this.chart = new Chart(this.elemento.nativeElement, {
       type: 'line',
+      
       data: {
         labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
         datasets: []
@@ -43,7 +43,9 @@ export class GraficoComponent implements OnInit {
       options: {
         legend: {
           display: true
-        }
+        },
+        maintainAspectRatio: false,
+        responsive: true    
       }
     });
   }

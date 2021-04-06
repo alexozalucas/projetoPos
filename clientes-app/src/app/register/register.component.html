@@ -1,56 +1,63 @@
 <div class="col-md-12">
-	<div class="card card-container">
-		<img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-		<form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-			<div class="form-group">
-				<label for="displayName">Nome</label> <input type="text" class="form-control" name="displayName"
-					[(ngModel)]="form.displayName" required minlength="3" maxlength="20" #displayName="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && displayName.invalid">
-					<div *ngIf="displayName.errors.required">É necessário informar o nome</div>
-					<div *ngIf="displayName.errors.minlength">O nome deve ter pelo menos 3 caracteres</div>
-					<div *ngIf="displayName.errors.maxlength">O nome deve ter no máximo 20 caracteres </div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="email">Email</label> <input type="email" class="form-control" name="email"
-					[(ngModel)]="form.email" required email #email="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && email.invalid">
-					<div *ngIf="email.errors.required">É necessário informar o email</div>
-					<div *ngIf="email.errors.email">O email deve ser um endereço de email válido</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="password">Senha</label> <input type="password" class="form-control" name="password"
-					[(ngModel)]="form.password" required minlength="6" #password="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && password.invalid">
-					<div *ngIf="password.errors.required">É necessário informar a senha</div>
-					<div *ngIf="password.errors.minlength">A senha deve ter pelo menos 6 caracteres</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="matchingPassword">Confirmar Senhar</label> <input type="password" class="form-control"
-					name="matchingPassword" [(ngModel)]="form.matchingPassword" required minlength="6"
-					#matchingPassword="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && matchingPassword.invalid">
-					<div *ngIf="matchingPassword.errors.required"> É necessário confirmar a senha</div>
-					<div *ngIf="matchingPassword.errors.minlength">A senha de confirmação deve ter pelo menos 6 caracteres</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<button class="btn btn-primary btn-block">Cadastrar</button>
-			</div>
-			<div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-				O cadastro falhou!<br />{{ errorMessage }}
-			</div>
-		</form>
-		<div class="alert alert-success" *ngIf="isSuccessful">você foi registrado com sucesso! <br/><br/>
-			<div class="card-footer text-center">
-				<div class="small">
-					<a routerLink="/login">
-						Clique aqui para retornar para tela de login
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="card card-container">
+    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+    <form *ngIf="!isSuccessful && !isLoading" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+      novalidate>
+      <div class="form-group">
+        <label for="displayName">Nome</label> <input type="text" class="form-control" name="displayName"
+          [(ngModel)]="form.displayName" required minlength="3" maxlength="20" #displayName="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && displayName.invalid">
+          <div *ngIf="displayName.errors.required">É necessário informar o nome</div>
+          <div *ngIf="displayName.errors.minlength">O nome deve ter pelo menos 3 caracteres</div>
+          <div *ngIf="displayName.errors.maxlength">O nome deve ter no máximo 20 caracteres </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label> <input type="email" class="form-control" name="email" [(ngModel)]="form.email"
+          required email #email="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+          <div *ngIf="email.errors.required">É necessário informar o email</div>
+          <div *ngIf="email.errors.email">O email deve ser um endereço de email válido</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label> <input type="password" class="form-control" name="password"
+          [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">É necessário informar a senha</div>
+          <div *ngIf="password.errors.minlength">A senha deve ter pelo menos 6 caracteres</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="matchingPassword">Confirmar Senhar</label> <input type="password" class="form-control"
+          name="matchingPassword" [(ngModel)]="form.matchingPassword" required minlength="6"
+          #matchingPassword="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && matchingPassword.invalid">
+          <div *ngIf="matchingPassword.errors.required"> É necessário confirmar a senha</div>
+          <div *ngIf="matchingPassword.errors.minlength">A senha de confirmação deve ter pelo menos 6 caracteres</div>
+        </div>
+      </div>
+      <div class="form-group">
+
+        <button class="btn btn-primary btn-block">Cadastrar</button>
+      </div>
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        O cadastro falhou!<br />{{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success text-center" *ngIf="isSuccessful">Você foi registrado com sucesso! <br /><br />
+      <p class="social-login text-center">
+        <button class="btn btn-info btn-block" routerLink="/login">
+          <i class="fas fa-sign-in-alt"></i> Efetuar login</button>
+      </p>
+
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div [class.spinner-border]="isLoading" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
 </div>

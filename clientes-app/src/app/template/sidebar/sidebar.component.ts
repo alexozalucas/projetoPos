@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthServices } from 'src/app/services/auth.services';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   private showRoleAdmin;
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthServices,
     private router: Router,
     private tokenStorageService: TokenStorageService
   ) { }

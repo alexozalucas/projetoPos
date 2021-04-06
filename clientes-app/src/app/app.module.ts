@@ -13,7 +13,6 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
 import { authInterceptorProviders } from './token.interceptor';
-import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './register/register.component';
 import { DefinicaoModule } from './definicao/definicao.module';
 import { PagamentoModule } from './pagamento/pagamento.module';
@@ -26,9 +25,8 @@ import { GraficoService } from './grafico-services';
 import { DateUtil } from './util/Date-Util';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { NgxMaskModule } from 'ngx-mask';
-import {NgxPaginationModule} from 'ngx-pagination';
-
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AuthServices } from './services/auth.services';
 
 
 
@@ -39,7 +37,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     LoginComponent,
     LayoutComponent,
     RegisterComponent,
-    UsuarioComponent    
+    UsuarioComponent
   ],
 
   imports: [
@@ -59,16 +57,21 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxPaginationModule
     
 
+
   ],
   providers: [ClientesService,
-      DefinicaoService,      
-     ServicoPrestadoService, 
-     PagamentoService,
-     PrestaContasService,
-     AuthService,     
-      authInterceptorProviders,
-      GraficoService
-    ],
+    DefinicaoService,
+    ServicoPrestadoService,
+    PagamentoService,
+    PrestaContasService,
+    AuthServices,
+    authInterceptorProviders,
+    GraficoService,
+    
+    
+
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
