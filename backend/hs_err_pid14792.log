@@ -1,0 +1,33 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fc84f1ab375, pid=14792, tid=14808
+#
+# JRE version: OpenJDK Runtime Environment (15.0.1+9) (build 15.0.1+9-18)
+# Java VM: OpenJDK 64-Bit Server VM (15.0.1+9-18, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjimage.so+0x4375]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x65
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/lib/systemd/systemd-coredump %P %u %g %s %t 9223372036854775808 %h" (or dumping to /home/alex/eclipse-workspace/projetoPos/backend/core.14792)
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+ShowCodeDetailsInExceptionMessages -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:41671 -javaagent:/home/alex/Área de Trabalho/eclipse/configuration/org.eclipse.osgi/400/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 com.projeto.servicos.ServicosApplication
+
+Host: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz, 8 cores, 7G, Linux Mint 20 Ulyana
+Time: Tue Apr  6 11:17:26 2021 -03 elapsed time: 754.214810 seconds (0d 0h 12m 34s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fc8481ef300):  JavaThread "Signal Dispatcher" daemon [_thread_in_vm, id=14808, stack(0x00007fc84c0f6000,0x00007fc84c1f7000)]
+
+Stack: [0x00007fc84c0f6000,0x00007fc84c1f7000],  sp=0x00007fc84c1f41b0,  free space=1016k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libjimage.so+0x4375]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x65
+C  [libjimage.so+0x4f0e]  ImageFileReader::find_location_index(char const*, unsigned long long*) const+0x3e
+C  [libjimage.so+0x540c]  JIMAGE_FindResource+0xfc
+V  [libjvm.so+0x4e9f51]
