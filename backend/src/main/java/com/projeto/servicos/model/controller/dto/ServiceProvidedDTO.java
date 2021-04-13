@@ -12,7 +12,7 @@ public class ServiceProvidedDTO {
 	
 	private Integer id;
 	
-	@NotEmpty (message = "campo.description.obrigatorio")
+	@NotEmpty (message = "{campo.descricao.obrigatorio}")
 	private String description;	
 	
 	@NotEmpty (message = "{campo.preco.obrigatorio}") 

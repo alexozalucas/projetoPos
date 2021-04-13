@@ -10,7 +10,7 @@ public class OAuth2UserInfoFactory {
 		if (registrationId.equalsIgnoreCase(SocialProvider.GOOGLE.getProviderType())) {
 			return new GoogleOAuth2UserInfo(attributes);
 		} else {
-			throw new OAuth2AuthenticationProcessingException("Sorry! Login with " + registrationId + " is not supported yet.");
+			throw new OAuth2AuthenticationProcessingException("Desculpa! Entrar com  " + registrationId + "ainda não é compatível. ");
 		}
 	}
 }

@@ -459,7 +459,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4 \">Gráfico</h1>\n\n\n<div class=\"row \">\n  <div class=\"col-md-2 container-fluid\">\n    <div class=\"form-group\">\n      <label for=\"data\">Ano:</label>\n      <input class=\"form-control\" placeholder=\"YYYY\" type=\"text\" id=\"data\" (change)=\"buscarPorData($event)\" mask=\"0000\"\n        name=\"competencia\">\n    </div>\n  </div>\n\n</div>\n\n\n\n\n<div class=\"container\">\n\n\n  <div class=\"chart-container\">\n    <canvas class=\"grafico\" #meuCanvas></canvas>\n  </div>\n\n\n  <br />\n  <div class=row *ngIf=\"dataSelecionada\">\n    <button type=\"button\" class=\"btn btn-primary m-1\" (click)=\"recebido()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Recebido por Mês\n    </button>\n    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"desconto()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Descontos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-success m-1\" (click)=\"acrescimo()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Acréscimos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"servico()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Serviços por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-warning m-1\" (click)=\"contrato()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Valor contratado\n    </button>\n  </div>\n</div>\n";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4 \">Gráfico</h1>\n\n\n<div class=\"row \">\n  <div class=\"col-md-2 container-fluid\">\n    <div class=\"form-group\">\n      <label for=\"data\">Ano:</label>\n      <input class=\"form-control\" placeholder=\"YYYY\" type=\"text\" id=\"data\" (change)=\"buscarPorData($event)\" mask=\"0000\"\n        name=\"competencia\">\n    </div>\n  </div>\n\n</div>\n\n\n\n\n\n<div class=\"container\">\n\n\n  <div class=\"chart-container\" >\n    <canvas class=\"grafico\" #meuCanvas></canvas>\n  </div>\n  \n\n\n  <br />\n  <div class=row *ngIf=\"dataSelecionada\">\n    <button type=\"button\" class=\"btn btn-primary m-1\" (click)=\"recebido()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Recebido por Mês\n    </button>\n    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"desconto()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Descontos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-success m-1\" (click)=\"acrescimo()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Acréscimos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"servico()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Serviços por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-warning m-1\" (click)=\"contrato()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Valor contratado\n    </button>\n  </div>\n</div>\n";
     /***/
   },
 
@@ -2072,6 +2072,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               _this2.errors = null;
               _this2.cliente = response;
             }, function (errorResponse) {
+              console.log(errorResponse);
               _this2.errors = errorResponse.error.erros;
               _this2.success = false;
             });
@@ -3140,7 +3141,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".chart-container {\n  position: relative;\n  margin: auto;\n  height: 60vh;\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ3JhZmljby9ncmFmaWNvLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLFlBQVk7O0FBRWQiLCJmaWxlIjoic3JjL2FwcC9ncmFmaWNvL2dyYWZpY28uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jaGFydC1jb250YWluZXIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIG1hcmdpbjogYXV0bztcbiAgaGVpZ2h0OiA2MHZoO1xuXG59XG4iXX0= */";
+    __webpack_exports__["default"] = " .chart-container {\n  width: 100%;\n  margin: auto;\n  height: 520px;\n\n\n}\n\n\n@media screen and (max-width: 700px) {\n  .chart-container {\n    width:450px;\n    margin: auto;\n    height: 300px;   \n    \n  }\n} \n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ3JhZmljby9ncmFmaWNvLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkNBQUM7RUFDQyxXQUFXO0VBQ1gsWUFBWTtFQUNaLGFBQWE7OztBQUdmOzs7QUFHQTtFQUNFO0lBQ0UsV0FBVztJQUNYLFlBQVk7SUFDWixhQUFhOztFQUVmO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9ncmFmaWNvL2dyYWZpY28uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIiAuY2hhcnQtY29udGFpbmVyIHtcbiAgd2lkdGg6IDEwMCU7XG4gIG1hcmdpbjogYXV0bztcbiAgaGVpZ2h0OiA1MjBweDtcblxuXG59XG5cblxuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzAwcHgpIHtcbiAgLmNoYXJ0LWNvbnRhaW5lciB7XG4gICAgd2lkdGg6NDUwcHg7XG4gICAgbWFyZ2luOiBhdXRvO1xuICAgIGhlaWdodDogMzAwcHg7ICAgXG4gICAgXG4gIH1cbn0gIl19 */";
     /***/
   },
 
@@ -7151,6 +7152,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       API_URL: "https://servicosprestados.herokuapp.com/api/",
       AUTH_API: "https://servicosprestados.herokuapp.com/api/auth/",
       GOOGLE_AUTH_URL: "https://servicosprestados.herokuapp.com/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app",
+      //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app",
       ClientId: 'my-angular-app',
       clientSecret: '@321',
       obterTokenUrl: '/oauth/token'

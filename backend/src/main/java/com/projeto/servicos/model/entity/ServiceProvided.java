@@ -48,8 +48,8 @@ public class ServiceProvided {
 	@JoinColumn(name= "id_typeService")
 	private TypeService typeService;
 	
-	@Column(name= "releasedPayment")
-	private boolean releasedPayment;
+	@Column(name= "releasedPayment", columnDefinition ="boolean")
+	private Boolean releasedPayment;
 	
 	
 	

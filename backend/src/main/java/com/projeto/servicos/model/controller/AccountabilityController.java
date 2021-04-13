@@ -67,7 +67,7 @@ public class AccountabilityController {
 		accountability.setTypePayment(type);
 		accountability.setServiceProvided(serviceProvided);
 		accountability.setObservation(accountability.getObservation());
-
+		serviceProvidedRepository.save(serviceProvided);
 			
 		return accountabilityRepository.save(accountability);
 		
