@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 public class ScheduleDTO {
 	
 	@NotEmpty(message = "{campo.scheduleDate.obrigatorio}")	
-	private String date;	
-	
+	private String date;
 	private String observation;	
 	private List<Client> client;
 	

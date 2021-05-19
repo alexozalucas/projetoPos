@@ -1,14 +1,12 @@
 package com.projeto.servicos.model.entity;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -45,10 +43,7 @@ public class Client {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "dateRegister" , updatable = false)
 	private LocalDate dateRegister;
-	
-	//@ManyToMany(mappedBy = "client")
-	//private List<Schedule> Schedule;
-
+		
 	@PrePersist
 	public void prePersist() {
 		setDateRegister(LocalDate.now());

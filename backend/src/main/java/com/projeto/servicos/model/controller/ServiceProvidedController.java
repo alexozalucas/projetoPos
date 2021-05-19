@@ -40,7 +40,7 @@ public class ServiceProvidedController {
 
 	private final TypeServiceRepository typeServiceRepository;
 
-	private final BigDecimalConvert BigDecimalConvert;
+	private final BigDecimalConvert bigDecimalConvert;
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -63,7 +63,7 @@ public class ServiceProvidedController {
 		serviceProvided.setDescription(dto.getDescription());
 		serviceProvided.setDate(data);
 		serviceProvided.setClient(cliente);
-		serviceProvided.setValue(BigDecimalConvert.convert(dto.getValue()));
+		serviceProvided.setValue(bigDecimalConvert.convert(dto.getValue()));
 		serviceProvided.setTypeService(typeService);
 		if(dto.getId() == null) {
 			serviceProvided.setReleasedPayment(false);

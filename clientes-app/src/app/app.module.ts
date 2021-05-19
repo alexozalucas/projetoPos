@@ -27,6 +27,23 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AuthServices } from './services/auth.services';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+
+
+
+
+
+ FullCalendarModule.registerPlugins([ 
+   dayGridPlugin,
+   timeGridPlugin,  
+   interactionPlugin,
+   
+   
+  
+ ]); 
 
 
 
@@ -54,7 +71,9 @@ import { AuthServices } from './services/auth.services';
     GraficoModule,
     DateUtil,
     NgxMaskModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FullCalendarModule
+    
     
 
 

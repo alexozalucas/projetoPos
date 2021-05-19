@@ -18,18 +18,66 @@
 
   <div class="tab-content m-4">
     <div id="home" class="tab-pane  fade in active show">
-        
-     <div class="row">       
-         <div class="col">
-            teste
-         </div>
-         <div class="col">
-            teste
-         </div>
-         <div class="col">
-            teste
-         </div>
-     </div>   
+
+      
+      <!-- <full-calendar [options]="calendarOptions"></full-calendar> -->
+
+      <div class="row">
+        <div class="col-md-2 mr-1">
+          <div class="form-group">
+            <label>
+              Data Inicial: *
+            </label>
+            <input type="text" class="form-control" [ngModel]= "dataInicial"
+            placeholder="DD/MM/YYYY"  id="dataInicial" name="dataInicial" mask="00/00/0000"/>
+  
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>
+              Data Final: *
+            </label>
+            <input type="text" class="form-control"  [ngModel]= "dataFinal"
+            placeholder="DD/MM/YYYY"  id="dataFinal" name="dataFinal" mask="00/00/0000"/>  
+          </div>
+        </div>  
+      </div>   
+
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-condensed table-hover" id="table-home">
+            <thead>
+              <tr>
+                <th>CPF</th>
+                <th>CLIENTES</th>                
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index">
+                <td>{{ cliente.cpf | mask: '000.000.000-99' }}</td>
+                <td>{{ cliente.name }}</td>                
+                <td>
+    
+                  <button class="btn btn-primary m-1" routerLink="/clientes/form/{{ cliente.id }}">
+                    <i class="fa fa-edit"></i>
+                  </button>
+    
+                  <button class="btn btn-danger m-1" (click)="preparaDelecao(cliente)" data-toggle="modal"
+                    data-target="#modalDeSelecao">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+    
+          </table>
+          <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+          </pagination-controls>
+        </div>
+      </div>
       
 
     </div>
