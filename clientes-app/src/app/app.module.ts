@@ -27,23 +27,13 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AuthServices } from './services/auth.services';
-import { FullCalendarModule } from '@fullcalendar/angular';
-import interactionPlugin from '@fullcalendar/interaction';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
+import { AgendaService } from './agenda.service';
+import { AnotacaoService } from './anotacao.service';
 
 
 
 
 
- FullCalendarModule.registerPlugins([ 
-   dayGridPlugin,
-   timeGridPlugin,  
-   interactionPlugin,
-   
-   
-  
- ]); 
 
 
 
@@ -71,10 +61,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
     GraficoModule,
     DateUtil,
     NgxMaskModule,
-    NgxPaginationModule,
-    FullCalendarModule
-    
-    
+    NgxPaginationModule,    
 
 
   ],
@@ -86,9 +73,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
     AuthServices,
     authInterceptorProviders,
     GraficoService,
-    
-    
-
+    AgendaService,
+    AnotacaoService
 
   ],
   bootstrap: [AppComponent]

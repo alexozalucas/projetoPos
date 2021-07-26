@@ -8,11 +8,17 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+      <div class="alert alert-success hidden" role="alert" *ngIf="success == true">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
         {{mensagemSucesso}}
       </div>
-      <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
-        {{mensagemErro}}
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let erro of errors">
+        {{erro}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     </div>
   </div>
@@ -40,12 +46,12 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>SERVIÇO</th>
+            <th>TIPO SERVIÇO</th>
             <th>OBSERVAÇÃO</th>
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="!isLoading">
           <tr
             *ngFor="let tipoServico of tipoServicos | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index">
             <td>{{ tipoServico.id }}</td>
@@ -64,8 +70,14 @@
           </tr>
         </tbody>
       </table>
-      <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+      <pagination-controls *ngIf="!isLoading" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
       </pagination-controls>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div [class.spinner-border]="isLoading" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
   </div>
 

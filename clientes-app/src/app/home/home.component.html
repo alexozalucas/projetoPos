@@ -1,94 +1,436 @@
-
-
-
-<ul class="nav nav-tabs bg-light mt-4 " >
+<ul class="nav nav-tabs bg-light mt-4 ">
   <li class="nav-item ">
-    <a class="nav-link active " data-toggle="tab" href="#home">Agenda</a>
+    <a class="nav-link active " data-toggle="tab" (click)="selecionarAbaAgenda()" href="#agenda">Agenda</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#menu1">Anotação</a>
+    <a class="nav-link" data-toggle="tab" (click)="this.mostrarAnotacao()" href="#anotacao">Anotação</a>
   </li>
 
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#menu2">Menu</a>
-  </li>
 </ul>
 
 <div class="containser-fluid">
 
   <div class="tab-content m-4">
-    <div id="home" class="tab-pane  fade in active show">
-
-      
-      <!-- <full-calendar [options]="calendarOptions"></full-calendar> -->
-
-      <div class="row">
-        <div class="col-md-2 mr-1">
-          <div class="form-group">
-            <label>
-              Data Inicial: *
-            </label>
-            <input type="text" class="form-control" [ngModel]= "dataInicial"
-            placeholder="DD/MM/YYYY"  id="dataInicial" name="dataInicial" mask="00/00/0000"/>
-  
-          </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success hidden" role="alert" *ngIf="success == true">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          {{mensagemSucesso}}
         </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <label>
-              Data Final: *
-            </label>
-            <input type="text" class="form-control"  [ngModel]= "dataFinal"
-            placeholder="DD/MM/YYYY"  id="dataFinal" name="dataFinal" mask="00/00/0000"/>  
-          </div>
-        </div>  
-      </div>   
 
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table table-condensed table-hover" id="table-home">
-            <thead>
-              <tr>
-                <th>CPF</th>
-                <th>CLIENTES</th>                
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                *ngFor="let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index">
-                <td>{{ cliente.cpf | mask: '000.000.000-99' }}</td>
-                <td>{{ cliente.name }}</td>                
-                <td>
-    
-                  <button class="btn btn-primary m-1" routerLink="/clientes/form/{{ cliente.id }}">
-                    <i class="fa fa-edit"></i>
-                  </button>
-    
-                  <button class="btn btn-danger m-1" (click)="preparaDelecao(cliente)" data-toggle="modal"
-                    data-target="#modalDeSelecao">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-    
-          </table>
-          <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
-          </pagination-controls>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let erro of errors">
+          {{erro}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
       </div>
-      
+    </div>
+
+
+
+    <div id="agenda" class="tab-pane  fade in active show">
+      <!-- parte em que mostra a lista das agendas -->
+      <div *ngIf="!telaEdicao">
+
+        <div class="row ">
+          <div class="col-md-3 mr-1">
+            <div class="form-group">
+              <label>
+                Data Inicial: *
+              </label>
+              <input type="text" class="form-control" [(ngModel)]="dateInitial" placeholder="DD/MM/YYYY"
+                id="dateInitial" name="dateInitial" mask="00/00/0000"  />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                Data Final: *
+              </label>
+              <input type="text" class="form-control" [(ngModel)]="dateFinal" placeholder="DD/MM/YYYY" id="dateFinal"
+                mask="00/00/0000" name="dateFinal" />
+            </div>
+          </div>
+          <div class="col-md-5 align-self-center pt-3 mb-1">
+            <button type="button" class="btn btn-primary mr-2" (click)="mostrarAgenda()">
+              <i class="fa fa-eye"></i> Mostrar
+            </button>
+            <button type="button" class="btn btn-warning" (click)="cadastroNovo()">
+              <i class="fa fa-plus"></i> Novo
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-condensed table-hover" id="table-home">
+              <thead>
+                <tr>
+                  <th>DATA</th>
+                  <th>TITULO</th>
+                  <th>OBSERVAÇÃO</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="!isLoading" >
+                <tr
+                  *ngFor="let agenda of listaAgenda | paginate: { itemsPerPage: 6, currentPage: paginaAtualAgenda, id: 'agenda' };  let i = index">
+                  <td>{{ agenda.date }}</td>
+                  <td>{{ agenda.title }}</td>
+                  <td>{{ agenda.observation }}</td>
+                  <td>
+                    <button class="btn btn-primary m-1" (click)="selecionarAgendaPorId(agenda.id)">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-danger m-1" (click)="preparaDelecao(agenda)" data-toggle="modal"
+                      data-target="#modalDeSelecao">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls *ngIf="!isLoading" id="agenda" (pageChange)="paginaAtualAgenda = $event" previousLabel="Anterior"
+              nextLabel="Próximo">
+            </pagination-controls>
+          </div>
+        </div>
+      <br />
+        <div class="d-flex justify-content-center">
+          <div [class.spinner-border]="isLoading" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <div id="modalDeSelecao" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4>Confirmação</h4>
+
+              </div>
+              <div class="modal-body" *ngIf="agendaSelecionada">
+                Confirma a exclusão da agenda data: {{ agendaSelecionada.date }}, titulo: {{agendaSelecionada.title}}
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-success" (click)="deletarAgenda(agendaSelecionada)" data-dismiss="modal">
+                  Confirma</button>
+                <button class="btn btn-default" data-dismiss="modal"> Cancela</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- parte em que edita a agendas -->
+      <div *ngIf="telaEdicao">
+
+        <form #agendaForm="ngForm" (ngSubmit)="onSubmit()">
+
+          <div class="row">
+            <div class="col-md-3" *ngIf="agenda.id">
+              <div class="form-group">
+                <label>
+                  ID:
+                </label>
+                <input type="text" class="form-control" disabled="true" [ngModel]="agenda.id" name="id" />
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>
+                  Data: *
+                </label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY" mask="00/00/0000"
+                  [disabled]="agenda.id" [(ngModel)]="agenda.date" name="date" />
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>
+                  titulo: *
+                </label>
+                <input type="text" class="form-control" [(ngModel)]="agenda.title" name="title" />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>
+                  Observação:
+                </label>
+                <input type="text" class="form-control" [(ngModel)]="agenda.observation" name="observation"
+                  type="text" />
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!isLoading">
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-success m-1 " *ngIf="!agenda.id">
+                <i class="fa fa-save"></i> Salvar
+              </button>
+              <button type="submit" class="btn btn-primary m-1 " *ngIf="agenda.id">
+                <i class="fa fa-sync-alt"></i> Atualizar
+              </button>
+              <button type="button" class="btn btn-danger m-1" (click)="voltarParaListagemAgenda()">
+                <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center">
+          <div [class.spinner-border]="isLoading" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
 
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+
+
+
+
+    <!-- ANOTAÇÕES LISTA-->
+    <div id="anotacao" class="tab-pane fade">
+
+      <div *ngIf="mostrarListaAnotacao  == 1">
+
+
+        <form class="form mb-3">
+          <div class="row">
+            <div class="col-md-1 mr-3 m-1">
+              <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
+            </div>
+            <div class="col-md-3 m-1">
+              <input class="form-control" type="text" name="search" id="pesquisar"
+                (keyup)="filtrarAnotacao($event.target.value)" />
+            </div>
+            <div class="col-md-5 m-1">
+              <button class="btn btn-warning" (click)="novoCadastroAnotacao()">
+                <i class="fa fa-plus"></i> Novo
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-condensed table-hover" id="table-home">
+              <thead>
+                <tr>
+                  <th>TITULO</th>
+                  <th>TIPO DE ANOTAÇÃO</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody *ngIf="!isLoading">
+                <tr
+                  *ngFor="let anotacao of anotacaoLista | paginate: { itemsPerPage: 6, currentPage: paginaAtualAnotacao,  id: 'anotacao' };  let p = index">
+                  <td>{{ anotacao.title }}</td>
+                  <td>{{ anotacao.typeAnnotation.id +" - "+ anotacao.typeAnnotation.type}}</td>
+                  <td>
+                    <button class="btn btn-primary m-1" (click)="selecionarAnotacaoPorId(anotacao.id)">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                    <button class="btn btn-danger m-1" (click)="preparaDelecaoAnotacao(anotacao)" data-toggle="modal"
+                      data-target="#modalDeSelecaoAnotacao">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls id="anotacao" *ngIf="!isLoading" (pageChange)="paginaAtualAnotacao = $event" previousLabel="Anterior"
+              nextLabel="Próximo">
+            </pagination-controls>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div [class.spinner-border]="isLoading" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div id="modalDeSelecaoAnotacao" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4>Confirmação</h4>
+              </div>
+              <div class="modal-body" *ngIf="anotacaoSelecionada">
+                Confirma a exclusão da anotação: {{ anotacaoSelecionada.id }}, titulo: {{anotacaoSelecionada.title}}
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-success" (click)="deletarAnotacao()" data-dismiss="modal">
+                  Confirma</button>
+                <button class="btn btn-default" data-dismiss="modal"> Cancela</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- FORMULÁRIO DE ANOTAÇÃO -->
+      <div *ngIf="mostrarListaAnotacao  == 2">
+        <form #anotacaoForm="ngForm" (ngSubmit)="onSubmitAnotacao()">
+          <div class="row">
+            <div class="col-md-4" *ngIf="anotacao.id">
+              <div class="form-group">
+                <label>
+                  ID:
+                </label>
+                <input type="text" class="form-control" disabled="true" [ngModel]="anotacao.id" name="id" />
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <label>Tipo de anotação: *</label>
+              <div class="input-group">
+
+                <select class="form-control" name="tipoAnotacao" [(ngModel)]="anotacao.typeAnnotation.id"
+                  [ngModelOptions]="{standalone:true}">
+                  <option *ngFor="let tipoAnotacao of tipoAnotacaoLista" [ngValue]="tipoAnotacao.id">
+                    {{ tipoAnotacao.id + " - "+tipoAnotacao.type }}
+                  </option>
+                </select>
+                <button type="button" class="btn btn-warning ml-1" (click)="novoCadastroTipoDeAnotacao()">
+                  <i class="fa fa-plus"></i>
+                </button>
+                <button type="button" class="btn btn-danger ml-1" [disabled]="!tipoAnotacao.id" (click)="buscarTipoDeAnotacaoPorId()" data-toggle="modal"
+                  data-target="#modalDeletarTipoAnotacao">
+                  <i class="fa fa-trash"></i>
+                </button>
+                <button type="button" class="btn btn-primary ml-1" [disabled]="!tipoAnotacao.id" (click)="editarTipoDeAnotacao()">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>
+                  Titulo: *
+                </label>
+                <input type="text" class="form-control" [(ngModel)]="anotacao.title" name="titulo" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 ">
+              <div class="form-group ">
+                <label for="anotacaoTexto" class="form-label">Anotação: </label>
+                <textarea class="form-control" id="anotacaoTexto" rows="8" [ngModelOptions]="{standalone:true}"
+                  [(ngModel)]="anotacao.annotation"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="!isLoading">
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-success m-1 " *ngIf="!anotacao.id">
+                <i class="fa fa-save"></i> Salvar
+              </button>
+              <button type="submit" class="btn btn-primary m-1 " *ngIf="anotacao.id">
+                <i class="fa fa-sync-alt"></i> Atualizar
+              </button>
+              <button type="button" class="btn btn-danger m-1" (click)="voltarParaListagemAnotacao()">
+                <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center">
+          <div [class.spinner-border]="isLoading" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <div id="modalDeletarTipoAnotacao" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4>Confirmação</h4>
+              </div>
+              <div class="modal-body" *ngIf="tipoAnotacao">
+                Confirma a exclusão do tipo de anotação: {{ tipoAnotacao.id }}, titulo: {{tipoAnotacao.type}}
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-success" (click)="deletarTipoAnotacao()" data-dismiss="modal">
+                  Confirma</button>
+                <button class="btn btn-default" data-dismiss="modal"> Cancela</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- FORMULÁRIO DE CADASTRO DE TIPO DE ANOTAÇÃO -->
+      <div *ngIf="mostrarListaAnotacao  == 3">
+        <form #anotacaoForm="ngForm" (ngSubmit)="onSubmitTipoAnotacao()">
+          <div class="row">
+            <div class="col-md-4" *ngIf="tipoAnotacao.id">
+              <div class="form-group">
+                <label>
+                  ID:
+                </label>
+                <input type="text" class="form-control" disabled="true" [ngModel]="tipoAnotacao.id" name="id" />
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <label>Tipo de anotação: *</label>
+              <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="tipoAnotacao.type" name="type" />
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>
+                  Observação:
+                </label>
+                <input type="text" class="form-control" [(ngModel)]="tipoAnotacao.observation" name="observacao" />
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!isLoading">
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-success m-1" *ngIf="!tipoAnotacao.id">
+                <i class="fa fa-save"></i> Salvar
+              </button>
+              <button type="submit" class="btn btn-primary m-1 " *ngIf="tipoAnotacao.id">
+                <i class="fa fa-sync-alt"></i> Atualizar
+              </button>
+              <button type="button" class="btn btn-danger m-1" (click)="voltarParaCadastrodeAnotacao()">
+                <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center">
+          <div [class.spinner-border]="isLoading" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+
     </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-        aperiam.</p>
-    </div>
+
+
+
   </div>
 </div>

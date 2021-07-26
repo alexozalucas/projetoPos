@@ -2,7 +2,6 @@ package com.projeto.servicos.model.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,11 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.projeto.servicos.model.controller.dto.ScheduleDTO;
-import com.projeto.servicos.model.entity.Client;
 import com.projeto.servicos.model.entity.Schedule;
-import com.projeto.servicos.model.repository.ClientRepository;
 import com.projeto.servicos.model.repository.ScheduleRepository;
-import com.projeto.servicos.service.ScheduleService;
 
 @RestController
 @RequestMapping("/api/schedule")
@@ -34,67 +30,62 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleRepository scheduleRepository;
 
-	@Autowired
-	private ScheduleService scheduleService;
-
-	@Autowired
-	private ClientRepository clientRepository;
-
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void save(@RequestBody @Valid ScheduleDTO dto) {
-		List<Client> listClient = new ArrayList<Client>();
 
-		if (dto.getClient() != null) {
+		
+		LocalDate data = LocalDate.parse(dto.getDate(), formatter);
+		Schedule schedule = new Schedule();
+		schedule.setId(dto.getId());
+		schedule.setDate(data);
+		schedule.setObservation(dto.getObservation());
+		schedule.setTitle(dto.getTitle());
 
-			for (Client x : dto.getClient()) {
-				Client client = clientRepository.findById(x.getId())
-						.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-								"ID de cliente não encontrado : " + x.getId()));
-				listClient.add(client);
-			}
-		}
+		scheduleRepository.save(schedule);
 
-		Schedule shedule = new Schedule();
-		shedule.setDate(LocalDate.parse(dto.getDate(), formatter));
-		shedule.setObservation(dto.getObservation());
-		shedule.setClient(listClient);
-
-		scheduleRepository.save(shedule);
-
-	}
-
-	@GetMapping
-	@ResponseStatus(HttpStatus.OK)
-	public List<Schedule> getAll() {
-
-		final List<Schedule> schedule = scheduleService.findAll();
-		return schedule;
 	}
 
 	@GetMapping("/date")
 	@ResponseStatus(HttpStatus.OK)
-	public List<Schedule> getByDate(@RequestParam(value = "dateInitial", required = true) String dateInitial,
-			@RequestParam(value = "dateFinal", required = true) String dateFinal) {
+	public List<Schedule> getByDate(
+			@RequestParam(value = "dateInitial", required = true, defaultValue = "31/12/1900") String dateInitial,
+			@RequestParam(value = "dateFinal", required = true, defaultValue = "31/12/1900") String dateFinal) {
 
-		LocalDate initialDate = LocalDate.parse(dateInitial, formatter);
-		LocalDate finalDate = LocalDate.parse(dateFinal, formatter);
+	
+		LocalDate initialDate = null;
+		LocalDate finalDate = null;
+		try {
+			initialDate = LocalDate.parse(dateInitial, formatter);
+			finalDate = LocalDate.parse(dateFinal, formatter);
+		} catch (Exception e) {
+			initialDate = LocalDate.parse("31/12/1900", formatter);
+			finalDate = LocalDate.parse("31/12/1900", formatter);
+		}
 
-		return this.scheduleService.searchByDate(initialDate, finalDate);
+		List<Schedule> response = this.scheduleRepository.findByDateBetweenOrderByDateAsc(initialDate, finalDate);
+
+		return response;
 	}
 
-	@DeleteMapping("delete/{date}")
-	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable String date) {
+	@GetMapping("{id}")
+	public Schedule getScheduleById(@PathVariable Long id) {
+		
+		
+		return scheduleRepository.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id de agenda não encontrado"));
+	}
 
-		LocalDate dateDelete = LocalDate.parse(date, DateTimeFormatter.ofPattern("ddMMyyyy"));
-		try {
-			this.scheduleRepository.deleteById(dateDelete);
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ocorreu um erro ao excluir o registro");
-		}
+	@DeleteMapping("{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Long id) {
+
+		scheduleRepository.findById(id).map(schedule -> {
+			scheduleRepository.delete(schedule);
+			return Void.TYPE;
+		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ID não encontrado"));
 
 	}
 

@@ -14,11 +14,12 @@ export class ClientesListaComponent implements OnInit {
   clientes: Cliente[] = [];
   clienteSelecionado: Cliente;
   mensagemSucesso: String;
-  mensagemErro: String;
   public paginaAtual = 1;
-  clientesFilter: Cliente[]
-  teste: String[]
+  clientesFilter: Cliente[];
   valorPesquisado: String = "";
+  isLoading: boolean = false;
+  success: boolean;
+  errors: String[];
 
   constructor(
     private service: ClientesService,
@@ -26,12 +27,25 @@ export class ClientesListaComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isLoading = true;
     this.service.getClientes()
       .subscribe(response => {
         this.clientes = response;
         this.clientesFilter = response;
         this.filtrar(this.valorPesquisado);
+        this.isLoading = false;
+      }, erro => {
+        this.isLoading = false;
+        this.errors = erro.error.erros
+        if (this.errors == undefined) {
+          this.errors = ["Ocorreu um erro ao carregar os clientes"]
+        }
       });
+  }
+
+  close() {
+    this.errors = [];
+    this.success = false;
   }
 
 
@@ -44,12 +58,22 @@ export class ClientesListaComponent implements OnInit {
   }
 
   deletarCliente(cliente: Cliente) {
+    this.isLoading = true;
+    this.close();
     this.service.deletar(this.clienteSelecionado)
       .subscribe(response => {
-        this.mensagemSucesso = "Cliente deletado com sucesso"
+        this.mensagemSucesso = "Cliente deletado com sucesso"        
+        this.isLoading = false;
+        this.success = true;
         this.ngOnInit();
       },
-        erro => this.mensagemErro = "Ocorreu erro ao deletar cliente"
+        erro => {
+          this.errors = erro.error.erros
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu um erro ao deletar o cliente"]
+          }
+          this.isLoading = false;
+        }
       );
   }
 

@@ -16,6 +16,8 @@ export class DefinicaoTipoServico implements OnInit {
   success: boolean = false;
   errors: String[];
   id: number;
+  isLoading: boolean = false;
+  mensagemSucesso: String;
 
 
   constructor(private service: DefinicaoService,
@@ -25,50 +27,71 @@ export class DefinicaoTipoServico implements OnInit {
   }
 
   ngOnInit() {
-    let params: Observable<Params> = this.activatedRouter.params    
+    this.close();
+    this.isLoading = true;
+    let params: Observable<Params> = this.activatedRouter.params
     params.subscribe(urlParams => {
       this.id = urlParams['id'];
-      if(this.id){
+      if (this.id) {
         this.service
-        .getTipoServicoById(this.id)
-        .subscribe(
-          response => this.tipoServico = response
-          , reject => this.tipoServico = new TipoServico()          
-        )
-
+          .getTipoServicoById(this.id)
+          .subscribe(
+            response => {
+              this.tipoServico = response
+            }
+            , erro => {
+              this.errors = erro.error.erros;
+              if (this.errors == undefined) {
+                this.errors = ["Ocorreu erro ao carregar o tipo de serviço"]
+              }         
+              this.tipoServico = new TipoServico();
+            }
+          )
       }
-
     })
+    this.isLoading = false;
+  }
 
+  close() {
+    this.errors = [];
+    this.success = false;
   }
 
   onSubmit() {
 
+    this.close();
+    this.isLoading = true;
     if (this.tipoServico.id) {
 
       this.service.atualizar(this.tipoServico)
         .subscribe(response => {
-          this.success = true;
-          this.errors = null;
+          this.success = true;  
           this.tipoServico = response;
-        }, reject => {
-          this.errors = reject.error.erros;
-          this.success = false;
-
+          this.isLoading = false;
+          this.mensagemSucesso = "Tipo de serviço atualizado com sucesso!"
+        }, erro => {
+          this.isLoading = false;
+          this.errors = erro.error.erros;
+              if (this.errors == undefined) {
+                this.errors = ["Ocorreu erro ao atualizar tipo de serviço"]
+              }    
         })
 
     } else {
 
       this.service.salvar(this.tipoServico)
         .subscribe(response => {
-          this.success = true;
-          this.errors = null;
+          this.success = true;  
+          this.isLoading = false;       
           this.tipoServico = response;
+          this.mensagemSucesso = "Tipo de serviço salvo com sucesso!"
 
-
-        }, errorResponse => {
-          this.errors = errorResponse.error.erros;
-          this.success = false;
+        }, erro => {
+          this.isLoading = false;
+          this.errors = erro.error.erros;
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu erro ao salvar tipo de serviço"]
+          }                 
         })
 
     }

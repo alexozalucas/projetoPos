@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.projeto.servicos.model.entity.Client;
 import com.projeto.servicos.model.entity.ServiceProvided;
+import com.projeto.servicos.model.entity.TypeService;
 
 @Repository
 public interface ServiceProvidedRepository extends JpaRepository<ServiceProvided, Integer>{
@@ -27,6 +29,10 @@ public interface ServiceProvidedRepository extends JpaRepository<ServiceProvided
 					
 	
 	List<ServiceProvided> findByDateBetweenAndReleasedPaymentFalse(LocalDate start, LocalDate end);
+	
+	boolean existsByClient(Client client);
+	
+	boolean existsByTypeService(TypeService typeService);
 	
 	
 

@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.projeto.servicos.model.entity.Client;
 import com.projeto.servicos.model.repository.ClientRepository;
+import com.projeto.servicos.model.repository.ServiceProvidedRepository;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -27,6 +28,9 @@ public class ClientController {
 
 	@Autowired
 	private ClientRepository repository;
+
+	@Autowired
+	private ServiceProvidedRepository serviceProvidedRepository;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -49,10 +53,14 @@ public class ClientController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteClient(@PathVariable Integer id) {
 
-		repository.findById(id).map(client -> {
-			repository.delete(client);
-			return Void.TYPE;
-		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		Client client = repository.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+
+		if (this.serviceProvidedRepository.existsByClient(client)) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Cliente está vinculado a um serviço!");
+		}
+
+		repository.delete(client);
 
 	}
 
@@ -76,6 +84,7 @@ public class ClientController {
 
 	@GetMapping
 	public List<Client> obterTodos() {
+
 		return repository.findAll();
 	}
 

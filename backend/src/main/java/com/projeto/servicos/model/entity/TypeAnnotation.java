@@ -5,8 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,20 +17,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Annotation {
-		
+public class TypeAnnotation {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Long id; 
+	private Long id; 	
+			
+	@NotEmpty(message = "{campo.titleTypeAnotation.obrigatorio}")
+	@Column(name= "title")
+	private String type;
 	
-	@Column(name = "title")
-	private String title;
-	
-	@Column(name = "annotation")
-	private String annotation;
-	
-	@ManyToOne
-	@JoinColumn(name= "typeAnnotation")
-	private TypeAnnotation typeAnnotation;
+	@Column(name= "observation")
+	private String observation;
 
 }

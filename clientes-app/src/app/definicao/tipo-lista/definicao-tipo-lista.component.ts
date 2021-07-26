@@ -16,23 +16,36 @@ export class TipoServicoListaComponent implements OnInit {
   tipoServicos: TipoServico[] = [];
   tipoServicoSelecionado: TipoServico;
   mensagemSucesso: String;
-  mensagemErro: String;
   public paginaAtual = 1;
   tipoServicosFilter : TipoServico[];
   valorPesquisado: String = "";
+  isLoading: boolean = false;  
+  success: boolean;
+  errors: String[];
 
   constructor(
     private service: DefinicaoService,
     private router: Router) { }
 
   ngOnInit() {
-
+    this.close
+    this.isLoading=true;
     this.service.getTipoServicos()
       .subscribe(response => {
+        this.isLoading=false;
         this.tipoServicos = response;
         this.tipoServicosFilter = response;
         this.filtrar(this.valorPesquisado);
-      });
+      },
+      erro => {
+        this.isLoading=false;
+        this.errors = erro.error.erros
+        if (this.errors == undefined) {
+          this.errors = ["Ocorreu erro ao carregar os tipos de serviço"]
+        }         
+      
+    }
+    );
   }
 
   public novoCadastro() {
@@ -45,14 +58,29 @@ export class TipoServicoListaComponent implements OnInit {
 
 
   deletarTipoServico(tipoServico: TipoServico) {
+    this.isLoading=true;
+    this.close();
     this.service.deletar(this.tipoServicoSelecionado)
       .subscribe(response => {
-        this.mensagemSucesso = "Tipo de serviço deletado com sucesso"
+        this.isLoading=false;
+        this.success = true;  
+        this.mensagemSucesso = "Tipo de serviço deletado com sucesso";
         this.ngOnInit();
       },
-        erro => this.mensagemErro = "Ocorreu erro ao deletar tipo de serviço"
+        erro => {
+          this.errors = erro.error.erros
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu erro ao deletar tipo de serviço"]
+          }         
+        this.isLoading=false;
+      }
       );
 
+  }
+
+  close() {
+    this.errors = [];
+    this.success = false;
   }
 
 
