@@ -18,8 +18,11 @@ export class PrestacaoContasListaComponent implements OnInit {
   mensagemSucesso: String;
   mensagemErro: String;
   public paginaAtual = 1;
-  prestacaoContasFiltro : PrestacaoContasBuscar[] = []; 
+  prestacaoContasFiltro: PrestacaoContasBuscar[] = [];
   valorPesquisado: String = "";
+  isLoading: boolean = false;
+  success: boolean;
+  errors: String[]
 
 
   constructor(
@@ -28,12 +31,25 @@ export class PrestacaoContasListaComponent implements OnInit {
 
   ngOnInit() {
 
+    this.close();
+    this.isLoading = true;
     this.service.getPrestacaoContas()
       .subscribe(response => {
         this.prestacaoContas = response;
         this.prestacaoContasFiltro = response;
         this.filtrar(this.valorPesquisado)
-      });
+        this.isLoading = false;
+      },
+        erro => {
+          this.errors = erro.error.erros;
+          this.isLoading = false;
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu um erro ao carregar os serviços prestados!"]
+          }
+        }
+      );
+
+
   }
 
   public novoCadastro() {
@@ -44,16 +60,30 @@ export class PrestacaoContasListaComponent implements OnInit {
     this.prestacaoContasSelecionado = prestacaoContas;
   }
 
+  close() {
+    this.errors = [];
+    this.success = false;
+  }
+
 
   deletarPrestacaoConta() {
+    this.close();
+    this.isLoading = true;
     this.service.deletar(this.prestacaoContasSelecionado)
-      .subscribe(response => {
-        this.mensagemSucesso = "prestação de conta deletada com sucesso"
-        this.ngOnInit();
-      },
-        erro => this.mensagemErro = "Ocorreu erro ao deletar a prestação de conta"
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          this.mensagemSucesso = "prestação de conta deletada com sucesso"
+          this.success = true;
+        },
+        erro => {
+          this.errors = erro.error.erros
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu erro ao deletar a prestação de conta!"]
+          }
+        }
       );
-
+    this.isLoading = false;
   }
 
   filtrar(value: String) {
@@ -62,9 +92,9 @@ export class PrestacaoContasListaComponent implements OnInit {
     } else {
       this.prestacaoContas = this.prestacaoContasFiltro.filter(x => {
         if (x.serviceProvided.description.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
-            String(x.id).trim().toLowerCase().includes(value.trim().toLowerCase()) ||
-            x.serviceProvided.client.name.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
-            x.typePayment.type.trim().toLowerCase().includes(value.trim().toLowerCase()) ) {
+          String(x.id).trim().toLowerCase().includes(value.trim().toLowerCase()) ||
+          x.serviceProvided.client.name.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
+          x.typePayment.type.trim().toLowerCase().includes(value.trim().toLowerCase())) {
           return true;
         }
       });

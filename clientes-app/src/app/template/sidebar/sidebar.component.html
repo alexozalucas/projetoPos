@@ -42,28 +42,17 @@
                 </a>
 
                 <a class="nav-link collapsed" routerLink="/graficos/listar" data-toggle="collapse" *ngIf="showRoleAdmin"
-                    aria-expanded="false" aria-controls="collapseLayouts" >
+                    aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i> </div>
                     Graficos
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-
-                <a class="nav-link collapsed" routerLink="/usuario" data-toggle="collapse" *ngIf="showRoleAdmin"
-                    aria-expanded="false" aria-controls="collapseLayouts" >
-                    <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i> </div>
-                    Usuários
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-
-
                 <div class="sb-sidenav-menu-heading">Logout</div>
                 <a class="nav-link collapsed" (click)="logout();" href="#" data-toggle="collapse"
                     data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                     Sair
                 </a>
-
-
             </div>
         </div>
         <div class="sb-sidenav-footer">

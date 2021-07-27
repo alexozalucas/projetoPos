@@ -23,6 +23,7 @@ export class ServicoPrestadoFormComponent implements OnInit {
   success: boolean = false;
   errors: String[];
   id: number;
+  isLoading: boolean = false;
 
   constructor(
     private clienteService: ClientesService,
@@ -37,7 +38,8 @@ export class ServicoPrestadoFormComponent implements OnInit {
 
   ngOnInit() {
 
-
+    this.close();
+    this.isLoading = true;
     let params: Observable<Params> = this.activatedRouter.params
     params.subscribe(urlParams => {
       this.id = urlParams['id'];
@@ -47,40 +49,74 @@ export class ServicoPrestadoFormComponent implements OnInit {
           .subscribe(
             response => {
               this.montaServicoPrestado(response);
-            }, reject => {
-              this.servico = new ServicoPrestado();
-            })
+            }, erro => {       
+              this.servico = new ServicoPrestado();       
+              this.errors = erro.error.erros
+              if (this.errors == undefined) {
+                this.errors = ["Ocorreu um erro ao carregar serviço prestado!"]
+              }
+            });
       }
     });
 
-    this.clienteService
-      .getClientes()
-      .subscribe(response =>
-        this.clientes = response);
+    if (this.errors == undefined || this.errors.length == 0) {
+      this.clienteService
+        .getClientes()
+        .subscribe(
+          response => {
+            this.clientes = response
+          }, erro => {            
+            this.errors = erro.error.erros
+            if (this.errors == undefined) {
+              this.errors = ["Ocorreu um erro ao carregar cliente"]
+            }
+          });
+    }
 
-    this.definicaoService.getTipoServicos()
-      .subscribe(response =>
-        this.tipoServico = response);
+    if (this.errors == undefined || this.errors.length == 0) {
+      this.definicaoService.getTipoServicos()
+        .subscribe(response => {
+          this.tipoServico = response
+        }, erro => {          
+          this.errors = erro.error.erros
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu um erro ao carregar tipo de serviço"]
+          }
+        });
+    }
 
+    this.isLoading = false;
+
+  }
+
+  close() {
+    this.errors = [];
+    this.success = false;
   }
 
   onSubmit() {
 
+    this.close();
+    this.isLoading = true;
     this.servico.date = DateUtil.dateFormat(this.servico.date);
     this.servico.value.replace(",", ".");
     this.service.salvar(this.servico)
       .subscribe(response => {
+        this.isLoading = false;
         this.success = true;
         this.errors = null;
         this.montaServicoPrestado(response);
-      }, reject => {
-        this.errors = reject.error.erros;
-
+      }, erro => {        
+        this.isLoading = false;
+        this.errors = erro.error.erros
+        if (this.errors == undefined) {
+          this.errors = ["Ocorreu um erro ao salvar/atualizar registro"];
+        }
       });
 
   }
 
-  montaServicoPrestado(response: any){
+  montaServicoPrestado(response: any) {
     this.servico.id = response.id
     this.servico.idClient = response.client.id;
     this.servico.description = response.description;

@@ -92,7 +92,7 @@ public class AccountabilityController {
 
 	@GetMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public List<Accountability> obterTodosAccountability() {
+	public List<Accountability> obterTodosAccountability() {		
 		return accountabilityRepository.findAll();
 	}
 
@@ -117,16 +117,21 @@ public class AccountabilityController {
 	@DeleteMapping("/typepayment/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
+		
+		TypePayment typePayment = typePaymentRepository.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tipo de pagamento não encontrado"));
+		
+		if (this.accountabilityRepository.existsByTypePayment(typePayment)) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Tipo de pagamento vinculado a um serviço!");
+		}
 
-		typePaymentRepository.findById(id).map(typePayment -> {
-			typePaymentRepository.delete(typePayment);
-			return Void.TYPE;
-		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
+		typePaymentRepository.delete(typePayment);
+		
 	}
 
 	@GetMapping("/typepayment")	
-	public List<TypePayment> obterTodos() {
+	public List<TypePayment> obterTodos() {		
+		
 		return typePaymentRepository.findAll();
 	}
 

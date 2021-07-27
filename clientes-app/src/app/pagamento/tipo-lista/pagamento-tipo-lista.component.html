@@ -7,32 +7,39 @@
 <div class="container-fluid">
 
     <div class="row">
-    <div class="col-md-12">
-        <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
-            {{mensagemSucesso}}
-        </div>
-        <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
-            {{mensagemErro}}
+        <div class="col-md-12">
+            <div class="alert alert-success hidden" role="alert" *ngIf="success == true">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                {{mensagemSucesso}}
+            </div>
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let erro of errors">
+                {{erro}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
     </div>
-    </div>  
 
 
     <form class="form">
         <div class="row">
-          <div class="col-md-1 mr-3 m-1">
-            <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
-          </div>
-          <div class="col-md-3 m-1">
-            <input class="form-control" type="text" name="search" id="pesquisar" (keyup)="filtrar($event.target.value)" />
-          </div>
-          <div class="col-md-5 m-1">
-            <button class="btn btn-warning" (click)="novoCadastro()">
-              <i class="fa fa-plus"></i> Novo
-            </button>
-          </div>
+            <div class="col-md-1 mr-3 m-1">
+                <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
+            </div>
+            <div class="col-md-3 m-1">
+                <input class="form-control" type="text" name="search" id="pesquisar"
+                    (keyup)="filtrar($event.target.value)" />
+            </div>
+            <div class="col-md-5 m-1">
+                <button class="btn btn-warning" (click)="novoCadastro()">
+                    <i class="fa fa-plus"></i> Novo
+                </button>
+            </div>
         </div>
-      </form>
+    </form>
 
     <br />
     <div class="row">
@@ -42,31 +49,39 @@
                     <tr>
                         <th>ID</th>
                         <th>TIPO</th>
-                        <th>OBSERVAÇÃO</th>                       
+                        <th>OBSERVAÇÃO</th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let tipoPagamentos of tipoPagamento | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index">
+                <tbody *ngIf="!isLoading">
+                    <tr
+                        *ngFor="let tipoPagamentos of tipoPagamento | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index">
                         <td>{{ tipoPagamentos.id }}</td>
                         <td>{{ tipoPagamentos.type }}</td>
-                        <td>{{ tipoPagamentos.observation }}</td>                        
+                        <td>{{ tipoPagamentos.observation }}</td>
                         <td>
                             <button class="btn btn-primary m-1 " routerLink="/pagamento/tipo/{{ tipoPagamentos.id }}">
                                 <i class="fa fa-edit"></i>
                             </button>
 
-                            <button class="btn btn-danger m-1" (click)="preparaDelecao(tipoPagamentos)" data-toggle="modal"
-                                data-target="#modalDeSelecao">
+                            <button class="btn btn-danger m-1" (click)="preparaDelecao(tipoPagamentos)"
+                                data-toggle="modal" data-target="#modalDeSelecao">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+            <pagination-controls *ngIf="!isLoading" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+            </pagination-controls>
         </div>
     </div>
+
+    <div class="d-flex justify-content-center">
+        <div [class.spinner-border]="isLoading" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
 
     <div id="modalDeSelecao" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -79,7 +94,8 @@
                     Confirma a exclusão do(a) tipo de pagamento: {{ tipoPagamentoSelecionado.type }}
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" (click)="deletarTipoPagamento()" data-dismiss="modal"> Confirma</button>
+                    <button class="btn btn-success" (click)="deletarTipoPagamento()" data-dismiss="modal">
+                        Confirma</button>
                     <button class="btn btn-default" data-dismiss="modal"> Cancela</button>
                 </div>
             </div>

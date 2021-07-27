@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagamentoService } from 'src/app/pagamento.services';
 import { TipoPagamento } from '../tipo-pagamento';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @Component({
@@ -15,11 +15,14 @@ export class PagamentoTipoLista implements OnInit {
 
   tipoPagamento: TipoPagamento[] = [];
   tipoPagamentoSelecionado: TipoPagamento;
-  mensagemSucesso: String;
-  mensagemErro: String;
+  mensagemSucesso: String;  
   public paginaAtual = 1;
   tipoPagamentoFilter: TipoPagamento[];
   valorPesquisado: String = "";
+  isLoading: boolean = false;
+  success: boolean;
+  errors: String[];
+
 
   constructor(
     private service: PagamentoService,
@@ -27,11 +30,20 @@ export class PagamentoTipoLista implements OnInit {
 
   ngOnInit() {
 
+    this.close();
+    this.isLoading = true;
     this.service.getTipoPagamento()
       .subscribe(response => {
+        this.isLoading = false;
         this.tipoPagamento = response;
         this.tipoPagamentoFilter = response;
         this.filtrar(this.valorPesquisado)
+      }, erro => {
+        this.isLoading = false;
+        this.errors = erro.error.erros
+        if (this.errors == undefined) {
+          this.errors = ["Ocorreu um erro ao carregar os tipos de pagamento"]
+        }
       });
   }
 
@@ -43,22 +55,34 @@ export class PagamentoTipoLista implements OnInit {
     this.tipoPagamentoSelecionado = tipoPagamento;
   }
 
+  close() {
+    this.errors = [];
+    this.success = false;
+  }
+
 
   deletarTipoPagamento(tipoPagamento: TipoPagamento) {
+    this.close();
+    this.isLoading = true;
     this.service.deletar(this.tipoPagamentoSelecionado)
       .subscribe(response => {
+        this.isLoading = false
         this.mensagemSucesso = "Tipo de pagamento deletado com sucesso: "
         this.ngOnInit();
-      },
-        erro => this.mensagemErro = "Ocorreu erro ao deletar tipo de pagamento"
-      );
+      }, erro => {
+        this.isLoading = false;
+        this.errors = erro.error.erros
+        if (this.errors == undefined) {
+          this.errors = ["Ocorreu um erro ao deletar o tipo de pagamento"]
+        }
+      });
   }
 
   filtrar(value: String) {
     if (!value) {
       this.tipoPagamento = this.tipoPagamentoFilter;
     } else {
-      this.tipoPagamento = this.tipoPagamentoFilter.filter(x => 
+      this.tipoPagamento = this.tipoPagamentoFilter.filter(x =>
         x.type.trim().toLowerCase().includes(value.trim().toLowerCase())
       );
     }

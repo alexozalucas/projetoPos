@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   currentUser: any;
   googleURL = environment.GOOGLE_AUTH_URL;
-  token: string ;
+  token: string;
   error: string;
   isLoading: boolean = false;
 
@@ -34,18 +34,20 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private router: Router) {
-        
+
   }
-
-
-  ngOnInit(): void {
-  
-   
-    //this.route.queryParams.subscribe((params) => console.log(params))
-    
+  init(){
+    debugger
     this.token = this.route.snapshot.queryParamMap.get('token');
     this.error = this.route.snapshot.queryParamMap.get('error');
-  
+  }
+
+  ngOnInit(): void {
+    //this.route.queryParams.subscribe((params) => console.log(params))
+    debugger
+    this.token = this.route.snapshot.queryParamMap.get('token');
+    this.error = this.route.snapshot.queryParamMap.get('error');
+
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
@@ -80,16 +82,13 @@ export class LoginComponent implements OnInit {
         this.login(data.user);
       },
       err => {
-       
         this.isLoading = false;
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
-        
         if (!this.errorMessage) {
           this.errorMessage = "Não foi possivel se comunicar com o servidor!"
         }
-
-        if(err.error.status = 401){
+        if (err.error.status == 401) {
           this.errorMessage = "Usuário/senha incorreto!"
         }
       }
@@ -106,28 +105,28 @@ export class LoginComponent implements OnInit {
   }
 
 
-  signInWithGoogle(){
+  signInWithGoogle() {
     window.location.href = this.googleURL;
 
     this.isLoading = true;
 
   }
-  verificarToken()  {
+  verificarToken() {
 
-   // window.location.href = this.googleURL;
+    // window.location.href = this.googleURL;
 
-    
-    
+
+
     //const routeFragment: Observable<string> = this.route.fragment;      
     //routeFragment.subscribe(fragment => {
-      //let token: string = window.location.href = this.googleURL;
-      //this.token = fragment.match(/^(.*?)&/)[1].replace('token=', '');
-      //console.log(this.token)
+    //let token: string = window.location.href = this.googleURL;
+    //this.token = fragment.match(/^(.*?)&/)[1].replace('token=', '');
+    //console.log(this.token)
     //});
 
-    
-  
- }
+
+
+  }
 
 
 

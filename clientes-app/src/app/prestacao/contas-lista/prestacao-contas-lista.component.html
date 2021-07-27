@@ -8,30 +8,37 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+            <div class="alert alert-success hidden" role="alert" *ngIf="success == true">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 {{mensagemSucesso}}
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
-                {{mensagemErro}}
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let erro of errors">
+                {{erro}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
     </div>
 
     <form class="form">
         <div class="row">
-          <div class="col-md-1 mr-3 m-1">
-            <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
-          </div>
-          <div class="col-md-3 m-1">
-            <input class="form-control" type="text" name="search" id="pesquisar" (keyup)="filtrar($event.target.value)" />
-          </div>
-          <div class="col-md-5 m-1">
-            <button class="btn btn-warning" (click)="novoCadastro()">
-              <i class="fa fa-plus"></i> Novo
-            </button>
-          </div>
+            <div class="col-md-1 mr-3 m-1">
+                <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
+            </div>
+            <div class="col-md-3 m-1">
+                <input class="form-control" type="text" name="search" id="pesquisar"
+                    (keyup)="filtrar($event.target.value)" />
+            </div>
+            <div class="col-md-5 m-1">
+                <button class="btn btn-warning" (click)="novoCadastro()">
+                    <i class="fa fa-plus"></i> Novo
+                </button>
+            </div>
         </div>
-      </form>
+    </form>
 
     <br />
     <div class="row">
@@ -45,13 +52,14 @@
                         <th>Tipo de Pagamento</th>
                         <th>Desconto</th>
                         <th>Acrescimo</th>
-                        <th>Observação</th>                       
+                        <th>Observação</th>
                         <th>Valor Total</th>
-                        <th></th>                        
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let prestacaoConta of prestacaoContas | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index">
+                <tbody *ngIf="!isLoading">
+                    <tr
+                        *ngFor="let prestacaoConta of prestacaoContas | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index">
                         <td>{{ prestacaoConta.id }}</td>
                         <td>{{ prestacaoConta.serviceProvided.description }}</td>
                         <td>{{ prestacaoConta.serviceProvided.client.name }}</td>
@@ -64,20 +72,26 @@
                             <button class="btn btn-primary m-1" routerLink="/prestacao/conta/{{ prestacaoConta.id }}">
                                 <i class="fa fa-edit"></i>
                             </button>
-
-                            <button class="btn btn-secondary m-1"  routerLink="/prestacao/conta/{{ prestacaoConta.id}}/true">
+                            <button class="btn btn-secondary m-1"
+                                routerLink="/prestacao/conta/{{ prestacaoConta.id}}/true">
                                 <i class="fa fa-print" aria-hidden="true"></i>
-                            </button>                             
-
-                            <button class="btn btn-danger m-1" (click)="preparaDelecao(prestacaoConta)" data-toggle="modal"
-                                data-target="#modalDeSelecao">
+                            </button>
+                            <button class="btn btn-danger m-1" (click)="preparaDelecao(prestacaoConta)"
+                                data-toggle="modal" data-target="#modalDeSelecao">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+            <pagination-controls *ngIf="!isLoading" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+                nextLabel="Próximo"></pagination-controls>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div [class.spinner-border]="isLoading" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>
 
@@ -89,7 +103,8 @@
 
                 </div>
                 <div class="modal-body" *ngIf="prestacaoContasSelecionado">
-                    Confirma a exclusão do(a) prestação de contas: {{prestacaoContasSelecionado.id +" - "+ prestacaoContasSelecionado.serviceProvided.description }}
+                    Confirma a exclusão do(a) prestação de contas: {{prestacaoContasSelecionado.id +" - "+
+                    prestacaoContasSelecionado.serviceProvided.description }}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" (click)="deletarPrestacaoConta()" data-dismiss="modal">

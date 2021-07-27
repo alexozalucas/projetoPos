@@ -8,11 +8,17 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-success" role="alert" *ngIf="success == true">
-                   {{messageSuccess}}
+                <div class="alert alert-success hidden" role="alert" *ngIf="success == true">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    {{mensagemSucesso}}
                 </div>
-                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let erro of errors">
                     {{erro}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -24,10 +30,10 @@
                     </label>
                     <input type="text" class="form-control" disabled="true" [ngModel]="tipoPagamento.id" name="id" />
                 </div>
-            </div>        
+            </div>
         </div>
 
-        
+
 
         <div class="row">
 
@@ -36,8 +42,7 @@
                     <label>
                         Tipo
                     </label>
-                    <input type="text" class="form-control"  [(ngModel)]="tipoPagamento.type"
-                        name="type" />
+                    <input type="text" class="form-control" [(ngModel)]="tipoPagamento.type" name="type" />
                 </div>
             </div>
             <div class="col-md-6">
@@ -45,17 +50,25 @@
                     <label>
                         Observação:
                     </label>
-                    <input type="text" class="form-control" [(ngModel)]="tipoPagamento.observation" name="observation" />
+                    <input type="text" class="form-control" [(ngModel)]="tipoPagamento.observation"
+                        name="observation" />
                 </div>
-            </div>            
+            </div>
         </div>
-        <div class="row">
+
+        <div class="d-flex justify-content-center">
+            <div [class.spinner-border]="isLoading" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        
+        <div class="row" *ngIf="!isLoading">
             <div class="col-md-4">
                 <button type="submit" class="btn btn-success m-1 " *ngIf="!tipoPagamento.id">
                     <i class="fa fa-save"></i> Salvar
                 </button>
                 <button type="submit" class="btn btn-primary m-1 " *ngIf="tipoPagamento.id">
-                    <i class="fa fa-sync-alt" ></i> Atualizar
+                    <i class="fa fa-sync-alt"></i> Atualizar
                 </button>
                 <button type="button" class="btn btn-danger m-1" (click)="voltarParaListagem()">
                     <i class="fa fa-arrow-alt-circle-left"></i> Voltar

@@ -23,7 +23,6 @@ import { PrestacaoContasModule } from './prestacao/prestacao-contas.module';
 import { GraficoModule } from './grafico/grafico.module';
 import { GraficoService } from './grafico-services';
 import { DateUtil } from './util/Date-Util';
-import { UsuarioComponent } from './usuario/usuario.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AuthServices } from './services/auth.services';
@@ -43,8 +42,7 @@ import { AnotacaoService } from './anotacao.service';
     HomeComponent,
     LoginComponent,
     LayoutComponent,
-    RegisterComponent,
-    UsuarioComponent
+    RegisterComponent    
   ],
 
   imports: [

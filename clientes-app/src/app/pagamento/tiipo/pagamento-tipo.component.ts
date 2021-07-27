@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PagamentoService} from '../../pagamento.services'
+import { PagamentoService } from '../../pagamento.services'
 import { TipoPagamento } from '../tipo-pagamento';
 
 
@@ -14,10 +14,11 @@ export class Pagamento implements OnInit {
 
 
   tipoPagamento: TipoPagamento;
-  success: boolean = false;
-  errors: String[];
   id: number;
-  messageSuccess : String;
+  mensagemSucesso: String;
+  isLoading: boolean = false;
+  success: boolean;
+  errors: String[];
 
 
   constructor(private service: PagamentoService,
@@ -27,52 +28,71 @@ export class Pagamento implements OnInit {
   }
 
   ngOnInit() {
+
+    this.close();
+    this.isLoading = true;
     let params: Observable<Params> = this.activatedRouter.params
     params.subscribe(urlParams => {
       this.id = urlParams['id'];
-      if(this.id){
+      if (this.id) {
         this.service
-        .getTipoServicoById(this.id)
-        .subscribe(
-          response => this.tipoPagamento = response
-          , reject => this.tipoPagamento = new TipoPagamento()          
-        )
-
+          .getTipoServicoById(this.id)
+          .subscribe(
+            response => this.tipoPagamento = response
+            , erro => {
+              this.tipoPagamento = new TipoPagamento()
+              this.isLoading = false;
+              this.errors = erro.error.erros
+              if (this.errors == undefined) {
+                this.errors = ["Ocorreu um erro ao carregar os tipos de pagamento"]
+              }
+            });
       }
-
+      this.isLoading = false;
     })
+  }
 
+  close() {
+    this.errors = [];
+    this.success = false;
   }
 
   // Metodo para atualizar e salvar cliente no Clientes-form.Component.html
   onSubmit() {
 
+    this.close();
+    this.isLoading = true;
     if (this.tipoPagamento.id) {
 
       this.service.atualizar(this.tipoPagamento)
         .subscribe(response => {
-          this.success = true;
-          this.errors = null;
+          this.success = true;    
+          this.isLoading = false;   
           this.tipoPagamento = response;
-          this.messageSuccess = "Tipo de pagamento atualizado com sucesso";
-        }, reject => {
-          this.errors = reject.error.erros;
-          this.success = false;
-
-        })
+          this.mensagemSucesso = "Tipo de pagamento atualizado com sucesso";
+        }, erro => {          
+          this.isLoading = false;
+          this.errors = erro.error.erros
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu um erro ao atualizar o tipo de pagamento"]
+          }
+        });
 
     } else {
 
       this.service.salvar(this.tipoPagamento)
         .subscribe(response => {
           this.success = true;
-          this.errors = null;
+          this.isLoading = false;         
           this.tipoPagamento = response;
-          this.messageSuccess = "Tipo de pagamento salvo com sucesso";
-        }, errorResponse => {
-          this.errors = errorResponse.error.erros;
-          this.success = false;
-        })
+          this.mensagemSucesso = "Tipo de pagamento salvo com sucesso";
+        }, erro => {          
+          this.isLoading = false;
+          this.errors = erro.error.erros
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu um erro ao salvar o tipo de pagamento"]
+          }
+        });
 
     }
   }

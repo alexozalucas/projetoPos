@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.projeto.servicos.model.entity.Accountability;
 import com.projeto.servicos.model.entity.ServiceProvided;
+import com.projeto.servicos.model.entity.TypePayment;
 
 public interface AccountabilityRepository extends JpaRepository<Accountability, Long> {
 	
@@ -19,6 +20,7 @@ public interface AccountabilityRepository extends JpaRepository<Accountability, 
 	List<ServiceProvided> findByNameClientAndMes(		
 			@Param("name") String name, @Param("mes") Integer mes);
 	
+	boolean existsByTypePayment(TypePayment typePayment);
 	
 
 }

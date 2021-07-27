@@ -23,7 +23,9 @@ export class ServicoPrestadoListaComponent implements OnInit {
   valorPesquisado: string = "";
   servicoPrestadoSelecionado: ServicoPrestadoBusca;
   mensagemSucesso: String;
-  mensagemErro: String;
+  isLoading: boolean = false;
+  success: boolean;
+  errors: String[];
 
   lista: ServicoPrestadoBusca[] = [];
 
@@ -33,28 +35,43 @@ export class ServicoPrestadoListaComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
   }
 
   consultar() {
+
+    this.close();
+    this.isLoading = true;
     if (this.dataInicial.length > 0) {
       this.service.buscarDataNome(this.nome, this.dataInicial, this.dataFinal)
         .subscribe(response => {
+          this.isLoading = false;
           this.lista = response;
-          this.listaFiltro = response;        
-          this.filtrar(this.valorPesquisado);         
-       
+          this.listaFiltro = response;
+          this.filtrar(this.valorPesquisado);
+
           if (this.listaFiltro.length <= 0) {
             this.message = "Nenhum registro encontrado!";
           } else {
             this.message = null;
           }
-        }, reject => {
-          this.message = "Ocorreu um erro ao buscar as informações";
+        }, erro => {
+          this.isLoading = false;
+          this.errors = erro.error.erros
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu um erro ao buscar as informações"]
+          }
         });
     } else {
       this.message = "Informe a competência!";
+      this.isLoading = false;
     }
+  }
+
+  close() {
+    this.errors = [];
+    this.success = false;
   }
 
 
@@ -83,31 +100,25 @@ export class ServicoPrestadoListaComponent implements OnInit {
 
   deletarServicoPrestado(servicePrestado: ServicoPrestadoBusca) {
 
+    this.close();
+    this.isLoading = true;
     this.service.deletar(this.servicoPrestadoSelecionado)
       .subscribe(response => {
         this.consultar();
+        this.success = true;
         this.mensagemSucesso = "serviço prestado deletado com sucesso!"
-      },
-        erro => this.mensagemErro = "Ocorreu erro ao deletar serviço prestado!"
-      );
-    this.setarMensagens();
-
+      }, erro => {
+        this.isLoading = false;
+        this.errors = erro.error.erros
+        if (this.errors == undefined) {
+          this.errors = ["Ocorreu um erro ao deletar serviço prestado!"]
+        }
+      });
   }
-
-  setarMensagens() {
-    setTimeout(x => {
-      this.mensagemSucesso = undefined;
-      this.mensagemErro = undefined;
-    }
-      , 3000)
-  }
-
-
 
 
   filtrar(value: string) {
 
-    
     if (!this.statusAberto && !this.statusFechado) {
       this.lista = []
     } else
