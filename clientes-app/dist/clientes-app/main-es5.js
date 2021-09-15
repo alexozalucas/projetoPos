@@ -1,8 +1,8 @@
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"], {
   /***/
@@ -379,7 +379,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">{{cliente.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n  <form #clienteForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"success == true\">\n          Cliente Salvo com sucesso\n        </div>\n        <div class=\"alert alert-danger\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n        </div>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"cliente.id\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            ID:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.id\" name=\"id\" />\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Data Cadastro:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.dateRegister\"\n            name=\"dateRegister\" />\n        </div>\n      </div>\n\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Nome: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.name\" name=\"name\" />\n\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            CPF: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.cpf\" name=\"cpf\" type=\"text\"\n            placeholder=\"000.000.000-00\" mask=\"000.000.000-00\" />\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!cliente.id\">\n          <i class=\"fa fa-save\"></i> Salvar\n        </button>\n        <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"cliente.id\">\n          <i class=\"fa fa-sync-alt\"></i> Atualizar\n        </button>\n        <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n          <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n        </button>\n\n      </div>\n\n    </div>\n\n  </form>\n</div>\n";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">{{cliente.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n\n  <form #clienteForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          Cliente salvo/editado com sucesso!\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"cliente.id\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            ID:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.id\" name=\"id\" />\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Data Cadastro:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.dateRegister\"\n            name=\"dateRegister\" />\n        </div>\n      </div>\n\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Nome: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.name\" name=\"name\" />\n\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            CPF: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.cpf\" name=\"cpf\" type=\"text\"\n            placeholder=\"000.000.000-00\" mask=\"000.000.000-00\" />\n        </div>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"!isLoading\">\n      <div class=\"col-md-4\">\n        <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!cliente.id\">\n          <i class=\"fa fa-save\"></i> Salvar\n        </button>\n        <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"cliente.id\">\n          <i class=\"fa fa-sync-alt\"></i> Atualizar\n        </button>\n        <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n          <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n        </button>\n      </div>\n    </div>\n  </form>\n</div>";
     /***/
   },
 
@@ -399,7 +399,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"mensagemSucesso\">\n        {{mensagemSucesso}}\n      </div>\n      <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"mensagemErro\">\n        {{mensagemErro}}\n      </div>\n    </div>\n  </div>\n  \n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\" id=\"table-clientes\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>NOME</th>\n            <th>CPF</th>\n            <th>DATA CADASTRO</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr\n            *ngFor=\"let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index\">\n            <td>{{ cliente.id }}</td>\n            <td>{{ cliente.name }}</td>\n            <td>{{ cliente.cpf | mask: '000.000.000-99' }}</td>\n            <td>{{ cliente.dateRegister }}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" routerLink=\"/clientes/form/{{ cliente.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(cliente)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n\n      </table>\n      <pagination-controls (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"clienteSelecionado\">\n          Confirma a exclusão do(a) Cliente: {{ clienteSelecionado.name }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarCliente()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n            aria-hidden=\"true\">&times;</span></button>\n        {{mensagemSucesso}}\n      </div>\n\n      <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n        {{erro}}\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n\n  <br />\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\" id=\"table-clientes\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>NOME</th>\n            <th>CPF</th>\n            <th>DATA CADASTRO</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr\n            *ngFor=\"let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index\">\n            <td>{{ cliente.id }}</td>\n            <td>{{ cliente.name }}</td>\n            <td>{{ cliente.cpf | mask: '000.000.000-99' }}</td>\n            <td>{{ cliente.dateRegister }}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" routerLink=\"/clientes/form/{{ cliente.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(cliente)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"clienteSelecionado\">\n          Confirma a exclusão do(a) Cliente: {{ clienteSelecionado.name }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarCliente()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>";
     /***/
   },
 
@@ -419,7 +419,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Tipo de Serviço</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"mensagemSucesso\">\n        {{mensagemSucesso}}\n      </div>\n      <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"mensagemErro\">\n        {{mensagemErro}}\n      </div>\n    </div>\n  </div>\n\n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>SERVIÇO</th>\n            <th>OBSERVAÇÃO</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr\n            *ngFor=\"let tipoServico of tipoServicos | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n            <td>{{ tipoServico.id }}</td>\n            <td>{{ tipoServico.service }}</td>\n            <td>{{ tipoServico.observation }}</td>\n            <td>\n              <button class=\"btn btn-primary m-1\" routerLink=\"/definicao/tipo/{{ tipoServico.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(tipoServico)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"tipoServicoSelecionado\">\n          Confirma a exclusão do(a) tipo de serviço: {{ tipoServicoSelecionado.service }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarTipoServico()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Tipo de Serviço</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n            aria-hidden=\"true\">&times;</span></button>\n        {{mensagemSucesso}}\n      </div>\n\n      <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n        {{erro}}\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>TIPO SERVIÇO</th>\n            <th>OBSERVAÇÃO</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr\n            *ngFor=\"let tipoServico of tipoServicos | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n            <td>{{ tipoServico.id }}</td>\n            <td>{{ tipoServico.service }}</td>\n            <td>{{ tipoServico.observation }}</td>\n            <td>\n              <button class=\"btn btn-primary m-1\" routerLink=\"/definicao/tipo/{{ tipoServico.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(tipoServico)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"tipoServicoSelecionado\">\n          Confirma a exclusão do(a) tipo de serviço: {{ tipoServicoSelecionado.service }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarTipoServico()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n";
     /***/
   },
 
@@ -439,7 +439,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Tipo de Serviço</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{tipoServico.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #tipoServicoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"success == true\">\n                    Tipo Serviço Salvo com Sucesso\n                </div>\n                <div class=\"alert alert-danger\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\" *ngIf=\"tipoServico.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoServico.id\" name=\"id\" />\n                </div>\n            </div>        \n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Serviço:\n                    </label>\n                    <input type=\"text\" class=\"form-control\"  [(ngModel)]=\"tipoServico.service\"\n                        name=\"service\" />\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Observação:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoServico.observation\" name=\"observation\" />\n                </div>\n            </div>            \n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!tipoServico.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoServico.id\">\n                    <i class=\"fa fa-sync-alt\" ></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n            </div>\n        </div>\n    </form>\n</div>\n";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Tipo de Serviço</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{tipoServico.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #tipoServicoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n              <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                    aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n              </div>\n        \n              <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n            </div>\n          </div>\n\n        <div class=\"row\" *ngIf=\"tipoServico.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoServico.id\" name=\"id\" />\n                </div>\n            </div>        \n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Tipo de Serviço: * \n                    </label>\n                    <input type=\"text\" class=\"form-control\"  [(ngModel)]=\"tipoServico.service\"\n                        name=\"service\" />\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Observação:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoServico.observation\" name=\"observation\" />\n                </div>\n            </div>            \n        </div>\n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!tipoServico.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoServico.id\">\n                    <i class=\"fa fa-sync-alt\" ></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n            </div>\n        </div>\n    </form>\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n          <span class=\"sr-only\">Loading...</span>\n        </div>\n      </div>\n</div>\n";
     /***/
   },
 
@@ -479,7 +479,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Págia Home</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Bem Vindo</li>\n</ol>";
+    __webpack_exports__["default"] = "<ul class=\"nav nav-tabs bg-light mt-4 \">\n  <li class=\"nav-item \">\n    <a class=\"nav-link active \" data-toggle=\"tab\" (click)=\"selecionarAbaAgenda()\" href=\"#agenda\">Agenda</a>\n  </li>\n  <li class=\"nav-item\">\n    <a class=\"nav-link\" data-toggle=\"tab\" (click)=\"this.mostrarAnotacao()\" href=\"#anotacao\">Anotação</a>\n  </li>\n\n</ul>\n\n<div class=\"containser-fluid\">\n\n  <div class=\"tab-content m-4\">\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          {{mensagemSucesso}}\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n\n\n\n    <div id=\"agenda\" class=\"tab-pane  fade in active show\">\n      <!-- parte em que mostra a lista das agendas -->\n      <div *ngIf=\"!telaEdicao\">\n\n        <div class=\"row \">\n          <div class=\"col-md-3 mr-1\">\n            <div class=\"form-group\">\n              <label>\n                Data Inicial: *\n              </label>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dateInitial\" placeholder=\"DD/MM/YYYY\"\n                id=\"dateInitial\" name=\"dateInitial\" mask=\"00/00/0000\"  />\n            </div>\n          </div>\n          <div class=\"col-md-3\">\n            <div class=\"form-group\">\n              <label>\n                Data Final: *\n              </label>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dateFinal\" placeholder=\"DD/MM/YYYY\" id=\"dateFinal\"\n                mask=\"00/00/0000\" name=\"dateFinal\" />\n            </div>\n          </div>\n          <div class=\"col-md-5 align-self-center pt-3 mb-1\">\n            <button type=\"button\" class=\"btn btn-primary mr-2\" (click)=\"mostrarAgenda()\">\n              <i class=\"fa fa-eye\"></i> Mostrar\n            </button>\n            <button type=\"button\" class=\"btn btn-warning\" (click)=\"cadastroNovo()\">\n              <i class=\"fa fa-plus\"></i> Novo\n            </button>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\" id=\"table-home\">\n              <thead>\n                <tr>\n                  <th>DATA</th>\n                  <th>TITULO</th>\n                  <th>OBSERVAÇÃO</th>\n                </tr>\n              </thead>\n              <tbody *ngIf=\"!isLoading\" >\n                <tr\n                  *ngFor=\"let agenda of listaAgenda | paginate: { itemsPerPage: 6, currentPage: paginaAtualAgenda, id: 'agenda' };  let i = index\">\n                  <td>{{ agenda.date }}</td>\n                  <td>{{ agenda.title }}</td>\n                  <td>{{ agenda.observation }}</td>\n                  <td>\n                    <button class=\"btn btn-primary m-1\" (click)=\"selecionarAgendaPorId(agenda.id)\">\n                      <i class=\"fa fa-edit\"></i>\n                    </button>\n                    <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(agenda)\" data-toggle=\"modal\"\n                      data-target=\"#modalDeSelecao\">\n                      <i class=\"fa fa-trash\"></i>\n                    </button>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" id=\"agenda\" (pageChange)=\"paginaAtualAgenda = $event\" previousLabel=\"Anterior\"\n              nextLabel=\"Próximo\">\n            </pagination-controls>\n          </div>\n        </div>\n      <br />\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n\n        <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n\n              </div>\n              <div class=\"modal-body\" *ngIf=\"agendaSelecionada\">\n                Confirma a exclusão da agenda data: {{ agendaSelecionada.date }}, titulo: {{agendaSelecionada.title}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarAgenda(agendaSelecionada)\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <!-- parte em que edita a agendas -->\n      <div *ngIf=\"telaEdicao\">\n\n        <form #agendaForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n          <div class=\"row\">\n            <div class=\"col-md-3\" *ngIf=\"agenda.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"agenda.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                <label>\n                  Data: *\n                </label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"DD/MM/YYYY\" mask=\"00/00/0000\"\n                  [disabled]=\"agenda.id\" [(ngModel)]=\"agenda.date\" name=\"date\" />\n              </div>\n            </div>\n\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  titulo: *\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"agenda.title\" name=\"title\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Observação:\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"agenda.observation\" name=\"observation\"\n                  type=\"text\" />\n              </div>\n            </div>\n          </div>\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n              <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!agenda.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"agenda.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagemAgenda()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n\n\n\n\n\n    <!-- ANOTAÇÕES LISTA-->\n    <div id=\"anotacao\" class=\"tab-pane fade\">\n\n      <div *ngIf=\"mostrarListaAnotacao  == 1\">\n\n\n        <form class=\"form mb-3\">\n          <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n              <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n              <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                (keyup)=\"filtrarAnotacao($event.target.value)\" />\n            </div>\n            <div class=\"col-md-5 m-1\">\n              <button class=\"btn btn-warning\" (click)=\"novoCadastroAnotacao()\">\n                <i class=\"fa fa-plus\"></i> Novo\n              </button>\n            </div>\n          </div>\n        </form>\n\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\" id=\"table-home\">\n              <thead>\n                <tr>\n                  <th>TITULO</th>\n                  <th>TIPO DE ANOTAÇÃO</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody *ngIf=\"!isLoading\">\n                <tr\n                  *ngFor=\"let anotacao of anotacaoLista | paginate: { itemsPerPage: 6, currentPage: paginaAtualAnotacao,  id: 'anotacao' };  let p = index\">\n                  <td>{{ anotacao.title }}</td>\n                  <td>{{ anotacao.typeAnnotation.id +\" - \"+ anotacao.typeAnnotation.type}}</td>\n                  <td>\n                    <button class=\"btn btn-primary m-1\" (click)=\"selecionarAnotacaoPorId(anotacao.id)\">\n                      <i class=\"fa fa-eye\"></i>\n                    </button>\n                    <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecaoAnotacao(anotacao)\" data-toggle=\"modal\"\n                      data-target=\"#modalDeSelecaoAnotacao\">\n                      <i class=\"fa fa-trash\"></i>\n                    </button>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n            <pagination-controls id=\"anotacao\" *ngIf=\"!isLoading\" (pageChange)=\"paginaAtualAnotacao = $event\" previousLabel=\"Anterior\"\n              nextLabel=\"Próximo\">\n            </pagination-controls>\n          </div>\n        </div>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n        <div id=\"modalDeSelecaoAnotacao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n              </div>\n              <div class=\"modal-body\" *ngIf=\"anotacaoSelecionada\">\n                Confirma a exclusão da anotação: {{ anotacaoSelecionada.id }}, titulo: {{anotacaoSelecionada.title}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarAnotacao()\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n\n      <!-- FORMULÁRIO DE ANOTAÇÃO -->\n      <div *ngIf=\"mostrarListaAnotacao  == 2\">\n        <form #anotacaoForm=\"ngForm\" (ngSubmit)=\"onSubmitAnotacao()\">\n          <div class=\"row\">\n            <div class=\"col-md-4\" *ngIf=\"anotacao.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"anotacao.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-5\">\n              <label>Tipo de anotação: *</label>\n              <div class=\"input-group\">\n\n                <select class=\"form-control\" name=\"tipoAnotacao\" [(ngModel)]=\"anotacao.typeAnnotation.id\"\n                  [ngModelOptions]=\"{standalone:true}\">\n                  <option *ngFor=\"let tipoAnotacao of tipoAnotacaoLista\" [ngValue]=\"tipoAnotacao.id\">\n                    {{ tipoAnotacao.id + \" - \"+tipoAnotacao.type }}\n                  </option>\n                </select>\n                <button type=\"button\" class=\"btn btn-warning ml-1\" (click)=\"novoCadastroTipoDeAnotacao()\">\n                  <i class=\"fa fa-plus\"></i>\n                </button>\n                <button type=\"button\" class=\"btn btn-danger ml-1\" [disabled]=\"!tipoAnotacao.id\" (click)=\"buscarTipoDeAnotacaoPorId()\" data-toggle=\"modal\"\n                  data-target=\"#modalDeletarTipoAnotacao\">\n                  <i class=\"fa fa-trash\"></i>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary ml-1\" [disabled]=\"!tipoAnotacao.id\" (click)=\"editarTipoDeAnotacao()\">\n                  <i class=\"fa fa-edit\"></i>\n                </button>\n              </div>\n            </div>\n\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Titulo: *\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"anotacao.title\" name=\"titulo\" />\n              </div>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-12 \">\n              <div class=\"form-group \">\n                <label for=\"anotacaoTexto\" class=\"form-label\">Anotação: </label>\n                <textarea class=\"form-control\" id=\"anotacaoTexto\" rows=\"8\" [ngModelOptions]=\"{standalone:true}\"\n                  [(ngModel)]=\"anotacao.annotation\"></textarea>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n              <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!anotacao.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"anotacao.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagemAnotacao()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n\n        <div id=\"modalDeletarTipoAnotacao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n              </div>\n              <div class=\"modal-body\" *ngIf=\"tipoAnotacao\">\n                Confirma a exclusão do tipo de anotação: {{ tipoAnotacao.id }}, titulo: {{tipoAnotacao.type}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarTipoAnotacao()\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n\n\n      <!-- FORMULÁRIO DE CADASTRO DE TIPO DE ANOTAÇÃO -->\n      <div *ngIf=\"mostrarListaAnotacao  == 3\">\n        <form #anotacaoForm=\"ngForm\" (ngSubmit)=\"onSubmitTipoAnotacao()\">\n          <div class=\"row\">\n            <div class=\"col-md-4\" *ngIf=\"tipoAnotacao.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoAnotacao.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-5\">\n              <label>Tipo de anotação: *</label>\n              <div class=\"input-group\">\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoAnotacao.type\" name=\"type\" />\n              </div>\n            </div>\n\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Observação:\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoAnotacao.observation\" name=\"observacao\" />\n              </div>\n            </div>\n          </div>\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n              <button type=\"submit\" class=\"btn btn-success m-1\" *ngIf=\"!tipoAnotacao.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoAnotacao.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaCadastrodeAnotacao()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n      </div>\n\n\n    </div>\n\n\n\n  </div>\n</div>";
     /***/
   },
 
@@ -499,7 +499,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-navbar></app-navbar>\n\n\n<div id=\"layoutSidenav\">\n    <app-sidebar></app-sidebar>\n    <div id=\"layoutSidenav_content\">\n        <main>\n            <div class=\"container-fluid\">\n                <router-outlet></router-outlet>\n            </div>\n            <footer class=\"py-4 bg-light mt-auto \">\n                <div class=\"container-fluid\">\n                    <div class=\"d-flex align-items-center justify-content-between small\">\n                        <div class=\"text-muted\">Copyright &copy; Meus Clientes 2021</div>\n                        <div>\n                            <a href=\"#\">Privacy Policy</a>\n                            &middot;\n                            <a href=\"#\">Terms &amp; Conditions</a>\n                        </div>\n                    </div>\n                </div>\n            </footer>\n        </main>\n    </div>\n</div>";
+    __webpack_exports__["default"] = "<app-navbar></app-navbar>\n\n\n<div id=\"layoutSidenav\">\n    <app-sidebar></app-sidebar>\n    <div id=\"layoutSidenav_content\">\n        <main>\n            <div class=\"container-fluid\">\n                <router-outlet></router-outlet>\n            </div>\n            <!-- <footer class=\"py-4 bg-light mt-auto \">\n                <div class=\"container-fluid\">\n                    <div class=\"d-flex align-items-center justify-content-between small\">\n                        <div class=\"text-muted\">Copyright &copy; Meus Clientes 2021</div>\n                        <div>\n                            <a href=\"#\">Privacy Policy</a>\n                            &middot;\n                            <a href=\"#\">Terms &amp; Conditions</a>\n                        </div>\n                    </div>\n                </div>\n            </footer> -->\n        </main>\n    </div>\n</div>";
     /***/
   },
 
@@ -519,7 +519,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"col-md-12\">\n  <div class=\"card card-container\">\n    <img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n    <form *ngIf=\"!isLoggedIn && !isLoading\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"username\">Email</label> <input type=\"text\" class=\"form-control\" name=\"username\"\n          [(ngModel)]=\"form.username\" required #username=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && username.invalid\">É necessário informar o\n          nome do usuário!</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n          [(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && password.invalid\">\n          <div *ngIf=\"password.errors.required\">É necessário informar a senha!</div>\n          <div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <button class=\"btn btn-primary btn-block\">Login</button>\n      </div>\n      <div class=\"form-group\">\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"isLoginFailed\">Login falhou: {{ errorMessage }}</div>\n      </div>\n      <div class=\"form-group\">\n        <p class=\"content-divider center mt-2\">\n          <span>Ou</span>\n\n          <!--\t</p>\n \t\t\t<p class=\"social-login text-center\">\n\t\t\t\t\tEntrar com:\n\t\t\t\t\t\n\t\t\t\t\t<button class=\"btn btn-outline-danger btn-block\"  (click)=\"signInWithGoogle()\">\n\t\t\t\t\t\t<i class=\"fab fa-google\"></i> Google</button>\n\n\t\t\t\t\t<a href=\"{{ googleURL }}\" class=\"ml-2\"  >\n\t\t\t\t\t\t<img alt=\"Login com Google\" src=\"/assets/img/google.png\" class=\"btn-img\" >\n\t\t\t\t\t</a>\t\t\t\t\t \n\t\t\t\t</p> -->\n\n      </div>\n    </form>\n\n\n\n    <p class=\"social-login text-center\" *ngIf=\"!isLoading\">\n      Entrar com:\n      <button class=\"btn btn-danger btn-block\" (click)=\"signInWithGoogle()\">\n        <i class=\"fab fa-google\"></i> Google</button>\n    </p>\n\n    <div class=\"card-footer text-center\" *ngIf=\"!isLoading\">\n      <div class=\"small\">\n        <a routerLink=\"/register\">\n          Não possui Usuário? Cadastre-se!\n        </a>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n\n  </div>\n\n\n</div>\n";
+    __webpack_exports__["default"] = "<div class=\"col-md-12\">\n  <div class=\"card card-container\">\n    <img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n    <form *ngIf=\"!isLoggedIn && !isLoading\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"username\">Email</label> <input type=\"text\" class=\"form-control\" name=\"username\"\n          [(ngModel)]=\"form.username\" required #username=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && username.invalid\">É necessário informar o\n          nome do usuário!</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n          [(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && password.invalid\">\n          <div *ngIf=\"password.errors.required\">É necessário informar a senha!</div>\n          <div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <button class=\"btn btn-primary btn-block\">Login</button>\n      </div>\n      <div class=\"form-group\">\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"isLoginFailed\">Login falhou: {{ errorMessage }}</div>\n      </div>\n      <div class=\"form-group\">\n        <p class=\"content-divider center mt-2\">\n          <span>Ou</span>\n\n      </div>\n    </form>\n\n\n\n    <p class=\"social-login text-center\" *ngIf=\"!isLoading\">\n      Entrar com:\n      <button class=\"btn btn-danger btn-block\" (click)=\"signInWithGoogle()\">\n        <i class=\"fab fa-google\"></i> Google</button>\n    </p>\n    \n    <div class=\"card-footer text-center\" *ngIf=\"!isLoading\">\n      <div class=\"small\">\n        <a routerLink=\"/register\">\n          Não possui Usuário? Cadastre-se!\n        </a>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n\n  </div>\n\n\n</div>\n";
     /***/
   },
 
@@ -539,7 +539,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Tipo de Pagamento</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{tipoPagamento.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #tipoPagamentoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"success == true\">\n                   {{messageSuccess}}\n                </div>\n                <div class=\"alert alert-danger\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                </div>\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"tipoPagamento.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoPagamento.id\" name=\"id\" />\n                </div>\n            </div>        \n        </div>\n\n        \n\n        <div class=\"row\">\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Tipo\n                    </label>\n                    <input type=\"text\" class=\"form-control\"  [(ngModel)]=\"tipoPagamento.type\"\n                        name=\"type\" />\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Observação:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoPagamento.observation\" name=\"observation\" />\n                </div>\n            </div>            \n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!tipoPagamento.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoPagamento.id\">\n                    <i class=\"fa fa-sync-alt\" ></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n\n        </div>\n\n    </form>\n</div>\n";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Tipo de Pagamento</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{tipoPagamento.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #tipoPagamentoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                            aria-hidden=\"true\">&times;</span></button>\n                    {{mensagemSucesso}}\n                </div>\n\n                <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"tipoPagamento.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoPagamento.id\" name=\"id\" />\n                </div>\n            </div>\n        </div>\n\n\n\n        <div class=\"row\">\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Tipo\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoPagamento.type\" name=\"type\" />\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Observação:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoPagamento.observation\"\n                        name=\"observation\" />\n                </div>\n            </div>\n        </div>\n\n        <div class=\"d-flex justify-content-center\">\n            <div [class.spinner-border]=\"isLoading\" role=\"status\">\n                <span class=\"sr-only\">Loading...</span>\n            </div>\n        </div>\n        \n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!tipoPagamento.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoPagamento.id\">\n                    <i class=\"fa fa-sync-alt\"></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n\n        </div>\n\n    </form>\n</div>";
     /***/
   },
 
@@ -559,7 +559,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Tipo de Pagamento</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n    <div class=\"row\">\n    <div class=\"col-md-12\">\n        <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"mensagemSucesso\">\n            {{mensagemSucesso}}\n        </div>\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"mensagemErro\">\n            {{mensagemErro}}\n        </div>\n    </div>\n    </div>  \n\n\n    <form class=\"form\">\n        <div class=\"row\">\n          <div class=\"col-md-1 mr-3 m-1\">\n            <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n          </div>\n          <div class=\"col-md-3 m-1\">\n            <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n          </div>\n          <div class=\"col-md-5 m-1\">\n            <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n              <i class=\"fa fa-plus\"></i> Novo\n            </button>\n          </div>\n        </div>\n      </form>\n\n    <br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>TIPO</th>\n                        <th>OBSERVAÇÃO</th>                       \n                        <th></th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr *ngFor=\"let tipoPagamentos of tipoPagamento | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n                        <td>{{ tipoPagamentos.id }}</td>\n                        <td>{{ tipoPagamentos.type }}</td>\n                        <td>{{ tipoPagamentos.observation }}</td>                        \n                        <td>\n                            <button class=\"btn btn-primary m-1 \" routerLink=\"/pagamento/tipo/{{ tipoPagamentos.id }}\">\n                                <i class=\"fa fa-edit\"></i>\n                            </button>\n\n                            <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(tipoPagamentos)\" data-toggle=\"modal\"\n                                data-target=\"#modalDeSelecao\">\n                                <i class=\"fa fa-trash\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <pagination-controls (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\"></pagination-controls>\n        </div>\n    </div>\n\n    <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h4>Confirmação</h4>\n\n                </div>\n                <div class=\"modal-body\" *ngIf=\"tipoPagamentoSelecionado\">\n                    Confirma a exclusão do(a) tipo de pagamento: {{ tipoPagamentoSelecionado.type }}\n                </div>\n                <div class=\"modal-footer\">\n                    <button class=\"btn btn-success\" (click)=\"deletarTipoPagamento()\" data-dismiss=\"modal\"> Confirma</button>\n                    <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Tipo de Pagamento</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                        aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n            </div>\n\n            <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n        </div>\n    </div>\n\n\n    <form class=\"form\">\n        <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n                <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n                <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                    (keyup)=\"filtrar($event.target.value)\" />\n            </div>\n            <div class=\"col-md-5 m-1\">\n                <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n                    <i class=\"fa fa-plus\"></i> Novo\n                </button>\n            </div>\n        </div>\n    </form>\n\n    <br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>TIPO</th>\n                        <th>OBSERVAÇÃO</th>\n                        <th></th>\n                    </tr>\n                </thead>\n                <tbody *ngIf=\"!isLoading\">\n                    <tr\n                        *ngFor=\"let tipoPagamentos of tipoPagamento | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n                        <td>{{ tipoPagamentos.id }}</td>\n                        <td>{{ tipoPagamentos.type }}</td>\n                        <td>{{ tipoPagamentos.observation }}</td>\n                        <td>\n                            <button class=\"btn btn-primary m-1 \" routerLink=\"/pagamento/tipo/{{ tipoPagamentos.id }}\">\n                                <i class=\"fa fa-edit\"></i>\n                            </button>\n\n                            <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(tipoPagamentos)\"\n                                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                                <i class=\"fa fa-trash\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n            </pagination-controls>\n        </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n          <span class=\"sr-only\">Loading...</span>\n        </div>\n      </div>\n\n    <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h4>Confirmação</h4>\n\n                </div>\n                <div class=\"modal-body\" *ngIf=\"tipoPagamentoSelecionado\">\n                    Confirma a exclusão do(a) tipo de pagamento: {{ tipoPagamentoSelecionado.type }}\n                </div>\n                <div class=\"modal-footer\">\n                    <button class=\"btn btn-success\" (click)=\"deletarTipoPagamento()\" data-dismiss=\"modal\">\n                        Confirma</button>\n                    <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>";
     /***/
   },
 
@@ -579,7 +579,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Prestação de Contas</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"mensagemSucesso\">\n                {{mensagemSucesso}}\n            </div>\n            <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"mensagemErro\">\n                {{mensagemErro}}\n            </div>\n        </div>\n    </div>\n\n    <form class=\"form\">\n        <div class=\"row\">\n          <div class=\"col-md-1 mr-3 m-1\">\n            <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n          </div>\n          <div class=\"col-md-3 m-1\">\n            <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n          </div>\n          <div class=\"col-md-5 m-1\">\n            <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n              <i class=\"fa fa-plus\"></i> Novo\n            </button>\n          </div>\n        </div>\n      </form>\n\n    <br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>Serviço Prestado</th>\n                        <th>Cliente</th>\n                        <th>Tipo de Pagamento</th>\n                        <th>Desconto</th>\n                        <th>Acrescimo</th>\n                        <th>Observação</th>                       \n                        <th>Valor Total</th>\n                        <th></th>                        \n                    </tr>\n                </thead>\n                <tbody>\n                    <tr *ngFor=\"let prestacaoConta of prestacaoContas | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n                        <td>{{ prestacaoConta.id }}</td>\n                        <td>{{ prestacaoConta.serviceProvided.description }}</td>\n                        <td>{{ prestacaoConta.serviceProvided.client.name }}</td>\n                        <td>{{ prestacaoConta.typePayment.type }}</td>\n                        <td>R$ {{ prestacaoConta.discountValue | mask: 'separator':',' }}</td>\n                        <td>R$ {{ prestacaoConta.additionValue | mask: 'separator':',' }}</td>\n                        <td>{{ prestacaoConta.observation }}</td>\n                        <td>R$ {{ prestacaoConta.totalValue | mask: 'separator':',' }}</td>\n                        <td>\n                            <button class=\"btn btn-primary m-1\" routerLink=\"/prestacao/conta/{{ prestacaoConta.id }}\">\n                                <i class=\"fa fa-edit\"></i>\n                            </button>\n\n                            <button class=\"btn btn-secondary m-1\"  routerLink=\"/prestacao/conta/{{ prestacaoConta.id}}/true\">\n                                <i class=\"fa fa-print\" aria-hidden=\"true\"></i>\n                            </button>                             \n\n                            <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(prestacaoConta)\" data-toggle=\"modal\"\n                                data-target=\"#modalDeSelecao\">\n                                <i class=\"fa fa-trash\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <pagination-controls (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\"></pagination-controls>\n        </div>\n    </div>\n\n    <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h4>Confirmação</h4>\n\n                </div>\n                <div class=\"modal-body\" *ngIf=\"prestacaoContasSelecionado\">\n                    Confirma a exclusão do(a) prestação de contas: {{prestacaoContasSelecionado.id +\" - \"+ prestacaoContasSelecionado.serviceProvided.description }}\n                </div>\n                <div class=\"modal-footer\">\n                    <button class=\"btn btn-success\" (click)=\"deletarPrestacaoConta()\" data-dismiss=\"modal\">\n                        Confirma</button>\n                    <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Prestação de Contas</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                        aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n            </div>\n\n            <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n        </div>\n    </div>\n\n    <form class=\"form\">\n        <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n                <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n                <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                    (keyup)=\"filtrar($event.target.value)\" />\n            </div>\n            <div class=\"col-md-5 m-1\">\n                <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n                    <i class=\"fa fa-plus\"></i> Novo\n                </button>\n            </div>\n        </div>\n    </form>\n\n    <br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>Serviço Prestado</th>\n                        <th>Cliente</th>\n                        <th>Tipo de Pagamento</th>\n                        <th>Desconto</th>\n                        <th>Acrescimo</th>\n                        <th>Observação</th>\n                        <th>Valor Total</th>\n                        <th></th>\n                    </tr>\n                </thead>\n                <tbody *ngIf=\"!isLoading\">\n                    <tr\n                        *ngFor=\"let prestacaoConta of prestacaoContas | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n                        <td>{{ prestacaoConta.id }}</td>\n                        <td>{{ prestacaoConta.serviceProvided.description }}</td>\n                        <td>{{ prestacaoConta.serviceProvided.client.name }}</td>\n                        <td>{{ prestacaoConta.typePayment.type }}</td>\n                        <td>R$ {{ prestacaoConta.discountValue | mask: 'separator':',' }}</td>\n                        <td>R$ {{ prestacaoConta.additionValue | mask: 'separator':',' }}</td>\n                        <td>{{ prestacaoConta.observation }}</td>\n                        <td>R$ {{ prestacaoConta.totalValue | mask: 'separator':',' }}</td>\n                        <td>\n                            <button class=\"btn btn-primary m-1\" routerLink=\"/prestacao/conta/{{ prestacaoConta.id }}\">\n                                <i class=\"fa fa-edit\"></i>\n                            </button>\n                            <button class=\"btn btn-secondary m-1\"\n                                routerLink=\"/prestacao/conta/{{ prestacaoConta.id}}/true\">\n                                <i class=\"fa fa-print\" aria-hidden=\"true\"></i>\n                            </button>\n                            <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(prestacaoConta)\"\n                                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                                <i class=\"fa fa-trash\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\"\n                nextLabel=\"Próximo\"></pagination-controls>\n        </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n        </div>\n    </div>\n\n    <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h4>Confirmação</h4>\n\n                </div>\n                <div class=\"modal-body\" *ngIf=\"prestacaoContasSelecionado\">\n                    Confirma a exclusão do(a) prestação de contas: {{prestacaoContasSelecionado.id +\" - \"+\n                    prestacaoContasSelecionado.serviceProvided.description }}\n                </div>\n                <div class=\"modal-footer\">\n                    <button class=\"btn btn-success\" (click)=\"deletarPrestacaoConta()\" data-dismiss=\"modal\">\n                        Confirma</button>\n                    <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>";
     /***/
   },
 
@@ -599,7 +599,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"prestacao\" *ngIf=\"!relatorio\">\n    <h1 class=\"mt-4\">Prestação de contas</h1>\n    <ol class=\"breadcrumb mb-4\">\n        <li class=\"breadcrumb-item active\">{{prestacaoContasBuscar.id ? 'Edição' :'Cadastro'}}</li>\n    </ol>\n\n    <div class=\"container-fluid\">\n        <form #tipoPagamentoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"success == true\">\n                        {{messageSuccess}}\n                    </div>\n                    <div class=\"alert alert-danger\" role=\"alert\" *ngFor=\"let erro of errors\">\n                        {{erro}}\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\" *ngIf=\"prestacaoContasBuscar.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>\n                            ID:\n                        </label>\n                        <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"prestacaoContasBuscar.id\"\n                            name=\"id\" />\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"!prestacaoContasBuscar.id\">\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Competência</label>\n                        <input class=\"form-control\" placeholder=\"MM/YYYY\" type=\"text\" id=\"data\"\n                            (change)=\"buscarPorData($event)\" mask=\"00/0000\">\n                    </div>\n                </div>\n            </div>\n\n\n            <div class=row *ngIf=\"!prestacaoContasBuscar.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Serviço Prestado:</label>\n                        <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado\">\n                            <option value=\"\">Selecione...</option>\n                            <option *ngFor=\"let servicoPrestadosBusca of servicoPrestadoBusca\"\n                                [ngValue]=\"servicoPrestadosBusca\">\n                                {{ servicoPrestadosBusca.id +\" - \"+ servicoPrestadosBusca.description}}\n                            </option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"servicoPrestadoBuscaSelecionado.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Cliente:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.client.name\" type=\"text\" name=\"name\">\n                    </div>\n                </div>\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Tipo Serviço:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.typeService.service\" type=\"text\"\n                            name=\"service\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"servicoPrestadoBuscaSelecionado.id\">\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Preço:</label>\n                        <input class=\"form-control\" disabled=\"true\" [(ngModel)]=\"servicoPrestadoBuscaSelecionado.value\"\n                            type=\"text\" name=\"value\" >\n                    </div>\n                </div>\n                <div class=\"col-md-8\">\n                    <div class=\"form-group\">\n                        <label>Descrição:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.description\" type=\"text\" name=\"description\">\n                    </div>\n                </div>\n            </div>\n\n\n            <div class=row>\n                <div class=\"col-md-12\">\n                    <div class=\"form-group\">\n                        <label>Tipo de Pagamento:</label>\n                        <select class=\"form-control\" name=\"pagamento\" [(ngModel)]=\"tipoPagamentoSelecionado.id\"\n                            [ngModelOptions]=\"{standalone:true}\">\n                            <option value=\"\">selecionar...</option>\n                            <option *ngFor=\"let tiposPagamento of tipoPagamento\" [ngValue]=\"tiposPagamento.id\">\n                                {{ tiposPagamento.id + \" - \"+tiposPagamento.type }}\n                            </option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n\n\n\n            <div class=\"row\">\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Desconto:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.discountValue\" type=\"text\"\n                            name=\"discountValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \" >\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Acrescimo:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.additionValue\" type=\"text\"\n                            name=\"additionValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \" >\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Valor Total:</label>\n                            <input class=\"form-control\" [ngModel]=\"somarTotal(servicoPrestadoBuscaSelecionado.value, prestacaoContasBuscar.additionValue, prestacaoContasBuscar.discountValue)\" type=\"text\"\n                            name=\"totalValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \" disabled=\"true\"  > \n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Data de pagamento:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.datePayment\"\n                            placeholder=\"DD/MM/YYYY\" type=\"text\" id=\"data\" name=\"datePayment\" mask=\"00/00/0000\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-9\">\n                    <div class=\"form-group\">\n                        <label>Observação:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.observation\" type=\"text\"\n                            name=\"observation\">\n                    </div>\n                </div>\n\n            </div>\n\n\n\n            <div class=\"row\">\n                <div class=\"col-md-6\">\n                    <button type=\"submit\" class=\"btn btn-success dimensaobotao m-1 \" *ngIf=\"!prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-save\"></i> Salvar\n                    </button>\n                    <button type=\"submit\" class=\"btn btn-primary dimensaobotao m-1 \" *ngIf=\"prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-sync-alt\"></i> Atualizar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-danger dimensaobotao m-1\" (click)=\"voltarParaListagem()\">\n                        <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"emitirRelatorio()\"\n                        *ngIf=\"prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-print\" aria-hidden=\"true\"></i> Relatório\n                    </button>\n\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n<div class=\"relatorio-prestacao\" *ngIf=\"relatorio\">\n    <h1 class=\"mt-4\">Relátório Prestação de contas</h1>\n\n    <h4 class=\"mt-4\">Cliente:</h4>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span>Nome: {{prestacaoContasBuscar.serviceProvided.client.name}} </span>\n            <span class=\"ml-3\">CPF: {{prestacaoContasBuscar.serviceProvided.client.cpf}} </span>\n        </div>\n    </div>\n\n    <h4 class=\"mt-4\">Serviço Prestado:</h4>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">ID: {{prestacaoContasBuscar.serviceProvided.id}} </span>\n            <span class=\"mr-3\">Descrição: {{prestacaoContasBuscar.serviceProvided.description}} </span>\n        </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Data: {{prestacaoContasBuscar.serviceProvided.date}} </span>\n            <span class=\"mr-3\">Tipo de Serviço: {{prestacaoContasBuscar.serviceProvided.typeService.service}} </span>\n\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor Combinado: R$ {{prestacaoContasBuscar.serviceProvided.value}} </span>\n        </div>\n    </div>\n\n    <h4 class=\"mt-4\">Prestação de conta</h4>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor de Desconto: R$ {{prestacaoContasBuscar.discountValue}} </span>\n\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor de Acrescimo: R$ {{prestacaoContasBuscar.additionValue}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor Total: R$ {{prestacaoContasBuscar.totalValue}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Observação: {{prestacaoContasBuscar.observation}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3 mb-10\">Tipo de pagamento: {{prestacaoContasBuscar.typePayment.type}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3 mb-10\">Tipo de pagamento: {{retornaDatePaymentFormat(prestacaoContasBuscar.datePayment)}} </span>\n        </div>\n    </div>\n\n\n    <br /><br />\n    <br /><br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <button type=\"button\" class=\"btn btn-secondary \" onclick=\"window.print()\" *ngIf=\"prestacaoContasBuscar.id\">\n                <i class=\"fa fa-print\" aria-hidden=\"true\"></i> Imprimir\n            </button>\n        </div>\n    </div>\n</div>";
+    __webpack_exports__["default"] = "<div class=\"prestacao\" *ngIf=\"!relatorio\">\n    <h1 class=\"mt-4\">Prestação de contas</h1>\n    <ol class=\"breadcrumb mb-4\">\n        <li class=\"breadcrumb-item active\">{{prestacaoContasBuscar.id ? 'Edição' :'Cadastro'}}</li>\n    </ol>\n\n    <div class=\"container-fluid\">\n        <form #tipoPagamentoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                                aria-hidden=\"true\">&times;</span></button>\n                        {{mensagemSucesso}}\n                    </div>\n\n                    <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"\n                        *ngFor=\"let erro of errors\">\n                        {{erro}}\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                        </button>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\" *ngIf=\"prestacaoContasBuscar.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>\n                            ID:\n                        </label>\n                        <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"prestacaoContasBuscar.id\"\n                            name=\"id\" />\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"!prestacaoContasBuscar.id\">\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Competência</label>\n                        <input class=\"form-control\" placeholder=\"MM/YYYY\" type=\"text\" id=\"data\"\n                            (change)=\"buscarPorData($event)\" mask=\"00/0000\">\n                    </div>\n                </div>\n            </div>\n\n\n            <div class=row *ngIf=\"!prestacaoContasBuscar.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Serviço Prestado:</label>\n                        <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado\">\n                            <option value=\"\">Selecione...</option>\n                            <option *ngFor=\"let servicoPrestadosBusca of servicoPrestadoBusca\"\n                                [ngValue]=\"servicoPrestadosBusca\">\n                                {{ servicoPrestadosBusca.id +\" - \"+ servicoPrestadosBusca.description}}\n                            </option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"servicoPrestadoBuscaSelecionado.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Cliente:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.client.name\" type=\"text\" name=\"name\">\n                    </div>\n                </div>\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Tipo Serviço:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.typeService.service\" type=\"text\"\n                            name=\"service\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"servicoPrestadoBuscaSelecionado.id\">\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Preço:</label>\n                        <input class=\"form-control\" disabled=\"true\" [(ngModel)]=\"servicoPrestadoBuscaSelecionado.value\"\n                            type=\"text\" name=\"value\">\n                    </div>\n                </div>\n                <div class=\"col-md-8\">\n                    <div class=\"form-group\">\n                        <label>Descrição:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.description\" type=\"text\" name=\"description\">\n                    </div>\n                </div>\n            </div>\n\n\n            <div class=row>\n                <div class=\"col-md-12\">\n                    <div class=\"form-group\">\n                        <label>Tipo de Pagamento:</label>\n                        <select class=\"form-control\" name=\"pagamento\" [(ngModel)]=\"tipoPagamentoSelecionado.id\"\n                            [ngModelOptions]=\"{standalone:true}\">\n                            <option value=\"\">selecionar...</option>\n                            <option *ngFor=\"let tiposPagamento of tipoPagamento\" [ngValue]=\"tiposPagamento.id\">\n                                {{ tiposPagamento.id + \" - \"+tiposPagamento.type }}\n                            </option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n\n\n\n            <div class=\"row\">\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Desconto:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.discountValue\" type=\"text\"\n                            name=\"discountValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Acrescimo:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.additionValue\" type=\"text\"\n                            name=\"additionValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Valor Total:</label>\n                        <input class=\"form-control\"\n                            [ngModel]=\"somarTotal(servicoPrestadoBuscaSelecionado.value, prestacaoContasBuscar.additionValue, prestacaoContasBuscar.discountValue)\"\n                            type=\"text\" name=\"totalValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\"\n                            prefix=\"R$ \" disabled=\"true\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Data de pagamento:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.datePayment\"\n                            placeholder=\"DD/MM/YYYY\" type=\"text\" id=\"data\" name=\"datePayment\" mask=\"00/00/0000\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-9\">\n                    <div class=\"form-group\">\n                        <label>Observação:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.observation\" type=\"text\"\n                            name=\"observation\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"d-flex justify-content-center\">\n                <div [class.spinner-border]=\"isLoading\" role=\"status\">\n                    <span class=\"sr-only\">Loading...</span>\n                </div>\n            </div>\n\n\n            <div class=\"row\" *ngIf=\"!isLoading\">\n                <div class=\"col-md-6\">\n                    <button type=\"submit\" class=\"btn btn-success dimensaobotao m-1 \" *ngIf=\"!prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-save\"></i> Salvar\n                    </button>\n                    <button type=\"submit\" class=\"btn btn-primary dimensaobotao m-1 \" *ngIf=\"prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-sync-alt\"></i> Atualizar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-danger dimensaobotao m-1\" (click)=\"voltarParaListagem()\">\n                        <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"emitirRelatorio()\"\n                        *ngIf=\"prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-print\" aria-hidden=\"true\"></i> Relatório\n                    </button>\n\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n<div class=\"relatorio-prestacao\" *ngIf=\"relatorio\">\n    <h1 class=\"mt-4\">Relátório Prestação de contas</h1>\n\n    <h4 class=\"mt-4\">Cliente:</h4>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span>Nome: {{prestacaoContasBuscar.serviceProvided.client.name}} </span>\n            <span class=\"ml-3\">CPF: {{prestacaoContasBuscar.serviceProvided.client.cpf}} </span>\n        </div>\n    </div>\n\n    <h4 class=\"mt-4\">Serviço Prestado:</h4>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">ID: {{prestacaoContasBuscar.serviceProvided.id}} </span>\n            <span class=\"mr-3\">Descrição: {{prestacaoContasBuscar.serviceProvided.description}} </span>\n        </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Data: {{prestacaoContasBuscar.serviceProvided.date}} </span>\n            <span class=\"mr-3\">Tipo de Serviço: {{prestacaoContasBuscar.serviceProvided.typeService.service}} </span>\n\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor Combinado: R$ {{prestacaoContasBuscar.serviceProvided.value}} </span>\n        </div>\n    </div>\n\n    <h4 class=\"mt-4\">Prestação de conta</h4>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor de Desconto: R$ {{prestacaoContasBuscar.discountValue}} </span>\n\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor de Acrescimo: R$ {{prestacaoContasBuscar.additionValue}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor Total: R$ {{prestacaoContasBuscar.totalValue}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Observação: {{prestacaoContasBuscar.observation}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3 mb-10\">Tipo de pagamento: {{prestacaoContasBuscar.typePayment.type}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3 mb-10\">Tipo de pagamento: {{retornaDatePaymentFormat(prestacaoContasBuscar.datePayment)}}\n            </span>\n        </div>\n    </div>\n\n\n    <br /><br />\n    <br /><br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <button type=\"button\" class=\"btn btn-secondary \" onclick=\"window.print()\" *ngIf=\"prestacaoContasBuscar.id\">\n                <i class=\"fa fa-print\" aria-hidden=\"true\"></i> Imprimir\n            </button>\n        </div>\n    </div>\n</div>";
     /***/
   },
 
@@ -639,7 +639,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Serviço Prestado</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{servico.id ? 'Edição' : 'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #form=\"ngForm\" (submit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"success == true\">\n                    {{servico.id ? 'Serviço atualizado com sucesso' : 'Serviço Prestado Salvo com Sucesso!'}}\n                </div>\n                <div class=\"alert alert-danger\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\" *ngIf=\"servico.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"servico.id\" name=\"id\" />\n                </div>\n            </div>\n        </div>\n\n        <div class=row>\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Cliente:</label>\n                    <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"servico.idClient\">\n                        <option value=\"\">Selecione...</option>\n                        <option *ngFor=\"let cliente of clientes\" [ngValue]=\"cliente.id\">\n                            {{ cliente.name }}\n                        </option>\n                    </select>\n                </div>\n            </div>\n        </div>\n\n        <div class=row>\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Tipo Serviço:</label>\n                    <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"servico.idTypeService\">\n                        <option value=\"\">Selecione...</option>\n                        <option *ngFor=\"let tipoServicos of tipoServico\" [ngValue]=\"tipoServicos.id\">\n                            {{ tipoServicos.service }}\n                        </option>\n                    </select>\n                </div>\n            </div>\n        </div>\n\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Descrição:</label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.description\" type=\"text\" name=\"description\"\n                        id=\"inputDescription\">\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>Data:</label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.date\"  placeholder=\"DD/MM/YYYY\" mask=\"00/00/0000\" \n                        type=\"text\" name=\"date\" id=\"inputData\">\n                </div>\n            </div>\n     \n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>Valor Inicial </label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.value\" type=\"text\" name=\"value\" id=\"inputValue\"\n                     mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1\" *ngIf=\"!servico.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"servico.id\">\n                    <i class=\"fa fa-sync-alt\" ></i> Atualizar\n                </button>\n                <button type=\"button\" routerLink=\"/servicos-prestados/lista\" class=\"btn btn-danger m-1\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n        </div>\n    </form>\n</div>";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Serviço Prestado</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{servico.id ? 'Edição' : 'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #form=\"ngForm\" (submit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                            aria-hidden=\"true\">&times;</span></button>\n                    {{servico.id ? 'Serviço atualizado com sucesso' : 'Serviço Prestado Salvo com Sucesso!'}}\n                </div>\n\n                <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\" *ngIf=\"servico.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"servico.id\" name=\"id\" />\n                </div>\n            </div>\n        </div>\n\n        <div class=row>\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Cliente:</label>\n                    <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"servico.idClient\">\n                        <option value=\"\">Selecione...</option>\n                        <option *ngFor=\"let cliente of clientes\" [ngValue]=\"cliente.id\">\n                            {{ cliente.name }}\n                        </option>\n                    </select>\n                </div>\n            </div>\n        </div>\n\n        <div class=row>\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Tipo Serviço:</label>\n                    <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\"\n                        [(ngModel)]=\"servico.idTypeService\">\n                        <option value=\"\">Selecione...</option>\n                        <option *ngFor=\"let tipoServicos of tipoServico\" [ngValue]=\"tipoServicos.id\">\n                            {{ tipoServicos.service }}\n                        </option>\n                    </select>\n                </div>\n            </div>\n        </div>\n\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Descrição:</label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.description\" type=\"text\" name=\"description\"\n                        id=\"inputDescription\">\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>Data:</label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.date\" placeholder=\"DD/MM/YYYY\" mask=\"00/00/0000\"\n                        type=\"text\" name=\"date\" id=\"inputData\">\n                </div>\n            </div>\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>Valor Inicial </label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.value\" type=\"text\" name=\"value\" id=\"inputValue\"\n                        mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                </div>\n            </div>\n        </div>\n        <div class=\"d-flex justify-content-center\">\n            <div [class.spinner-border]=\"isLoading\" role=\"status\">\n              <span class=\"sr-only\">Loading...</span>\n            </div>\n          </div>\n\n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1\" *ngIf=\"!servico.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"servico.id\">\n                    <i class=\"fa fa-sync-alt\"></i> Atualizar\n                </button>\n                <button type=\"button\" routerLink=\"/servicos-prestados/lista\" class=\"btn btn-danger m-1\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n        </div>\n    </form>\n</div>";
     /***/
   },
 
@@ -659,7 +659,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Serviço Prestado</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-bitem active\">Consulta</li>\n</ol>\n\n<div class=\"container-fluid\">\n\n\n  <form #consultaForm=\"ngForm\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"mensagemSucesso\">\n          {{mensagemSucesso}}\n        </div>\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"mensagemErro\">\n          {{mensagemErro}}\n        </div>\n      </div>\n    </div>\n\n    <div class=row>\n      <div class=\"col-md-1 mr-4 m-1\">\n        <label for=\"competencia\" class=\"col-form-label \">Competência:</label>\n      </div>\n      <div class=\"col-md-2 m-1\">\n        <input class=\"form-control\" placeholder=\"MM/YYYY\" type=\"text\" id=\"inputMes\" (change)=\"montaData($event)\"\n          mask=\"00/0000\">\n      </div>\n      <div class=\"col-md-1 mr-3 m-1\" *ngIf=\"listaFiltro.length > 0\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\" *ngIf=\"listaFiltro.length > 0\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-2 m-1\">\n        <button class=\"btn btn-warning\" routerLink=\"/servicos-prestados/form\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"form-check form-check-inline m-2\" *ngIf=\"listaFiltro.length > 0\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"inlineCheckbox1\" (click)=\"buscaPorStatus($event.target.checked,2)\" checked>\n    <label class=\"form-check-label\" for=\"inlineCheckbox1\">Em aberto</label>\n  </div>\n  <div class=\"form-check form-check-inline mb-2\" *ngIf=\"listaFiltro.length > 0\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"inlineCheckbox2\" (click)=\"buscaPorStatus($event.target.checked,1)\" checked>\n    <label class=\"form-check-label\" for=\"inlineCheckbox2\">Fechado</label>\n  </div>\n  <br />\n\n\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n\n      <div class=\"alert alert-warning\" role=\"alert\" *ngIf=\"message\">\n        {{message}}\n      </div>\n\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>Cliente</th>\n            <th>Descrição</th>\n            <th>Preço</th>\n            <th>Tipo de serviço</th>\n            <th>Data</th>\n            <th>Status</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let s of lista | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index\">\n            <td>{{ s.client.name }}</td>\n            <td>{{ s.description }}</td>\n            <td>R$ {{ s.value  | mask: 'separator':','}}</td>\n            <td>{{ s.typeService.service }}</td>\n            <td>{{ s.date }}</td>\n            <td>{{ s.releasedPayment ? 'Fechado' :'Em Aberto'  }}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" *ngIf=\"!s.releasedPayment\" routerLink=\"/servicos-prestados/form/{{s.id}}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" *ngIf=\"!s.releasedPayment\" (click)=\"preparaDelecao(s)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"servicoPrestadoSelecionado\">\n          Confirma a exclusão do serviço prestado: {{ servicoPrestadoSelecionado.description }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarServicoPrestado()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n";
+    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Serviço Prestado</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-bitem active\">Consulta</li>\n</ol>\n\n<div class=\"container-fluid\">\n\n\n  <form #consultaForm=\"ngForm\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          {{mensagemSucesso}}\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n\n    <div class=row>\n      <div class=\"col-md-1 mr-4 m-1\">\n        <label for=\"competencia\" class=\"col-form-label \">Competência:</label>\n      </div>\n      <div class=\"col-md-2 m-1\">\n        <input class=\"form-control\" placeholder=\"MM/YYYY\" type=\"text\" id=\"inputMes\" (change)=\"montaData($event)\"\n          mask=\"00/0000\">\n      </div>\n      <div class=\"col-md-1 mr-3 m-1\" *ngIf=\"listaFiltro.length > 0\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\" *ngIf=\"listaFiltro.length > 0\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-2 m-1\">\n        <button class=\"btn btn-warning\" routerLink=\"/servicos-prestados/form\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"form-check form-check-inline m-2\" *ngIf=\"listaFiltro.length > 0\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"inlineCheckbox1\"\n      (click)=\"buscaPorStatus($event.target.checked,2)\" checked>\n    <label class=\"form-check-label\" for=\"inlineCheckbox1\">Em aberto</label>\n  </div>\n  <div class=\"form-check form-check-inline mb-2\" *ngIf=\"listaFiltro.length > 0\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"inlineCheckbox2\"\n      (click)=\"buscaPorStatus($event.target.checked,1)\" checked>\n    <label class=\"form-check-label\" for=\"inlineCheckbox2\">Fechado</label>\n  </div>\n  <br />\n\n\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n\n      <div class=\"alert alert-warning\" role=\"alert\" *ngIf=\"message\">\n        {{message}}\n      </div>\n\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>Cliente</th>\n            <th>Descrição</th>\n            <th>Preço</th>\n            <th>Tipo de serviço</th>\n            <th>Data</th>\n            <th>Status</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr *ngFor=\"let s of lista | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index\">\n            <td>{{ s.client.name }}</td>\n            <td>{{ s.description }}</td>\n            <td>R$ {{ s.value | mask: 'separator':','}}</td>\n            <td>{{ s.typeService.service }}</td>\n            <td>{{ s.date }}</td>\n            <td>{{ s.releasedPayment ? 'Fechado' :'Em Aberto' }}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" *ngIf=\"!s.releasedPayment\"\n                routerLink=\"/servicos-prestados/form/{{s.id}}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" *ngIf=\"!s.releasedPayment\" (click)=\"preparaDelecao(s)\"\n                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\"\n        nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"servicoPrestadoSelecionado\">\n          Confirma a exclusão do serviço prestado: {{ servicoPrestadoSelecionado.description }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarServicoPrestado()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>";
     /***/
   },
 
@@ -699,27 +699,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"layoutSidenav_nav\">\n    <nav class=\"sb-sidenav accordion sb-sidenav-dark\" id=\"sidenavAccordion\">\n        <div class=\"sb-sidenav-menu\">\n            <div class=\"nav\">\n                <div class=\"sb-sidenav-menu-heading\">Sistema</div>\n                <a class=\"nav-link\" routerLink=\"/home\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>\n                    Home\n                </a>\n                <div class=\"sb-sidenav-menu-heading\">Cadastros</div>\n                <a class=\"nav-link collapsed\" routerLink=\"/clientes\" data-toggle=\"collapse\" aria-expanded=\"false\"\n                    aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i> </div>\n                    Clientes\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/definicao\" data-toggle=\"collapse\" aria-expanded=\"false\"\n                    aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Tipo de serviço\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/servicos-prestados\" data-toggle=\"collapse\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Serviços Prestados\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/pagamento/tipo/lista\" data-toggle=\"collapse\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Tipo de Pagamento\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/prestacao\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Prestação de contas\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/graficos/listar\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\" >\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Graficos\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/usuario\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\" >\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Usuários\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n\n                <div class=\"sb-sidenav-menu-heading\">Logout</div>\n                <a class=\"nav-link collapsed\" (click)=\"logout();\" href=\"#\" data-toggle=\"collapse\"\n                    data-target=\"#collapseLayouts\" aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-sign-out-alt\"></i></div>\n                    Sair\n                </a>\n\n\n            </div>\n        </div>\n        <div class=\"sb-sidenav-footer\">\n            <div class=\"small\">Usuário Logado:</div>\n            {{usuarioLogado}}\n        </div>\n\n    </nav>\n</div>";
-    /***/
-  },
-
-  /***/
-  "./node_modules/raw-loader/dist/cjs.js!./src/app/usuario/usuario.component.html":
-  /*!**************************************************************************************!*\
-    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/usuario/usuario.component.html ***!
-    \**************************************************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function node_modulesRawLoaderDistCjsJsSrcAppUsuarioUsuarioComponentHtml(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = "<h1 class=\"mt-4\">Usuários</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"mensagemSucesso\">\n        {{mensagemSucesso}}\n      </div>\n      <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"mensagemErro\">\n        {{mensagemErro}}\n      </div>\n    </div>\n  </div>\n  \n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\" id=\"table-clientes\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>NOME</th>\n            <th>CPF</th>\n            <th>DATA CADASTRO</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr\n            *ngFor=\"let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index\">\n            <td>{{ cliente.id }}</td>\n            <td>{{ cliente.name }}</td>\n            <td>{{ cliente.cpf | mask: '000.000.000-99' }}</td>\n            <td>{{ cliente.dateRegister }}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" routerLink=\"/clientes/form/{{ cliente.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(cliente)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n\n      </table>\n      <pagination-controls (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"clienteSelecionado\">\n          Confirma a exclusão do(a) Cliente: {{ clienteSelecionado.name }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarCliente()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n";
+    __webpack_exports__["default"] = "<div id=\"layoutSidenav_nav\">\n    <nav class=\"sb-sidenav accordion sb-sidenav-dark\" id=\"sidenavAccordion\">\n        <div class=\"sb-sidenav-menu\">\n            <div class=\"nav\">\n                <div class=\"sb-sidenav-menu-heading\">Sistema</div>\n                <a class=\"nav-link\" routerLink=\"/home\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>\n                    Home\n                </a>\n                <div class=\"sb-sidenav-menu-heading\">Cadastros</div>\n                <a class=\"nav-link collapsed\" routerLink=\"/clientes\" data-toggle=\"collapse\" aria-expanded=\"false\"\n                    aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i> </div>\n                    Clientes\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/definicao\" data-toggle=\"collapse\" aria-expanded=\"false\"\n                    aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Tipo de serviço\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/servicos-prestados\" data-toggle=\"collapse\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Serviços Prestados\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/pagamento/tipo/lista\" data-toggle=\"collapse\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Tipo de Pagamento\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/prestacao\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Prestação de contas\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/graficos/listar\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Graficos\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <div class=\"sb-sidenav-menu-heading\">Logout</div>\n                <a class=\"nav-link collapsed\" (click)=\"logout();\" href=\"#\" data-toggle=\"collapse\"\n                    data-target=\"#collapseLayouts\" aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-sign-out-alt\"></i></div>\n                    Sair\n                </a>\n            </div>\n        </div>\n        <div class=\"sb-sidenav-footer\">\n            <div class=\"small\">Usuário Logado:</div>\n            {{usuarioLogado}}\n        </div>\n\n    </nav>\n</div>";
     /***/
   },
 
@@ -1328,6 +1308,221 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/agenda.service.ts":
+  /*!***********************************!*\
+    !*** ./src/app/agenda.service.ts ***!
+    \***********************************/
+
+  /*! exports provided: AgendaService */
+
+  /***/
+  function srcAppAgendaServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AgendaService", function () {
+      return AgendaService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../environments/environment */
+    "./src/environments/environment.ts");
+
+    var AgendaService = /*#__PURE__*/function () {
+      function AgendaService(http) {
+        _classCallCheck(this, AgendaService);
+
+        this.http = http;
+        this.apiURL = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_BASE_URL + '/api/schedule';
+      }
+
+      _createClass(AgendaService, [{
+        key: "salvar",
+        value: function salvar(agenda) {
+          return this.http.post("".concat(this.apiURL), agenda);
+        }
+      }, {
+        key: "atualizar",
+        value: function atualizar(agenda) {
+          return this.http.put("".concat(this.apiURL, "/").concat(agenda.id), agenda);
+        }
+      }, {
+        key: "getAgendaById",
+        value: function getAgendaById(id) {
+          return this.http.get("".concat(this.apiURL, "/").concat(id));
+        }
+      }, {
+        key: "getAgendaBydate",
+        value: function getAgendaBydate(dateInitial, dateFinal) {
+          var httpParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set("dateInitial", dateInitial).set("dateFinal", dateFinal);
+          var url = this.apiURL + "/date?" + httpParams.toString();
+          return this.http.get(url);
+        }
+      }, {
+        key: "deletar",
+        value: function deletar(agenda) {
+          return this.http["delete"]("".concat(this.apiURL, "/").concat(agenda.id));
+        }
+      }]);
+
+      return AgendaService;
+    }();
+
+    AgendaService.ctorParameters = function () {
+      return [{
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }];
+    };
+
+    AgendaService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], AgendaService);
+    /***/
+  },
+
+  /***/
+  "./src/app/anotacao.service.ts":
+  /*!*************************************!*\
+    !*** ./src/app/anotacao.service.ts ***!
+    \*************************************/
+
+  /*! exports provided: AnotacaoService */
+
+  /***/
+  function srcAppAnotacaoServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AnotacaoService", function () {
+      return AnotacaoService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../environments/environment */
+    "./src/environments/environment.ts");
+
+    var AnotacaoService = /*#__PURE__*/function () {
+      function AnotacaoService(http) {
+        _classCallCheck(this, AnotacaoService);
+
+        this.http = http;
+        this.apiURL = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_BASE_URL + '/api/annotation';
+      }
+
+      _createClass(AnotacaoService, [{
+        key: "salvarAnotacao",
+        value: function salvarAnotacao(anotacao) {
+          return this.http.post("".concat(this.apiURL), anotacao);
+        }
+      }, {
+        key: "atualizarAnotacao",
+        value: function atualizarAnotacao(anotacao) {
+          return this.http.put("".concat(this.apiURL), anotacao);
+        }
+      }, {
+        key: "deletarAnotacao",
+        value: function deletarAnotacao(anotacao) {
+          return this.http["delete"]("".concat(this.apiURL, "/").concat(anotacao.id));
+        }
+      }, {
+        key: "getAnotacaoById",
+        value: function getAnotacaoById(id) {
+          return this.http.get("".concat(this.apiURL, "/").concat(id));
+        }
+      }, {
+        key: "getAllAnotacao",
+        value: function getAllAnotacao() {
+          return this.http.get("".concat(this.apiURL));
+        }
+      }, {
+        key: "salvarTipoAnotacao",
+        value: function salvarTipoAnotacao(tipo) {
+          return this.http.post("".concat(this.apiURL) + '/typeannotation', tipo);
+        }
+      }, {
+        key: "atualizarTipoAnotacao",
+        value: function atualizarTipoAnotacao(tipo) {
+          return this.http.put("".concat(this.apiURL) + '/typeannotation', tipo);
+        }
+      }, {
+        key: "deletarTipoAnotacao",
+        value: function deletarTipoAnotacao(tipo) {
+          return this.http["delete"]("".concat(this.apiURL, "/typeannotation/").concat(tipo.id));
+        }
+      }, {
+        key: "getTipoAnotacaoById",
+        value: function getTipoAnotacaoById(id) {
+          return this.http.get("".concat(this.apiURL, "/typeannotation/").concat(id));
+        }
+      }, {
+        key: "getAllTipoAnotacao",
+        value: function getAllTipoAnotacao() {
+          return this.http.get("".concat(this.apiURL, "/typeannotation"));
+        }
+      }]);
+
+      return AnotacaoService;
+    }();
+
+    AnotacaoService.ctorParameters = function () {
+      return [{
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }];
+    };
+
+    AnotacaoService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], AnotacaoService);
+    /***/
+  },
+
+  /***/
   "./src/app/app-routing.module.ts":
   /*!***************************************!*\
     !*** ./src/app/app-routing.module.ts ***!
@@ -1394,12 +1589,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _register_register_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./register/register.component */
     "./src/app/register/register.component.ts");
-    /* harmony import */
-
-
-    var _usuario_usuario_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-    /*! ./usuario/usuario.component */
-    "./src/app/usuario/usuario.component.ts");
 
     var routes = [{
       path: 'login',
@@ -1414,13 +1603,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         path: 'home',
         component: _home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"],
         canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]]
-      }, {
-        path: 'usuario',
-        component: _usuario_usuario_component__WEBPACK_IMPORTED_MODULE_8__["UsuarioComponent"],
-        canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]],
-        data: {
-          roles: ['ROLE_ADMIN']
-        }
       }, {
         path: '',
         redirectTo: '/home',
@@ -1687,36 +1869,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _usuario_usuario_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
-    /*! ./usuario/usuario.component */
-    "./src/app/usuario/usuario.component.ts");
-    /* harmony import */
-
-
-    var ngx_mask__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
+    var ngx_mask__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
     /*! ngx-mask */
     "./node_modules/ngx-mask/fesm2015/ngx-mask.js");
     /* harmony import */
 
 
-    var ngx_pagination__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
+    var ngx_pagination__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
     /*! ngx-pagination */
     "./node_modules/ngx-pagination/dist/ngx-pagination.js");
     /* harmony import */
 
 
-    var _services_auth_services__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
+    var _services_auth_services__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
     /*! ./services/auth.services */
     "./src/app/services/auth.services.ts");
+    /* harmony import */
+
+
+    var _agenda_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
+    /*! ./agenda.service */
+    "./src/app/agenda.service.ts");
+    /* harmony import */
+
+
+    var _anotacao_service__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(
+    /*! ./anotacao.service */
+    "./src/app/anotacao.service.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
     };
 
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_12__["LoginComponent"], _layout_layout_component__WEBPACK_IMPORTED_MODULE_14__["LayoutComponent"], _register_register_component__WEBPACK_IMPORTED_MODULE_16__["RegisterComponent"], _usuario_usuario_component__WEBPACK_IMPORTED_MODULE_26__["UsuarioComponent"]],
-      imports: [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _template_template_module__WEBPACK_IMPORTED_MODULE_5__["TemplateModule"], _clientes_clientes_module__WEBPACK_IMPORTED_MODULE_7__["ClientesModule"], _servico_prestado_servico_prestado_module__WEBPACK_IMPORTED_MODULE_10__["ServicoPrestadoModule"], _definicao_definicao_module__WEBPACK_IMPORTED_MODULE_17__["DefinicaoModule"], _pagamento_pagamento_module__WEBPACK_IMPORTED_MODULE_18__["PagamentoModule"], _prestacao_prestacao_contas_module__WEBPACK_IMPORTED_MODULE_22__["PrestacaoContasModule"], _grafico_grafico_module__WEBPACK_IMPORTED_MODULE_23__["GraficoModule"], _util_Date_Util__WEBPACK_IMPORTED_MODULE_25__["DateUtil"], ngx_mask__WEBPACK_IMPORTED_MODULE_27__["NgxMaskModule"], ngx_pagination__WEBPACK_IMPORTED_MODULE_28__["NgxPaginationModule"]],
-      providers: [_clientes_service__WEBPACK_IMPORTED_MODULE_8__["ClientesService"], _definicao_service__WEBPACK_IMPORTED_MODULE_20__["DefinicaoService"], _servico_prestado_service__WEBPACK_IMPORTED_MODULE_11__["ServicoPrestadoService"], _pagamento_services__WEBPACK_IMPORTED_MODULE_19__["PagamentoService"], _presta_contas_services__WEBPACK_IMPORTED_MODULE_21__["PrestaContasService"], _services_auth_services__WEBPACK_IMPORTED_MODULE_29__["AuthServices"], _token_interceptor__WEBPACK_IMPORTED_MODULE_15__["authInterceptorProviders"], _grafico_services__WEBPACK_IMPORTED_MODULE_24__["GraficoService"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_12__["LoginComponent"], _layout_layout_component__WEBPACK_IMPORTED_MODULE_14__["LayoutComponent"], _register_register_component__WEBPACK_IMPORTED_MODULE_16__["RegisterComponent"]],
+      imports: [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _template_template_module__WEBPACK_IMPORTED_MODULE_5__["TemplateModule"], _clientes_clientes_module__WEBPACK_IMPORTED_MODULE_7__["ClientesModule"], _servico_prestado_servico_prestado_module__WEBPACK_IMPORTED_MODULE_10__["ServicoPrestadoModule"], _definicao_definicao_module__WEBPACK_IMPORTED_MODULE_17__["DefinicaoModule"], _pagamento_pagamento_module__WEBPACK_IMPORTED_MODULE_18__["PagamentoModule"], _prestacao_prestacao_contas_module__WEBPACK_IMPORTED_MODULE_22__["PrestacaoContasModule"], _grafico_grafico_module__WEBPACK_IMPORTED_MODULE_23__["GraficoModule"], _util_Date_Util__WEBPACK_IMPORTED_MODULE_25__["DateUtil"], ngx_mask__WEBPACK_IMPORTED_MODULE_26__["NgxMaskModule"], ngx_pagination__WEBPACK_IMPORTED_MODULE_27__["NgxPaginationModule"]],
+      providers: [_clientes_service__WEBPACK_IMPORTED_MODULE_8__["ClientesService"], _definicao_service__WEBPACK_IMPORTED_MODULE_20__["DefinicaoService"], _servico_prestado_service__WEBPACK_IMPORTED_MODULE_11__["ServicoPrestadoService"], _pagamento_services__WEBPACK_IMPORTED_MODULE_19__["PagamentoService"], _presta_contas_services__WEBPACK_IMPORTED_MODULE_21__["PrestaContasService"], _services_auth_services__WEBPACK_IMPORTED_MODULE_28__["AuthServices"], _token_interceptor__WEBPACK_IMPORTED_MODULE_15__["authInterceptorProviders"], _grafico_services__WEBPACK_IMPORTED_MODULE_24__["GraficoService"], _agenda_service__WEBPACK_IMPORTED_MODULE_29__["AgendaService"], _anotacao_service__WEBPACK_IMPORTED_MODULE_30__["AnotacaoService"]],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
     })], AppModule);
     /***/
@@ -2030,26 +2218,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.router = router;
         this.activatedRouter = activatedRouter;
         this.success = false;
+        this.isLoading = false;
         this.cliente = new _cliente__WEBPACK_IMPORTED_MODULE_2__["Cliente"]();
       }
 
       _createClass(ClientesFormComponent, [{
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
+        }
+      }, {
         key: "ngOnInit",
         value: function ngOnInit() {
           var _this = this;
 
+          this.isLoading = true;
           var params = this.activatedRouter.params;
           params.subscribe(function (urlParams) {
             _this.id = urlParams['id'];
 
             if (_this.id) {
               _this.service.getClientesById(_this.id).subscribe(function (response) {
-                return _this.cliente = response;
+                _this.cliente = response;
               }, function (reject) {
-                return _this.cliente = new _cliente__WEBPACK_IMPORTED_MODULE_2__["Cliente"]();
+                _this.cliente = new _cliente__WEBPACK_IMPORTED_MODULE_2__["Cliente"]();
               });
             }
           });
+          this.isLoading = false;
         } // Metodo para atualizar e salvar cliente no Clientes-form.Component.html
 
       }, {
@@ -2057,30 +2254,44 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function onSubmit() {
           var _this2 = this;
 
+          this.isLoading = true;
+          this.close();
+
           if (this.cliente.id) {
             this.service.atualizar(this.cliente).subscribe(function (response) {
               _this2.success = true;
-              _this2.errors = null;
               _this2.cliente = response;
-            }, function (reject) {
-              _this2.errors = reject.error.erros;
-              _this2.success = false;
+              _this2.isLoading = false;
+            }, function (erro) {
+              _this2.errors = erro.error.erros;
+
+              if (_this2.errors == undefined) {
+                _this2.errors = ["Ocorreu erro ao atualizar registro!"];
+              }
+
+              _this2.isLoading = false;
             });
           } else {
             this.service.salvar(this.cliente).subscribe(function (response) {
               _this2.success = true;
               _this2.errors = null;
               _this2.cliente = response;
-            }, function (errorResponse) {
-              console.log(errorResponse);
-              _this2.errors = errorResponse.error.erros;
-              _this2.success = false;
+              _this2.isLoading = false;
+            }, function (erro) {
+              _this2.errors = erro.error.erros;
+
+              if (_this2.errors == undefined) {
+                _this2.errors = ["Ocorreu erro ao salvar registro!"];
+              }
+
+              _this2.isLoading = false;
             });
           }
         }
       }, {
         key: "voltarParaListagem",
         value: function voltarParaListagem() {
+          this.close();
           this.router.navigate(['/clientes']);
         }
       }]);
@@ -2183,6 +2394,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.clientes = [];
         this.paginaAtual = 1;
         this.valorPesquisado = "";
+        this.isLoading = false;
       }
 
       _createClass(ClientesListaComponent, [{
@@ -2190,12 +2402,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function ngOnInit() {
           var _this3 = this;
 
+          this.isLoading = true;
           this.service.getClientes().subscribe(function (response) {
             _this3.clientes = response;
             _this3.clientesFilter = response;
 
             _this3.filtrar(_this3.valorPesquisado);
+
+            _this3.isLoading = false;
+          }, function (erro) {
+            _this3.isLoading = false;
+            _this3.errors = erro.error.erros;
+
+            if (_this3.errors == undefined) {
+              _this3.errors = ["Ocorreu um erro ao carregar os clientes"];
+            }
           });
+        }
+      }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
         }
       }, {
         key: "novoCadastro",
@@ -2212,12 +2440,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function deletarCliente(cliente) {
           var _this4 = this;
 
+          this.isLoading = true;
+          this.close();
           this.service.deletar(this.clienteSelecionado).subscribe(function (response) {
             _this4.mensagemSucesso = "Cliente deletado com sucesso";
+            _this4.isLoading = false;
+            _this4.success = true;
 
             _this4.ngOnInit();
           }, function (erro) {
-            return _this4.mensagemErro = "Ocorreu erro ao deletar cliente";
+            _this4.errors = erro.error.erros;
+
+            if (_this4.errors == undefined) {
+              _this4.errors = ["Ocorreu um erro ao deletar o cliente"];
+            }
+
+            _this4.isLoading = false;
           });
         }
       }, {
@@ -2785,6 +3023,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.tipoServicos = [];
         this.paginaAtual = 1;
         this.valorPesquisado = "";
+        this.isLoading = false;
       }
 
       _createClass(TipoServicoListaComponent, [{
@@ -2792,11 +3031,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function ngOnInit() {
           var _this5 = this;
 
+          this.close;
+          this.isLoading = true;
           this.service.getTipoServicos().subscribe(function (response) {
+            _this5.isLoading = false;
             _this5.tipoServicos = response;
             _this5.tipoServicosFilter = response;
 
             _this5.filtrar(_this5.valorPesquisado);
+          }, function (erro) {
+            _this5.isLoading = false;
+            _this5.errors = erro.error.erros;
+
+            if (_this5.errors == undefined) {
+              _this5.errors = ["Ocorreu erro ao carregar os tipos de serviço"];
+            }
           });
         }
       }, {
@@ -2814,13 +3063,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function deletarTipoServico(tipoServico) {
           var _this6 = this;
 
+          this.isLoading = true;
+          this.close();
           this.service.deletar(this.tipoServicoSelecionado).subscribe(function (response) {
+            _this6.isLoading = false;
+            _this6.success = true;
             _this6.mensagemSucesso = "Tipo de serviço deletado com sucesso";
 
             _this6.ngOnInit();
           }, function (erro) {
-            return _this6.mensagemErro = "Ocorreu erro ao deletar tipo de serviço";
+            _this6.errors = erro.error.erros;
+
+            if (_this6.errors == undefined) {
+              _this6.errors = ["Ocorreu erro ao deletar tipo de serviço"];
+            }
+
+            _this6.isLoading = false;
           });
+        }
+      }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
         }
       }, {
         key: "filtrar",
@@ -2971,6 +3236,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.router = router;
         this.activatedRouter = activatedRouter;
         this.success = false;
+        this.isLoading = false;
         this.tipoServico = new _tipo_servico__WEBPACK_IMPORTED_MODULE_4__["TipoServico"]();
       }
 
@@ -2979,41 +3245,69 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function ngOnInit() {
           var _this7 = this;
 
+          this.close();
+          this.isLoading = true;
           var params = this.activatedRouter.params;
           params.subscribe(function (urlParams) {
             _this7.id = urlParams['id'];
 
             if (_this7.id) {
               _this7.service.getTipoServicoById(_this7.id).subscribe(function (response) {
-                return _this7.tipoServico = response;
-              }, function (reject) {
-                return _this7.tipoServico = new _tipo_servico__WEBPACK_IMPORTED_MODULE_4__["TipoServico"]();
+                _this7.tipoServico = response;
+              }, function (erro) {
+                _this7.errors = erro.error.erros;
+
+                if (_this7.errors == undefined) {
+                  _this7.errors = ["Ocorreu erro ao carregar o tipo de serviço"];
+                }
+
+                _this7.tipoServico = new _tipo_servico__WEBPACK_IMPORTED_MODULE_4__["TipoServico"]();
               });
             }
           });
+          this.isLoading = false;
+        }
+      }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
         }
       }, {
         key: "onSubmit",
         value: function onSubmit() {
           var _this8 = this;
 
+          this.close();
+          this.isLoading = true;
+
           if (this.tipoServico.id) {
             this.service.atualizar(this.tipoServico).subscribe(function (response) {
               _this8.success = true;
-              _this8.errors = null;
               _this8.tipoServico = response;
-            }, function (reject) {
-              _this8.errors = reject.error.erros;
-              _this8.success = false;
+              _this8.isLoading = false;
+              _this8.mensagemSucesso = "Tipo de serviço atualizado com sucesso!";
+            }, function (erro) {
+              _this8.isLoading = false;
+              _this8.errors = erro.error.erros;
+
+              if (_this8.errors == undefined) {
+                _this8.errors = ["Ocorreu erro ao atualizar tipo de serviço"];
+              }
             });
           } else {
             this.service.salvar(this.tipoServico).subscribe(function (response) {
               _this8.success = true;
-              _this8.errors = null;
+              _this8.isLoading = false;
               _this8.tipoServico = response;
-            }, function (errorResponse) {
-              _this8.errors = errorResponse.error.erros;
-              _this8.success = false;
+              _this8.mensagemSucesso = "Tipo de serviço salvo com sucesso!";
+            }, function (erro) {
+              _this8.isLoading = false;
+              _this8.errors = erro.error.erros;
+
+              if (_this8.errors == undefined) {
+                _this8.errors = ["Ocorreu erro ao salvar tipo de serviço"];
+              }
             });
           }
         }
@@ -3598,6 +3892,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/home/agenda.ts":
+  /*!********************************!*\
+    !*** ./src/app/home/agenda.ts ***!
+    \********************************/
+
+  /*! exports provided: Agenda */
+
+  /***/
+  function srcAppHomeAgendaTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "Agenda", function () {
+      return Agenda;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+
+    var Agenda = function Agenda() {
+      _classCallCheck(this, Agenda);
+    };
+    /***/
+
+  },
+
+  /***/
   "./src/app/home/home.component.css":
   /*!*****************************************!*\
     !*** ./src/app/home/home.component.css ***!
@@ -3648,19 +3975,438 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _agenda_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../agenda.service */
+    "./src/app/agenda.service.ts");
+    /* harmony import */
+
+
+    var _anotacao_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../anotacao.service */
+    "./src/app/anotacao.service.ts");
+    /* harmony import */
+
+
+    var _util_Date_Util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../util/Date-Util */
+    "./src/app/util/Date-Util.ts");
+    /* harmony import */
+
+
+    var _agenda__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ./agenda */
+    "./src/app/home/agenda.ts");
 
     var HomeComponent = /*#__PURE__*/function () {
-      function HomeComponent() {
+      function HomeComponent(agendaService, anotacaoService) {
         _classCallCheck(this, HomeComponent);
+
+        this.agendaService = agendaService;
+        this.anotacaoService = anotacaoService;
+        this.paginaAtualAgenda = 0;
+        this.paginaAtualAnotacao = 0;
+        this.dateInitial = null;
+        this.dateFinal = null;
+        this.success = false;
+        this.telaEdicao = false;
+        this.isLoading = false; // 1 - lista de anotação, 2 - cadastro/edição da anotação,
+        // 3 - Cadastro do tipo de anotação, 4 - listar tipo de anotação
+
+        this.mostrarListaAnotacao = 1;
+        this.agenda = {};
+        this.anotacao = {};
+        this.tipoAnotacao = {};
       }
 
       _createClass(HomeComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {}
+      }, {
+        key: "preparaDelecao",
+        value: function preparaDelecao(agenda) {
+          this.agendaSelecionada = agenda;
+          this.close();
+        }
+      }, {
+        key: "deletarAgenda",
+        value: function deletarAgenda(agenda) {
+          var _this15 = this;
+
+          this.errors = [];
+          this.agendaService.deletar(agenda).subscribe(function (response) {
+            _this15.agendaSelecionada = undefined;
+            _this15.mensagemSucesso = "Agenda deletada com sucesso";
+            _this15.success = true;
+
+            _this15.mostrarAgenda();
+          }, function (erro) {
+            _this15.errors = erro.error.erros;
+
+            if (_this15.errors == undefined) {
+              _this15.errors = ["Ocorreu um erro ao deletar a agenda"];
+            }
+          });
+        }
+      }, {
+        key: "mostrarAgenda",
+        value: function mostrarAgenda() {
+          var _this16 = this;
+
+          this.close();
+
+          var dateFinalFormat = _util_Date_Util__WEBPACK_IMPORTED_MODULE_4__["DateUtil"].dateFormat(this.dateFinal);
+
+          var dateInitialFormat = _util_Date_Util__WEBPACK_IMPORTED_MODULE_4__["DateUtil"].dateFormat(this.dateInitial);
+
+          if ((dateFinalFormat == "" || dateInitialFormat == "") && !this.telaEdicao) {
+            this.errors = ["Favor informar as data corretamente!"];
+          } else {
+            this.isLoading = true;
+            this.agendaService.getAgendaBydate(dateInitialFormat, dateFinalFormat).subscribe(function (response) {
+              _this16.listaAgenda = response;
+
+              _this16.mostrarTipoAnotacao();
+
+              _this16.isLoading = false;
+            }, function (erro) {
+              _this16.errors = ["Ocorreu um erro ao consultar agenda!"];
+              _this16.isLoading = false;
+            });
+          }
+        }
+      }, {
+        key: "selecionarAgendaPorId",
+        value: function selecionarAgendaPorId(id) {
+          var _this17 = this;
+
+          this.close();
+          this.isLoading = true;
+          this.agendaService.getAgendaById(id).subscribe(function (response) {
+            _this17.agenda = response;
+            _this17.telaEdicao = true;
+            _this17.isLoading = false;
+          }, function (erro) {
+            _this17.isLoading = false;
+            _this17.errors = erro.error.erros;
+
+            if (_this17.errors == undefined) {
+              _this17.errors = ["Ocorreu um erro ao editar a agenda"];
+            }
+          });
+        }
+      }, {
+        key: "voltarParaListagemAgenda",
+        value: function voltarParaListagemAgenda() {
+          this.agenda = new _agenda__WEBPACK_IMPORTED_MODULE_5__["Agenda"]();
+          this.close();
+          this.mostrarAgenda();
+          this.telaEdicao = false;
+        }
+      }, {
+        key: "onSubmit",
+        value: function onSubmit() {
+          var _this18 = this;
+
+          this.isLoading = true;
+          this.close();
+          this.agenda.date = _util_Date_Util__WEBPACK_IMPORTED_MODULE_4__["DateUtil"].dateFormat(this.agenda.date);
+          this.agendaService.salvar(this.agenda).subscribe(function (response) {
+            _this18.success = true;
+            _this18.isLoading = false;
+
+            if (_this18.agenda.id > 0) {
+              _this18.mensagemSucesso = "Agenda editada com sucesso";
+            } else {
+              _this18.mensagemSucesso = "Agenda salva com sucesso";
+              _this18.agenda = {};
+            }
+          }, function (erro) {
+            _this18.isLoading = false;
+            _this18.errors = erro.error.erros;
+
+            if (_this18.errors == undefined) {
+              _this18.errors = ["Ocorreu um erro ao salvar/editar a agenda"];
+            }
+          });
+        }
+      }, {
+        key: "cadastroNovo",
+        value: function cadastroNovo() {
+          this.close();
+          this.telaEdicao = true;
+        }
+      }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
+        }
+      }, {
+        key: "selecionarAbaAgenda",
+        value: function selecionarAbaAgenda() {
+          this.isLoading = false;
+          this.close();
+        } // Metodos da aba anotação
+
+      }, {
+        key: "selecionarAnotacaoPorId",
+        value: function selecionarAnotacaoPorId(id) {
+          var _this19 = this;
+
+          this.close();
+          this.isLoading = true;
+          this.mostrarTipoAnotacao();
+          this.anotacaoService.getAnotacaoById(id).subscribe(function (response) {
+            _this19.anotacao = response;
+            _this19.mostrarListaAnotacao = 2;
+            _this19.tipoAnotacao.id = response.typeAnnotation.id;
+            _this19.isLoading = false;
+          }, function (erro) {
+            _this19.errors = ["Ocorreu um erro ao selecionar a anotação"];
+            _this19.isLoading = false;
+          });
+        }
+      }, {
+        key: "voltarParaListagemAnotacao",
+        value: function voltarParaListagemAnotacao() {
+          this.close();
+          this.mostrarAnotacao();
+          this.mostrarListaAnotacao = 1;
+        }
+      }, {
+        key: "preparaDelecaoAnotacao",
+        value: function preparaDelecaoAnotacao(anotacao) {
+          this.close();
+          this.anotacaoSelecionada = anotacao;
+        }
+      }, {
+        key: "mostrarAnotacao",
+        value: function mostrarAnotacao() {
+          var _this20 = this;
+
+          // Retorna todas as anotação 
+          this.close();
+          this.anotacao = {};
+          this.anotacaoLista = [];
+          this.isLoading = true;
+          this.anotacaoService.getAllAnotacao().subscribe(function (response) {
+            _this20.anotacaoLista = response;
+            _this20.anotacaoListaFilter = response;
+            _this20.isLoading = false;
+          }, function (erro) {
+            _this20.isLoading = false;
+            _this20.anotacaoListaFilter = [];
+            _this20.errors = erro.error.erros;
+
+            if (_this20.errors == undefined) {
+              _this20.errors = ["Ocorreu um erro ao mostrar as anotações"];
+            }
+          });
+        }
+      }, {
+        key: "deletarAnotacao",
+        value: function deletarAnotacao() {
+          var _this21 = this;
+
+          this.isLoading = true;
+          this.anotacaoService.deletarAnotacao(this.anotacaoSelecionada).subscribe(function (response) {
+            _this21.anotacaoSelecionada = undefined;
+            _this21.mensagemSucesso = "Anotação deletada com sucesso";
+            _this21.success = true;
+            _this21.isLoading = false;
+
+            _this21.mostrarAnotacao();
+          }, function (erro) {
+            _this21.isLoading = false;
+            _this21.errors = erro.error.erros;
+
+            if (_this21.errors == undefined) {
+              _this21.errors = ["Ocorreu um erro ao deletar a anotação"];
+            }
+          });
+        }
+      }, {
+        key: "onSubmitAnotacao",
+        value: function onSubmitAnotacao() {
+          var _this22 = this;
+
+          this.close();
+          this.isLoading = true;
+          this.anotacaoService.salvarAnotacao(this.anotacao).subscribe(function (response) {
+            _this22.isLoading = false;
+            _this22.success = true;
+
+            if (_this22.anotacao.id > 0) {
+              _this22.mensagemSucesso = "Anotação editada com sucesso";
+            } else {
+              _this22.mensagemSucesso = "Anotação salva com sucesso";
+              _this22.anotacao = response;
+            }
+          }, function (erro) {
+            _this22.isLoading = false;
+            _this22.errors = erro.error.erros;
+
+            if (_this22.errors == undefined) {
+              _this22.errors = ["Ocorreu um erro ao salvar/editar a anotação"];
+            }
+          });
+        }
+      }, {
+        key: "novoCadastroAnotacao",
+        value: function novoCadastroAnotacao() {
+          this.anotacao = {};
+          this.tipoAnotacao = {};
+          this.anotacao.typeAnnotation = this.tipoAnotacao;
+          this.mostrarListaAnotacao = 2;
+          this.close();
+          this.mostrarTipoAnotacao();
+        }
+      }, {
+        key: "filtrarAnotacao",
+        value: function filtrarAnotacao(value) {
+          if (!value) {
+            this.anotacaoLista = this.anotacaoListaFilter;
+          } else {
+            this.paginaAtualAnotacao = 0;
+            this.anotacaoLista = this.anotacaoListaFilter.filter(function (x) {
+              if (x.title.trim().toLowerCase().includes(value.trim().toLowerCase()) || x.typeAnnotation.type.trim().toLowerCase().includes(value.trim().toLowerCase()) || x.typeAnnotation.id.toString().trim().includes(value.trim().toString())) {
+                return true;
+              }
+            });
+          }
+        } // Parte de código para tratar os tipos de anotação
+
+      }, {
+        key: "mostrarTipoAnotacao",
+        value: function mostrarTipoAnotacao() {
+          var _this23 = this;
+
+          this.anotacaoService.getAllTipoAnotacao().subscribe(function (response) {
+            _this23.tipoAnotacaoLista = response;
+          }, function (erro) {
+            _this23.errors = erro.error.erros;
+
+            if (_this23.errors == undefined) {
+              _this23.errors = ["Ocorreu um erro ao carregar os tipos de anotação"];
+            }
+          });
+        } // PARTE DO CÓDIGO PARA TIPO DE ANOTAÇÃO
+
+      }, {
+        key: "novoCadastroTipoDeAnotacao",
+        value: function novoCadastroTipoDeAnotacao() {
+          this.mostrarListaAnotacao = 3;
+          this.tipoAnotacao = {};
+        }
+      }, {
+        key: "voltarParaCadastrodeAnotacao",
+        value: function voltarParaCadastrodeAnotacao() {
+          this.mostrarListaAnotacao = 2;
+          this.close();
+        }
+      }, {
+        key: "buscarTipoDeAnotacaoPorId",
+        value: function buscarTipoDeAnotacaoPorId() {
+          var _this24 = this;
+
+          this.anotacaoService.getTipoAnotacaoById(this.anotacao.typeAnnotation.id).subscribe(function (response) {
+            _this24.tipoAnotacao = response;
+          }, function (erro) {
+            _this24.errors = erro.error.erros;
+
+            if (_this24.errors == undefined) {
+              _this24.errors = ["Ocorreu um erro no retorno do tipo de anotação"];
+            }
+          });
+        }
+      }, {
+        key: "onSubmitTipoAnotacao",
+        value: function onSubmitTipoAnotacao() {
+          var _this25 = this;
+
+          this.close();
+          this.isLoading = true;
+
+          if (this.tipoAnotacao.id) {
+            this.anotacaoService.atualizarTipoAnotacao(this.tipoAnotacao).subscribe(function (response) {
+              _this25.isLoading = false;
+              _this25.success = true;
+              _this25.mensagemSucesso = "Tipo de anotação editada com sucesso";
+              _this25.tipoAnotacao = response;
+
+              _this25.mostrarTipoAnotacao();
+            }, function (erro) {
+              _this25.isLoading = false;
+              _this25.errors = erro.error.erros;
+
+              if (_this25.errors == undefined) {
+                _this25.errors = ["Ocorreu um erro ao salvar/editar o tipo de anotação"];
+              }
+            });
+          } else {
+            this.anotacaoService.salvarTipoAnotacao(this.tipoAnotacao).subscribe(function (response) {
+              _this25.isLoading = false;
+              _this25.success = true;
+              _this25.mensagemSucesso = "Tipo de anotação salva com sucesso";
+              _this25.tipoAnotacao = response;
+
+              _this25.mostrarTipoAnotacao();
+            }, function (erro) {
+              _this25.isLoading = false;
+              _this25.errors = erro.error.erros;
+
+              if (_this25.errors == undefined) {
+                _this25.errors = ["Ocorreu um erro ao salvar/editar o tipo de anotação"];
+              }
+            });
+          }
+        }
+      }, {
+        key: "editarTipoDeAnotacao",
+        value: function editarTipoDeAnotacao() {
+          this.buscarTipoDeAnotacaoPorId();
+          this.mostrarListaAnotacao = 3;
+        }
+      }, {
+        key: "deletarTipoAnotacao",
+        value: function deletarTipoAnotacao() {
+          var _this26 = this;
+
+          this.close();
+          this.isLoading = true;
+          this.anotacaoService.deletarTipoAnotacao(this.tipoAnotacao).subscribe(function (response) {
+            _this26.isLoading = false;
+            _this26.success = true;
+            _this26.mensagemSucesso = "Tipo de anotação deletada com sucesso";
+
+            _this26.mostrarTipoAnotacao();
+
+            _this26.tipoAnotacao = {};
+            _this26.anotacao.typeAnnotation = _this26.tipoAnotacao;
+          }, function (erro) {
+            _this26.isLoading = false;
+            _this26.errors = erro.error.erros;
+
+            if (_this26.errors == undefined) {
+              _this26.errors = ["Ocorreu um erro ao deletar o tipo de anotação"];
+            }
+          });
+        }
       }]);
 
       return HomeComponent;
     }();
+
+    HomeComponent.ctorParameters = function () {
+      return [{
+        type: _agenda_service__WEBPACK_IMPORTED_MODULE_2__["AgendaService"]
+      }, {
+        type: _anotacao_service__WEBPACK_IMPORTED_MODULE_3__["AnotacaoService"]
+      }];
+    };
 
     HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-home',
@@ -3862,9 +4608,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _services_auth_services__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ../services/auth.services */
     "./src/app/services/auth.services.ts");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
 
     var LoginComponent = /*#__PURE__*/function () {
-      function LoginComponent(authService, tokenStorage, route, userService, router) {
+      function LoginComponent(authService, tokenStorage, route, userService, router, http) {
         _classCallCheck(this, LoginComponent);
 
         this.authService = authService;
@@ -3872,6 +4624,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.route = route;
         this.userService = userService;
         this.router = router;
+        this.http = http;
         this.form = {};
         this.isLoggedIn = false;
         this.isLoginFailed = false;
@@ -3883,9 +4636,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(LoginComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this15 = this;
+          var _this27 = this;
 
-          //this.route.queryParams.subscribe((params) => console.log(params))
           this.token = this.route.snapshot.queryParamMap.get('token');
           this.error = this.route.snapshot.queryParamMap.get('error');
 
@@ -3895,11 +4647,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else if (this.token) {
             this.tokenStorage.saveToken(this.token);
             this.userService.getCurrentUser().subscribe(function (data) {
-              _this15.login(data);
+              _this27.login(data);
             }, function (err) {
-              _this15.errorMessage = err.error.message;
-              _this15.isLoginFailed = true;
-              _this15.isLoading = false;
+              _this27.errorMessage = err.error.message;
+              _this27.isLoginFailed = true;
+              _this27.isLoading = false;
             });
           } else if (this.error) {
             this.errorMessage = this.error;
@@ -3910,24 +4662,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this16 = this;
+          var _this28 = this;
 
+          debugger;
           this.isLoading = true;
           this.authService.login(this.form).subscribe(function (data) {
-            _this16.tokenStorage.saveToken(data.accessToken);
+            _this28.tokenStorage.saveToken(data.accessToken);
 
-            _this16.login(data.user);
+            _this28.login(data.user);
           }, function (err) {
-            _this16.isLoading = false;
-            _this16.errorMessage = err.error.message;
-            _this16.isLoginFailed = true;
+            _this28.isLoading = false;
+            _this28.errorMessage = err.error.message;
+            _this28.isLoginFailed = true;
 
-            if (!_this16.errorMessage) {
-              _this16.errorMessage = "Não foi possivel se comunicar com o servidor!";
+            if (!_this28.errorMessage) {
+              _this28.errorMessage = "Não foi possivel se comunicar com o servidor!";
             }
 
-            if (err.error.status = 401) {
-              _this16.errorMessage = "Usuário/senha incorreto!";
+            if (err.error.status == 401) {
+              _this28.errorMessage = "Usuário/senha incorreto!";
             }
           });
         }
@@ -3946,16 +4699,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           window.location.href = this.googleURL;
           this.isLoading = true;
         }
-      }, {
-        key: "verificarToken",
-        value: function verificarToken() {// window.location.href = this.googleURL;
-          //const routeFragment: Observable<string> = this.route.fragment;      
-          //routeFragment.subscribe(fragment => {
-          //let token: string = window.location.href = this.googleURL;
-          //this.token = fragment.match(/^(.*?)&/)[1].replace('token=', '');
-          //console.log(this.token)
-          //});
-        }
       }]);
 
       return LoginComponent;
@@ -3972,6 +4715,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+      }, {
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]
       }];
     };
 
@@ -4337,53 +5082,80 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.service = service;
         this.router = router;
         this.activatedRouter = activatedRouter;
-        this.success = false;
+        this.isLoading = false;
         this.tipoPagamento = new _tipo_pagamento__WEBPACK_IMPORTED_MODULE_4__["TipoPagamento"]();
       }
 
       _createClass(Pagamento, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this17 = this;
+          var _this29 = this;
 
+          this.close();
+          this.isLoading = true;
           var params = this.activatedRouter.params;
           params.subscribe(function (urlParams) {
-            _this17.id = urlParams['id'];
+            _this29.id = urlParams['id'];
 
-            if (_this17.id) {
-              _this17.service.getTipoServicoById(_this17.id).subscribe(function (response) {
-                return _this17.tipoPagamento = response;
-              }, function (reject) {
-                return _this17.tipoPagamento = new _tipo_pagamento__WEBPACK_IMPORTED_MODULE_4__["TipoPagamento"]();
+            if (_this29.id) {
+              _this29.service.getTipoServicoById(_this29.id).subscribe(function (response) {
+                return _this29.tipoPagamento = response;
+              }, function (erro) {
+                _this29.tipoPagamento = new _tipo_pagamento__WEBPACK_IMPORTED_MODULE_4__["TipoPagamento"]();
+                _this29.isLoading = false;
+                _this29.errors = erro.error.erros;
+
+                if (_this29.errors == undefined) {
+                  _this29.errors = ["Ocorreu um erro ao carregar os tipos de pagamento"];
+                }
               });
             }
+
+            _this29.isLoading = false;
           });
+        }
+      }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
         } // Metodo para atualizar e salvar cliente no Clientes-form.Component.html
 
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this18 = this;
+          var _this30 = this;
+
+          this.close();
+          this.isLoading = true;
 
           if (this.tipoPagamento.id) {
             this.service.atualizar(this.tipoPagamento).subscribe(function (response) {
-              _this18.success = true;
-              _this18.errors = null;
-              _this18.tipoPagamento = response;
-              _this18.messageSuccess = "Tipo de pagamento atualizado com sucesso";
-            }, function (reject) {
-              _this18.errors = reject.error.erros;
-              _this18.success = false;
+              _this30.success = true;
+              _this30.isLoading = false;
+              _this30.tipoPagamento = response;
+              _this30.mensagemSucesso = "Tipo de pagamento atualizado com sucesso";
+            }, function (erro) {
+              _this30.isLoading = false;
+              _this30.errors = erro.error.erros;
+
+              if (_this30.errors == undefined) {
+                _this30.errors = ["Ocorreu um erro ao atualizar o tipo de pagamento"];
+              }
             });
           } else {
             this.service.salvar(this.tipoPagamento).subscribe(function (response) {
-              _this18.success = true;
-              _this18.errors = null;
-              _this18.tipoPagamento = response;
-              _this18.messageSuccess = "Tipo de pagamento salvo com sucesso";
-            }, function (errorResponse) {
-              _this18.errors = errorResponse.error.erros;
-              _this18.success = false;
+              _this30.success = true;
+              _this30.isLoading = false;
+              _this30.tipoPagamento = response;
+              _this30.mensagemSucesso = "Tipo de pagamento salvo com sucesso";
+            }, function (erro) {
+              _this30.isLoading = false;
+              _this30.errors = erro.error.erros;
+
+              if (_this30.errors == undefined) {
+                _this30.errors = ["Ocorreu um erro ao salvar o tipo de pagamento"];
+              }
             });
           }
         }
@@ -4492,18 +5264,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.tipoPagamento = [];
         this.paginaAtual = 1;
         this.valorPesquisado = "";
+        this.isLoading = false;
       }
 
       _createClass(PagamentoTipoLista, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this19 = this;
+          var _this31 = this;
 
+          this.close();
+          this.isLoading = true;
           this.service.getTipoPagamento().subscribe(function (response) {
-            _this19.tipoPagamento = response;
-            _this19.tipoPagamentoFilter = response;
+            _this31.isLoading = false;
+            _this31.tipoPagamento = response;
+            _this31.tipoPagamentoFilter = response;
 
-            _this19.filtrar(_this19.valorPesquisado);
+            _this31.filtrar(_this31.valorPesquisado);
+          }, function (erro) {
+            _this31.isLoading = false;
+            _this31.errors = erro.error.erros;
+
+            if (_this31.errors == undefined) {
+              _this31.errors = ["Ocorreu um erro ao carregar os tipos de pagamento"];
+            }
           });
         }
       }, {
@@ -4517,16 +5300,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.tipoPagamentoSelecionado = tipoPagamento;
         }
       }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
+        }
+      }, {
         key: "deletarTipoPagamento",
         value: function deletarTipoPagamento(tipoPagamento) {
-          var _this20 = this;
+          var _this32 = this;
 
+          this.close();
+          this.isLoading = true;
           this.service.deletar(this.tipoPagamentoSelecionado).subscribe(function (response) {
-            _this20.mensagemSucesso = "Tipo de pagamento deletado com sucesso: ";
+            _this32.isLoading = false;
+            _this32.mensagemSucesso = "Tipo de pagamento deletado com sucesso: ";
 
-            _this20.ngOnInit();
+            _this32.ngOnInit();
           }, function (erro) {
-            return _this20.mensagemErro = "Ocorreu erro ao deletar tipo de pagamento";
+            _this32.isLoading = false;
+            _this32.errors = erro.error.erros;
+
+            if (_this32.errors == undefined) {
+              _this32.errors = ["Ocorreu um erro ao deletar o tipo de pagamento"];
+            }
           });
         }
       }, {
@@ -4796,18 +5593,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.paginaAtual = 1;
         this.prestacaoContasFiltro = [];
         this.valorPesquisado = "";
+        this.isLoading = false;
       }
 
       _createClass(PrestacaoContasListaComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this21 = this;
+          var _this33 = this;
 
+          this.close();
+          this.isLoading = true;
           this.service.getPrestacaoContas().subscribe(function (response) {
-            _this21.prestacaoContas = response;
-            _this21.prestacaoContasFiltro = response;
+            _this33.prestacaoContas = response;
+            _this33.prestacaoContasFiltro = response;
 
-            _this21.filtrar(_this21.valorPesquisado);
+            _this33.filtrar(_this33.valorPesquisado);
+
+            _this33.isLoading = false;
+          }, function (erro) {
+            _this33.errors = erro.error.erros;
+            _this33.isLoading = false;
+
+            if (_this33.errors == undefined) {
+              _this33.errors = ["Ocorreu um erro ao carregar os serviços prestados!"];
+            }
           });
         }
       }, {
@@ -4821,17 +5630,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.prestacaoContasSelecionado = prestacaoContas;
         }
       }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
+        }
+      }, {
         key: "deletarPrestacaoConta",
         value: function deletarPrestacaoConta() {
-          var _this22 = this;
+          var _this34 = this;
 
+          this.close();
+          this.isLoading = true;
           this.service.deletar(this.prestacaoContasSelecionado).subscribe(function (response) {
-            _this22.mensagemSucesso = "prestação de conta deletada com sucesso";
+            _this34.ngOnInit();
 
-            _this22.ngOnInit();
+            _this34.mensagemSucesso = "prestação de conta deletada com sucesso";
+            _this34.success = true;
           }, function (erro) {
-            return _this22.mensagemErro = "Ocorreu erro ao deletar a prestação de conta";
+            _this34.errors = erro.error.erros;
+
+            if (_this34.errors == undefined) {
+              _this34.errors = ["Ocorreu erro ao deletar a prestação de conta!"];
+            }
           });
+          this.isLoading = false;
         }
       }, {
         key: "filtrar",
@@ -4991,6 +5814,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.servicoPrestadoBusca = [];
         this.tipoPagamento = [];
         this.success = false;
+        this.isLoading = false;
         this.prestacaoContasBuscar = new _contas_lista_prestacao_contas_buscar__WEBPACK_IMPORTED_MODULE_6__["PrestacaoContasBuscar"]();
         this.servicoPrestadoBuscaSelecionado = new src_app_servico_prestado_servico_prestado_lista_servicoPrestadoBusca__WEBPACK_IMPORTED_MODULE_5__["ServicoPrestadoBusca"]();
         this.tipoPagamentoSelecionado = new src_app_pagamento_tipo_pagamento__WEBPACK_IMPORTED_MODULE_8__["TipoPagamento"]();
@@ -5000,26 +5824,54 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(PrestacaoContasComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this23 = this;
+          var _this35 = this;
 
+          this.close();
+          this.isLoading = true;
           var params = this.activatedRouter.params;
           params.subscribe(function (urlParams) {
-            _this23.id = urlParams['id'];
+            _this35.id = urlParams['id'];
 
-            if (_this23.id) {
-              _this23.service.getPrestacaoContasById(_this23.id).subscribe(function (response) {
-                _this23.prestacaoContasBuscar = response;
-                _this23.servicoPrestadoBuscaSelecionado = response.serviceProvided;
-                _this23.tipoPagamentoSelecionado.id = response.typePayment.id;
-                _this23.relatorio = _this23.activatedRouter.snapshot.params.relatorio;
-              }, function (reject) {
-                _this23.prestacaoContasBuscar = new _contas_lista_prestacao_contas_buscar__WEBPACK_IMPORTED_MODULE_6__["PrestacaoContasBuscar"]();
+            if (_this35.id) {
+              _this35.service.getPrestacaoContasById(_this35.id).subscribe(function (response) {
+                _this35.prestacaoContasBuscar = response;
+                _this35.servicoPrestadoBuscaSelecionado = response.serviceProvided;
+                _this35.tipoPagamentoSelecionado.id = response.typePayment.id;
+                _this35.relatorio = _this35.activatedRouter.snapshot.params.relatorio;
+              }, function (erro) {
+                _this35.errors = erro.error.erros;
+                _this35.prestacaoContasBuscar = new _contas_lista_prestacao_contas_buscar__WEBPACK_IMPORTED_MODULE_6__["PrestacaoContasBuscar"]();
+
+                if (_this35.errors == undefined) {
+                  _this35.errors = ["Ocorreu um erro carregar a prestação de contas!"];
+                }
               });
             }
+
+            _this35.isLoading = false;
           });
-          this.pagamentoService.getTipoPagamento().subscribe(function (response) {
-            _this23.tipoPagamento = response;
-          });
+
+          if (this.errors.length == 0) {
+            this.close();
+            this.isLoading = true;
+            this.pagamentoService.getTipoPagamento().subscribe(function (response) {
+              _this35.tipoPagamento = response;
+              _this35.isLoading = false;
+            }, function (erro) {
+              _this35.errors = erro.error.erros;
+              _this35.isLoading = false;
+
+              if (_this35.errors == undefined) {
+                _this35.errors = ["Ocorreu erro ao se comunicar com o servidor!"];
+              }
+            });
+          }
+        }
+      }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
         }
       }, {
         key: "emitirRelatorio",
@@ -5029,7 +5881,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this24 = this;
+          var _this36 = this;
 
           if (!this.prestacaoContasBuscar.id) {
             this.prestacaoContasBuscar.serviceProvided = this.servicoPrestadoBuscaSelecionado;
@@ -5043,20 +5895,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.prestacaoContas.observation = this.prestacaoContasBuscar.observation;
           this.prestacaoContas.totalValue = src_app_util_Date_Util__WEBPACK_IMPORTED_MODULE_10__["DateUtil"].validarValorDefault(this.valorTotal);
           this.prestacaoContas.idTypePayment = this.tipoPagamentoSelecionado.id;
+          this.close();
+          this.isLoading = true;
           this.service.salvar(this.prestacaoContas).subscribe(function (response) {
-            _this24.success = true;
-            _this24.errors = null;
+            _this36.success = true;
+            _this36.isLoading = false;
 
-            if (_this24.prestacaoContasBuscar.id != undefined) {
-              _this24.messageSuccess = "Pestação de contas atualizado com sucesso!";
+            if (_this36.prestacaoContasBuscar.id != undefined) {
+              _this36.mensagemSucesso = "Pestação de contas atualizado com sucesso!";
             } else {
-              _this24.messageSuccess = "Pestação de contas salvo com sucesso!";
+              _this36.mensagemSucesso = "Pestação de contas salvo com sucesso!";
             }
 
-            _this24.prestacaoContasBuscar = response;
-          }, function (reject) {
-            _this24.errors = reject.error.erros;
-            _this24.success = false;
+            _this36.prestacaoContasBuscar = response;
+          }, function (erro) {
+            _this36.errors = erro.error.erros;
+            _this36.isLoading = false;
+            _this36.success = false;
+
+            if (_this36.errors == undefined) {
+              _this36.errors = ["Ocorreu erro ao se comunicar com o servidor!"];
+            }
           });
         }
       }, {
@@ -5078,7 +5937,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "buscarPorData",
         value: function buscarPorData(event) {
-          var _this25 = this;
+          var _this37 = this;
 
           var dataRecebida = event.target.value;
 
@@ -5089,18 +5948,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var qtdDias = data.getDate();
             this.dataInicial = "01/" + dataRecebida;
             this.dataFinal = qtdDias + "/" + dataRecebida;
+            this.close();
+            this.isLoading = true;
             this.servicoPrestadoService.buscarDate(this.dataInicial, this.dataFinal).subscribe(function (response) {
-              _this25.servicoPrestadoBusca = response;
-              _this25.errors = null;
+              _this37.servicoPrestadoBusca = response;
+              _this37.errors = null;
+              _this37.isLoading = false;
 
-              if (_this25.servicoPrestadoBusca.length == 0) {
-                _this25.servicoPrestadoBuscaSelecionado.id = null;
+              if (_this37.servicoPrestadoBusca.length == 0) {
+                _this37.servicoPrestadoBuscaSelecionado.id = null;
               }
-            }, function (reject) {
-              _this25.servicoPrestadoBusca = null;
-              _this25.servicoPrestadoBuscaSelecionado.id = null;
-              _this25.errors = reject.error.erros;
-              _this25.success = false;
+            }, function (erro) {
+              _this37.servicoPrestadoBusca = null;
+              _this37.servicoPrestadoBuscaSelecionado.id = null;
+              _this37.errors = erro.error.erros;
+              _this37.isLoading = false;
+              _this37.success = false;
+
+              if (_this37.errors == undefined) {
+                _this37.errors = ["Ocorreu erro ao se comunicar com o servidor!"];
+              }
             });
           } else {
             this.servicoPrestadoBusca = null;
@@ -5464,17 +6331,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this26 = this;
+          var _this38 = this;
 
           this.isLoading = true;
           this.authService.register(this.form).subscribe(function (data) {
-            _this26.isSuccessful = true;
-            _this26.isSignUpFailed = false;
-            _this26.isLoading = false;
+            _this38.isSuccessful = true;
+            _this38.isSignUpFailed = false;
+            _this38.isLoading = false;
           }, function (err) {
-            _this26.errorMessage = err.error.message;
-            _this26.isSignUpFailed = true;
-            _this26.isLoading = false;
+            _this38.errorMessage = err.error.message;
+            _this38.isSignUpFailed = true;
+            _this38.isLoading = false;
           });
         }
       }]);
@@ -6013,6 +6880,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.clientes = [];
         this.tipoServico = [];
         this.success = false;
+        this.isLoading = false;
         this.servico = new _servicoPrestado__WEBPACK_IMPORTED_MODULE_4__["ServicoPrestado"]();
         this.servico.date = "";
         this.servico.value = "";
@@ -6021,41 +6889,82 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(ServicoPrestadoFormComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this27 = this;
+          var _this39 = this;
 
+          this.close();
+          this.isLoading = true;
           var params = this.activatedRouter.params;
           params.subscribe(function (urlParams) {
-            _this27.id = urlParams['id'];
+            _this39.id = urlParams['id'];
 
-            if (_this27.id) {
-              _this27.service.getServicoPrestadoById(_this27.id).subscribe(function (response) {
-                _this27.montaServicoPrestado(response);
-              }, function (reject) {
-                _this27.servico = new _servicoPrestado__WEBPACK_IMPORTED_MODULE_4__["ServicoPrestado"]();
+            if (_this39.id) {
+              _this39.service.getServicoPrestadoById(_this39.id).subscribe(function (response) {
+                _this39.montaServicoPrestado(response);
+              }, function (erro) {
+                _this39.servico = new _servicoPrestado__WEBPACK_IMPORTED_MODULE_4__["ServicoPrestado"]();
+                _this39.errors = erro.error.erros;
+
+                if (_this39.errors == undefined) {
+                  _this39.errors = ["Ocorreu um erro ao carregar serviço prestado!"];
+                }
               });
             }
           });
-          this.clienteService.getClientes().subscribe(function (response) {
-            return _this27.clientes = response;
-          });
-          this.definicaoService.getTipoServicos().subscribe(function (response) {
-            return _this27.tipoServico = response;
-          });
+
+          if (this.errors == undefined || this.errors.length == 0) {
+            this.clienteService.getClientes().subscribe(function (response) {
+              _this39.clientes = response;
+            }, function (erro) {
+              _this39.errors = erro.error.erros;
+
+              if (_this39.errors == undefined) {
+                _this39.errors = ["Ocorreu um erro ao carregar cliente"];
+              }
+            });
+          }
+
+          if (this.errors == undefined || this.errors.length == 0) {
+            this.definicaoService.getTipoServicos().subscribe(function (response) {
+              _this39.tipoServico = response;
+            }, function (erro) {
+              _this39.errors = erro.error.erros;
+
+              if (_this39.errors == undefined) {
+                _this39.errors = ["Ocorreu um erro ao carregar tipo de serviço"];
+              }
+            });
+          }
+
+          this.isLoading = false;
+        }
+      }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
         }
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this28 = this;
+          var _this40 = this;
 
+          this.close();
+          this.isLoading = true;
           this.servico.date = src_app_util_Date_Util__WEBPACK_IMPORTED_MODULE_6__["DateUtil"].dateFormat(this.servico.date);
           this.servico.value.replace(",", ".");
           this.service.salvar(this.servico).subscribe(function (response) {
-            _this28.success = true;
-            _this28.errors = null;
+            _this40.isLoading = false;
+            _this40.success = true;
+            _this40.errors = null;
 
-            _this28.montaServicoPrestado(response);
-          }, function (reject) {
-            _this28.errors = reject.error.erros;
+            _this40.montaServicoPrestado(response);
+          }, function (erro) {
+            _this40.isLoading = false;
+            _this40.errors = erro.error.erros;
+
+            if (_this40.errors == undefined) {
+              _this40.errors = ["Ocorreu um erro ao salvar/atualizar registro"];
+            }
           });
         }
       }, {
@@ -6169,6 +7078,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.statusAberto = true;
         this.statusFechado = true;
         this.valorPesquisado = "";
+        this.isLoading = false;
         this.lista = [];
       }
 
@@ -6178,26 +7088,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "consultar",
         value: function consultar() {
-          var _this29 = this;
+          var _this41 = this;
+
+          this.close();
+          this.isLoading = true;
 
           if (this.dataInicial.length > 0) {
             this.service.buscarDataNome(this.nome, this.dataInicial, this.dataFinal).subscribe(function (response) {
-              _this29.lista = response;
-              _this29.listaFiltro = response;
+              _this41.isLoading = false;
+              _this41.lista = response;
+              _this41.listaFiltro = response;
 
-              _this29.filtrar(_this29.valorPesquisado);
+              _this41.filtrar(_this41.valorPesquisado);
 
-              if (_this29.listaFiltro.length <= 0) {
-                _this29.message = "Nenhum registro encontrado!";
+              if (_this41.listaFiltro.length <= 0) {
+                _this41.message = "Nenhum registro encontrado!";
               } else {
-                _this29.message = null;
+                _this41.message = null;
               }
-            }, function (reject) {
-              _this29.message = "Ocorreu um erro ao buscar as informações";
+            }, function (erro) {
+              _this41.isLoading = false;
+              _this41.errors = erro.error.erros;
+
+              if (_this41.errors == undefined) {
+                _this41.errors = ["Ocorreu um erro ao buscar as informações"];
+              }
             });
           } else {
             this.message = "Informe a competência!";
+            this.isLoading = false;
           }
+        }
+      }, {
+        key: "close",
+        value: function close() {
+          this.errors = [];
+          this.success = false;
         }
       }, {
         key: "montaData",
@@ -6226,26 +7152,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "deletarServicoPrestado",
         value: function deletarServicoPrestado(servicePrestado) {
-          var _this30 = this;
+          var _this42 = this;
 
+          this.close();
+          this.isLoading = true;
           this.service.deletar(this.servicoPrestadoSelecionado).subscribe(function (response) {
-            _this30.consultar();
+            _this42.consultar();
 
-            _this30.mensagemSucesso = "serviço prestado deletado com sucesso!";
+            _this42.success = true;
+            _this42.mensagemSucesso = "serviço prestado deletado com sucesso!";
           }, function (erro) {
-            return _this30.mensagemErro = "Ocorreu erro ao deletar serviço prestado!";
-          });
-          this.setarMensagens();
-        }
-      }, {
-        key: "setarMensagens",
-        value: function setarMensagens() {
-          var _this31 = this;
+            _this42.isLoading = false;
+            _this42.errors = erro.error.erros;
 
-          setTimeout(function (x) {
-            _this31.mensagemSucesso = undefined;
-            _this31.mensagemErro = undefined;
-          }, 3000);
+            if (_this42.errors == undefined) {
+              _this42.errors = ["Ocorreu um erro ao deletar serviço prestado!"];
+            }
+          });
         }
       }, {
         key: "filtrar",
@@ -6921,7 +7844,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AuthInterceptor, [{
         key: "intercept",
         value: function intercept(req, next) {
-          var _this32 = this;
+          var _this43 = this;
 
           var authReq = req;
           var loginPath = '/login';
@@ -6939,7 +7862,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 return;
               }
 
-              _this32.token.signOut();
+              _this43.token.signOut();
 
               window.location.href = loginPath;
             }
@@ -6964,83 +7887,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       useClass: AuthInterceptor,
       multi: true
     }];
-    /***/
-  },
-
-  /***/
-  "./src/app/usuario/usuario.component.css":
-  /*!***********************************************!*\
-    !*** ./src/app/usuario/usuario.component.css ***!
-    \***********************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcAppUsuarioUsuarioComponentCss(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3VzdWFyaW8vdXN1YXJpby5jb21wb25lbnQuY3NzIn0= */";
-    /***/
-  },
-
-  /***/
-  "./src/app/usuario/usuario.component.ts":
-  /*!**********************************************!*\
-    !*** ./src/app/usuario/usuario.component.ts ***!
-    \**********************************************/
-
-  /*! exports provided: UsuarioComponent */
-
-  /***/
-  function srcAppUsuarioUsuarioComponentTs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "UsuarioComponent", function () {
-      return UsuarioComponent;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/fesm2015/core.js");
-
-    var UsuarioComponent = /*#__PURE__*/function () {
-      function UsuarioComponent() {
-        _classCallCheck(this, UsuarioComponent);
-      }
-
-      _createClass(UsuarioComponent, [{
-        key: "ngOnInit",
-        value: function ngOnInit() {}
-      }]);
-
-      return UsuarioComponent;
-    }();
-
-    UsuarioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-      selector: 'app-usuario',
-      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! raw-loader!./usuario.component.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/usuario/usuario.component.html"))["default"],
-      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! ./usuario.component.css */
-      "./src/app/usuario/usuario.component.css"))["default"]]
-    })], UsuarioComponent);
     /***/
   },
 
@@ -7092,6 +7938,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               var mes = data.substring(2, 4);
               var ano = data.substring(4, 8);
               retorno = dia + "/" + mes + "/" + ano;
+
+              if (!this.validateDate(retorno)) {
+                retorno = "";
+              }
             }
           }
 
@@ -7105,6 +7955,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           return valor;
+        }
+      }, {
+        key: "validateDate",
+        value: function validateDate(data) {
+          var regex = "\\d{2}/\\d{2}/\\d{4}";
+          var dtArray = data.split("/");
+          if (dtArray == null) return false;
+          var dtDay = dtArray[0];
+          var dtMonth = dtArray[1];
+          var dtYear = dtArray[2];
+          if (dtMonth < 1 || dtMonth > 12) return false;else if (dtDay < 1 || dtDay > 31) return false;else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31) return false;else if (dtMonth == 2) {
+            var isleap = dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0);
+            if (dtDay > 29 || dtDay == 29 && !isleap) return false;
+          }
+          return true;
         }
       }]);
 
@@ -7142,16 +8007,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/tslib/tslib.es6.js");
 
     var environment = {
-      production: false,
+      //production: false,
       //API_BASE_URL: 'http://localhost:8080',
       //API_URL: "http://localhost:8080/api/",
       //AUTH_API: "http://localhost:8080/api/auth/",
       //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:4200/login",
-      //production: true,
+      //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google",
+      //GOOGLE_REDIRECT: "redirect_uri=http://localhost:4200/login",
+      production: true,
       API_BASE_URL: 'https://servicosprestados.herokuapp.com',
       API_URL: "https://servicosprestados.herokuapp.com/api/",
       AUTH_API: "https://servicosprestados.herokuapp.com/api/auth/",
-      GOOGLE_AUTH_URL: "https://servicosprestados.herokuapp.com/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app",
+      GOOGLE_AUTH_URL: "https://servicosprestados.herokuapp.com/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app/login",
       //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app",
       ClientId: 'my-angular-app',
       clientSecret: '@321',
@@ -7225,7 +8092,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! /home/alex/eclipse-workspace/projetoPos/clientes-app/src/main.ts */
+    /*! /media/OS/BKP_Alex/eclipse-workspace/projetoPos/clientes-app/src/main.ts */
     "./src/main.ts");
     /***/
   }

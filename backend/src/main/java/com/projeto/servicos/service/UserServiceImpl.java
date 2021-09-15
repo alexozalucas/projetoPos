@@ -3,6 +3,7 @@ package com.projeto.servicos.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,7 +28,6 @@ import com.projeto.servicos.service.exception.OAuth2AuthenticationProcessingExce
 import com.projeto.servicos.service.exception.UserAlreadyExistAuthenticationException;
 import com.projeto.servicos.util.GeneralUtils;
 
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -44,9 +44,11 @@ public class UserServiceImpl implements UserService {
 	@Transactional(value = "transactionManager")
 	public User registerNewUser(final SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException {
 		if (signUpRequest.getUserID() != null && userRepository.existsById(signUpRequest.getUserID())) {
-			throw new UserAlreadyExistAuthenticationException("User with User id " + signUpRequest.getUserID() + " already exist");
+			throw new UserAlreadyExistAuthenticationException(
+					"O ID " + signUpRequest.getUserID() + " já está vinculado a um usuário");
 		} else if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-			throw new UserAlreadyExistAuthenticationException("User with email id " + signUpRequest.getEmail() + " already exist");
+			throw new UserAlreadyExistAuthenticationException(
+					"O email " + signUpRequest.getEmail() + " já existe vinculado a um usuário");
 		}
 		User user = buildUser(signUpRequest);
 		Date now = Calendar.getInstance().getTime();
@@ -63,7 +65,7 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(formDTO.getEmail());
 		user.setPassword(passwordEncoder.encode(formDTO.getPassword()));
 		final HashSet<Role> roles = new HashSet<Role>();
-		roles.add(roleRepository.findByName(Role.ROLE_USER));
+		roles.add(roleRepository.findByName(Role.USER));
 		user.setRoles(roles);
 		user.setProvider(formDTO.getSocialProvider().getProviderType());
 		user.setEnabled(true);
@@ -78,19 +80,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo) {
+	public LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken,
+			OidcUserInfo userInfo) {
 		OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(registrationId, attributes);
 		if (StringUtils.isEmpty(oAuth2UserInfo.getName())) {
-			throw new OAuth2AuthenticationProcessingException("Name not found from OAuth2 provider");
+			throw new OAuth2AuthenticationProcessingException("Nome não encontrado no provedor OAuth2");
 		} else if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
-			throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
+			throw new OAuth2AuthenticationProcessingException("Email não encontrado do provedor OAuth2");
 		}
 		SignUpRequest userDetails = toUserRegistrationObject(registrationId, oAuth2UserInfo);
 		User user = findUserByEmail(oAuth2UserInfo.getEmail());
 		if (user != null) {
-			if (!user.getProvider().equals(registrationId) && !user.getProvider().equals(SocialProvider.LOCAL.getProviderType())) {
+			if (!user.getProvider().equals(registrationId)
+					&& !user.getProvider().equals(SocialProvider.LOCAL.getProviderType())) {
 				throw new OAuth2AuthenticationProcessingException(
-						"Looks like you're signed up with " + user.getProvider() + " account. Please use your " + user.getProvider() + " account to login.");
+						"Parece que você se inscreveu com " + user.getProvider() + " conta. Por favor, use o seu "
+								+ user.getProvider() + " conta para fazer o login.");
 			}
 			user = updateExistingUser(user, oAuth2UserInfo);
 		} else {
@@ -106,12 +111,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private SignUpRequest toUserRegistrationObject(String registrationId, OAuth2UserInfo oAuth2UserInfo) {
-		return SignUpRequest.getBuilder().addProviderUserID(oAuth2UserInfo.getId()).addDisplayName(oAuth2UserInfo.getName()).addEmail(oAuth2UserInfo.getEmail())
+		return SignUpRequest.getBuilder().addProviderUserID(oAuth2UserInfo.getId())
+				.addDisplayName(oAuth2UserInfo.getName()).addEmail(oAuth2UserInfo.getEmail())
 				.addSocialProvider(GeneralUtils.toSocialProvider(registrationId)).addPassword("changeit").build();
 	}
 
 	@Override
 	public Optional<User> findUserById(Long id) {
 		return userRepository.findById(id);
+	}
+
+	@Override	
+	public List<User> findUserAll() {
+		List<User> response = userRepository.findAll();
+		return response;
 	}
 }

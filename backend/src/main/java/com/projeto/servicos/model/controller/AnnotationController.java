@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class AnnotationController {
 	@Autowired
 	private AnnotationRepository annotationRepository;
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Annotation saveAnnotation( @Valid @RequestBody AnnotationDTO annotationDTO) {
@@ -56,6 +58,7 @@ public class AnnotationController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@PutMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void updateAnnotation(@RequestBody @Valid AnnotationDTO annotationDTO) {
@@ -78,6 +81,7 @@ public class AnnotationController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteAnnotation(@PathVariable Long id) {
@@ -89,6 +93,7 @@ public class AnnotationController {
 	}
 	
 	
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public List<Annotation> getAllAnnotation() {

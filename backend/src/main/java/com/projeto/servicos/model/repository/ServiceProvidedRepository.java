@@ -34,6 +34,10 @@ public interface ServiceProvidedRepository extends JpaRepository<ServiceProvided
 	
 	boolean existsByTypeService(TypeService typeService);
 	
+	boolean existsByClientAndReleasedPaymentFalse(Client client);
+	
+	boolean existsByIdAndReleasedPaymentTrue(Integer id);
+	
 	
 
 

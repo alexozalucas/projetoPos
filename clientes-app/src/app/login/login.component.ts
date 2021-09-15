@@ -6,9 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { environment } from 'src/environments/environment';
 import { AuthServices } from '../services/auth.services';
-
-
-
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -33,33 +31,40 @@ export class LoginComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private router: Router) {
-
+    private router: Router,
+    private http : HttpClient) {
+      
   }
-  init(){
-    debugger
-    this.token = this.route.snapshot.queryParamMap.get('token');
-    this.error = this.route.snapshot.queryParamMap.get('error');
-  }
+  
+ 
 
   ngOnInit(): void {
-    //this.route.queryParams.subscribe((params) => console.log(params))
-    debugger
+    
     this.token = this.route.snapshot.queryParamMap.get('token');
     this.error = this.route.snapshot.queryParamMap.get('error');
-
-
+    
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.currentUser = this.tokenStorage.getUser();
-    }
-    else if (this.token) {
+      this.router.navigate(['/home']) 
+    }else if (this.token) {
+      
+      this.isLoading = true;
       this.tokenStorage.saveToken(this.token);
       this.userService.getCurrentUser().subscribe(
         data => {
-          this.login(data);
+
+          if(!data.enabled){
+            this.isLoginFailed = true;
+            this.errorMessage = "Usuário desabilitado, procure um administrador!";
+            this.tokenStorage.signOut();
+          }else{
+            this.login(data);
+          }
+          this.isLoading = false;
         },
         err => {
+          this.tokenStorage.signOut();
           this.errorMessage = err.error.message;
           this.isLoginFailed = true;
           this.isLoading = false;
@@ -74,7 +79,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-
+    
     this.isLoading = true;
     this.authService.login(this.form).subscribe(
       data => {
@@ -88,8 +93,11 @@ export class LoginComponent implements OnInit {
         if (!this.errorMessage) {
           this.errorMessage = "Não foi possivel se comunicar com o servidor!"
         }
-        if (err.error.status == 401) {
+        if (err.error.status == 401 && this.errorMessage != "User is disabled") {
           this.errorMessage = "Usuário/senha incorreto!"
+        }
+        if(err.error.status == 401 && this.errorMessage == "User is disabled"){
+          this.errorMessage = "Usuário desabilitado, procure um administrador!" 
         }
       }
     );
@@ -98,36 +106,17 @@ export class LoginComponent implements OnInit {
   login(user): void {
     this.tokenStorage.saveUser(user);
     this.isLoginFailed = false;
-    this.isLoggedIn = true;
+    this.isLoggedIn = true;    
     this.currentUser = this.tokenStorage.getUser();
-    this.router.navigate(['/home'])
-    //window.location.reload();
+    this.isLoading = false;
+    this.router.navigate(['/home'])   
   }
 
 
   signInWithGoogle() {
-    window.location.href = this.googleURL;
-
-    this.isLoading = true;
-
+   window.location.href = this.googleURL;    
+   this.isLoading = true;
   }
-  verificarToken() {
-
-    // window.location.href = this.googleURL;
-
-
-
-    //const routeFragment: Observable<string> = this.route.fragment;      
-    //routeFragment.subscribe(fragment => {
-    //let token: string = window.location.href = this.googleURL;
-    //this.token = fragment.match(/^(.*?)&/)[1].replace('token=', '');
-    //console.log(this.token)
-    //});
-
-
-
-  }
-
 
 
 

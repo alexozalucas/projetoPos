@@ -14,6 +14,8 @@ export class GraficoComponent implements OnInit {
   chart: Chart
   dataSelecionada: boolean;
   grafico: Grafico[] = [];
+  isLoading: boolean = false;
+  errors: String[];
 
   dataset: any
   constructor(
@@ -52,17 +54,22 @@ export class GraficoComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.inicializarGrafico();
-
+    this.close();
   }
 
 
+  close() {
+    this.errors = [];
+  }
+
 
   buscarPorData(event) {
+    
     var ano = event.target.value;
-    this.inicializarGrafico()
-
+    this.isLoading = true;   
+    this.close();
+    this.inicializarGrafico();
     if (ano.length == 4) {
       var dataInicial = "01/" + "01/" + ano;
       var dataFinal = "31" + "/12/" + ano;
@@ -70,12 +77,21 @@ export class GraficoComponent implements OnInit {
         .subscribe(response => {
           this.grafico = response;
           this.dataSelecionada = true;
-        }, reject => {
+          this.isLoading = false; 
+          window.scrollTo(0 , 1800);                   
+        }, erro => {
           this.dataSelecionada = false;
+          this.errors = erro.error.erros
+          if (this.errors == undefined) {
+            this.errors = ["Ocorreu erro ao atualizar registro!"]
+          }
+          this.isLoading = false;  
         });
     } else {
       this.dataSelecionada = false;
+      this.isLoading = false;
     }
+    
   }
 
 

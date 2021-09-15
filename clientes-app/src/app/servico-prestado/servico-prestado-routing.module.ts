@@ -7,7 +7,9 @@ import { ServicoPrestadoListaComponent } from './servico-prestado-lista/servico-
 
 const routes: Routes = [
   {
-    path: 'servicos-prestados', component: LayoutComponent,  canActivate : [AuthGuard],  children: [
+    path: 'servicos-prestados', component: LayoutComponent,  canActivate : [AuthGuard], data :{
+      roles:['ROLE_ADMIN','ROLE_USER']
+    },  children: [
       { path: 'form', component: ServicoPrestadoFormComponent },
       {path: 'form/:id' , component: ServicoPrestadoFormComponent},
       { path: 'lista', component: ServicoPrestadoListaComponent },

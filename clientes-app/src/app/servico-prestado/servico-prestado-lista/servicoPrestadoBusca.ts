@@ -11,6 +11,7 @@ export class ServicoPrestadoBusca {
     client: Cliente;
     typeService: TipoServico;
     releasedPayment : Boolean
+    search?: string
 
 
 }

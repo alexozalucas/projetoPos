@@ -30,14 +30,14 @@
         <label for="competencia" class="col-form-label ">Competência:</label>
       </div>
       <div class="col-md-2 m-1">
-        <input class="form-control" placeholder="MM/YYYY" type="text" id="inputMes" (change)="montaData($event)"
+        <input class="form-control" placeholder="MM/YYYY" autocomplete="off" type="text" id="inputMes" (change)="montaData($event)"
           mask="00/0000">
       </div>
       <div class="col-md-1 mr-3 m-1" *ngIf="listaFiltro.length > 0">
         <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
       </div>
       <div class="col-md-3 m-1" *ngIf="listaFiltro.length > 0">
-        <input class="form-control" type="text" name="search" id="pesquisar" (keyup)="filtrar($event.target.value)" />
+        <input class="form-control" type="text" name="search" id="pesquisar" autocomplete="off" (keyup)="filtrar($event.target.value)" />
       </div>
       <div class="col-md-2 m-1">
         <button class="btn btn-warning" routerLink="/servicos-prestados/form">
@@ -73,19 +73,21 @@
       <table class="table">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Cliente</th>
-            <th>Descrição</th>
+            <!-- <th>Descrição</th> -->
             <th>Preço</th>
             <th>Tipo de serviço</th>
-            <th>Data</th>
+            <th>Data Contratação</th>
             <th>Status</th>
             <th></th>
           </tr>
         </thead>
         <tbody *ngIf="!isLoading">
           <tr *ngFor="let s of lista | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+            <td>{{ s.id }}</td>
             <td>{{ s.client.name }}</td>
-            <td>{{ s.description }}</td>
+            <!-- <td>{{ s.description }}</td> -->
             <td>R$ {{ s.value | mask: 'separator':','}}</td>
             <td>{{ s.typeService.service }}</td>
             <td>{{ s.date }}</td>
@@ -126,7 +128,7 @@
 
         </div>
         <div class="modal-body" *ngIf="servicoPrestadoSelecionado">
-          Confirma a exclusão do serviço prestado: {{ servicoPrestadoSelecionado.description }}
+          Confirma a exclusão do serviço prestado de ID: {{ servicoPrestadoSelecionado.id }}
         </div>
         <div class="modal-footer">
           <button class="btn btn-success" (click)="deletarServicoPrestado()" data-dismiss="modal"> Confirma</button>

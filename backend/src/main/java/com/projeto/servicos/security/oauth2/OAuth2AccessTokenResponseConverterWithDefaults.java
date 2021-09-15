@@ -53,7 +53,7 @@ public class OAuth2AccessTokenResponseConverterWithDefaults implements Converter
 	}
 
 	public final void setDefaultAccessTokenType(OAuth2AccessToken.TokenType defaultAccessTokenType) {
-		Assert.notNull(defaultAccessTokenType, "defaultAccessTokenType cannot be null");
+		Assert.notNull(defaultAccessTokenType, "O tipo de token de acesso padrão não pode ser nulo");
 		this.defaultAccessTokenType = defaultAccessTokenType;
 	}
 }

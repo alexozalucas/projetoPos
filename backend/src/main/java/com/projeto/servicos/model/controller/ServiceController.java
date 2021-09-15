@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ public class ServiceController {
 	@Autowired
 	private ServiceProvidedRepository serviceProvidedRepository;
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@PostMapping("/typeservice")
 	@ResponseStatus(HttpStatus.CREATED)
 	public TypeService salveTypeService(@RequestBody @Valid TypeService typeService) {
@@ -44,6 +46,7 @@ public class ServiceController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@DeleteMapping("/typeservice/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteTypeService(@PathVariable Long id) {
@@ -59,12 +62,14 @@ public class ServiceController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("/typeservice")
 	public List<TypeService> obterTodosTypeService() {
 
 		return typeServiceRepository.findAll();
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("/typeservice/{id}")
 	public TypeService getTypeServiceById(@PathVariable Long id) {
 
@@ -73,6 +78,7 @@ public class ServiceController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@PutMapping("/typeservice/{id}")
 	public TypeService updateTypeService(@PathVariable Integer id, @RequestBody @Valid TypeService typeService) {
 

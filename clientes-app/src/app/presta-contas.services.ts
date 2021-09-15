@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -19,8 +19,11 @@ export class PrestaContasService {
       return this.http.post<PrestacaoContasBuscar>(`${this.apiURL}`, prestacaoContas)
     }  
      
-    getPrestacaoContas(): Observable<PrestacaoContasBuscar[]> {
-      return this.http.get<PrestacaoContasBuscar[]>(`${this.apiURL}`);      
+    getPrestacaoContas(dateInitial: string, dateFinal: string): Observable<PrestacaoContasBuscar[]> {
+      const httpParams = new HttpParams()
+            .set("dateInitial", dateInitial).set("dateFinal",dateFinal);
+            const url = this.apiURL + "/date?" + httpParams.toString();     
+            return this.http.get<any>(url);    
     }
   
     getPrestacaoContasById(id: number): Observable<PrestacaoContasBuscar> {

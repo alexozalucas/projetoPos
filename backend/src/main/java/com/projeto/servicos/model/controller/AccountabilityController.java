@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -66,7 +67,7 @@ public class AccountabilityController {
 		accountability.setTotalValue(BigDecimalConvert.convert(accountabilityDTO.getTotalValue()));
 		accountability.setTypePayment(type);
 		accountability.setServiceProvided(serviceProvided);
-		accountability.setObservation(accountability.getObservation());
+		accountability.setObservation(accountabilityDTO.getObservation());
 		serviceProvidedRepository.save(serviceProvided);
 			
 		return accountabilityRepository.save(accountability);
@@ -90,10 +91,27 @@ public class AccountabilityController {
 
 	}
 
-	@GetMapping
+	
+	@GetMapping("/date")
 	@PreAuthorize("hasRole('ADMIN')")
-	public List<Accountability> obterTodosAccountability() {		
-		return accountabilityRepository.findAll();
+	public List<Accountability> obterTodosAccountability(
+			@RequestParam(value = "dateInitial", required = true, defaultValue = "31/12/1900") String dateInitial,
+			@RequestParam(value = "dateFinal", required = true, defaultValue = "31/12/1900") String dateFinal) {		
+		
+		LocalDate initialDate = null;
+		LocalDate finalDate = null;
+		
+		try {
+			initialDate = LocalDate.parse(dateInitial, formatter);
+			finalDate = LocalDate.parse(dateFinal, formatter);
+		} catch (Exception e) {
+			initialDate = LocalDate.parse("31/12/1900", formatter);
+			finalDate = LocalDate.parse("31/12/1900", formatter);
+		}
+		
+		List<Accountability> response = this.accountabilityRepository.findBydatePaymentBetweenOrderByDatePaymentAsc(initialDate, finalDate);
+		
+		return response;
 	}
 
 	@GetMapping("{id}")
@@ -103,7 +121,8 @@ public class AccountabilityController {
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Prestação de contas não encontrada!"));
 	}
 
-	@PostMapping("/typepayment")	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/typepayment")
 	@ResponseStatus(HttpStatus.CREATED)	
 	public TypePayment salve(@RequestBody @Valid TypePayment typePayment) {
 
@@ -114,6 +133,7 @@ public class AccountabilityController {
 		return typePaymentRepository.save(typePayment);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/typepayment/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
@@ -129,18 +149,21 @@ public class AccountabilityController {
 		
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/typepayment")	
 	public List<TypePayment> obterTodos() {		
 		
 		return typePaymentRepository.findAll();
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/typepayment/{id}")
 	public TypePayment getTypeServiceById(@PathVariable Long id) {
 		return typePaymentRepository.findById(id).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tipo de pagamento não encontrado"));
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/typepayment")
 	public TypePayment updatetypePayment(@RequestBody @Valid TypePayment typePayment) {
 

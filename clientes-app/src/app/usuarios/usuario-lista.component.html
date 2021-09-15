@@ -1,0 +1,183 @@
+<h1 class="mt-4">Usuários</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">Editar</li>
+</ol>
+
+
+
+<div class="container-fluid" *ngIf="!usuario">
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-success hidden" role="alert" *ngIf="success == true">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        {{mensagemSucesso}}
+      </div>
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let erro of errors">
+        {{erro}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <form class="form">
+    <div class="row">
+      <div class="col-md-1 mr-3 m-1">
+        <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
+      </div>
+      <div class="col-md-3 m-1">
+        <input class="form-control" type="text" name="search" id="pesquisar" autocomplete="off" (keyup)="filtrar($event.target.value)" />
+      </div>
+
+    </div>
+  </form>
+
+  <br />
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-condensed table-hover" id="table-clientes">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOME</th>
+            <th>EMAIL</th>
+            <th>STATUS</th>
+            <th>PERFIL</th>
+            <th>AÇÃO</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="!isLoading">
+          <tr
+            *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index">
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.displayName }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.enabled ? 'ATIVO' :'INATIVO'}}</td>
+            <td>{{returnRolesDescription(usuario)}}</td>
+            <td>
+              <button class="btn btn-primary " (click)="editarUsuario(usuario) ">
+                <i class="fa fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls *ngIf="!isLoading" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+        nextLabel="Próximo">
+      </pagination-controls>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div [class.spinner-border]="isLoading" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid" *ngIf="usuario">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-success hidden" role="alert" *ngIf="success == true">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        Usuário editado com sucesso!
+      </div>
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let erro of errors">
+        {{erro}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TELA PARA EDITAR DADOS DO USUÁRIOS -->
+  <form #usuarioForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>
+            ID:
+          </label>
+          <input type="text" class="form-control" disabled="true" [ngModel]="usuario.id" name="id" />
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            Nome: *
+          </label>
+          <input type="text" class="form-control" disabled="true" [(ngModel)]="usuario.displayName" name="name" />
+
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            Email: *
+          </label>
+          <input type="text" class="form-control" disabled="true" [(ngModel)]="usuario.email" name="email"
+            type="text" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+
+      <div class="col-4">
+        <label>Status: *</label>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="customSwitch1"
+            (click)="VerificaStatus($event.target.checked)" [checked]="usuario.enabled">
+          <label class="custom-control-label" for="customSwitch1">{{usuario.enabled ? 'ATIVO' :'INATIVO'}}</label>
+        </div>
+      </div>
+
+      <div class="col-8">
+        <label>Perfil: *</label>
+        <div class="custom-control custom-switch" *ngFor='let role of roles'>
+          <input type="checkbox" class="custom-control-input" id="role-{{role.roleId}}" [checked]="role.check"
+            (click)="VerificaStatusRole($event.target.checked,role)">
+          <label class="custom-control-label" for="role-{{role.roleId}}">{{role.name}}</label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="d-flex justify-content-center">
+      <div [class.spinner-border]="isLoading" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div class="row" *ngIf="!isLoading">
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-primary m-1 ">
+          <i class="fa fa-sync-alt"></i> Editar
+        </button>
+        <button type="button" class="btn btn-danger m-1" (click)="voltarParaListagem()">
+          <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+        </button>
+      </div>
+    </div>
+  </form>
+
+
+
+</div>

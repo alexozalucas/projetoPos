@@ -1,5 +1,6 @@
 package com.projeto.servicos.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -17,5 +18,5 @@ public interface UserService {
 	User findUserByEmail(String email);
 	Optional<User> findUserById(Long id);
 	LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
-
+	List<User> findUserAll();
 }

@@ -8,6 +8,7 @@ import { PrestacaoContasComponent } from './contas/prestacao-contas.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { DateUtil } from '../util/Date-Util';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     PrestacaoContasRoutingModule,
     NgxMaskModule.forRoot(),
     DateUtil,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DropdownModule
   ],
   exports : [
     PrestacaoContasListaComponent,

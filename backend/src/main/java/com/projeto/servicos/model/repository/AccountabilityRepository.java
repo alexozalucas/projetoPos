@@ -22,5 +22,9 @@ public interface AccountabilityRepository extends JpaRepository<Accountability, 
 	
 	boolean existsByTypePayment(TypePayment typePayment);
 	
+	List<Accountability> findBydatePaymentBetweenOrderByDatePaymentAsc(LocalDate start, LocalDate end);
+	
+	
+	
 
 }

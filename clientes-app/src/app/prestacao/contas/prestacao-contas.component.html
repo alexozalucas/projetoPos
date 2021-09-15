@@ -39,8 +39,8 @@
             <div class="row" *ngIf="!prestacaoContasBuscar.id">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Competência</label>
-                        <input class="form-control" placeholder="MM/YYYY" type="text" id="data"
+                        <label>Competência: *</label>
+                        <input class="form-control" placeholder="MM/YYYY" type="text" id="data" autocomplete="off"
                             (change)="buscarPorData($event)" mask="00/0000">
                     </div>
                 </div>
@@ -50,28 +50,32 @@
             <div class=row *ngIf="!prestacaoContasBuscar.id">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Serviço Prestado:</label>
-                        <select class="form-control" [ngModelOptions]="{standalone:true}"
+                        <label>Serviço Prestado: *</label>   
+                        <p-dropdown #ser [options]="servicoPrestadoBusca"  [ngModelOptions]="{standalone:true}" [(ngModel)]="servicoPrestadoBuscaSelecionado" optionLabel="search"  
+                        placeholder="Selecione um serviço prestado..."
+                        emptyMessage="nenhum resultado encontrado" emptyFilterMessage="nenhum resultado encontrado" filter="true" [autoDisplayFirst]="false" (onBlur)="clearFilter(ser)" required
+                        [style]="{width : '100%' }"></p-dropdown>                 
+                         <!-- <select class="form-control" [ngModelOptions]="{standalone:true}"
                             [(ngModel)]="servicoPrestadoBuscaSelecionado">
                             <option value="">Selecione...</option>
                             <option *ngFor="let servicoPrestadosBusca of servicoPrestadoBusca"
                                 [ngValue]="servicoPrestadosBusca">
                                 {{ servicoPrestadosBusca.id +" - "+ servicoPrestadosBusca.description}}
                             </option>
-                        </select>
+                        </select>   -->
                     </div>
                 </div>
             </div>
 
             <div class="row" *ngIf="servicoPrestadoBuscaSelecionado.id">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label>Cliente:</label>
                         <input class="form-control" disabled="true"
                             [(ngModel)]="servicoPrestadoBuscaSelecionado.client.name" type="text" name="name">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Tipo Serviço:</label>
                         <input class="form-control" disabled="true"
@@ -79,21 +83,30 @@
                             name="service">
                     </div>
                 </div>
-            </div>
-
-            <div class="row" *ngIf="servicoPrestadoBuscaSelecionado.id">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label>Preço:</label>
                         <input class="form-control" disabled="true" [(ngModel)]="servicoPrestadoBuscaSelecionado.value"
                             type="text" name="value">
                     </div>
                 </div>
-                <div class="col-md-8">
+            </div>
+
+            <div class="row" *ngIf="servicoPrestadoBuscaSelecionado.id">
+                <div class="col-md-9">
                     <div class="form-group">
                         <label>Descrição:</label>
-                        <input class="form-control" disabled="true"
-                            [(ngModel)]="servicoPrestadoBuscaSelecionado.description" type="text" name="description">
+                        <textarea class="form-control" Maxlength="1200" disabled="true" id="descricaoServico" rows="4" [ngModelOptions]="{standalone:true}"
+                        [(ngModel)]="servicoPrestadoBuscaSelecionado.description"></textarea>
+                        <!-- <input class="form-control" disabled="true"
+                            [(ngModel)]="servicoPrestadoBuscaSelecionado.description" type="text" name="description"> -->
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Data Contrato:</label>
+                        <input class="form-control" disabled="true" [(ngModel)]="servicoPrestadoBuscaSelecionado.date"
+                            type="text" name="data">
                     </div>
                 </div>
             </div>
@@ -102,32 +115,34 @@
             <div class=row>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>Tipo de Pagamento:</label>
-                        <select class="form-control" name="pagamento" [(ngModel)]="tipoPagamentoSelecionado.id"
+                        <label>Tipo de Pagamento: *</label>
+                        <p-dropdown #ser [options]="tipoPagamento"  [ngModelOptions]="{standalone:true}" [(ngModel)]="tipoPagamentoSelecionado.id" optionLabel="search" optionValue="id" 
+                        placeholder="Selecione um serviço prestado..."
+                        emptyMessage="nenhum resultado encontrado" emptyFilterMessage="nenhum resultado encontrado" filter="true" [autoDisplayFirst]="false" (onBlur)="clearFilter(ser)" required
+                        [style]="{width : '100%' }"></p-dropdown>   
+                        <!-- <select class="form-control" name="pagamento" [(ngModel)]="tipoPagamentoSelecionado.id"
                             [ngModelOptions]="{standalone:true}">
                             <option value="">selecionar...</option>
                             <option *ngFor="let tiposPagamento of tipoPagamento" [ngValue]="tiposPagamento.id">
                                 {{ tiposPagamento.id + " - "+tiposPagamento.type }}
                             </option>
-                        </select>
+                        </select> -->
                     </div>
                 </div>
             </div>
-
-
 
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Desconto:</label>
-                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.discountValue" type="text"
+                        <input class="form-control" autocomplete="off" [(ngModel)]="prestacaoContasBuscar.discountValue" type="text"
                             name="discountValue" id="inputValue" mask="separator.2" thousandSeparator="." prefix="R$ ">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Acrescimo:</label>
-                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.additionValue" type="text"
+                        <input class="form-control" autocomplete="off" [(ngModel)]="prestacaoContasBuscar.additionValue" type="text"
                             name="additionValue" id="inputValue" mask="separator.2" thousandSeparator="." prefix="R$ ">
                     </div>
                 </div>
@@ -145,8 +160,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Data de pagamento:</label>
-                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.datePayment"
+                        <label>Data de pagamento: *</label>
+                        <input class="form-control" autocomplete="off" [(ngModel)]="prestacaoContasBuscar.datePayment"
                             placeholder="DD/MM/YYYY" type="text" id="data" name="datePayment" mask="00/00/0000">
                     </div>
                 </div>
@@ -154,7 +169,7 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <label>Observação:</label>
-                        <input class="form-control" [(ngModel)]="prestacaoContasBuscar.observation" type="text"
+                        <input class="form-control" autocomplete="off" Maxlength="240" [(ngModel)]="prestacaoContasBuscar.observation" type="text"
                             name="observation">
                     </div>
                 </div>
@@ -165,7 +180,6 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-
 
             <div class="row" *ngIf="!isLoading">
                 <div class="col-md-6">
@@ -185,6 +199,7 @@
 
                 </div>
             </div>
+        <br/><br/>
         </form>
     </div>
 </div>
@@ -256,7 +271,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <span class="mr-3 mb-10">Tipo de pagamento: {{retornaDatePaymentFormat(prestacaoContasBuscar.datePayment)}}
+            <span class="mr-3 mb-10">Data pagamento: {{retornaDatePaymentFormat(prestacaoContasBuscar.datePayment)}}
             </span>
         </div>
     </div>
@@ -266,9 +281,12 @@
     <br /><br />
     <div class="row">
         <div class="col-md-12">
-            <button type="button" class="btn btn-secondary " onclick="window.print()" *ngIf="prestacaoContasBuscar.id">
+            <button type="button" class="btn btn-secondary " (click)="gerarPDF()" *ngIf="prestacaoContasBuscar.id">
                 <i class="fa fa-print" aria-hidden="true"></i> Imprimir
             </button>
+            <button type="button" class="btn btn-danger m-1" (click)="voltarParaListagem()">
+                <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+              </button>
         </div>
     </div>
 </div>

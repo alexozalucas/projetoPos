@@ -5,5 +5,6 @@ export class TipoPagamento{
     id: number;
     type: string;
     observation: string;
+    search?: string;
     
 }

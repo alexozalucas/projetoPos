@@ -30,7 +30,7 @@ public class ServiceProvided {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name= "descricao" , nullable = false)
+	@Column(name= "descricao" , nullable = false, length = 1200)
 	private String description;
 	
 	@ManyToOne
@@ -51,6 +51,7 @@ public class ServiceProvided {
 	@Column(name= "releasedPayment", columnDefinition ="boolean")
 	private Boolean releasedPayment;
 	
+
 	
 	
 

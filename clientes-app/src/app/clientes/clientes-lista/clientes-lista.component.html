@@ -29,7 +29,8 @@
         <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
       </div>
       <div class="col-md-3 m-1">
-        <input class="form-control" type="text" name="search" id="pesquisar" (keyup)="filtrar($event.target.value)" />
+        <input class="form-control" type="text" name="search" id="pesquisar" autocomplete="off"
+          (keyup)="filtrar($event.target.value)" />
       </div>
       <div class="col-md-5 m-1">
         <button class="btn btn-warning" (click)="novoCadastro()">
@@ -38,8 +39,6 @@
       </div>
     </div>
   </form>
-
-
   <br />
 
   <div class="row">
@@ -51,6 +50,7 @@
             <th>NOME</th>
             <th>CPF</th>
             <th>DATA CADASTRO</th>
+            <th>STATUS</th>
             <th></th>
           </tr>
         </thead>
@@ -61,6 +61,7 @@
             <td>{{ cliente.name }}</td>
             <td>{{ cliente.cpf | mask: '000.000.000-99' }}</td>
             <td>{{ cliente.dateRegister }}</td>
+            <td>{{ cliente.status ? 'ATIVO' :'INATIVO'}}</td>
             <td>
 
               <button class="btn btn-primary m-1" routerLink="/clientes/form/{{ cliente.id }}">
@@ -75,7 +76,8 @@
           </tr>
         </tbody>
       </table>
-      <pagination-controls *ngIf="!isLoading" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+      <pagination-controls *ngIf="!isLoading" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+        nextLabel="Próximo">
       </pagination-controls>
     </div>
   </div>

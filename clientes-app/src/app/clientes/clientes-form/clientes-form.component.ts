@@ -3,6 +3,7 @@ import { Cliente } from '../cliente';
 import { ClientesService } from 'src/app/clientes.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 @Component({
@@ -18,10 +19,12 @@ export class ClientesFormComponent implements OnInit {
   id: number;
   isLoading: boolean = false;
   
+  
 
   constructor(private service: ClientesService,
     private router: Router,
-    private activatedRouter: ActivatedRoute) {
+    private activatedRouter: ActivatedRoute,
+    private tokenStorageService: TokenStorageService,) {
     this.cliente = new Cliente();
   }
 
@@ -32,6 +35,7 @@ export class ClientesFormComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
+    this.cliente.status = true;
     let params: Observable<Params> = this.activatedRouter.params
     params.subscribe(urlParams => {
       this.id = urlParams['id'];
@@ -51,6 +55,16 @@ export class ClientesFormComponent implements OnInit {
     });
     this.isLoading = false;
   }
+
+  returnPermission() {
+    const user = this.tokenStorageService.getUser();
+    var permission = true;
+    if (user.roles.includes('ROLE_ADMIN') || user.roles.includes('ROLE_USER')) {
+      permission = false;
+    }
+    return permission;
+  }
+
 
 
   // Metodo para atualizar e salvar cliente no Clientes-form.Component.html
@@ -94,6 +108,9 @@ export class ClientesFormComponent implements OnInit {
     
   }
 
+  VerificaStatus(event){
+    this.cliente.status = event;
+  }
 
   voltarParaListagem() {
     this.close();

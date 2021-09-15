@@ -5,10 +5,12 @@ import { DateUtil } from '../util/Date-Util';
 import { Agenda } from './agenda'
 import { Anotacao } from './anotacao';
 import { TipoAnotacao } from './tipoAnotacao';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { ClientesService } from '../clientes.service';
+import { Cliente } from '../clientes/cliente';
 
 
-
-
+declare var $: any;
 
 @Component({
   selector: 'app-home',
@@ -20,8 +22,10 @@ export class HomeComponent implements OnInit {
   options: any;
   paginaAtualAgenda: number = 0;
   paginaAtualAnotacao: number = 0;
-  dateInitial: string = null;
-  dateFinal: string = null;
+  paginaAtualClient: number = 0;
+  paginaAtualClientCad: number = 0;
+  dateInitial: string = "";
+  dateFinal: string = "";
   listaAgenda: Agenda[];
   mensagemErro: string;
   mensagemSucesso: string;
@@ -38,24 +42,40 @@ export class HomeComponent implements OnInit {
   anotacaoSelecionada: Anotacao;
   tipoAnotacaoSelecionado: TipoAnotacao;
   isLoading: boolean = false;
+  clientes: Cliente[];
+  clienteListCache: Cliente[];
+  clientesFilter: Cliente[];
+
 
   // 1 - lista de anotação, 2 - cadastro/edição da anotação,
   // 3 - Cadastro do tipo de anotação, 4 - listar tipo de anotação
   mostrarListaAnotacao: number = 1;
 
-
-
   constructor(
     private agendaService: AgendaService,
     private anotacaoService: AnotacaoService,
-
+    private tokenStorageService: TokenStorageService,
+    private clientService: ClientesService
   ) {
     this.agenda = {} as Agenda;
     this.anotacao = {} as Anotacao;
     this.tipoAnotacao = {} as TipoAnotacao;
+    this.clienteListCache = {} as Cliente[];
+
   }
 
   ngOnInit() {
+    this.returnPermission();
+  }
+
+
+  returnPermission() {
+    const user = this.tokenStorageService.getUser();
+    var permission = true;
+    if (user.roles.includes('ROLE_ADMIN') || user.roles.includes('ROLE_USER')) {
+      permission = false;
+    }
+    return permission;
   }
 
   preparaDelecao(agenda: Agenda) {
@@ -81,7 +101,6 @@ export class HomeComponent implements OnInit {
 
   }
 
-
   mostrarAgenda() {
 
     this.close();
@@ -104,8 +123,10 @@ export class HomeComponent implements OnInit {
           }
         );
     }
+  }
 
-
+  VerificaStatusFlag(event) {
+    this.agenda.flagConfirmation = event;
   }
 
   selecionarAgendaPorId(id: number) {
@@ -114,6 +135,7 @@ export class HomeComponent implements OnInit {
     this.agendaService.getAgendaById(id)
       .subscribe(response => {
         this.agenda = response;
+        this.clienteListCache = this.agenda.client;
         this.telaEdicao = true;
         this.isLoading = false;
       }, erro => {
@@ -126,40 +148,76 @@ export class HomeComponent implements OnInit {
   }
 
   voltarParaListagemAgenda() {
-
+    this.clienteListCache = [];
     this.agenda = new Agenda();
     this.close();
-    this.mostrarAgenda();
-    this.telaEdicao = false;
+    this.telaEdicao = false;    
+    if (this.listaAgenda) {
+      this.mostrarAgenda();
+    }
+
   }
 
   onSubmit() {
+
     this.isLoading = true;
     this.close();
     this.agenda.date = DateUtil.dateFormat(this.agenda.date);
-    this.agendaService.salvar(this.agenda)
-      .subscribe(response => {
-        this.success = true;
-        this.isLoading = false;
-        if (this.agenda.id > 0) {
-          this.mensagemSucesso = "Agenda editada com sucesso";
-        } else {
-          this.mensagemSucesso = "Agenda salva com sucesso";
-          this.agenda = {} as Agenda;
-        }
+    this.agenda.client = this.clienteListCache;
 
-      },
-        erro => {
+    if (this.returnPermission()) {
+
+      this.agendaService.saveValidate(this.agenda)
+        .subscribe(response => {
+          this.success = true;
           this.isLoading = false;
-          this.errors = erro.error.erros
-          if (this.errors == undefined) {
-            this.errors = ["Ocorreu um erro ao salvar/editar a agenda"]
+          if (this.agenda.id > 0) {
+            this.mensagemSucesso = "Agenda editada com sucesso";
+          } else {
+            this.mensagemSucesso = "Agenda salva com sucesso";
+            this.agenda = {} as Agenda;
+            this.clienteListCache = [];
           }
-        });
+        },
+          erro => {
+            this.isLoading = false;
+            this.errors = erro.error.erros
+            if (this.errors == undefined) {
+              this.errors = ["Ocorreu um erro ao salvar/editar a agenda"]
+            }
+          });
+    } else {
+      
+      this.agendaService.salvar(this.agenda)
+        .subscribe(response => {
+          this.success = true;
+          this.isLoading = false;
+          if (this.agenda.id > 0) {
+            this.mensagemSucesso = "Agenda editada com sucesso";
+          } else {
+            this.mensagemSucesso = "Agenda salva com sucesso";
+            this.agenda = {} as Agenda;
+            this.clienteListCache = [];
+          }
+        },
+          erro => {
+            this.isLoading = false;
+            this.errors = erro.error.erros
+            if (this.errors == undefined) {
+              this.errors = ["Ocorreu um erro ao salvar/editar a agenda"]
+            }
+          });
+
+
+
+    }
+
+
   }
 
   cadastroNovo() {
     this.close();
+    this.clienteListCache = [];
     this.telaEdicao = true;
   }
 
@@ -171,19 +229,75 @@ export class HomeComponent implements OnInit {
   selecionarAbaAgenda() {
     this.isLoading = false;
     this.close();
-
-
   }
 
+  // modal de clientes
 
+  openModalComponents(): void {
+    this.loadingClient();
+    $("#modalComponents").modal({
+      show: true,
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
 
-  // Metodos da aba anotação
+  closeModalComponents(): void {
+    $("#modalComponents").on('hidden.bs.modal');
+  }
 
-  selecionarAnotacaoPorId(id: number) {
-    
+  filtrarClientes(value: string) {
+    if (!value) {
+      this.clientes = this.clientesFilter;
+    } else {
+      this.clientes = this.clientesFilter.filter(x => {
+        if (x.name.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
+          String(x.id).trim().toLowerCase().includes(value.trim().toLowerCase())
+        ) {
+          return true;
+        }
+      });
+    }
+  }
+
+  loadingClient() {
+
+    this.clientes = [];
     this.close();
     this.isLoading = true;
-    this.mostrarTipoAnotacao();    
+    this.clientService.getClientesAll()
+      .subscribe(response => {
+        this.clientes = response;
+        this.clienteListCache.forEach(x =>
+          this.clientes.filter(v => v.id == x.id)
+            .map(s => s.checked = true));
+        this.clientesFilter = this.clientes;
+        this.isLoading = false;
+      }, erro => {
+        this.isLoading = false;
+        this.errors = erro.error.erros
+        if (this.errors == undefined) {
+          this.errors = ["Ocorreu um erro ao carregar os clientes"];
+        }
+      });
+  }
+
+  VerificaChecked(check: boolean, client: Cliente) {
+    this.clientes.filter(x => x.id == client.id).map(v => { v.checked = check });
+  }
+
+  registrarAgendaCliente() {
+    this.filtrarClientes(undefined);
+    this.clienteListCache = this.clientes.filter(x => x.checked);
+    this.closeModalComponents();
+  }
+
+  // Metodos da aba anotação
+  selecionarAnotacaoPorId(id: number) {
+
+    this.close();
+    this.isLoading = true;
+    this.mostrarTipoAnotacao();
     this.anotacaoService.getAnotacaoById(id)
       .subscribe(response => {
         this.anotacao = response;
@@ -212,10 +326,11 @@ export class HomeComponent implements OnInit {
   }
 
   mostrarAnotacao() {
-    // Retorna todas as anotação 
+    // Retorna todas as anotação
+    this.mostrarListaAnotacao = 1;
     this.close();
     this.anotacao = {} as Anotacao;
-    this.anotacaoLista = [];
+    this.anotacaoLista = {} as Anotacao[];
     this.isLoading = true;
     this.anotacaoService.getAllAnotacao()
       .subscribe(response => {
@@ -223,13 +338,14 @@ export class HomeComponent implements OnInit {
         this.anotacaoListaFilter = response;
         this.isLoading = false;
       }, erro => {
-        this.isLoading = false;
         this.anotacaoListaFilter = [];
         this.errors = erro.error.erros
         if (this.errors == undefined) {
           this.errors = ["Ocorreu um erro ao mostrar as anotações"]
         }
+        this.isLoading = false;
       });
+
   }
 
   deletarAnotacao() {
@@ -254,10 +370,10 @@ export class HomeComponent implements OnInit {
   onSubmitAnotacao() {
 
     this.close();
-    this.isLoading =true;
+    this.isLoading = true;
     this.anotacaoService.salvarAnotacao(this.anotacao)
       .subscribe(response => {
-        this.isLoading =false;
+        this.isLoading = false;
         this.success = true;
         if (this.anotacao.id > 0) {
           this.mensagemSucesso = "Anotação editada com sucesso";
@@ -265,10 +381,10 @@ export class HomeComponent implements OnInit {
           this.mensagemSucesso = "Anotação salva com sucesso";
           this.anotacao = response;
         }
-        
+
       },
         erro => {
-          this.isLoading =false;
+          this.isLoading = false;
           this.errors = erro.error.erros
           if (this.errors == undefined) {
             this.errors = ["Ocorreu um erro ao salvar/editar a anotação"]
@@ -308,7 +424,7 @@ export class HomeComponent implements OnInit {
 
   // Parte de código para tratar os tipos de anotação
   mostrarTipoAnotacao() {
-  
+    this.tipoAnotacaoLista = [];
     this.anotacaoService.getAllTipoAnotacao()
       .subscribe(response => {
         this.tipoAnotacaoLista = response;
@@ -334,7 +450,7 @@ export class HomeComponent implements OnInit {
 
 
   buscarTipoDeAnotacaoPorId() {
-   
+
     this.anotacaoService.getTipoAnotacaoById(this.anotacao.typeAnnotation.id)
       .subscribe(response => {
         this.tipoAnotacao = response;
@@ -396,10 +512,10 @@ export class HomeComponent implements OnInit {
   deletarTipoAnotacao() {
 
     this.close();
-    this.isLoading=true;
+    this.isLoading = true;
     this.anotacaoService.deletarTipoAnotacao(this.tipoAnotacao)
       .subscribe(response => {
-        this.isLoading=false;
+        this.isLoading = false;
         this.success = true;
         this.mensagemSucesso = "Tipo de anotação deletada com sucesso";
         this.mostrarTipoAnotacao();
@@ -407,7 +523,7 @@ export class HomeComponent implements OnInit {
         this.anotacao.typeAnnotation = this.tipoAnotacao;
 
       }, erro => {
-        this.isLoading=false;
+        this.isLoading = false;
         this.errors = erro.error.erros
         if (this.errors == undefined) {
           this.errors = ["Ocorreu um erro ao deletar o tipo de anotação"];

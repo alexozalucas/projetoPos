@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Usuario } from '../usuarios/usuario';
+import { Role } from '../usuarios/roles';
 
 
 const httpOptions = {
@@ -16,19 +18,25 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getPublicContent(): Observable<any> {
-    return this.http.get(environment.API_URL + 'all', { responseType: 'text' });
+  apiURL: string = environment.API_BASE_URL + '/api/user';
+
+  getUserAll(): Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(`${this.apiURL}`+'/all');
   }
 
-  getUserBoard(): Observable<any> {
-    return this.http.get(environment.API_URL + 'user', { responseType: 'text' });
+  salvar(user: Usuario, role: Role[] ): Observable<any> {
+    const url = this.apiURL + "/role/user/"+user.id+ "/status/"+user.enabled  
+    return this.http.put<any>(url,role);
   }
 
-  getAdminBoard(): Observable<any> {
-    return this.http.get(environment.API_URL + 'admin', { responseType: 'text' });
+  getRoleAll(): Observable<Role[]>{
+    return this.http.get<Role[]>(`${this.apiURL}`+'/role/all');
   }
+
 
   getCurrentUser(): Observable<any> {
     return this.http.get(environment.API_URL + 'user/me', httpOptions);
   }
+
+  
 }

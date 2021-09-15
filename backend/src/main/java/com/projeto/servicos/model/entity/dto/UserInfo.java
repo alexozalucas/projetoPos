@@ -7,5 +7,6 @@ import lombok.Value;
 @Value
 public class UserInfo {
 	private String id, displayName, email;
+	private boolean enabled;
 	private List<String> roles;
 }

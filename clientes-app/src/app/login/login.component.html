@@ -1,9 +1,9 @@
 <div class="col-md-12">
   <div class="card card-container">
-    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+    <h3 class="text-center" style="font-family: fantasy;">Controle de serviço prestado</h3>
     <form *ngIf="!isLoggedIn && !isLoading" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group">
-        <label for="username">Email</label> <input type="text" class="form-control" name="username"
+        <label for="username">Email</label> <input type="text" class="form-control" name="username" autocomplete="off"
           [(ngModel)]="form.username" required #username="ngModel" />
         <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">É necessário informar o
           nome do usuário!</div>
@@ -36,7 +36,7 @@
       <button class="btn btn-danger btn-block" (click)="signInWithGoogle()">
         <i class="fab fa-google"></i> Google</button>
     </p>
-
+    
     <div class="card-footer text-center" *ngIf="!isLoading">
       <div class="small">
         <a routerLink="/register">

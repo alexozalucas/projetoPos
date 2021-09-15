@@ -28,6 +28,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AuthServices } from './services/auth.services';
 import { AgendaService } from './agenda.service';
 import { AnotacaoService } from './anotacao.service';
+import { FilterService, PrimeNGConfig } from 'primeng/api';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { UsuarioModule } from './usuarios/usuario.module';
 
 
 
@@ -57,9 +60,12 @@ import { AnotacaoService } from './anotacao.service';
     PagamentoModule,
     PrestacaoContasModule,
     GraficoModule,
+    UsuarioModule,
     DateUtil,
     NgxMaskModule,
-    NgxPaginationModule,    
+    NgxPaginationModule,   
+    BrowserModule,
+    BrowserAnimationsModule 
 
 
   ],
@@ -72,8 +78,10 @@ import { AnotacaoService } from './anotacao.service';
     authInterceptorProviders,
     GraficoService,
     AgendaService,
-    AnotacaoService
-
+    AnotacaoService,
+    FilterService,
+    PrimeNGConfig,
+   
   ],
   bootstrap: [AppComponent]
 })

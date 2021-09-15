@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Cliente } from './clientes/cliente';
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment'
@@ -18,8 +17,8 @@ export class AgendaService {
     return this.http.post<Agenda>(`${this.apiURL}`, agenda)
   }
 
-  atualizar(agenda: Agenda): Observable<any> {
-    return this.http.put<Agenda>(`${this.apiURL}/${agenda.id}`, agenda)
+  saveValidate(agenda: Agenda) {
+    return this.http.post<Agenda>(`${this.apiURL}/validate`, agenda)
   }
 
   getAgendaById(id: number): Observable<Agenda> {

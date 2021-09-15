@@ -1,4 +1,4 @@
-import { logging } from "protractor";
+
 
 export class Cliente{
 
@@ -6,6 +6,10 @@ export class Cliente{
     name: string;
     cpf: string;
     dateRegister: string;
+    status: boolean;
+    search?: string;
+    checked?: boolean;
+
 
 
 }

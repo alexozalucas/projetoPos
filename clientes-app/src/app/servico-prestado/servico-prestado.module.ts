@@ -9,12 +9,16 @@ import { RouterModule } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
 import { DateUtil } from '../util/Date-Util';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {DropdownModule} from 'primeng/dropdown';
+
+
 
 
 @NgModule({
   declarations: [
     ServicoPrestadoFormComponent,
-    ServicoPrestadoListaComponent
+    ServicoPrestadoListaComponent,
+
 
     ],
   imports: [
@@ -24,7 +28,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RouterModule,
     NgxMaskModule.forRoot(),
     DateUtil,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DropdownModule,
+   
+    
+
   ],
   exports : [
     ServicoPrestadoFormComponent,

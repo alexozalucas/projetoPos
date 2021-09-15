@@ -23,7 +23,7 @@ public class GraphicController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public  List<GraphicDTO> getAll(@RequestParam (value ="datePaymentInitial", required =true) String datePaymentInitial,
 			@RequestParam (value ="datePaymentFinal", required =true) String datePaymentFinal ) {
-				
+		
 		return this.graphicService.getAll(datePaymentInitial,datePaymentFinal);
 	}
 	

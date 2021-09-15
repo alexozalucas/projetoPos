@@ -20,10 +20,65 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+            <div class="alert alert-warning hidden" role="alert" *ngIf="alertInf != null">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                {{alertInf}}
+            </div>
         </div>
     </div>
 
-    <form class="form">
+
+    <div class="row ">
+        <div class="col-lg-2 col-md-4  mr-1">
+            <div class="form-group">
+                <label>
+                    Data Pag. Inicial: *
+                </label>
+                <input type="text" class="form-control" [(ngModel)]="dateInitial" placeholder="DD/MM/YYYY"
+                    id="dateInitial" name="dateInitial" mask="00/00/0000"  autocomplete="off"/>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 ">
+            <div class="form-group">
+                <label>
+                    Data Pag. Final: *
+                </label>
+                <input type="text" class="form-control" [(ngModel)]="dateFinal" placeholder="DD/MM/YYYY" id="dateFinal"
+                    mask="00/00/0000" name="dateFinal" autocomplete="off" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6  align-self-center pt-3 mb-2">
+            <button type="button" class="btn btn-primary " (click)="mostrarPrestacoes()">
+                <i class="fa fa-eye"></i> Mostrar
+            </button>
+            <button class="btn btn-warning ml-2" (click)="novoCadastro()">
+                <i class="fa fa-plus"></i> Novo
+            </button>
+            <button class="btn btn-info ml-2" (click)="ativarPesquisa()">
+                <i class="fa fa-search" ></i> pesquisar
+            </button>
+        </div>
+
+       
+    </div>
+
+    <div class="row ">
+        <div class="col-lg-4 col-md-4" *ngIf="isSearch">
+            <div class="form-group">                
+                <input class="form-control" type="text" name="search" id="pesquisar"
+                placeholder="Digite sua pesquisa aqui..." autocomplete="off"
+                    (keyup)="filtrar($event.target.value)" />
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 
+
+      <form class="form">
         <div class="row">
             <div class="col-md-1 mr-3 m-1">
                 <label for="pesquisar" class="col-form-label ">Pesquisar:</label>
@@ -38,7 +93,10 @@
                 </button>
             </div>
         </div>
-    </form>
+    </form> -->
+
+
+
 
     <br />
     <div class="row">
@@ -47,12 +105,13 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Serviço Prestado</th>
+                        <th>Tipo de serviço</th>
+                        <!-- <th>Serviço Prestado</th> -->
                         <th>Cliente</th>
                         <th>Tipo de Pagamento</th>
+                        <th>Data Pag.</th>
                         <th>Desconto</th>
                         <th>Acrescimo</th>
-                        <th>Observação</th>
                         <th>Valor Total</th>
                         <th></th>
                     </tr>
@@ -61,16 +120,17 @@
                     <tr
                         *ngFor="let prestacaoConta of prestacaoContas | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index">
                         <td>{{ prestacaoConta.id }}</td>
-                        <td>{{ prestacaoConta.serviceProvided.description }}</td>
+                        <td>{{ prestacaoConta.serviceProvided.typeService.service }}</td>
+                        <!-- <td>{{ prestacaoConta.serviceProvided.description }}</td> -->
                         <td>{{ prestacaoConta.serviceProvided.client.name }}</td>
                         <td>{{ prestacaoConta.typePayment.type }}</td>
+                        <td>{{ converToDateFormat(prestacaoConta.datePayment)  }}</td>
                         <td>R$ {{ prestacaoConta.discountValue | mask: 'separator':',' }}</td>
                         <td>R$ {{ prestacaoConta.additionValue | mask: 'separator':',' }}</td>
-                        <td>{{ prestacaoConta.observation }}</td>
                         <td>R$ {{ prestacaoConta.totalValue | mask: 'separator':',' }}</td>
                         <td>
                             <button class="btn btn-primary m-1" routerLink="/prestacao/conta/{{ prestacaoConta.id }}">
-                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-eye"></i>
                             </button>
                             <button class="btn btn-secondary m-1"
                                 routerLink="/prestacao/conta/{{ prestacaoConta.id}}/true">
@@ -103,8 +163,7 @@
 
                 </div>
                 <div class="modal-body" *ngIf="prestacaoContasSelecionado">
-                    Confirma a exclusão do(a) prestação de contas: {{prestacaoContasSelecionado.id +" - "+
-                    prestacaoContasSelecionado.serviceProvided.description }}
+                    Confirma a exclusão do(a) prestação de contas de ID: {{ prestacaoContasSelecionado.id }}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" (click)="deletarPrestacaoConta()" data-dismiss="modal">

@@ -1,32 +1,40 @@
-<h1 class="mt-4 ">Gráfico</h1>
-
-
 <div class="row ">
-  <div class="col-md-2 container-fluid">
-    <div class="form-group">
-      <label for="data">Ano:</label>
-      <input class="form-control" placeholder="YYYY" type="text" id="data" (change)="buscarPorData($event)" mask="0000"
-        name="competencia">
-    </div>
-  </div>
 
-</div>
-
-
-
-
-
-<div class="container">
-
-
-  <div class="chart-container" >
-    <canvas class="grafico" #meuCanvas></canvas>
-  </div>
   
 
+  <div class="col-md-12" *ngIf="errors.length>0">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngFor="let erro of errors">
+      {{erro}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <h1 class="mt-4 ">Gráfico</h1>
+  </div>
+  <div class="col-md-2 mt-4">
+   
+    
+    <div class="form-group text-center">
+      <label for="data">Ano: *</label> 
+      <input class="form-control text-center" placeholder="YYYY" type="text" id="data" autocomplete="off"
+        (change)="buscarPorData($event)" mask="0000" name="competencia">
+    </div>
+  </div>
+</div>
 
+<div class="container">
+  <div class="chart-container">
+    <canvas class="grafico" #meuCanvas></canvas>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div [class.spinner-border]="isLoading" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
   <br />
-  <div class=row *ngIf="dataSelecionada">
+  <div class=row *ngIf="dataSelecionada && !isLoading">
     <button type="button" class="btn btn-primary m-1" (click)="recebido()">
       <i class="fa fa-signal" aria-hidden="true"></i> Recebido por Mês
     </button>

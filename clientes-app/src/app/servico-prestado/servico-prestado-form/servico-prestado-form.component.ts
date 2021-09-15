@@ -8,6 +8,9 @@ import { DefinicaoService } from 'src/app/definicao.service';
 import { DateUtil } from 'src/app/util/Date-Util';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Dropdown } from 'primeng/dropdown';
+
+
 
 
 @Component({
@@ -24,6 +27,7 @@ export class ServicoPrestadoFormComponent implements OnInit {
   errors: String[];
   id: number;
   isLoading: boolean = false;
+  forms: Form;
 
   constructor(
     private clienteService: ClientesService,
@@ -64,7 +68,8 @@ export class ServicoPrestadoFormComponent implements OnInit {
         .getClientes()
         .subscribe(
           response => {
-            this.clientes = response
+            this.clientes = response.filter(x => x.status)
+            this.clientes.map(v => v.search = v.id + " - "+v.name);
           }, erro => {            
             this.errors = erro.error.erros
             if (this.errors == undefined) {
@@ -76,7 +81,8 @@ export class ServicoPrestadoFormComponent implements OnInit {
     if (this.errors == undefined || this.errors.length == 0) {
       this.definicaoService.getTipoServicos()
         .subscribe(response => {
-          this.tipoServico = response
+          this.tipoServico = response;
+          this.tipoServico.map(v => v.search = v.id + " - "+v.service);
         }, erro => {          
           this.errors = erro.error.erros
           if (this.errors == undefined) {
@@ -99,7 +105,7 @@ export class ServicoPrestadoFormComponent implements OnInit {
     this.close();
     this.isLoading = true;
     this.servico.date = DateUtil.dateFormat(this.servico.date);
-    this.servico.value.replace(",", ".");
+    this.servico.value.replace(",", ".");    
     this.service.salvar(this.servico)
       .subscribe(response => {
         this.isLoading = false;
@@ -124,5 +130,27 @@ export class ServicoPrestadoFormComponent implements OnInit {
     this.servico.date = response.date;
     this.servico.value = response.value;
   }
+
+
+  clearFilter(dropdown: Dropdown) {
+    dropdown.resetFilter();
+  }
+
+
+}
+
+class Form {
+
+  cliente ?: Cliente;
+
+
+  constructor() {
+    this.clean();
+  }
+
+  clean() {
+    this.cliente = {} as Cliente;
+  }
+
 
 }

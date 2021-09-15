@@ -1,6 +1,7 @@
 package com.projeto.servicos.model.controller;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,10 +34,10 @@ public class ScheduleController {
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void save(@RequestBody @Valid ScheduleDTO dto) {
-
+	public void saveValidate(@RequestBody @Valid ScheduleDTO dto) {
 		
 		LocalDate data = LocalDate.parse(dto.getDate(), formatter);
 		Schedule schedule = new Schedule();
@@ -43,17 +45,62 @@ public class ScheduleController {
 		schedule.setDate(data);
 		schedule.setObservation(dto.getObservation());
 		schedule.setTitle(dto.getTitle());
-
+		schedule.setClient(dto.getClient());
+		schedule.setHourInitial(LocalTime.parse(dto.getHourInitial()));
+		schedule.setHourFinal(LocalTime.parse(dto.getHourFinal()));
+		if(dto.getFlagConfirmation() == null) {
+			schedule.setFlagConfirmation(false);
+		}else {
+			schedule.setFlagConfirmation(dto.getFlagConfirmation());
+		}
+		
+		if(scheduleRepository.existsByHourAndDate(schedule.getHourInitial(), schedule.getHourFinal(), schedule.getDate())) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Nesta data e neste intervalor de horário já possui agenda cadastrada!");
+		}
+		
+		if(schedule.getHourInitial().isAfter(schedule.getHourFinal())) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Hora inicial não pode ser maior que hora final!");
+		}
+		
 		scheduleRepository.save(schedule);
-
 	}
-
+	
+	
+	@PostMapping("/validate")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void save(@RequestBody @Valid ScheduleDTO dto) {
+		
+		LocalDate data = LocalDate.parse(dto.getDate(), formatter);
+		Schedule schedule = new Schedule();
+		schedule.setId(dto.getId());
+		schedule.setDate(data);
+		schedule.setObservation(dto.getObservation());
+		schedule.setTitle(dto.getTitle());
+		schedule.setClient(dto.getClient());
+		schedule.setHourInitial(LocalTime.parse(dto.getHourInitial()));
+		schedule.setHourFinal(LocalTime.parse(dto.getHourFinal()));
+		
+		if(dto.getId() == null) {
+			schedule.setFlagConfirmation(false);
+		}
+		
+		if(scheduleRepository.existsByHourAndDate(schedule.getHourInitial(), schedule.getHourFinal(), schedule.getDate())) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Nesta data e neste intervalor de horário já possui agenda cadastrada!");
+		}
+		
+		if(schedule.getHourInitial().isAfter(schedule.getHourFinal())) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Hora inicial não pode ser maior que hora final!");
+		}
+				
+		scheduleRepository.save(schedule);
+	}
+	
+	
 	@GetMapping("/date")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Schedule> getByDate(
 			@RequestParam(value = "dateInitial", required = true, defaultValue = "31/12/1900") String dateInitial,
 			@RequestParam(value = "dateFinal", required = true, defaultValue = "31/12/1900") String dateFinal) {
-
 	
 		LocalDate initialDate = null;
 		LocalDate finalDate = null;

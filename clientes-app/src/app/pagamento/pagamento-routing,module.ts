@@ -8,7 +8,9 @@ import { PagamentoTipoLista } from './tipo-lista/pagamento-tipo-lista.component'
 
 const routes: Routes = [
   {
-    path: 'pagamento', component: LayoutComponent,  canActivate : [AuthGuard], children: [
+    path: 'pagamento', component: LayoutComponent,  canActivate : [AuthGuard], data :{
+      roles:['ROLE_ADMIN']
+    }, children: [
       { path: 'tipo', component: Pagamento },  
       { path: 'tipo/lista', component: PagamentoTipoLista },
       {path: 'tipo/:id' , component: Pagamento},     

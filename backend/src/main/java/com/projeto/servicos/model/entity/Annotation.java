@@ -27,7 +27,7 @@ public class Annotation {
 	@Column(name = "title")
 	private String title;
 	
-	@Column(name = "annotation")
+	@Column(name = "annotation", length = 1200)
 	private String annotation;
 	
 	@ManyToOne

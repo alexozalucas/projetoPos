@@ -1,6 +1,7 @@
 <div class="col-md-12">
   <div class="card card-container">
-    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+    <h3 class="text-center" style="font-family: fantasy;">Controle de serviço prestado</h3>
+  
     <form *ngIf="!isSuccessful && !isLoading" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
       novalidate>
       <div class="form-group">

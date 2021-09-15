@@ -40,7 +40,7 @@ public class Accountability {
 	@Column(name= "additionValue")
 	private BigDecimal additionValue;
 	
-	@Column(name= "observation")
+	@Column(name= "observation", length = 1200)
 	private String observation;
 	
 	@ManyToOne

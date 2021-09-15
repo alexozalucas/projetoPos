@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +45,7 @@ public class ServiceProvidedController {
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ServiceProvided salve(@RequestBody @Valid ServiceProvidedDTO dto) {
@@ -57,21 +59,24 @@ public class ServiceProvidedController {
 
 		TypeService typeService = typeServiceRepository.findById(idTypeService)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de serviço inexistente"));
-
+		
+		if(serviceProvidedRepository.existsByIdAndReleasedPaymentTrue(dto.getId())) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Serviço prestado já possui lançamento de prestação de conta!");
+		}
+		
 		ServiceProvided serviceProvided = new ServiceProvided();
 		serviceProvided.setId(dto.getId());
 		serviceProvided.setDescription(dto.getDescription());
 		serviceProvided.setDate(data);
 		serviceProvided.setClient(cliente);
 		serviceProvided.setValue(bigDecimalConvert.convert(dto.getValue()));
-		serviceProvided.setTypeService(typeService);
-		if(dto.getId() == null) {
-			serviceProvided.setReleasedPayment(false);
-		}
+		serviceProvided.setTypeService(typeService);		
+		serviceProvided.setReleasedPayment(false);		
 
 		return serviceProvidedRepository.save(serviceProvided);
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping
 	public List<ServiceProvided> Search(@RequestParam(value = "name", required = false, defaultValue = "") String name,
 			@RequestParam(value = "mes", required = false) int mes) {
@@ -80,6 +85,7 @@ public class ServiceProvidedController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("/SearchNameDate")
 	public List<ServiceProvided> SearchNameDate(
 			@RequestParam(value = "name", required = false, defaultValue = "") String name,
@@ -93,6 +99,7 @@ public class ServiceProvidedController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("/date")
 	public List<ServiceProvided> SearchDate(@RequestParam(value = "dateInitial", required = true) String dateInitial,
 			@RequestParam(value = "dateFinal", required = true) String dateFinal) {
@@ -103,15 +110,21 @@ public class ServiceProvidedController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("/all")
 	public List<ServiceProvided> obterTodos() {
 		return serviceProvidedRepository.findAll();
 	}
 	
 	
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Integer id) {
+		
+		if(serviceProvidedRepository.existsByIdAndReleasedPaymentTrue(id)) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Serviço prestado já possui lançamento de prestação de conta!");
+		}
 
 		serviceProvidedRepository.findById(id).map(service -> {			
 			serviceProvidedRepository.delete(service);
@@ -120,6 +133,7 @@ public class ServiceProvidedController {
 		
 	}
 	
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("/{id}")
 	public ServiceProvided getServiceProvided(@PathVariable Integer id) {
 

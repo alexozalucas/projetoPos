@@ -11,14 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @Entity
-@Getter
-@Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final String USER = "USER";
@@ -33,6 +37,7 @@ public class Role implements Serializable {
 
 	private String name;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "roles")
 	private Set<User> users;
 

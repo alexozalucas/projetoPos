@@ -43,6 +43,9 @@ public class Client {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "dateRegister" , updatable = false)
 	private LocalDate dateRegister;
+	
+	@Column(name = "status", nullable = false )
+	private Boolean status;
 		
 	@PrePersist
 	public void prePersist() {

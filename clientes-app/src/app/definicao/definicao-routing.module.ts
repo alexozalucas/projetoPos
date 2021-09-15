@@ -7,7 +7,9 @@ import { DefinicaoTipoServico } from './tipo/definicao-tipo-servico.component';
 
 const routes: Routes = [
   {
-    path: 'definicao', component: LayoutComponent,  canActivate : [AuthGuard], children: [
+    path: 'definicao', component: LayoutComponent,  canActivate : [AuthGuard], data :{
+      roles:['ROLE_ADMIN','ROLE_USER']
+    }, children: [
       { path: 'tipo', component: DefinicaoTipoServico },  
       { path: 'tipo/lista', component: TipoServicoListaComponent },
       {path: 'tipo/:id' , component: DefinicaoTipoServico},     

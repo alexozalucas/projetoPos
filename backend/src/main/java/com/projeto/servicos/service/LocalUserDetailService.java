@@ -23,7 +23,7 @@ public class LocalUserDetailService implements UserDetailsService {
 	public LocalUser loadUserByUsername(final String email) throws UsernameNotFoundException {
 		User user = userService.findUserByEmail(email);
 		if (user == null) {
-			throw new UsernameNotFoundException("User " + email + " was not found in the database");
+			throw new UsernameNotFoundException("Usuário " + email + " não foi encontrado no banco de dados");
 		}
 		return createLocalUser(user);
 	}

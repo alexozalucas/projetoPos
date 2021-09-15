@@ -5,7 +5,6 @@
 
 <div class="container-fluid">
     <form #form="ngForm" (submit)="onSubmit()">
-
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-success hidden" role="alert" *ngIf="success == true">
@@ -34,16 +33,20 @@
             </div>
         </div>
 
-        <div class=row>
+        <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>Cliente:</label>
-                    <select class="form-control" [ngModelOptions]="{standalone:true}" [(ngModel)]="servico.idClient">
+                    <label >Cliente: *</label>
+					<p-dropdown #cli [options]="clientes"  [ngModelOptions]="{standalone:true}" [(ngModel)]="servico.idClient" optionLabel="search" optionValue="id"
+                    placeholder="Selecione um cliente..." emptyMessage="nenhum resultado encontrado"
+                    emptyFilterMessage="nenhum resultado encontrado" filter="true" [autoDisplayFirst]="false" (onBlur)="clearFilter(cli)" required
+                    [style]="{width : '100%' }"></p-dropdown>
+                    <!-- <select class="form-control"  [ngModelOptions]="{standalone:true}"  [(ngModel)]="servico.idClient">
                         <option value="">Selecione...</option>
                         <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
-                            {{ cliente.name }}
+                            {{cliente.id +" - "+ cliente.name }}
                         </option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </div>
@@ -51,14 +54,18 @@
         <div class=row>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>Tipo Serviço:</label>
-                    <select class="form-control" [ngModelOptions]="{standalone:true}"
+                    <label>Tipo Serviço: *</label>
+                    <p-dropdown #ser [options]="tipoServico"  [ngModelOptions]="{standalone:true}" [(ngModel)]="servico.idTypeService" optionLabel="search"  optionValue="id"
+                    placeholder="Selecione um tipo de serviço..." emptyMessage="nenhum resultado encontrado"
+                    emptyFilterMessage="nenhum resultado encontrado" filter="true" [autoDisplayFirst]="false" (onBlur)="clearFilter(ser)" required
+                    [style]="{width : '100%' }"></p-dropdown>
+                    <!-- <select class="form-control" [ngModelOptions]="{standalone:true}"
                         [(ngModel)]="servico.idTypeService">
                         <option value="">Selecione...</option>
                         <option *ngFor="let tipoServicos of tipoServico" [ngValue]="tipoServicos.id">
-                            {{ tipoServicos.service }}
+                            {{tipoServicos.id +" - " +tipoServicos.service }}
                         </option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </div>
@@ -67,9 +74,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>Descrição:</label>
-                    <input class="form-control" [(ngModel)]="servico.description" type="text" name="description"
-                        id="inputDescription">
+                    <label>Descrição: *</label>
+                    <textarea class="form-control" Maxlength="1200" id="descricaoServico" rows="4" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="servico.description"></textarea>
+                    <!-- <input class="form-control" [(ngModel)]="servico.description" type="text" name="description"
+                        id="inputDescription"> -->
                 </div>
             </div>
         </div>
@@ -77,16 +86,16 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Data:</label>
-                    <input class="form-control" [(ngModel)]="servico.date" placeholder="DD/MM/YYYY" mask="00/00/0000"
+                    <label>Data Contrato: *</label>
+                    <input class="form-control" autocomplete="off" [(ngModel)]="servico.date" placeholder="DD/MM/YYYY" mask="00/00/0000"
                         type="text" name="date" id="inputData">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Valor Inicial </label>
-                    <input class="form-control" [(ngModel)]="servico.value" type="text" name="value" id="inputValue"
+                    <label>Valor Inicial: *</label>
+                    <input class="form-control" autocomplete="off" [(ngModel)]="servico.value" type="text" name="value" id="inputValue"
                         mask="separator.2" thousandSeparator="." prefix="R$ ">
                 </div>
             </div>
