@@ -11,6 +11,9 @@ import { PrestacaoContas } from '../prestacao-conta';
 import { DateUtil } from 'src/app/util/Date-Util';
 import { jsPDF } from "jspdf";
 import { Dropdown } from 'primeng/dropdown';
+import autoTable from 'jspdf-autotable';
+
+import 'jspdf-autotable'
 
 
 
@@ -92,7 +95,7 @@ export class PrestacaoContasComponent implements OnInit {
       this.pagamentoService.getTipoPagamento()
         .subscribe(response => {
           this.tipoPagamento = response;
-          this.tipoPagamento.map(v => v.search = v.id + " - "+v.type); 
+          this.tipoPagamento.map(v => v.search = v.id + " - " + v.type);
           this.isLoading = false;
         }, erro => {
           this.errors = erro.error.erros;
@@ -111,107 +114,66 @@ export class PrestacaoContasComponent implements OnInit {
   }
 
   gerarPDF() {
-    const documento = new jsPDF();
-    
-    documento.setFont("Courier");
-    documento.setFontSize(15);
-    documento.text("Relatório de prestação de contas", 60, 12);
+    let doc = new jsPDF();
 
     // Parte do relatório destinada a cliente
-    documento.setFontSize(12);
-    documento.text("Cliente:", 10, 25);
+    const clientcolumns = [['Clientes', '']];
+    const client = [
+      ['Nome', this.prestacaoContasBuscar.serviceProvided.client.name],
+      ['CPF', this.prestacaoContasBuscar.serviceProvided.client.cpf]
+    ];
 
-    documento.setFillColor(50, 50, 50);
-    documento.rect(10, 30, 30, 8, "FD");
-    documento.rect(10, 38, 30, 8, "FD");  
-    documento.rect(40, 30, 160, 8, "S");
-    documento.rect(40, 38, 160, 8, "S");
+    autoTable(doc, {
+      head: clientcolumns,
+      body: client,
+      columnStyles: { 0: { cellWidth: 20 } },
+      didDrawPage: (dataArg) => {
+        doc.text('Relatório de prestação de contas', dataArg.settings.margin.left, 10);
+      }
+    });
 
-    documento.setFontSize(10);
-    documento.setTextColor(255, 255, 255);
-    documento.text("Nome", 12, 36);
-    documento.text("CPF", 12, 44);
 
-    documento.setFont("Normal");
-    documento.setTextColor(0, 0, 0);
-    documento.text(this.prestacaoContasBuscar.serviceProvided.client.name, 42, 36);
-    documento.text(this.prestacaoContasBuscar.serviceProvided.client.cpf, 42, 44);
-  
     // Parte do relatório destinada ao serviço prestado
-    documento.setFontSize(12);
-    documento.text("Serviço prestado:", 10, 55);
+    const providerServiceColumns = [['Serviço Prestado', '']];
+    const providerService = [
+      ['ID', this.prestacaoContasBuscar.serviceProvided.id],
+      ['Descrição', this.prestacaoContasBuscar.serviceProvided.description],
+      ['Data', this.prestacaoContasBuscar.serviceProvided.date],
+      ['Tipo serviço', this.prestacaoContasBuscar.serviceProvided.typeService.service],
+      ['Valor fechado', this.prestacaoContasBuscar.serviceProvided.value]
+    ];
 
-    documento.setFillColor(50, 50, 50);
-    documento.rect(10, 61, 30, 8, "FD");
-    documento.rect(10, 69, 30, 8, "FD");
-    documento.rect(10, 77, 30, 8, "FD");
-    documento.rect(10, 85, 30, 8, "FD");
-    documento.rect(10, 93, 30, 8, "FD");
-    documento.rect(40, 61, 160, 8, "S");
-    documento.rect(40, 69, 160, 8, "S");
-    documento.rect(40, 77, 160, 8, "S");
-    documento.rect(40, 85, 160, 8, "S");
-    documento.rect(40, 93, 160, 8, "S");
-    
+    autoTable(doc, {
+      head: providerServiceColumns,
+      body: providerService,
+      columnStyles: { 0: { cellWidth: 40 } },
+      didDrawPage: (dataArg) => {
+        doc.text('', dataArg.settings.margin.left, 10);
+      }
+    });
 
-    documento.setFontSize(10);
-    documento.setTextColor(255, 255, 255);
-    documento.text("ID", 12, 67);
-    documento.text("Descrição", 12, 75);
-    documento.text("Data", 12, 83);
-    documento.text("Tipo serviço", 12, 91);
-    documento.text("Valor fechado", 12, 99);
-  
-    var pageWidth = 158,	 
-	  margin = 0.5,
-	  maxLineWidth = pageWidth - margin * 2;
-    var description = documento.splitTextToSize(this.prestacaoContasBuscar.serviceProvided.description, maxLineWidth);
-    
-    documento.setFont("Normal");
-    documento.setTextColor(0, 0, 0);
-    documento.text(this.prestacaoContasBuscar.serviceProvided.id+"", 42, 67);
-    documento.text(description, 42, 75);
-    documento.text(this.prestacaoContasBuscar.serviceProvided.date, 42, 83);
-    documento.text(this.prestacaoContasBuscar.serviceProvided.typeService.service, 42, 91);
-    documento.text(this.prestacaoContasBuscar.serviceProvided.value+"", 42, 99);
-   
-    // Parte do relatório destinada a prestação de contas
-    documento.setFontSize(12);
-    documento.text("Prestação de contas:", 10, 110);
 
-    documento.setFillColor(50, 50, 50);
-    documento.rect(10, 118, 30, 8, "FD");
-    documento.rect(10, 126, 30, 8, "FD");
-    documento.rect(10, 134, 30, 8, "FD");
-    documento.rect(10, 142, 30, 8, "FD");
-    documento.rect(10, 150, 30, 8, "FD");
-    documento.rect(10, 158, 30, 8, "FD");
-    documento.rect(40, 118, 160, 8, "S");
-    documento.rect(40, 126, 160, 8, "S");
-    documento.rect(40, 134, 160, 8, "S");
-    documento.rect(40, 142, 160, 8, "S");
-    documento.rect(40, 150, 160, 8, "S");
-    documento.rect(40, 158, 160, 8, "S")
-
-    documento.setFontSize(10);
-    documento.setTextColor(255, 255, 255);
-    documento.text("Desconto", 12, 124);
-    documento.text("Acrescimo", 12, 132);
-    documento.text("Valor Total", 12, 140);
-    documento.text("Observação", 12, 148);
-    documento.text("Tipo de pagamento", 12, 156);
-    documento.text("Data Pagamento", 12, 164);
-
-    documento.setFont("Normal");
-    documento.setTextColor(0, 0, 0);
-    documento.text(this.prestacaoContasBuscar.discountValue+"", 42, 124);
-    documento.text(this.prestacaoContasBuscar.additionValue+"", 42, 132);
-    documento.text(this.prestacaoContasBuscar.totalValue+"", 42, 140);
-    documento.text(this.prestacaoContasBuscar.observation, 42, 148);
-    documento.text(this.prestacaoContasBuscar.typePayment.type, 42, 156);
-    documento.text(this.retornaDatePaymentFormat(this.prestacaoContasBuscar.datePayment), 42, 164)
-
-    documento.output("dataurlnewwindow");
+     // Parte do relatório destinada a prestação de contas
+     const accountabilityColumns = [['Prestação de contas', '']];
+     const accountability = [
+       ['Desconto', this.prestacaoContasBuscar.discountValue],
+       ['Acrescimo', this.prestacaoContasBuscar.additionValue],
+       ['Valor Total', this.prestacaoContasBuscar.totalValue],
+       ['Observação', this.prestacaoContasBuscar.observation],
+       ['Tipo de pagamento', this.prestacaoContasBuscar.typePayment.type],
+       ['Data Pagamento', this.retornaDatePaymentFormat(this.prestacaoContasBuscar.datePayment)]
+     ];
+ 
+     autoTable(doc, {
+       head: accountabilityColumns,
+       body: accountability,
+       columnStyles: { 0: { cellWidth: 40 } },
+       didDrawPage: (dataArg) => {
+         doc.text('', dataArg.settings.margin.left, 10);
+       }
+     });
+ 
+     doc.output("dataurlnewwindow");
   }
 
 
@@ -235,7 +197,7 @@ export class PrestacaoContasComponent implements OnInit {
 
     this.prestacaoContas.idTypePayment = this.tipoPagamentoSelecionado.id;
     this.close();
-    this.isLoading = true;      
+    this.isLoading = true;
     this.service.salvar(this.prestacaoContas)
       .subscribe(response => {
         this.success = true;
@@ -287,9 +249,9 @@ export class PrestacaoContasComponent implements OnInit {
       this.close();
       this.isLoading = true;
       this.servicoPrestadoService.buscarDate(this.dataInicial, this.dataFinal)
-        .subscribe(response => {          
+        .subscribe(response => {
           this.servicoPrestadoBusca = response;
-          this.servicoPrestadoBusca.map(v => v.search = v.id + " - "+v.client.name+" - "+v.typeService.service );
+          this.servicoPrestadoBusca.map(v => v.search = v.id + " - " + v.client.name + " - " + v.typeService.service);
           this.errors = null;
           this.isLoading = false;
           if (this.servicoPrestadoBusca.length == 0) {

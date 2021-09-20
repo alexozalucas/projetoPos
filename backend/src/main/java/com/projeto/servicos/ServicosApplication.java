@@ -16,7 +16,7 @@ public class ServicosApplication extends SpringBootServletInitializer {
 		app.run();
 		
 	}
-	
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(ServicosApplication.class);
