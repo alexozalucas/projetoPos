@@ -347,7 +347,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">{{cliente.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n\n  <form #clienteForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          Cliente salvo/editado com sucesso!\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"cliente.id\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            ID:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.id\" name=\"id\" />\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Data Cadastro:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.dateRegister\"\n            name=\"dateRegister\" />\n        </div>\n      </div>\n\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Nome: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.name\" name=\"name\" />\n\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            CPF: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.cpf\" name=\"cpf\" type=\"text\"\n            placeholder=\"000.000.000-00\" mask=\"000.000.000-00\" />\n        </div>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"!isLoading\">\n      <div class=\"col-md-4\">\n        <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!cliente.id\">\n          <i class=\"fa fa-save\"></i> Salvar\n        </button>\n        <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"cliente.id\">\n          <i class=\"fa fa-sync-alt\"></i> Atualizar\n        </button>\n        <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n          <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n        </button>\n      </div>\n    </div>\n  </form>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">{{cliente.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n\n  <form #clienteForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          Cliente salvo/editado com sucesso!\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"cliente.id\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            ID:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.id\" name=\"id\" />\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Data Cadastro:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"cliente.dateRegister\"\n            name=\"dateRegister\" />\n        </div>\n      </div>\n\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Nome: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.name\" name=\"name\" autocomplete=\"off\"/>\n\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            CPF: *\n          </label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"cliente.cpf\" name=\"cpf\" type=\"text\" autocomplete=\"off\"\n            placeholder=\"000.000.000-00\" mask=\"000.000.000-00\" />\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row mb-2\" >\n      <div class=\"col\">\n        <label>Status: *</label>\n        <div class=\"custom-control custom-switch\">          \n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"customSwitch1\" (click)=\"VerificaStatus($event.target.checked)\" [checked]=\"cliente.status\" >\n          <label class=\"custom-control-label\" for=\"customSwitch1\" >{{cliente.status ? 'ATIVO' :'INATIVO'}}</label>\n        </div>\n      </div>\n    </div>\n  \n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"!isLoading\">\n      <div class=\"col-md-4\">\n        <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!cliente.id\">\n          <i class=\"fa fa-save\"></i> Salvar\n        </button>\n        <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"cliente.id\">\n          <i class=\"fa fa-sync-alt\"></i> Atualizar\n        </button>\n        <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\" *ngIf=\"!returnPermission()\">\n          <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n        </button>\n      </div>\n    </div>\n  </form>\n</div>");
 
 /***/ }),
 
@@ -360,7 +360,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n            aria-hidden=\"true\">&times;</span></button>\n        {{mensagemSucesso}}\n      </div>\n\n      <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n        {{erro}}\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n\n  <br />\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\" id=\"table-clientes\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>NOME</th>\n            <th>CPF</th>\n            <th>DATA CADASTRO</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr\n            *ngFor=\"let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index\">\n            <td>{{ cliente.id }}</td>\n            <td>{{ cliente.name }}</td>\n            <td>{{ cliente.cpf | mask: '000.000.000-99' }}</td>\n            <td>{{ cliente.dateRegister }}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" routerLink=\"/clientes/form/{{ cliente.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(cliente)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"clienteSelecionado\">\n          Confirma a exclusão do(a) Cliente: {{ clienteSelecionado.name }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarCliente()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Clientes</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n            aria-hidden=\"true\">&times;</span></button>\n        {{mensagemSucesso}}\n      </div>\n\n      <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n        {{erro}}\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" autocomplete=\"off\"\n          (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n  <br />\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\" id=\"table-clientes\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>NOME</th>\n            <th>CPF</th>\n            <th>DATA CADASTRO</th>\n            <th>STATUS</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr\n            *ngFor=\"let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index\">\n            <td>{{ cliente.id }}</td>\n            <td>{{ cliente.name }}</td>\n            <td>{{ cliente.cpf | mask: '000.000.000-99' }}</td>\n            <td>{{ cliente.dateRegister }}</td>\n            <td>{{ cliente.status ? 'ATIVO' :'INATIVO'}}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" routerLink=\"/clientes/form/{{ cliente.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(cliente)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\"\n        nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"clienteSelecionado\">\n          Confirma a exclusão do(a) Cliente: {{ clienteSelecionado.name }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarCliente()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>");
 
 /***/ }),
 
@@ -373,7 +373,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Tipo de Serviço</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n            aria-hidden=\"true\">&times;</span></button>\n        {{mensagemSucesso}}\n      </div>\n\n      <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n        {{erro}}\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>TIPO SERVIÇO</th>\n            <th>OBSERVAÇÃO</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr\n            *ngFor=\"let tipoServico of tipoServicos | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n            <td>{{ tipoServico.id }}</td>\n            <td>{{ tipoServico.service }}</td>\n            <td>{{ tipoServico.observation }}</td>\n            <td>\n              <button class=\"btn btn-primary m-1\" routerLink=\"/definicao/tipo/{{ tipoServico.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(tipoServico)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"tipoServicoSelecionado\">\n          Confirma a exclusão do(a) tipo de serviço: {{ tipoServicoSelecionado.service }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarTipoServico()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Tipo de Serviço</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n            aria-hidden=\"true\">&times;</span></button>\n        {{mensagemSucesso}}\n      </div>\n\n      <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n        {{erro}}\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" autocomplete=\"off\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-5 m-1\">\n        <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>TIPO SERVIÇO</th>\n            <th>OBSERVAÇÃO</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr\n            *ngFor=\"let tipoServico of tipoServicos | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n            <td>{{ tipoServico.id }}</td>\n            <td>{{ tipoServico.service }}</td>\n            <td>{{ tipoServico.observation }}</td>\n            <td>\n              <button class=\"btn btn-primary m-1\" routerLink=\"/definicao/tipo/{{ tipoServico.id }}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(tipoServico)\" data-toggle=\"modal\"\n                data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"tipoServicoSelecionado\">\n          Confirma a exclusão do(a) tipo de serviço: {{ tipoServicoSelecionado.service }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarTipoServico()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n");
 
 /***/ }),
 
@@ -386,7 +386,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Tipo de Serviço</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{tipoServico.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #tipoServicoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n              <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                    aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n              </div>\n        \n              <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n            </div>\n          </div>\n\n        <div class=\"row\" *ngIf=\"tipoServico.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoServico.id\" name=\"id\" />\n                </div>\n            </div>        \n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Tipo de Serviço: * \n                    </label>\n                    <input type=\"text\" class=\"form-control\"  [(ngModel)]=\"tipoServico.service\"\n                        name=\"service\" />\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Observação:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoServico.observation\" name=\"observation\" />\n                </div>\n            </div>            \n        </div>\n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!tipoServico.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoServico.id\">\n                    <i class=\"fa fa-sync-alt\" ></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n            </div>\n        </div>\n    </form>\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n          <span class=\"sr-only\">Loading...</span>\n        </div>\n      </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Tipo de Serviço</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{tipoServico.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #tipoServicoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n              <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                    aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n              </div>\n        \n              <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n            </div>\n          </div>\n\n        <div class=\"row\" *ngIf=\"tipoServico.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoServico.id\" name=\"id\" />\n                </div>\n            </div>        \n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Tipo de Serviço: * \n                    </label>\n                    <input type=\"text\" class=\"form-control\" Maxlength=\"240\" autocomplete=\"off\"  [(ngModel)]=\"tipoServico.service\"\n                        name=\"service\" />\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Observação:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" Maxlength=\"240\" autocomplete=\"off\" [(ngModel)]=\"tipoServico.observation\" name=\"observation\" />\n                </div>\n            </div>            \n        </div>\n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!tipoServico.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoServico.id\">\n                    <i class=\"fa fa-sync-alt\" ></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n            </div>\n        </div>\n    </form>\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n          <span class=\"sr-only\">Loading...</span>\n        </div>\n      </div>\n</div>\n");
 
 /***/ }),
 
@@ -399,7 +399,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4 \">Gráfico</h1>\n\n\n<div class=\"row \">\n  <div class=\"col-md-2 container-fluid\">\n    <div class=\"form-group\">\n      <label for=\"data\">Ano:</label>\n      <input class=\"form-control\" placeholder=\"YYYY\" type=\"text\" id=\"data\" (change)=\"buscarPorData($event)\" mask=\"0000\"\n        name=\"competencia\">\n    </div>\n  </div>\n\n</div>\n\n\n\n\n\n<div class=\"container\">\n\n\n  <div class=\"chart-container\" >\n    <canvas class=\"grafico\" #meuCanvas></canvas>\n  </div>\n  \n\n\n  <br />\n  <div class=row *ngIf=\"dataSelecionada\">\n    <button type=\"button\" class=\"btn btn-primary m-1\" (click)=\"recebido()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Recebido por Mês\n    </button>\n    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"desconto()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Descontos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-success m-1\" (click)=\"acrescimo()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Acréscimos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"servico()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Serviços por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-warning m-1\" (click)=\"contrato()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Valor contratado\n    </button>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row \">\n\n  \n\n  <div class=\"col-md-12\" *ngIf=\"errors.length>0\">\n    <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n      {{erro}}\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n  </div>\n  <div class=\"col-sm-2\">\n    <h1 class=\"mt-4 \">Gráfico</h1>\n  </div>\n  <div class=\"col-md-2 mt-4\">\n   \n    \n    <div class=\"form-group text-center\">\n      <label for=\"data\">Ano: *</label> \n      <input class=\"form-control text-center\" placeholder=\"YYYY\" type=\"text\" id=\"data\" autocomplete=\"off\"\n        (change)=\"buscarPorData($event)\" mask=\"0000\" name=\"competencia\">\n    </div>\n  </div>\n</div>\n\n<div class=\"container\">\n  <div class=\"chart-container\">\n    <canvas class=\"grafico\" #meuCanvas></canvas>\n  </div>\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n  <br />\n  <div class=row *ngIf=\"dataSelecionada && !isLoading\">\n    <button type=\"button\" class=\"btn btn-primary m-1\" (click)=\"recebido()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Recebido por Mês\n    </button>\n    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"desconto()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Descontos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-success m-1\" (click)=\"acrescimo()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Acréscimos por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"servico()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Serviços por mês\n    </button>\n    <button type=\"button\" class=\"btn btn-warning m-1\" (click)=\"contrato()\">\n      <i class=\"fa fa-signal\" aria-hidden=\"true\"></i> Valor contratado\n    </button>\n  </div>\n</div>");
 
 /***/ }),
 
@@ -412,7 +412,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ul class=\"nav nav-tabs bg-light mt-4 \">\n  <li class=\"nav-item \">\n    <a class=\"nav-link active \" data-toggle=\"tab\" (click)=\"selecionarAbaAgenda()\" href=\"#agenda\">Agenda</a>\n  </li>\n  <li class=\"nav-item\">\n    <a class=\"nav-link\" data-toggle=\"tab\" (click)=\"this.mostrarAnotacao()\" href=\"#anotacao\">Anotação</a>\n  </li>\n\n</ul>\n\n<div class=\"containser-fluid\">\n\n  <div class=\"tab-content m-4\">\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          {{mensagemSucesso}}\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n\n\n\n    <div id=\"agenda\" class=\"tab-pane  fade in active show\">\n      <!-- parte em que mostra a lista das agendas -->\n      <div *ngIf=\"!telaEdicao\">\n\n        <div class=\"row \">\n          <div class=\"col-md-3 mr-1\">\n            <div class=\"form-group\">\n              <label>\n                Data Inicial: *\n              </label>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dateInitial\" placeholder=\"DD/MM/YYYY\"\n                id=\"dateInitial\" name=\"dateInitial\" mask=\"00/00/0000\"  />\n            </div>\n          </div>\n          <div class=\"col-md-3\">\n            <div class=\"form-group\">\n              <label>\n                Data Final: *\n              </label>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dateFinal\" placeholder=\"DD/MM/YYYY\" id=\"dateFinal\"\n                mask=\"00/00/0000\" name=\"dateFinal\" />\n            </div>\n          </div>\n          <div class=\"col-md-5 align-self-center pt-3 mb-1\">\n            <button type=\"button\" class=\"btn btn-primary mr-2\" (click)=\"mostrarAgenda()\">\n              <i class=\"fa fa-eye\"></i> Mostrar\n            </button>\n            <button type=\"button\" class=\"btn btn-warning\" (click)=\"cadastroNovo()\">\n              <i class=\"fa fa-plus\"></i> Novo\n            </button>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\" id=\"table-home\">\n              <thead>\n                <tr>\n                  <th>DATA</th>\n                  <th>TITULO</th>\n                  <th>OBSERVAÇÃO</th>\n                </tr>\n              </thead>\n              <tbody *ngIf=\"!isLoading\" >\n                <tr\n                  *ngFor=\"let agenda of listaAgenda | paginate: { itemsPerPage: 6, currentPage: paginaAtualAgenda, id: 'agenda' };  let i = index\">\n                  <td>{{ agenda.date }}</td>\n                  <td>{{ agenda.title }}</td>\n                  <td>{{ agenda.observation }}</td>\n                  <td>\n                    <button class=\"btn btn-primary m-1\" (click)=\"selecionarAgendaPorId(agenda.id)\">\n                      <i class=\"fa fa-edit\"></i>\n                    </button>\n                    <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(agenda)\" data-toggle=\"modal\"\n                      data-target=\"#modalDeSelecao\">\n                      <i class=\"fa fa-trash\"></i>\n                    </button>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" id=\"agenda\" (pageChange)=\"paginaAtualAgenda = $event\" previousLabel=\"Anterior\"\n              nextLabel=\"Próximo\">\n            </pagination-controls>\n          </div>\n        </div>\n      <br />\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n\n        <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n\n              </div>\n              <div class=\"modal-body\" *ngIf=\"agendaSelecionada\">\n                Confirma a exclusão da agenda data: {{ agendaSelecionada.date }}, titulo: {{agendaSelecionada.title}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarAgenda(agendaSelecionada)\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <!-- parte em que edita a agendas -->\n      <div *ngIf=\"telaEdicao\">\n\n        <form #agendaForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n          <div class=\"row\">\n            <div class=\"col-md-3\" *ngIf=\"agenda.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"agenda.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                <label>\n                  Data: *\n                </label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"DD/MM/YYYY\" mask=\"00/00/0000\"\n                  [disabled]=\"agenda.id\" [(ngModel)]=\"agenda.date\" name=\"date\" />\n              </div>\n            </div>\n\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  titulo: *\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"agenda.title\" name=\"title\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Observação:\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"agenda.observation\" name=\"observation\"\n                  type=\"text\" />\n              </div>\n            </div>\n          </div>\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n              <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!agenda.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"agenda.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagemAgenda()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n\n\n\n\n\n    <!-- ANOTAÇÕES LISTA-->\n    <div id=\"anotacao\" class=\"tab-pane fade\">\n\n      <div *ngIf=\"mostrarListaAnotacao  == 1\">\n\n\n        <form class=\"form mb-3\">\n          <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n              <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n              <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                (keyup)=\"filtrarAnotacao($event.target.value)\" />\n            </div>\n            <div class=\"col-md-5 m-1\">\n              <button class=\"btn btn-warning\" (click)=\"novoCadastroAnotacao()\">\n                <i class=\"fa fa-plus\"></i> Novo\n              </button>\n            </div>\n          </div>\n        </form>\n\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\" id=\"table-home\">\n              <thead>\n                <tr>\n                  <th>TITULO</th>\n                  <th>TIPO DE ANOTAÇÃO</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody *ngIf=\"!isLoading\">\n                <tr\n                  *ngFor=\"let anotacao of anotacaoLista | paginate: { itemsPerPage: 6, currentPage: paginaAtualAnotacao,  id: 'anotacao' };  let p = index\">\n                  <td>{{ anotacao.title }}</td>\n                  <td>{{ anotacao.typeAnnotation.id +\" - \"+ anotacao.typeAnnotation.type}}</td>\n                  <td>\n                    <button class=\"btn btn-primary m-1\" (click)=\"selecionarAnotacaoPorId(anotacao.id)\">\n                      <i class=\"fa fa-eye\"></i>\n                    </button>\n                    <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecaoAnotacao(anotacao)\" data-toggle=\"modal\"\n                      data-target=\"#modalDeSelecaoAnotacao\">\n                      <i class=\"fa fa-trash\"></i>\n                    </button>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n            <pagination-controls id=\"anotacao\" *ngIf=\"!isLoading\" (pageChange)=\"paginaAtualAnotacao = $event\" previousLabel=\"Anterior\"\n              nextLabel=\"Próximo\">\n            </pagination-controls>\n          </div>\n        </div>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n        <div id=\"modalDeSelecaoAnotacao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n              </div>\n              <div class=\"modal-body\" *ngIf=\"anotacaoSelecionada\">\n                Confirma a exclusão da anotação: {{ anotacaoSelecionada.id }}, titulo: {{anotacaoSelecionada.title}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarAnotacao()\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n\n      <!-- FORMULÁRIO DE ANOTAÇÃO -->\n      <div *ngIf=\"mostrarListaAnotacao  == 2\">\n        <form #anotacaoForm=\"ngForm\" (ngSubmit)=\"onSubmitAnotacao()\">\n          <div class=\"row\">\n            <div class=\"col-md-4\" *ngIf=\"anotacao.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"anotacao.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-5\">\n              <label>Tipo de anotação: *</label>\n              <div class=\"input-group\">\n\n                <select class=\"form-control\" name=\"tipoAnotacao\" [(ngModel)]=\"anotacao.typeAnnotation.id\"\n                  [ngModelOptions]=\"{standalone:true}\">\n                  <option *ngFor=\"let tipoAnotacao of tipoAnotacaoLista\" [ngValue]=\"tipoAnotacao.id\">\n                    {{ tipoAnotacao.id + \" - \"+tipoAnotacao.type }}\n                  </option>\n                </select>\n                <button type=\"button\" class=\"btn btn-warning ml-1\" (click)=\"novoCadastroTipoDeAnotacao()\">\n                  <i class=\"fa fa-plus\"></i>\n                </button>\n                <button type=\"button\" class=\"btn btn-danger ml-1\" [disabled]=\"!tipoAnotacao.id\" (click)=\"buscarTipoDeAnotacaoPorId()\" data-toggle=\"modal\"\n                  data-target=\"#modalDeletarTipoAnotacao\">\n                  <i class=\"fa fa-trash\"></i>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary ml-1\" [disabled]=\"!tipoAnotacao.id\" (click)=\"editarTipoDeAnotacao()\">\n                  <i class=\"fa fa-edit\"></i>\n                </button>\n              </div>\n            </div>\n\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Titulo: *\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"anotacao.title\" name=\"titulo\" />\n              </div>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-12 \">\n              <div class=\"form-group \">\n                <label for=\"anotacaoTexto\" class=\"form-label\">Anotação: </label>\n                <textarea class=\"form-control\" id=\"anotacaoTexto\" rows=\"8\" [ngModelOptions]=\"{standalone:true}\"\n                  [(ngModel)]=\"anotacao.annotation\"></textarea>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n              <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!anotacao.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"anotacao.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagemAnotacao()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n\n        <div id=\"modalDeletarTipoAnotacao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n              </div>\n              <div class=\"modal-body\" *ngIf=\"tipoAnotacao\">\n                Confirma a exclusão do tipo de anotação: {{ tipoAnotacao.id }}, titulo: {{tipoAnotacao.type}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarTipoAnotacao()\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n\n\n      <!-- FORMULÁRIO DE CADASTRO DE TIPO DE ANOTAÇÃO -->\n      <div *ngIf=\"mostrarListaAnotacao  == 3\">\n        <form #anotacaoForm=\"ngForm\" (ngSubmit)=\"onSubmitTipoAnotacao()\">\n          <div class=\"row\">\n            <div class=\"col-md-4\" *ngIf=\"tipoAnotacao.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoAnotacao.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-5\">\n              <label>Tipo de anotação: *</label>\n              <div class=\"input-group\">\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoAnotacao.type\" name=\"type\" />\n              </div>\n            </div>\n\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Observação:\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoAnotacao.observation\" name=\"observacao\" />\n              </div>\n            </div>\n          </div>\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n              <button type=\"submit\" class=\"btn btn-success m-1\" *ngIf=\"!tipoAnotacao.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoAnotacao.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaCadastrodeAnotacao()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n      </div>\n\n\n    </div>\n\n\n\n  </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ul class=\"nav nav-tabs bg-light mt-4 \">\n  <li class=\"nav-item \">\n    <a class=\"nav-link active \" data-toggle=\"tab\" (click)=\"selecionarAbaAgenda()\" href=\"#agenda\">Agenda</a>\n  </li>\n  <li class=\"nav-item\">\n    <a class=\"nav-link\" data-toggle=\"tab\" (click)=\"this.mostrarAnotacao()\" href=\"#anotacao\"\n      [class.disabled]='returnPermission()'>Anotação</a>\n  </li>\n\n</ul>\n\n<div class=\"containser-fluid\">\n\n  <div class=\"tab-content m-4\">\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          {{mensagemSucesso}}\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n\n\n\n    <div id=\"agenda\" class=\"tab-pane  fade in active show\">\n      <!-- parte em que mostra a lista das agendas -->\n      <div *ngIf=\"!telaEdicao\">\n\n        <div class=\"row \">\n          <div class=\"col-md-3 mr-1\">\n            <div class=\"form-group\">\n              <label>\n                Data Inicial: *\n              </label>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dateInitial \" placeholder=\"DD/MM/YYYY\"\n                id=\"dateInitial\" name=\"dateInitial\" mask=\"00/00/0000\" autocomplete=\"off\" />\n            </div>\n          </div>\n          <div class=\"col-md-3\">\n            <div class=\"form-group\">\n              <label>\n                Data Final: *\n              </label>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dateFinal\" placeholder=\"DD/MM/YYYY\" id=\"dateFinal\"\n                mask=\"00/00/0000\" name=\"dateFinal\" autocomplete=\"off\" />\n            </div>\n          </div>\n          <div class=\"col-md-5 align-self-center pt-3 mb-1\">\n            <button type=\"button\" class=\"btn btn-primary mr-2\" (click)=\"mostrarAgenda()\">\n              <i class=\"fa fa-eye\"></i> Mostrar\n            </button>\n            <button type=\"button\" class=\"btn btn-warning\" (click)=\"cadastroNovo()\">\n              <i class=\"fa fa-plus\"></i> Novo\n            </button>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\" id=\"table-home\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>DATA</th>\n                  <th>TITULO</th>\n                  <th>Horário</th>\n                  <th>Confirmação</th>\n                </tr>\n              </thead>\n              <tbody *ngIf=\"!isLoading\">\n                <tr\n                  *ngFor=\"let agenda of listaAgenda | paginate: { itemsPerPage: 6, currentPage: paginaAtualAgenda, id: 'agenda' };  let i = index\">\n                  <td>{{ agenda.id }}</td>\n                  <td>{{ agenda.date }}</td>\n                  <td>{{ agenda.title }}</td>\n                  <td>{{ agenda.hourInitial +\" à \" + agenda.hourFinal}}</td>\n                  <td>{{ agenda.flagConfirmation ? 'Confirmado' : 'Falta confirmar' }}</td>\n                  <td>\n                    <button class=\"btn btn-primary m-1\" (click)=\"selecionarAgendaPorId(agenda.id)\">\n                      <i class=\"fa fa-edit\"></i>\n                    </button>\n                    <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(agenda)\" data-toggle=\"modal\"\n                      data-target=\"#modalDeSelecao\">\n                      <i class=\"fa fa-trash\"></i>\n                    </button>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" id=\"agenda\" (pageChange)=\"paginaAtualAgenda = $event\"\n              previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n            </pagination-controls>\n          </div>\n        </div>\n\n        <br />\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n\n        <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n\n              </div>\n              <div class=\"modal-body\" *ngIf=\"agendaSelecionada\">\n                Confirma a exclusão da agenda data: {{ agendaSelecionada.date }}, titulo: {{agendaSelecionada.title}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarAgenda(agendaSelecionada)\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <!-- parte em que edita a agendas -->\n      <div *ngIf=\"telaEdicao\">\n        <form #agendaForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n          <div class=\"row\">\n            <div class=\"col-md-3\" *ngIf=\"agenda.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"agenda.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                <label>\n                  Data: *\n                </label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"DD/MM/YYYY\" mask=\"00/00/0000\" autocomplete=\"off\"\n                  [disabled]=\"agenda.id\" [(ngModel)]=\"agenda.date\" name=\"date\" />\n              </div>\n            </div>\n          </div>\n\n\n\n          <div class=\"row\">\n            <div class=\"col-md-2\">\n              <div class=\"form-group\">\n                <label>\n                  Hora Inicial: *\n                </label>\n                <input type=\"time\" class=\"form-control\" [(ngModel)]=\"agenda.hourInitial\" name=\"hourInitial\"\n                  autocomplete=\"off\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-2\">\n              <div class=\"form-group\">\n                <label>\n                  Hora Final: *\n                </label>\n                <input type=\"time\" class=\"form-control\" [(ngModel)]=\"agenda.hourFinal\" name=\"hourFinal\"\n                  autocomplete=\"off\" />\n              </div>\n            </div>\n          </div>\n\n\n\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Titulo: *\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"agenda.title\" name=\"title\" autocomplete=\"off\" />\n              </div>\n            </div>\n\n          </div>\n\n          <div class=\"row\">\n            <div class=\"col-md-12\">\n              <div class=\"form-group\">\n                <label>Descrição: </label>\n                <textarea class=\"form-control\" Maxlength=\"1200\" id=\"observation\" rows=\"5\"\n                  [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"agenda.observation\"></textarea>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"row\">\n            <div class=\"col-md-4\">\n              <table class=\"table table-sm\" id=\"table-clients\">\n                <thead class=\"table-dark\">\n                  <tr>\n                    <th>ID</th>\n                    <th>Cliente</th>\n                  </tr>\n                </thead>\n                <tbody *ngIf=\"!isLoading\">\n                  <tr\n                    *ngFor=\"let cliente of clienteListCache | paginate: { itemsPerPage: 3, currentPage: paginaAtualClientCad };  let i = index\">\n                    <td>{{ cliente.id }}</td>\n                    <td>{{ cliente.name }}</td>\n                  </tr>\n                </tbody>\n              </table>\n              <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtualClientCad = $event\"\n                previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n              </pagination-controls>\n            </div>\n\n            <div class=\"col-md-5 ml-3 \">\n              <label>Confirmação: *</label>\n              <div class=\"custom-control custom-switch\" >\n                <input type=\"checkbox\" class=\"custom-control-input\" id=\"confirmation\"\n                  (click)=\"VerificaStatusFlag($event.target.checked)\" [checked]=\"agenda.flagConfirmation\" [disabled]='returnPermission()'>\n                <label class=\"custom-control-label\"  for=\"confirmation\">{{agenda.flagConfirmation ? 'Confirmado'\n                  :'Pendente'}}</label>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-5\">\n              <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!agenda.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"agenda.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagemAgenda()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n              <button type=\"button\" class=\"btn btn-warning m-1\" (click)=\"openModalComponents()\"\n                *ngIf=\"clienteListCache.length == 0\">\n                <i class=\"fa fa-plus\"></i> Clientes\n              </button>\n              <button type=\"button\" class=\"btn btn-primary m-1\" (click)=\"openModalComponents()\"\n                *ngIf=\"clienteListCache.length > 0\">\n                <i class=\"fa fa-edit\"></i> Clientes\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n      </div>\n    </div>\n\n\n    <!-- Modal para selecionar o cliente -->\n    <div id=\"modalComponents\" class=\"modal\" tabindex=\"-1\" role=\"dialog\">\n      <div class=\"modal-dialog modal-dialog-centered modal-lg \" role=\"document\">\n        <div class=\"modal-content\">\n          <div class=\"modal-header\" style=\"background-color: #343a40;\">\n            <h5 class=\"modal-title\" style=\"color: snow;\">Clientes</h5>\n            <button type=\"button\" class=\"close\" (click)=\"closeModalComponents()\" data-dismiss=\"modal\"\n              aria-label=\"Fechar\">\n              <span aria-hidden=\"true\" style=\"color: snow;\">&times;</span>\n            </button>\n          </div>\n\n\n          <div class=\"row mt-2 \">\n            <div class=\"col-md-1 ml-3 \">\n              <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-6 ml-3 mr-3\">\n              <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" autocomplete=\"off\"\n                placeholder=\"Digite sua pesquisa aqui...\" (keyup)=\"filtrarClientes($event.target.value)\" />\n            </div>\n          </div>\n\n\n          <div class=\"modal-body\" style=\" overflow-y: auto;\">\n            <div class=\"row\">\n              <div class=\"col-md-12\">\n                <table class=\"table table-condensed table-hover\" id=\"table-clientes\">\n                  <thead>\n                    <tr>\n                      <th>SELECIONAR</th>\n                      <th>ID</th>\n                      <th>NOME</th>\n                      <th>CPF</th>\n                      <th>STATUS</th>\n                    </tr>\n                  </thead>\n                  <tbody *ngIf=\"!isLoading\">\n                    <tr\n                      *ngFor=\"let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: paginaAtualClient };  let i = index\">\n                      <td>\n                        <div class=\"form-check\">\n                          <input class=\"form-check-input ml-4\" type=\"checkbox\" id=\"role-{{cliente.id}}\"\n                            [checked]=\"cliente.checked\" (click)=\"VerificaChecked($event.target.checked,cliente)\">\n                        </div>\n                      </td>\n                      <td>{{ cliente.id }}</td>\n                      <td>{{ cliente.name }}</td>\n                      <td>{{ cliente.cpf | mask: '...0.000-99' }}</td>\n                      <td>{{ cliente.status ? 'ATIVO' :'INATIVO'}}</td>\n                    </tr>\n                  </tbody>\n                </table>\n                <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtualClient = $event\"\n                  previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n                </pagination-controls>\n              </div>\n            </div>\n\n            <div class=\"modal-footer\" style=\"margin: 20px; margin-top: 0px;\">\n              <button type=\"button\" class=\"btn btn-primary\" (click)=\"registrarAgendaCliente()\"\n                data-dismiss=\"modal\">OK</button>\n              <br>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    <!-- ANOTAÇÕES LISTA-->\n    <div id=\"anotacao\" class=\"tab-pane fade\">\n\n      <div *ngIf=\"mostrarListaAnotacao  == 1\">\n\n\n        <form class=\"form mb-3\">\n          <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n              <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n              <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" autocomplete=\"off\"\n                (keyup)=\"filtrarAnotacao($event.target.value)\" />\n            </div>\n            <div class=\"col-md-5 m-1\">\n              <button class=\"btn btn-warning\" (click)=\"novoCadastroAnotacao()\">\n                <i class=\"fa fa-plus\"></i> Novo\n              </button>\n            </div>\n          </div>\n        </form>\n\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\" id=\"table-home\">\n              <thead>\n                <tr>\n                  <th>TITULO</th>\n                  <th>TIPO DE ANOTAÇÃO</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody *ngIf=\"!isLoading\">\n                <tr\n                  *ngFor=\"let anotacao of anotacaoLista | paginate: { itemsPerPage: 6, currentPage: paginaAtualAnotacao,  id: 'anotacao' };  let p = index\">\n                  <td>{{ anotacao.title }}</td>\n                  <td>{{ anotacao.typeAnnotation.type}}</td>\n                  <td>\n                    <button class=\"btn btn-primary m-1\" (click)=\"selecionarAnotacaoPorId(anotacao.id)\">\n                      <i class=\"fa fa-eye\"></i>\n                    </button>\n                    <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecaoAnotacao(anotacao)\" data-toggle=\"modal\"\n                      data-target=\"#modalDeSelecaoAnotacao\">\n                      <i class=\"fa fa-trash\"></i>\n                    </button>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n            <pagination-controls id=\"anotacao\" *ngIf=\"!isLoading\" (pageChange)=\"paginaAtualAnotacao = $event\"\n              previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n            </pagination-controls>\n          </div>\n        </div>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n        <div id=\"modalDeSelecaoAnotacao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n              </div>\n              <div class=\"modal-body\" *ngIf=\"anotacaoSelecionada\">\n                Confirma a exclusão da anotação: {{ anotacaoSelecionada.id }}, titulo: {{anotacaoSelecionada.title}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarAnotacao()\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n\n      <!-- FORMULÁRIO DE ANOTAÇÃO -->\n      <div *ngIf=\"mostrarListaAnotacao  == 2\">\n        <form #anotacaoForm=\"ngForm\" (ngSubmit)=\"onSubmitAnotacao()\">\n          <div class=\"row\">\n            <div class=\"col-md-4\" *ngIf=\"anotacao.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"anotacao.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-5\">\n              <label>Tipo de anotação: *</label>\n              <div class=\"input-group\">\n                <select class=\"form-control\" name=\"tipoAnotacao\" [(ngModel)]=\"anotacao.typeAnnotation.id\"\n                  [ngModelOptions]=\"{standalone:true}\">\n                  <option *ngFor=\"let tipoAnotacao of tipoAnotacaoLista\" [ngValue]=\"tipoAnotacao.id\">\n                    {{ tipoAnotacao.id + \" - \"+tipoAnotacao.type }}\n                  </option>\n                </select>\n                <button type=\"button\" class=\"btn btn-warning ml-1\" (click)=\"novoCadastroTipoDeAnotacao()\">\n                  <i class=\"fa fa-plus\"></i>\n                </button>\n                <button type=\"button\" class=\"btn btn-danger ml-1\" [disabled]=\"!this.tipoAnotacao.id\"\n                  (click)=\"buscarTipoDeAnotacaoPorId()\" data-toggle=\"modal\" data-target=\"#modalDeletarTipoAnotacao\">\n                  <i class=\"fa fa-trash\"></i>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary ml-1\" [disabled]=\"!this.tipoAnotacao.id\"\n                  (click)=\"editarTipoDeAnotacao()\">\n                  <i class=\"fa fa-edit\"></i>\n                </button>\n              </div>\n            </div>\n\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Titulo: *\n                </label>\n                <input type=\"text\" class=\"form-control\" Maxlength=\"240\" [(ngModel)]=\"anotacao.title\" name=\"titulo\" autocomplete=\"off\" />\n              </div>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-12 \">\n              <div class=\"form-group \">\n                <label for=\"anotacaoTexto\" class=\"form-label\">Anotação: </label>\n                <textarea class=\"form-control\" id=\"anotacaoTexto\" Maxlength=\"1200\" rows=\"8\"\n                  [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"anotacao.annotation\"></textarea>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n              <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!anotacao.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"anotacao.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagemAnotacao()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n\n        <div id=\"modalDeletarTipoAnotacao\" class=\"modal fade\" role=\"dialog\">\n          <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4>Confirmação</h4>\n              </div>\n              <div class=\"modal-body\" *ngIf=\"tipoAnotacao\">\n                Confirma a exclusão do tipo de anotação: {{ tipoAnotacao.id }}, titulo: {{tipoAnotacao.type}}\n              </div>\n              <div class=\"modal-footer\">\n                <button class=\"btn btn-success\" (click)=\"deletarTipoAnotacao()\" data-dismiss=\"modal\">\n                  Confirma</button>\n                <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n\n\n      <!-- FORMULÁRIO DE CADASTRO DE TIPO DE ANOTAÇÃO -->\n      <div *ngIf=\"mostrarListaAnotacao  == 3\">\n        <form #anotacaoForm=\"ngForm\" (ngSubmit)=\"onSubmitTipoAnotacao()\">\n          <div class=\"row\">\n            <div class=\"col-md-4\" *ngIf=\"tipoAnotacao.id\">\n              <div class=\"form-group\">\n                <label>\n                  ID:\n                </label>\n                <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoAnotacao.id\" name=\"id\" />\n              </div>\n            </div>\n\n            <div class=\"col-md-5\">\n              <label>Tipo de anotação: *</label>\n              <div class=\"input-group\">\n                <input type=\"text\" class=\"form-control\" Maxlength=\"240\" [(ngModel)]=\"tipoAnotacao.type\" name=\"type\" />\n              </div>\n            </div>\n\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <label>\n                  Observação:\n                </label>\n                <input type=\"text\" class=\"form-control\" Maxlength=\"240\" [(ngModel)]=\"tipoAnotacao.observation\" name=\"observacao\"\n                  autocomplete=\"off\" />\n              </div>\n            </div>\n          </div>\n          <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n              <button type=\"submit\" class=\"btn btn-success m-1\" *ngIf=\"!tipoAnotacao.id\">\n                <i class=\"fa fa-save\"></i> Salvar\n              </button>\n              <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoAnotacao.id\">\n                <i class=\"fa fa-sync-alt\"></i> Atualizar\n              </button>\n              <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaCadastrodeAnotacao()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n            </div>\n          </div>\n        </form>\n        <div class=\"d-flex justify-content-center\">\n          <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n        </div>\n      </div>\n\n\n    </div>\n\n\n\n  </div>\n</div>");
 
 /***/ }),
 
@@ -425,7 +425,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-navbar></app-navbar>\n\n\n<div id=\"layoutSidenav\">\n    <app-sidebar></app-sidebar>\n    <div id=\"layoutSidenav_content\">\n        <main>\n            <div class=\"container-fluid\">\n                <router-outlet></router-outlet>\n            </div>\n            <!-- <footer class=\"py-4 bg-light mt-auto \">\n                <div class=\"container-fluid\">\n                    <div class=\"d-flex align-items-center justify-content-between small\">\n                        <div class=\"text-muted\">Copyright &copy; Meus Clientes 2021</div>\n                        <div>\n                            <a href=\"#\">Privacy Policy</a>\n                            &middot;\n                            <a href=\"#\">Terms &amp; Conditions</a>\n                        </div>\n                    </div>\n                </div>\n            </footer> -->\n        </main>\n    </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-navbar></app-navbar>\n\n\n<div id=\"layoutSidenav\">\n    <app-sidebar></app-sidebar>\n    <div id=\"layoutSidenav_content\">\n        <main>\n            <div class=\"container-fluid\">\n                <router-outlet></router-outlet>\n            </div>\n\n        </main>\n    </div>\n</div>");
 
 /***/ }),
 
@@ -438,7 +438,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n  <div class=\"card card-container\">\n    <img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n    <form *ngIf=\"!isLoggedIn && !isLoading\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"username\">Email</label> <input type=\"text\" class=\"form-control\" name=\"username\"\n          [(ngModel)]=\"form.username\" required #username=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && username.invalid\">É necessário informar o\n          nome do usuário!</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n          [(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && password.invalid\">\n          <div *ngIf=\"password.errors.required\">É necessário informar a senha!</div>\n          <div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <button class=\"btn btn-primary btn-block\">Login</button>\n      </div>\n      <div class=\"form-group\">\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"isLoginFailed\">Login falhou: {{ errorMessage }}</div>\n      </div>\n      <div class=\"form-group\">\n        <p class=\"content-divider center mt-2\">\n          <span>Ou</span>\n\n      </div>\n    </form>\n\n\n\n    <p class=\"social-login text-center\" *ngIf=\"!isLoading\">\n      Entrar com:\n      <button class=\"btn btn-danger btn-block\" (click)=\"signInWithGoogle()\">\n        <i class=\"fab fa-google\"></i> Google</button>\n    </p>\n    \n    <div class=\"card-footer text-center\" *ngIf=\"!isLoading\">\n      <div class=\"small\">\n        <a routerLink=\"/register\">\n          Não possui Usuário? Cadastre-se!\n        </a>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n\n  </div>\n\n\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n  <div class=\"card card-container\">\n    <h3 class=\"text-center\" style=\"font-family: fantasy;\">Controle de serviço prestado</h3>\n    <form *ngIf=\"!isLoggedIn && !isLoading\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"username\">Email</label> <input type=\"text\" class=\"form-control\" name=\"username\" autocomplete=\"off\"\n          [(ngModel)]=\"form.username\" required #username=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && username.invalid\">É necessário informar o\n          nome do usuário!</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n          [(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"f.submitted && password.invalid\">\n          <div *ngIf=\"password.errors.required\">É necessário informar a senha!</div>\n          <div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <button class=\"btn btn-primary btn-block\">Login</button>\n      </div>\n      <div class=\"form-group\">\n        <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"isLoginFailed\">Login falhou: {{ errorMessage }}</div>\n      </div>\n      <div class=\"form-group\">\n        <p class=\"content-divider center mt-2\">\n          <span>Ou</span>\n\n      </div>\n    </form>\n\n\n\n    <p class=\"social-login text-center\" *ngIf=\"!isLoading\">\n      Entrar com:\n      <button class=\"btn btn-danger btn-block\" (click)=\"signInWithGoogle()\">\n        <i class=\"fab fa-google\"></i> Google</button>\n    </p>\n    \n    <div class=\"card-footer text-center\" *ngIf=\"!isLoading\">\n      <div class=\"small\">\n        <a routerLink=\"/register\">\n          Não possui Usuário? Cadastre-se!\n        </a>\n      </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n\n  </div>\n\n\n</div>\n");
 
 /***/ }),
 
@@ -451,7 +451,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Tipo de Pagamento</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{tipoPagamento.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #tipoPagamentoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                            aria-hidden=\"true\">&times;</span></button>\n                    {{mensagemSucesso}}\n                </div>\n\n                <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"tipoPagamento.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoPagamento.id\" name=\"id\" />\n                </div>\n            </div>\n        </div>\n\n\n\n        <div class=\"row\">\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Tipo\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoPagamento.type\" name=\"type\" />\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Observação:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"tipoPagamento.observation\"\n                        name=\"observation\" />\n                </div>\n            </div>\n        </div>\n\n        <div class=\"d-flex justify-content-center\">\n            <div [class.spinner-border]=\"isLoading\" role=\"status\">\n                <span class=\"sr-only\">Loading...</span>\n            </div>\n        </div>\n        \n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!tipoPagamento.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoPagamento.id\">\n                    <i class=\"fa fa-sync-alt\"></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n\n        </div>\n\n    </form>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Tipo de Pagamento</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{tipoPagamento.id ? 'Edição' :'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #tipoPagamentoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                            aria-hidden=\"true\">&times;</span></button>\n                    {{mensagemSucesso}}\n                </div>\n\n                <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"tipoPagamento.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"tipoPagamento.id\" name=\"id\" />\n                </div>\n            </div>\n        </div>\n\n\n\n        <div class=\"row\">\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Tipo: *\n                    </label>\n                    <input type=\"text\" class=\"form-control\" autocomplete=\"off\" Maxlength=\"240\" [(ngModel)]=\"tipoPagamento.type\" name=\"type\" />\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        Observação:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" autocomplete=\"off\" Maxlength=\"240\" [(ngModel)]=\"tipoPagamento.observation\"\n                        name=\"observation\" />\n                </div>\n            </div>\n        </div>\n\n        <div class=\"d-flex justify-content-center\">\n            <div [class.spinner-border]=\"isLoading\" role=\"status\">\n                <span class=\"sr-only\">Loading...</span>\n            </div>\n        </div>\n        \n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1 \" *ngIf=\"!tipoPagamento.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"tipoPagamento.id\">\n                    <i class=\"fa fa-sync-alt\"></i> Atualizar\n                </button>\n                <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n\n        </div>\n\n    </form>\n</div>");
 
 /***/ }),
 
@@ -464,7 +464,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Tipo de Pagamento</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                        aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n            </div>\n\n            <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n        </div>\n    </div>\n\n\n    <form class=\"form\">\n        <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n                <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n                <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                    (keyup)=\"filtrar($event.target.value)\" />\n            </div>\n            <div class=\"col-md-5 m-1\">\n                <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n                    <i class=\"fa fa-plus\"></i> Novo\n                </button>\n            </div>\n        </div>\n    </form>\n\n    <br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>TIPO</th>\n                        <th>OBSERVAÇÃO</th>\n                        <th></th>\n                    </tr>\n                </thead>\n                <tbody *ngIf=\"!isLoading\">\n                    <tr\n                        *ngFor=\"let tipoPagamentos of tipoPagamento | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n                        <td>{{ tipoPagamentos.id }}</td>\n                        <td>{{ tipoPagamentos.type }}</td>\n                        <td>{{ tipoPagamentos.observation }}</td>\n                        <td>\n                            <button class=\"btn btn-primary m-1 \" routerLink=\"/pagamento/tipo/{{ tipoPagamentos.id }}\">\n                                <i class=\"fa fa-edit\"></i>\n                            </button>\n\n                            <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(tipoPagamentos)\"\n                                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                                <i class=\"fa fa-trash\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n            </pagination-controls>\n        </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n          <span class=\"sr-only\">Loading...</span>\n        </div>\n      </div>\n\n    <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h4>Confirmação</h4>\n\n                </div>\n                <div class=\"modal-body\" *ngIf=\"tipoPagamentoSelecionado\">\n                    Confirma a exclusão do(a) tipo de pagamento: {{ tipoPagamentoSelecionado.type }}\n                </div>\n                <div class=\"modal-footer\">\n                    <button class=\"btn btn-success\" (click)=\"deletarTipoPagamento()\" data-dismiss=\"modal\">\n                        Confirma</button>\n                    <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Tipo de Pagamento</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                        aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n            </div>\n\n            <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n        </div>\n    </div>\n\n\n    <form class=\"form\">\n        <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n                <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n                <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                    (keyup)=\"filtrar($event.target.value)\" autocomplete=\"off\"  />\n            </div>\n            <div class=\"col-md-5 m-1\">\n                <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n                    <i class=\"fa fa-plus\"></i> Novo\n                </button>\n            </div>\n        </div>\n    </form>\n\n    <br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>TIPO</th>\n                        <th>OBSERVAÇÃO</th>\n                        <th></th>\n                    </tr>\n                </thead>\n                <tbody *ngIf=\"!isLoading\">\n                    <tr\n                        *ngFor=\"let tipoPagamentos of tipoPagamento | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n                        <td>{{ tipoPagamentos.id }}</td>\n                        <td>{{ tipoPagamentos.type }}</td>\n                        <td>{{ tipoPagamentos.observation }}</td>\n                        <td>\n                            <button class=\"btn btn-primary m-1 \" routerLink=\"/pagamento/tipo/{{ tipoPagamentos.id }}\">\n                                <i class=\"fa fa-edit\"></i>\n                            </button>\n\n                            <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(tipoPagamentos)\"\n                                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                                <i class=\"fa fa-trash\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\" nextLabel=\"Próximo\">\n            </pagination-controls>\n        </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n          <span class=\"sr-only\">Loading...</span>\n        </div>\n      </div>\n\n    <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h4>Confirmação</h4>\n\n                </div>\n                <div class=\"modal-body\" *ngIf=\"tipoPagamentoSelecionado\">\n                    Confirma a exclusão do(a) tipo de pagamento: {{ tipoPagamentoSelecionado.type }}\n                </div>\n                <div class=\"modal-footer\">\n                    <button class=\"btn btn-success\" (click)=\"deletarTipoPagamento()\" data-dismiss=\"modal\">\n                        Confirma</button>\n                    <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>");
 
 /***/ }),
 
@@ -477,7 +477,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Prestação de Contas</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                        aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n            </div>\n\n            <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n        </div>\n    </div>\n\n    <form class=\"form\">\n        <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n                <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n                <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                    (keyup)=\"filtrar($event.target.value)\" />\n            </div>\n            <div class=\"col-md-5 m-1\">\n                <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n                    <i class=\"fa fa-plus\"></i> Novo\n                </button>\n            </div>\n        </div>\n    </form>\n\n    <br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>Serviço Prestado</th>\n                        <th>Cliente</th>\n                        <th>Tipo de Pagamento</th>\n                        <th>Desconto</th>\n                        <th>Acrescimo</th>\n                        <th>Observação</th>\n                        <th>Valor Total</th>\n                        <th></th>\n                    </tr>\n                </thead>\n                <tbody *ngIf=\"!isLoading\">\n                    <tr\n                        *ngFor=\"let prestacaoConta of prestacaoContas | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n                        <td>{{ prestacaoConta.id }}</td>\n                        <td>{{ prestacaoConta.serviceProvided.description }}</td>\n                        <td>{{ prestacaoConta.serviceProvided.client.name }}</td>\n                        <td>{{ prestacaoConta.typePayment.type }}</td>\n                        <td>R$ {{ prestacaoConta.discountValue | mask: 'separator':',' }}</td>\n                        <td>R$ {{ prestacaoConta.additionValue | mask: 'separator':',' }}</td>\n                        <td>{{ prestacaoConta.observation }}</td>\n                        <td>R$ {{ prestacaoConta.totalValue | mask: 'separator':',' }}</td>\n                        <td>\n                            <button class=\"btn btn-primary m-1\" routerLink=\"/prestacao/conta/{{ prestacaoConta.id }}\">\n                                <i class=\"fa fa-edit\"></i>\n                            </button>\n                            <button class=\"btn btn-secondary m-1\"\n                                routerLink=\"/prestacao/conta/{{ prestacaoConta.id}}/true\">\n                                <i class=\"fa fa-print\" aria-hidden=\"true\"></i>\n                            </button>\n                            <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(prestacaoConta)\"\n                                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                                <i class=\"fa fa-trash\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\"\n                nextLabel=\"Próximo\"></pagination-controls>\n        </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n        </div>\n    </div>\n\n    <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h4>Confirmação</h4>\n\n                </div>\n                <div class=\"modal-body\" *ngIf=\"prestacaoContasSelecionado\">\n                    Confirma a exclusão do(a) prestação de contas: {{prestacaoContasSelecionado.id +\" - \"+\n                    prestacaoContasSelecionado.serviceProvided.description }}\n                </div>\n                <div class=\"modal-footer\">\n                    <button class=\"btn btn-success\" (click)=\"deletarPrestacaoConta()\" data-dismiss=\"modal\">\n                        Confirma</button>\n                    <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Prestação de Contas</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">Consulta</li>\n</ol>\n\n\n<div class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                        aria-hidden=\"true\">&times;</span></button>\n                {{mensagemSucesso}}\n            </div>\n\n            <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                {{erro}}\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n\n            <div class=\"alert alert-warning hidden\" role=\"alert\" *ngIf=\"alertInf != null\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                        aria-hidden=\"true\">&times;</span></button>\n                {{alertInf}}\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"row \">\n        <div class=\"col-lg-2 col-md-4  mr-1\">\n            <div class=\"form-group\">\n                <label>\n                    Data Pag. Inicial: *\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dateInitial\" placeholder=\"DD/MM/YYYY\"\n                    id=\"dateInitial\" name=\"dateInitial\" mask=\"00/00/0000\"  autocomplete=\"off\"/>\n            </div>\n        </div>\n        <div class=\"col-lg-2 col-md-4 \">\n            <div class=\"form-group\">\n                <label>\n                    Data Pag. Final: *\n                </label>\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dateFinal\" placeholder=\"DD/MM/YYYY\" id=\"dateFinal\"\n                    mask=\"00/00/0000\" name=\"dateFinal\" autocomplete=\"off\" />\n            </div>\n        </div>\n        <div class=\"col-lg-6 col-md-6  align-self-center pt-3 mb-2\">\n            <button type=\"button\" class=\"btn btn-primary \" (click)=\"mostrarPrestacoes()\">\n                <i class=\"fa fa-eye\"></i> Mostrar\n            </button>\n            <button class=\"btn btn-warning ml-2\" (click)=\"novoCadastro()\">\n                <i class=\"fa fa-plus\"></i> Novo\n            </button>\n            <button class=\"btn btn-info ml-2\" (click)=\"ativarPesquisa()\">\n                <i class=\"fa fa-search\" ></i> pesquisar\n            </button>\n        </div>\n\n       \n    </div>\n\n    <div class=\"row \">\n        <div class=\"col-lg-4 col-md-4\" *ngIf=\"isSearch\">\n            <div class=\"form-group\">                \n                <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                placeholder=\"Digite sua pesquisa aqui...\" autocomplete=\"off\"\n                    (keyup)=\"filtrar($event.target.value)\" />\n            </div>\n        </div>\n    </div>\n\n\n\n    <!-- \n\n      <form class=\"form\">\n        <div class=\"row\">\n            <div class=\"col-md-1 mr-3 m-1\">\n                <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n            </div>\n            <div class=\"col-md-3 m-1\">\n                <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\"\n                    (keyup)=\"filtrar($event.target.value)\" />\n            </div>\n            <div class=\"col-md-5 m-1\">\n                <button class=\"btn btn-warning\" (click)=\"novoCadastro()\">\n                    <i class=\"fa fa-plus\"></i> Novo\n                </button>\n            </div>\n        </div>\n    </form> -->\n\n\n\n\n    <br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <table class=\"table table-condensed table-hover\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>Tipo de serviço</th>\n                        <!-- <th>Serviço Prestado</th> -->\n                        <th>Cliente</th>\n                        <th>Tipo de Pagamento</th>\n                        <th>Data Pag.</th>\n                        <th>Desconto</th>\n                        <th>Acrescimo</th>\n                        <th>Valor Total</th>\n                        <th></th>\n                    </tr>\n                </thead>\n                <tbody *ngIf=\"!isLoading\">\n                    <tr\n                        *ngFor=\"let prestacaoConta of prestacaoContas | paginate: { itemsPerPage: 6, currentPage: paginaAtual }; let i = index\">\n                        <td>{{ prestacaoConta.id }}</td>\n                        <td>{{ prestacaoConta.serviceProvided.typeService.service }}</td>\n                        <!-- <td>{{ prestacaoConta.serviceProvided.description }}</td> -->\n                        <td>{{ prestacaoConta.serviceProvided.client.name }}</td>\n                        <td>{{ prestacaoConta.typePayment.type }}</td>\n                        <td>{{ converToDateFormat(prestacaoConta.datePayment)  }}</td>\n                        <td>R$ {{ prestacaoConta.discountValue | mask: 'separator':',' }}</td>\n                        <td>R$ {{ prestacaoConta.additionValue | mask: 'separator':',' }}</td>\n                        <td>R$ {{ prestacaoConta.totalValue | mask: 'separator':',' }}</td>\n                        <td>\n                            <button class=\"btn btn-primary m-1\" routerLink=\"/prestacao/conta/{{ prestacaoConta.id }}\">\n                                <i class=\"fa fa-eye\"></i>\n                            </button>\n                            <button class=\"btn btn-secondary m-1\"\n                                routerLink=\"/prestacao/conta/{{ prestacaoConta.id}}/true\">\n                                <i class=\"fa fa-print\" aria-hidden=\"true\"></i>\n                            </button>\n                            <button class=\"btn btn-danger m-1\" (click)=\"preparaDelecao(prestacaoConta)\"\n                                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                                <i class=\"fa fa-trash\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\"\n                nextLabel=\"Próximo\"></pagination-controls>\n        </div>\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n        <div [class.spinner-border]=\"isLoading\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n        </div>\n    </div>\n\n    <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n        <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h4>Confirmação</h4>\n\n                </div>\n                <div class=\"modal-body\" *ngIf=\"prestacaoContasSelecionado\">\n                    Confirma a exclusão do(a) prestação de contas de ID: {{ prestacaoContasSelecionado.id }}\n                </div>\n                <div class=\"modal-footer\">\n                    <button class=\"btn btn-success\" (click)=\"deletarPrestacaoConta()\" data-dismiss=\"modal\">\n                        Confirma</button>\n                    <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>");
 
 /***/ }),
 
@@ -490,7 +490,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"prestacao\" *ngIf=\"!relatorio\">\n    <h1 class=\"mt-4\">Prestação de contas</h1>\n    <ol class=\"breadcrumb mb-4\">\n        <li class=\"breadcrumb-item active\">{{prestacaoContasBuscar.id ? 'Edição' :'Cadastro'}}</li>\n    </ol>\n\n    <div class=\"container-fluid\">\n        <form #tipoPagamentoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                                aria-hidden=\"true\">&times;</span></button>\n                        {{mensagemSucesso}}\n                    </div>\n\n                    <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"\n                        *ngFor=\"let erro of errors\">\n                        {{erro}}\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                        </button>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\" *ngIf=\"prestacaoContasBuscar.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>\n                            ID:\n                        </label>\n                        <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"prestacaoContasBuscar.id\"\n                            name=\"id\" />\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"!prestacaoContasBuscar.id\">\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Competência</label>\n                        <input class=\"form-control\" placeholder=\"MM/YYYY\" type=\"text\" id=\"data\"\n                            (change)=\"buscarPorData($event)\" mask=\"00/0000\">\n                    </div>\n                </div>\n            </div>\n\n\n            <div class=row *ngIf=\"!prestacaoContasBuscar.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Serviço Prestado:</label>\n                        <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado\">\n                            <option value=\"\">Selecione...</option>\n                            <option *ngFor=\"let servicoPrestadosBusca of servicoPrestadoBusca\"\n                                [ngValue]=\"servicoPrestadosBusca\">\n                                {{ servicoPrestadosBusca.id +\" - \"+ servicoPrestadosBusca.description}}\n                            </option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"servicoPrestadoBuscaSelecionado.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Cliente:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.client.name\" type=\"text\" name=\"name\">\n                    </div>\n                </div>\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Tipo Serviço:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.typeService.service\" type=\"text\"\n                            name=\"service\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"servicoPrestadoBuscaSelecionado.id\">\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Preço:</label>\n                        <input class=\"form-control\" disabled=\"true\" [(ngModel)]=\"servicoPrestadoBuscaSelecionado.value\"\n                            type=\"text\" name=\"value\">\n                    </div>\n                </div>\n                <div class=\"col-md-8\">\n                    <div class=\"form-group\">\n                        <label>Descrição:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.description\" type=\"text\" name=\"description\">\n                    </div>\n                </div>\n            </div>\n\n\n            <div class=row>\n                <div class=\"col-md-12\">\n                    <div class=\"form-group\">\n                        <label>Tipo de Pagamento:</label>\n                        <select class=\"form-control\" name=\"pagamento\" [(ngModel)]=\"tipoPagamentoSelecionado.id\"\n                            [ngModelOptions]=\"{standalone:true}\">\n                            <option value=\"\">selecionar...</option>\n                            <option *ngFor=\"let tiposPagamento of tipoPagamento\" [ngValue]=\"tiposPagamento.id\">\n                                {{ tiposPagamento.id + \" - \"+tiposPagamento.type }}\n                            </option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n\n\n\n            <div class=\"row\">\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Desconto:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.discountValue\" type=\"text\"\n                            name=\"discountValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Acrescimo:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.additionValue\" type=\"text\"\n                            name=\"additionValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Valor Total:</label>\n                        <input class=\"form-control\"\n                            [ngModel]=\"somarTotal(servicoPrestadoBuscaSelecionado.value, prestacaoContasBuscar.additionValue, prestacaoContasBuscar.discountValue)\"\n                            type=\"text\" name=\"totalValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\"\n                            prefix=\"R$ \" disabled=\"true\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Data de pagamento:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.datePayment\"\n                            placeholder=\"DD/MM/YYYY\" type=\"text\" id=\"data\" name=\"datePayment\" mask=\"00/00/0000\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-9\">\n                    <div class=\"form-group\">\n                        <label>Observação:</label>\n                        <input class=\"form-control\" [(ngModel)]=\"prestacaoContasBuscar.observation\" type=\"text\"\n                            name=\"observation\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"d-flex justify-content-center\">\n                <div [class.spinner-border]=\"isLoading\" role=\"status\">\n                    <span class=\"sr-only\">Loading...</span>\n                </div>\n            </div>\n\n\n            <div class=\"row\" *ngIf=\"!isLoading\">\n                <div class=\"col-md-6\">\n                    <button type=\"submit\" class=\"btn btn-success dimensaobotao m-1 \" *ngIf=\"!prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-save\"></i> Salvar\n                    </button>\n                    <button type=\"submit\" class=\"btn btn-primary dimensaobotao m-1 \" *ngIf=\"prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-sync-alt\"></i> Atualizar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-danger dimensaobotao m-1\" (click)=\"voltarParaListagem()\">\n                        <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"emitirRelatorio()\"\n                        *ngIf=\"prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-print\" aria-hidden=\"true\"></i> Relatório\n                    </button>\n\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n<div class=\"relatorio-prestacao\" *ngIf=\"relatorio\">\n    <h1 class=\"mt-4\">Relátório Prestação de contas</h1>\n\n    <h4 class=\"mt-4\">Cliente:</h4>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span>Nome: {{prestacaoContasBuscar.serviceProvided.client.name}} </span>\n            <span class=\"ml-3\">CPF: {{prestacaoContasBuscar.serviceProvided.client.cpf}} </span>\n        </div>\n    </div>\n\n    <h4 class=\"mt-4\">Serviço Prestado:</h4>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">ID: {{prestacaoContasBuscar.serviceProvided.id}} </span>\n            <span class=\"mr-3\">Descrição: {{prestacaoContasBuscar.serviceProvided.description}} </span>\n        </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Data: {{prestacaoContasBuscar.serviceProvided.date}} </span>\n            <span class=\"mr-3\">Tipo de Serviço: {{prestacaoContasBuscar.serviceProvided.typeService.service}} </span>\n\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor Combinado: R$ {{prestacaoContasBuscar.serviceProvided.value}} </span>\n        </div>\n    </div>\n\n    <h4 class=\"mt-4\">Prestação de conta</h4>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor de Desconto: R$ {{prestacaoContasBuscar.discountValue}} </span>\n\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor de Acrescimo: R$ {{prestacaoContasBuscar.additionValue}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor Total: R$ {{prestacaoContasBuscar.totalValue}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Observação: {{prestacaoContasBuscar.observation}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3 mb-10\">Tipo de pagamento: {{prestacaoContasBuscar.typePayment.type}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3 mb-10\">Tipo de pagamento: {{retornaDatePaymentFormat(prestacaoContasBuscar.datePayment)}}\n            </span>\n        </div>\n    </div>\n\n\n    <br /><br />\n    <br /><br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <button type=\"button\" class=\"btn btn-secondary \" onclick=\"window.print()\" *ngIf=\"prestacaoContasBuscar.id\">\n                <i class=\"fa fa-print\" aria-hidden=\"true\"></i> Imprimir\n            </button>\n        </div>\n    </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"prestacao\" *ngIf=\"!relatorio\">\n    <h1 class=\"mt-4\">Prestação de contas</h1>\n    <ol class=\"breadcrumb mb-4\">\n        <li class=\"breadcrumb-item active\">{{prestacaoContasBuscar.id ? 'Edição' :'Cadastro'}}</li>\n    </ol>\n\n    <div class=\"container-fluid\">\n        <form #tipoPagamentoForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                                aria-hidden=\"true\">&times;</span></button>\n                        {{mensagemSucesso}}\n                    </div>\n\n                    <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"\n                        *ngFor=\"let erro of errors\">\n                        {{erro}}\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                        </button>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\" *ngIf=\"prestacaoContasBuscar.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>\n                            ID:\n                        </label>\n                        <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"prestacaoContasBuscar.id\"\n                            name=\"id\" />\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"!prestacaoContasBuscar.id\">\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Competência: *</label>\n                        <input class=\"form-control\" placeholder=\"MM/YYYY\" type=\"text\" id=\"data\" autocomplete=\"off\"\n                            (change)=\"buscarPorData($event)\" mask=\"00/0000\">\n                    </div>\n                </div>\n            </div>\n\n\n            <div class=row *ngIf=\"!prestacaoContasBuscar.id\">\n                <div class=\"col-md-6\">\n                    <div class=\"form-group\">\n                        <label>Serviço Prestado: *</label>   \n                        <p-dropdown #ser [options]=\"servicoPrestadoBusca\"  [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"servicoPrestadoBuscaSelecionado\" optionLabel=\"search\"  \n                        placeholder=\"Selecione um serviço prestado...\"\n                        emptyMessage=\"nenhum resultado encontrado\" emptyFilterMessage=\"nenhum resultado encontrado\" filter=\"true\" [autoDisplayFirst]=\"false\" (onBlur)=\"clearFilter(ser)\" required\n                        [style]=\"{width : '100%' }\"></p-dropdown>                 \n                         <!-- <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado\">\n                            <option value=\"\">Selecione...</option>\n                            <option *ngFor=\"let servicoPrestadosBusca of servicoPrestadoBusca\"\n                                [ngValue]=\"servicoPrestadosBusca\">\n                                {{ servicoPrestadosBusca.id +\" - \"+ servicoPrestadosBusca.description}}\n                            </option>\n                        </select>   -->\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"servicoPrestadoBuscaSelecionado.id\">\n                <div class=\"col-md-5\">\n                    <div class=\"form-group\">\n                        <label>Cliente:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.client.name\" type=\"text\" name=\"name\">\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Tipo Serviço:</label>\n                        <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.typeService.service\" type=\"text\"\n                            name=\"service\">\n                    </div>\n                </div>\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Preço:</label>\n                        <input class=\"form-control\" disabled=\"true\" [(ngModel)]=\"servicoPrestadoBuscaSelecionado.value\"\n                            type=\"text\" name=\"value\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"servicoPrestadoBuscaSelecionado.id\">\n                <div class=\"col-md-9\">\n                    <div class=\"form-group\">\n                        <label>Descrição:</label>\n                        <textarea class=\"form-control\" Maxlength=\"1200\" disabled=\"true\" id=\"descricaoServico\" rows=\"4\" [ngModelOptions]=\"{standalone:true}\"\n                        [(ngModel)]=\"servicoPrestadoBuscaSelecionado.description\"></textarea>\n                        <!-- <input class=\"form-control\" disabled=\"true\"\n                            [(ngModel)]=\"servicoPrestadoBuscaSelecionado.description\" type=\"text\" name=\"description\"> -->\n                    </div>\n                </div>\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Data Contrato:</label>\n                        <input class=\"form-control\" disabled=\"true\" [(ngModel)]=\"servicoPrestadoBuscaSelecionado.date\"\n                            type=\"text\" name=\"data\">\n                    </div>\n                </div>\n            </div>\n\n\n            <div class=row>\n                <div class=\"col-md-12\">\n                    <div class=\"form-group\">\n                        <label>Tipo de Pagamento: *</label>\n                        <p-dropdown #ser [options]=\"tipoPagamento\"  [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"tipoPagamentoSelecionado.id\" optionLabel=\"search\" optionValue=\"id\" \n                        placeholder=\"Selecione um serviço prestado...\"\n                        emptyMessage=\"nenhum resultado encontrado\" emptyFilterMessage=\"nenhum resultado encontrado\" filter=\"true\" [autoDisplayFirst]=\"false\" (onBlur)=\"clearFilter(ser)\" required\n                        [style]=\"{width : '100%' }\"></p-dropdown>   \n                        <!-- <select class=\"form-control\" name=\"pagamento\" [(ngModel)]=\"tipoPagamentoSelecionado.id\"\n                            [ngModelOptions]=\"{standalone:true}\">\n                            <option value=\"\">selecionar...</option>\n                            <option *ngFor=\"let tiposPagamento of tipoPagamento\" [ngValue]=\"tiposPagamento.id\">\n                                {{ tiposPagamento.id + \" - \"+tiposPagamento.type }}\n                            </option>\n                        </select> -->\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Desconto:</label>\n                        <input class=\"form-control\" autocomplete=\"off\" [(ngModel)]=\"prestacaoContasBuscar.discountValue\" type=\"text\"\n                            name=\"discountValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Acrescimo:</label>\n                        <input class=\"form-control\" autocomplete=\"off\" [(ngModel)]=\"prestacaoContasBuscar.additionValue\" type=\"text\"\n                            name=\"additionValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                    </div>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"form-group\">\n                        <label>Valor Total:</label>\n                        <input class=\"form-control\"\n                            [ngModel]=\"somarTotal(servicoPrestadoBuscaSelecionado.value, prestacaoContasBuscar.additionValue, prestacaoContasBuscar.discountValue)\"\n                            type=\"text\" name=\"totalValue\" id=\"inputValue\" mask=\"separator.2\" thousandSeparator=\".\"\n                            prefix=\"R$ \" disabled=\"true\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-3\">\n                    <div class=\"form-group\">\n                        <label>Data de pagamento: *</label>\n                        <input class=\"form-control\" autocomplete=\"off\" [(ngModel)]=\"prestacaoContasBuscar.datePayment\"\n                            placeholder=\"DD/MM/YYYY\" type=\"text\" id=\"data\" name=\"datePayment\" mask=\"00/00/0000\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-9\">\n                    <div class=\"form-group\">\n                        <label>Observação:</label>\n                        <input class=\"form-control\" autocomplete=\"off\" Maxlength=\"240\" [(ngModel)]=\"prestacaoContasBuscar.observation\" type=\"text\"\n                            name=\"observation\">\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"d-flex justify-content-center\">\n                <div [class.spinner-border]=\"isLoading\" role=\"status\">\n                    <span class=\"sr-only\">Loading...</span>\n                </div>\n            </div>\n\n            <div class=\"row\" *ngIf=\"!isLoading\">\n                <div class=\"col-md-6\">\n                    <button type=\"submit\" class=\"btn btn-success dimensaobotao m-1 \" *ngIf=\"!prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-save\"></i> Salvar\n                    </button>\n                    <button type=\"submit\" class=\"btn btn-primary dimensaobotao m-1 \" *ngIf=\"prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-sync-alt\"></i> Atualizar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-danger dimensaobotao m-1\" (click)=\"voltarParaListagem()\">\n                        <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-secondary m-1\" (click)=\"emitirRelatorio()\"\n                        *ngIf=\"prestacaoContasBuscar.id\">\n                        <i class=\"fa fa-print\" aria-hidden=\"true\"></i> Relatório\n                    </button>\n\n                </div>\n            </div>\n        <br/><br/>\n        </form>\n    </div>\n</div>\n\n<div class=\"relatorio-prestacao\" *ngIf=\"relatorio\">\n    <h1 class=\"mt-4\">Relátório Prestação de contas</h1>\n\n    <h4 class=\"mt-4\">Cliente:</h4>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span>Nome: {{prestacaoContasBuscar.serviceProvided.client.name}} </span>\n            <span class=\"ml-3\">CPF: {{prestacaoContasBuscar.serviceProvided.client.cpf}} </span>\n        </div>\n    </div>\n\n    <h4 class=\"mt-4\">Serviço Prestado:</h4>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">ID: {{prestacaoContasBuscar.serviceProvided.id}} </span>\n            <span class=\"mr-3\">Descrição: {{prestacaoContasBuscar.serviceProvided.description}} </span>\n        </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Data: {{prestacaoContasBuscar.serviceProvided.date}} </span>\n            <span class=\"mr-3\">Tipo de Serviço: {{prestacaoContasBuscar.serviceProvided.typeService.service}} </span>\n\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor Combinado: R$ {{prestacaoContasBuscar.serviceProvided.value}} </span>\n        </div>\n    </div>\n\n    <h4 class=\"mt-4\">Prestação de conta</h4>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor de Desconto: R$ {{prestacaoContasBuscar.discountValue}} </span>\n\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor de Acrescimo: R$ {{prestacaoContasBuscar.additionValue}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Valor Total: R$ {{prestacaoContasBuscar.totalValue}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3\">Observação: {{prestacaoContasBuscar.observation}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3 mb-10\">Tipo de pagamento: {{prestacaoContasBuscar.typePayment.type}} </span>\n        </div>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <span class=\"mr-3 mb-10\">Data pagamento: {{retornaDatePaymentFormat(prestacaoContasBuscar.datePayment)}}\n            </span>\n        </div>\n    </div>\n\n\n    <br /><br />\n    <br /><br />\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <button type=\"button\" class=\"btn btn-secondary \" (click)=\"gerarPDF()\" *ngIf=\"prestacaoContasBuscar.id\">\n                <i class=\"fa fa-print\" aria-hidden=\"true\"></i> Imprimir\n            </button>\n            <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n                <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n              </button>\n        </div>\n    </div>\n</div>");
 
 /***/ }),
 
@@ -503,7 +503,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n  <div class=\"card card-container\">\n    <img id=\"profile-img\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"profile-img-card\" />\n    <form *ngIf=\"!isSuccessful && !isLoading\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\"\n      novalidate>\n      <div class=\"form-group\">\n        <label for=\"displayName\">Nome</label> <input type=\"text\" class=\"form-control\" name=\"displayName\"\n          [(ngModel)]=\"form.displayName\" required minlength=\"3\" maxlength=\"20\" #displayName=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && displayName.invalid\">\n          <div *ngIf=\"displayName.errors.required\">É necessário informar o nome</div>\n          <div *ngIf=\"displayName.errors.minlength\">O nome deve ter pelo menos 3 caracteres</div>\n          <div *ngIf=\"displayName.errors.maxlength\">O nome deve ter no máximo 20 caracteres </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"email\">Email</label> <input type=\"email\" class=\"form-control\" name=\"email\" [(ngModel)]=\"form.email\"\n          required email #email=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && email.invalid\">\n          <div *ngIf=\"email.errors.required\">É necessário informar o email</div>\n          <div *ngIf=\"email.errors.email\">O email deve ser um endereço de email válido</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n          [(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && password.invalid\">\n          <div *ngIf=\"password.errors.required\">É necessário informar a senha</div>\n          <div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"matchingPassword\">Confirmar Senhar</label> <input type=\"password\" class=\"form-control\"\n          name=\"matchingPassword\" [(ngModel)]=\"form.matchingPassword\" required minlength=\"6\"\n          #matchingPassword=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && matchingPassword.invalid\">\n          <div *ngIf=\"matchingPassword.errors.required\"> É necessário confirmar a senha</div>\n          <div *ngIf=\"matchingPassword.errors.minlength\">A senha de confirmação deve ter pelo menos 6 caracteres</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n\n        <button class=\"btn btn-primary btn-block\">Cadastrar</button>\n      </div>\n      <div class=\"alert alert-warning\" *ngIf=\"f.submitted && isSignUpFailed\">\n        O cadastro falhou!<br />{{ errorMessage }}\n      </div>\n    </form>\n\n    <div class=\"alert alert-success text-center\" *ngIf=\"isSuccessful\">Você foi registrado com sucesso! <br /><br />\n      <p class=\"social-login text-center\">\n        <button class=\"btn btn-info btn-block\" routerLink=\"/login\">\n          <i class=\"fas fa-sign-in-alt\"></i> Efetuar login</button>\n      </p>\n\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-12\">\n  <div class=\"card card-container\">\n    <h3 class=\"text-center\" style=\"font-family: fantasy;\">Controle de serviço prestado</h3>\n  \n    <form *ngIf=\"!isSuccessful && !isLoading\" name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\"\n      novalidate>\n      <div class=\"form-group\">\n        <label for=\"displayName\">Nome</label> <input type=\"text\" class=\"form-control\" name=\"displayName\"\n          [(ngModel)]=\"form.displayName\" required minlength=\"3\" maxlength=\"20\" #displayName=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && displayName.invalid\">\n          <div *ngIf=\"displayName.errors.required\">É necessário informar o nome</div>\n          <div *ngIf=\"displayName.errors.minlength\">O nome deve ter pelo menos 3 caracteres</div>\n          <div *ngIf=\"displayName.errors.maxlength\">O nome deve ter no máximo 20 caracteres </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"email\">Email</label> <input type=\"email\" class=\"form-control\" name=\"email\" [(ngModel)]=\"form.email\"\n          required email #email=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && email.invalid\">\n          <div *ngIf=\"email.errors.required\">É necessário informar o email</div>\n          <div *ngIf=\"email.errors.email\">O email deve ser um endereço de email válido</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Senha</label> <input type=\"password\" class=\"form-control\" name=\"password\"\n          [(ngModel)]=\"form.password\" required minlength=\"6\" #password=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && password.invalid\">\n          <div *ngIf=\"password.errors.required\">É necessário informar a senha</div>\n          <div *ngIf=\"password.errors.minlength\">A senha deve ter pelo menos 6 caracteres</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"matchingPassword\">Confirmar Senhar</label> <input type=\"password\" class=\"form-control\"\n          name=\"matchingPassword\" [(ngModel)]=\"form.matchingPassword\" required minlength=\"6\"\n          #matchingPassword=\"ngModel\" />\n        <div class=\"alert-danger\" *ngIf=\"f.submitted && matchingPassword.invalid\">\n          <div *ngIf=\"matchingPassword.errors.required\"> É necessário confirmar a senha</div>\n          <div *ngIf=\"matchingPassword.errors.minlength\">A senha de confirmação deve ter pelo menos 6 caracteres</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n\n        <button class=\"btn btn-primary btn-block\">Cadastrar</button>\n      </div>\n      <div class=\"alert alert-warning\" *ngIf=\"f.submitted && isSignUpFailed\">\n        O cadastro falhou!<br />{{ errorMessage }}\n      </div>\n    </form>\n\n    <div class=\"alert alert-success text-center\" *ngIf=\"isSuccessful\">Você foi registrado com sucesso! <br /><br />\n      <p class=\"social-login text-center\">\n        <button class=\"btn btn-info btn-block\" routerLink=\"/login\">\n          <i class=\"fas fa-sign-in-alt\"></i> Efetuar login</button>\n      </p>\n\n    </div>\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -516,7 +516,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Serviço Prestado</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{servico.id ? 'Edição' : 'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #form=\"ngForm\" (submit)=\"onSubmit()\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                            aria-hidden=\"true\">&times;</span></button>\n                    {{servico.id ? 'Serviço atualizado com sucesso' : 'Serviço Prestado Salvo com Sucesso!'}}\n                </div>\n\n                <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\" *ngIf=\"servico.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"servico.id\" name=\"id\" />\n                </div>\n            </div>\n        </div>\n\n        <div class=row>\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Cliente:</label>\n                    <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"servico.idClient\">\n                        <option value=\"\">Selecione...</option>\n                        <option *ngFor=\"let cliente of clientes\" [ngValue]=\"cliente.id\">\n                            {{ cliente.name }}\n                        </option>\n                    </select>\n                </div>\n            </div>\n        </div>\n\n        <div class=row>\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Tipo Serviço:</label>\n                    <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\"\n                        [(ngModel)]=\"servico.idTypeService\">\n                        <option value=\"\">Selecione...</option>\n                        <option *ngFor=\"let tipoServicos of tipoServico\" [ngValue]=\"tipoServicos.id\">\n                            {{ tipoServicos.service }}\n                        </option>\n                    </select>\n                </div>\n            </div>\n        </div>\n\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Descrição:</label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.description\" type=\"text\" name=\"description\"\n                        id=\"inputDescription\">\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>Data:</label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.date\" placeholder=\"DD/MM/YYYY\" mask=\"00/00/0000\"\n                        type=\"text\" name=\"date\" id=\"inputData\">\n                </div>\n            </div>\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>Valor Inicial </label>\n                    <input class=\"form-control\" [(ngModel)]=\"servico.value\" type=\"text\" name=\"value\" id=\"inputValue\"\n                        mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                </div>\n            </div>\n        </div>\n        <div class=\"d-flex justify-content-center\">\n            <div [class.spinner-border]=\"isLoading\" role=\"status\">\n              <span class=\"sr-only\">Loading...</span>\n            </div>\n          </div>\n\n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1\" *ngIf=\"!servico.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"servico.id\">\n                    <i class=\"fa fa-sync-alt\"></i> Atualizar\n                </button>\n                <button type=\"button\" routerLink=\"/servicos-prestados/lista\" class=\"btn btn-danger m-1\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n        </div>\n    </form>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Serviço Prestado</h1>\n<ol class=\"breadcrumb mb-4\">\n    <li class=\"breadcrumb-item active\">{{servico.id ? 'Edição' : 'Cadastro'}}</li>\n</ol>\n\n<div class=\"container-fluid\">\n    <form #form=\"ngForm\" (submit)=\"onSubmit()\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n                            aria-hidden=\"true\">&times;</span></button>\n                    {{servico.id ? 'Serviço atualizado com sucesso' : 'Serviço Prestado Salvo com Sucesso!'}}\n                </div>\n\n                <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n                    {{erro}}\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\" *ngIf=\"servico.id\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>\n                        ID:\n                    </label>\n                    <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"servico.id\" name=\"id\" />\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label >Cliente: *</label>\n\t\t\t\t\t<p-dropdown #cli [options]=\"clientes\"  [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"servico.idClient\" optionLabel=\"search\" optionValue=\"id\"\n                    placeholder=\"Selecione um cliente...\" emptyMessage=\"nenhum resultado encontrado\"\n                    emptyFilterMessage=\"nenhum resultado encontrado\" filter=\"true\" [autoDisplayFirst]=\"false\" (onBlur)=\"clearFilter(cli)\" required\n                    [style]=\"{width : '100%' }\"></p-dropdown>\n                    <!-- <select class=\"form-control\"  [ngModelOptions]=\"{standalone:true}\"  [(ngModel)]=\"servico.idClient\">\n                        <option value=\"\">Selecione...</option>\n                        <option *ngFor=\"let cliente of clientes\" [ngValue]=\"cliente.id\">\n                            {{cliente.id +\" - \"+ cliente.name }}\n                        </option>\n                    </select> -->\n                </div>\n            </div>\n        </div>\n\n        <div class=row>\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Tipo Serviço: *</label>\n                    <p-dropdown #ser [options]=\"tipoServico\"  [ngModelOptions]=\"{standalone:true}\" [(ngModel)]=\"servico.idTypeService\" optionLabel=\"search\"  optionValue=\"id\"\n                    placeholder=\"Selecione um tipo de serviço...\" emptyMessage=\"nenhum resultado encontrado\"\n                    emptyFilterMessage=\"nenhum resultado encontrado\" filter=\"true\" [autoDisplayFirst]=\"false\" (onBlur)=\"clearFilter(ser)\" required\n                    [style]=\"{width : '100%' }\"></p-dropdown>\n                    <!-- <select class=\"form-control\" [ngModelOptions]=\"{standalone:true}\"\n                        [(ngModel)]=\"servico.idTypeService\">\n                        <option value=\"\">Selecione...</option>\n                        <option *ngFor=\"let tipoServicos of tipoServico\" [ngValue]=\"tipoServicos.id\">\n                            {{tipoServicos.id +\" - \" +tipoServicos.service }}\n                        </option>\n                    </select> -->\n                </div>\n            </div>\n        </div>\n\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"form-group\">\n                    <label>Descrição: *</label>\n                    <textarea class=\"form-control\" Maxlength=\"1200\" id=\"descricaoServico\" rows=\"4\" [ngModelOptions]=\"{standalone:true}\"\n                    [(ngModel)]=\"servico.description\"></textarea>\n                    <!-- <input class=\"form-control\" [(ngModel)]=\"servico.description\" type=\"text\" name=\"description\"\n                        id=\"inputDescription\"> -->\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>Data Contrato: *</label>\n                    <input class=\"form-control\" autocomplete=\"off\" [(ngModel)]=\"servico.date\" placeholder=\"DD/MM/YYYY\" mask=\"00/00/0000\"\n                        type=\"text\" name=\"date\" id=\"inputData\">\n                </div>\n            </div>\n\n            <div class=\"col-md-6\">\n                <div class=\"form-group\">\n                    <label>Valor Inicial: *</label>\n                    <input class=\"form-control\" autocomplete=\"off\" [(ngModel)]=\"servico.value\" type=\"text\" name=\"value\" id=\"inputValue\"\n                        mask=\"separator.2\" thousandSeparator=\".\" prefix=\"R$ \">\n                </div>\n            </div>\n        </div>\n        <div class=\"d-flex justify-content-center\">\n            <div [class.spinner-border]=\"isLoading\" role=\"status\">\n              <span class=\"sr-only\">Loading...</span>\n            </div>\n          </div>\n\n        <div class=\"row\" *ngIf=\"!isLoading\">\n            <div class=\"col-md-4\">\n                <button type=\"submit\" class=\"btn btn-success m-1\" *ngIf=\"!servico.id\">\n                    <i class=\"fa fa-save\"></i> Salvar\n                </button>\n                <button type=\"submit\" class=\"btn btn-primary m-1 \" *ngIf=\"servico.id\">\n                    <i class=\"fa fa-sync-alt\"></i> Atualizar\n                </button>\n                <button type=\"button\" routerLink=\"/servicos-prestados/lista\" class=\"btn btn-danger m-1\">\n                    <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n                </button>\n\n            </div>\n        </div>\n    </form>\n</div>");
 
 /***/ }),
 
@@ -529,7 +529,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Serviço Prestado</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-bitem active\">Consulta</li>\n</ol>\n\n<div class=\"container-fluid\">\n\n\n  <form #consultaForm=\"ngForm\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          {{mensagemSucesso}}\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n\n    <div class=row>\n      <div class=\"col-md-1 mr-4 m-1\">\n        <label for=\"competencia\" class=\"col-form-label \">Competência:</label>\n      </div>\n      <div class=\"col-md-2 m-1\">\n        <input class=\"form-control\" placeholder=\"MM/YYYY\" type=\"text\" id=\"inputMes\" (change)=\"montaData($event)\"\n          mask=\"00/0000\">\n      </div>\n      <div class=\"col-md-1 mr-3 m-1\" *ngIf=\"listaFiltro.length > 0\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\" *ngIf=\"listaFiltro.length > 0\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-2 m-1\">\n        <button class=\"btn btn-warning\" routerLink=\"/servicos-prestados/form\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"form-check form-check-inline m-2\" *ngIf=\"listaFiltro.length > 0\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"inlineCheckbox1\"\n      (click)=\"buscaPorStatus($event.target.checked,2)\" checked>\n    <label class=\"form-check-label\" for=\"inlineCheckbox1\">Em aberto</label>\n  </div>\n  <div class=\"form-check form-check-inline mb-2\" *ngIf=\"listaFiltro.length > 0\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"inlineCheckbox2\"\n      (click)=\"buscaPorStatus($event.target.checked,1)\" checked>\n    <label class=\"form-check-label\" for=\"inlineCheckbox2\">Fechado</label>\n  </div>\n  <br />\n\n\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n\n      <div class=\"alert alert-warning\" role=\"alert\" *ngIf=\"message\">\n        {{message}}\n      </div>\n\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>Cliente</th>\n            <th>Descrição</th>\n            <th>Preço</th>\n            <th>Tipo de serviço</th>\n            <th>Data</th>\n            <th>Status</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr *ngFor=\"let s of lista | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index\">\n            <td>{{ s.client.name }}</td>\n            <td>{{ s.description }}</td>\n            <td>R$ {{ s.value | mask: 'separator':','}}</td>\n            <td>{{ s.typeService.service }}</td>\n            <td>{{ s.date }}</td>\n            <td>{{ s.releasedPayment ? 'Fechado' :'Em Aberto' }}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" *ngIf=\"!s.releasedPayment\"\n                routerLink=\"/servicos-prestados/form/{{s.id}}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" *ngIf=\"!s.releasedPayment\" (click)=\"preparaDelecao(s)\"\n                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\"\n        nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"servicoPrestadoSelecionado\">\n          Confirma a exclusão do serviço prestado: {{ servicoPrestadoSelecionado.description }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarServicoPrestado()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Serviço Prestado</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-bitem active\">Consulta</li>\n</ol>\n\n<div class=\"container-fluid\">\n\n\n  <form #consultaForm=\"ngForm\">\n\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n              aria-hidden=\"true\">&times;</span></button>\n          {{mensagemSucesso}}\n        </div>\n\n        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n          {{erro}}\n          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n      </div>\n    </div>\n\n    <div class=row>\n      <div class=\"col-md-1 mr-4 m-1\">\n        <label for=\"competencia\" class=\"col-form-label \">Competência:</label>\n      </div>\n      <div class=\"col-md-2 m-1\">\n        <input class=\"form-control\" placeholder=\"MM/YYYY\" autocomplete=\"off\" type=\"text\" id=\"inputMes\" (change)=\"montaData($event)\"\n          mask=\"00/0000\">\n      </div>\n      <div class=\"col-md-1 mr-3 m-1\" *ngIf=\"listaFiltro.length > 0\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\" *ngIf=\"listaFiltro.length > 0\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" autocomplete=\"off\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n      <div class=\"col-md-2 m-1\">\n        <button class=\"btn btn-warning\" routerLink=\"/servicos-prestados/form\">\n          <i class=\"fa fa-plus\"></i> Novo\n        </button>\n      </div>\n    </div>\n  </form>\n\n  <br />\n  <div class=\"form-check form-check-inline m-2\" *ngIf=\"listaFiltro.length > 0\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"inlineCheckbox1\"\n      (click)=\"buscaPorStatus($event.target.checked,2)\" checked>\n    <label class=\"form-check-label\" for=\"inlineCheckbox1\">Em aberto</label>\n  </div>\n  <div class=\"form-check form-check-inline mb-2\" *ngIf=\"listaFiltro.length > 0\">\n    <input class=\"form-check-input\" type=\"checkbox\" id=\"inlineCheckbox2\"\n      (click)=\"buscaPorStatus($event.target.checked,1)\" checked>\n    <label class=\"form-check-label\" for=\"inlineCheckbox2\">Fechado</label>\n  </div>\n  <br />\n\n\n\n  <br />\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n\n      <div class=\"alert alert-warning\" role=\"alert\" *ngIf=\"message\">\n        {{message}}\n      </div>\n\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Cliente</th>\n            <!-- <th>Descrição</th> -->\n            <th>Preço</th>\n            <th>Tipo de serviço</th>\n            <th>Data Contratação</th>\n            <th>Status</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr *ngFor=\"let s of lista | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index\">\n            <td>{{ s.id }}</td>\n            <td>{{ s.client.name }}</td>\n            <!-- <td>{{ s.description }}</td> -->\n            <td>R$ {{ s.value | mask: 'separator':','}}</td>\n            <td>{{ s.typeService.service }}</td>\n            <td>{{ s.date }}</td>\n            <td>{{ s.releasedPayment ? 'Fechado' :'Em Aberto' }}</td>\n            <td>\n\n              <button class=\"btn btn-primary m-1\" *ngIf=\"!s.releasedPayment\"\n                routerLink=\"/servicos-prestados/form/{{s.id}}\">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n\n              <button class=\"btn btn-danger m-1\" *ngIf=\"!s.releasedPayment\" (click)=\"preparaDelecao(s)\"\n                data-toggle=\"modal\" data-target=\"#modalDeSelecao\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </td>\n\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\"\n        nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n\n  <div id=\"modalDeSelecao\" class=\"modal fade\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h4>Confirmação</h4>\n\n        </div>\n        <div class=\"modal-body\" *ngIf=\"servicoPrestadoSelecionado\">\n          Confirma a exclusão do serviço prestado de ID: {{ servicoPrestadoSelecionado.id }}\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"btn btn-success\" (click)=\"deletarServicoPrestado()\" data-dismiss=\"modal\"> Confirma</button>\n          <button class=\"btn btn-default\" data-dismiss=\"modal\"> Cancela</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>");
 
 /***/ }),
 
@@ -542,7 +542,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"sb-topnav navbar navbar-expand navbar-dark bg-dark\">\n    <a class=\"navbar-brand\" href=\"#\">Meus Clientes</a>\n    <button class=\"btn btn-link btn-sm order-1 order-lg-0\" id=\"sidebarToggle\" href=\"#\">\n        <i class=\"fas fa-bars\"></i>\n    </button>            \n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"sb-topnav navbar navbar-expand navbar-dark bg-dark\">\n    <a class=\"navbar-brand\" href=\"#\">Controle de serviços</a>\n    <button class=\"btn btn-link btn-sm order-1 order-lg-0\" id=\"sidebarToggle\" href=\"#\">\n        <i class=\"fas fa-bars\"></i>\n    </button>            \n</nav>\n");
 
 /***/ }),
 
@@ -555,7 +555,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"layoutSidenav_nav\">\n    <nav class=\"sb-sidenav accordion sb-sidenav-dark\" id=\"sidenavAccordion\">\n        <div class=\"sb-sidenav-menu\">\n            <div class=\"nav\">\n                <div class=\"sb-sidenav-menu-heading\">Sistema</div>\n                <a class=\"nav-link\" routerLink=\"/home\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div>\n                    Home\n                </a>\n                <div class=\"sb-sidenav-menu-heading\">Cadastros</div>\n                <a class=\"nav-link collapsed\" routerLink=\"/clientes\" data-toggle=\"collapse\" aria-expanded=\"false\"\n                    aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i> </div>\n                    Clientes\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/definicao\" data-toggle=\"collapse\" aria-expanded=\"false\"\n                    aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Tipo de serviço\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/servicos-prestados\" data-toggle=\"collapse\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Serviços Prestados\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/pagamento/tipo/lista\" data-toggle=\"collapse\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Tipo de Pagamento\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/prestacao\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Prestação de contas\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/graficos/listar\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Graficos\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <div class=\"sb-sidenav-menu-heading\">Logout</div>\n                <a class=\"nav-link collapsed\" (click)=\"logout();\" href=\"#\" data-toggle=\"collapse\"\n                    data-target=\"#collapseLayouts\" aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-sign-out-alt\"></i></div>\n                    Sair\n                </a>\n            </div>\n        </div>\n        <div class=\"sb-sidenav-footer\">\n            <div class=\"small\">Usuário Logado:</div>\n            {{usuarioLogado}}\n        </div>\n\n    </nav>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"layoutSidenav_nav\">\n    <nav class=\"sb-sidenav accordion sb-sidenav-dark\" id=\"sidenavAccordion\">\n        <div class=\"sb-sidenav-menu\">\n            <div class=\"nav\">\n                <div class=\"sb-sidenav-menu-heading\">Sistema</div>\n                <a class=\"nav-link\" routerLink=\"/home\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-calendar-alt\"></i></div>\n                    Agenda\n                </a>\n                <div class=\"sb-sidenav-menu-heading\" >Menu</div>\n                <a class=\"nav-link collapsed \" routerLink={{showUrlUser}} data-toggle=\"collapse\" aria-disabled=\"true\" aria-expanded=\"false\" \n                    aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-address-card\"></i> </div>\n                    Clientes\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/definicao\" data-toggle=\"collapse\" aria-expanded=\"false\" *ngIf=\"returnPermission()\"\n                    aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"pi pi-user-edit\"></i> </div>\n                    Tipo de serviço\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/servicos-prestados\" data-toggle=\"collapse\" *ngIf=\"returnPermission()\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"far fa-handshake\"></i> </div>\n                    Serviços Prestados\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/pagamento/tipo/lista\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-money-bill-wave\"></i> </div>\n                    Tipo de Pagamento\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/prestacao\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-file-invoice-dollar\"></i> </div>\n                    Prestação de contas\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n\n                <a class=\"nav-link collapsed\" routerLink=\"/graficos/listar\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-chart-line\"></i> </div>\n                    Graficos\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <a class=\"nav-link collapsed\" routerLink=\"/usuario/listar\" data-toggle=\"collapse\" *ngIf=\"showRoleAdmin\"\n                    aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"pi pi-user-edit\"></i> </div>\n                    Usuários\n                    <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div>\n                </a>\n                <br/><br/>\n                <div class=\"sb-sidenav-menu-heading\">Logout</div>\n                <a class=\"nav-link collapsed\" (click)=\"logout();\" href=\"#\" data-toggle=\"collapse\"\n                    data-target=\"#collapseLayouts\" aria-expanded=\"false\" aria-controls=\"collapseLayouts\">\n                    <div class=\"sb-nav-link-icon\"><i class=\"fas fa-sign-out-alt\"></i></div>\n                    Sair\n                </a>\n            </div>\n        </div>\n        <div class=\"sb-sidenav-footer\">\n            <div class=\"small\">Usuário Logado:</div>\n            {{usuarioLogado}}\n        </div>\n\n    </nav>\n</div>");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/usuarios/usuario-lista.component.html":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/usuarios/usuario-lista.component.html ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"mt-4\">Usuários</h1>\n<ol class=\"breadcrumb mb-4\">\n  <li class=\"breadcrumb-item active\">Editar</li>\n</ol>\n\n\n\n<div class=\"container-fluid\" *ngIf=\"!usuario\">\n\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n            aria-hidden=\"true\">&times;</span></button>\n        {{mensagemSucesso}}\n      </div>\n\n      <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n        {{erro}}\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n\n  </div>\n\n  <form class=\"form\">\n    <div class=\"row\">\n      <div class=\"col-md-1 mr-3 m-1\">\n        <label for=\"pesquisar\" class=\"col-form-label \">Pesquisar:</label>\n      </div>\n      <div class=\"col-md-3 m-1\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" id=\"pesquisar\" autocomplete=\"off\" (keyup)=\"filtrar($event.target.value)\" />\n      </div>\n\n    </div>\n  </form>\n\n  <br />\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <table class=\"table table-condensed table-hover\" id=\"table-clientes\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>NOME</th>\n            <th>EMAIL</th>\n            <th>STATUS</th>\n            <th>PERFIL</th>\n            <th>AÇÃO</th>\n          </tr>\n        </thead>\n        <tbody *ngIf=\"!isLoading\">\n          <tr\n            *ngFor=\"let usuario of usuarios | paginate: { itemsPerPage: 6, currentPage: paginaAtual };  let i = index\">\n            <td>{{ usuario.id }}</td>\n            <td>{{ usuario.displayName }}</td>\n            <td>{{ usuario.email }}</td>\n            <td>{{ usuario.enabled ? 'ATIVO' :'INATIVO'}}</td>\n            <td>{{returnRolesDescription(usuario)}}</td>\n            <td>\n              <button class=\"btn btn-primary \" (click)=\"editarUsuario(usuario) \">\n                <i class=\"fa fa-edit\"></i>\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <pagination-controls *ngIf=\"!isLoading\" (pageChange)=\"paginaAtual = $event\" previousLabel=\"Anterior\"\n        nextLabel=\"Próximo\">\n      </pagination-controls>\n    </div>\n  </div>\n\n  <div class=\"d-flex justify-content-center\">\n    <div [class.spinner-border]=\"isLoading\" role=\"status\">\n      <span class=\"sr-only\">Loading...</span>\n    </div>\n  </div>\n</div>\n\n\n<div class=\"container-fluid\" *ngIf=\"usuario\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"alert alert-success hidden\" role=\"alert\" *ngIf=\"success == true\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span\n            aria-hidden=\"true\">&times;</span></button>\n        Usuário editado com sucesso!\n      </div>\n\n      <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\" *ngFor=\"let erro of errors\">\n        {{erro}}\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n\n  </div>\n\n  <!-- TELA PARA EDITAR DADOS DO USUÁRIOS -->\n  <form #usuarioForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\n    <div class=\"row\">\n      <div class=\"col-md-3\">\n        <div class=\"form-group\">\n          <label>\n            ID:\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [ngModel]=\"usuario.id\" name=\"id\" />\n        </div>\n      </div>\n\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Nome: *\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [(ngModel)]=\"usuario.displayName\" name=\"name\" />\n\n        </div>\n      </div>\n\n      <div class=\"col-md-6\">\n        <div class=\"form-group\">\n          <label>\n            Email: *\n          </label>\n          <input type=\"text\" class=\"form-control\" disabled=\"true\" [(ngModel)]=\"usuario.email\" name=\"email\"\n            type=\"text\" />\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row mb-2\">\n\n      <div class=\"col-4\">\n        <label>Status: *</label>\n        <div class=\"custom-control custom-switch\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"customSwitch1\"\n            (click)=\"VerificaStatus($event.target.checked)\" [checked]=\"usuario.enabled\">\n          <label class=\"custom-control-label\" for=\"customSwitch1\">{{usuario.enabled ? 'ATIVO' :'INATIVO'}}</label>\n        </div>\n      </div>\n\n      <div class=\"col-8\">\n        <label>Perfil: *</label>\n        <div class=\"custom-control custom-switch\" *ngFor='let role of roles'>\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"role-{{role.roleId}}\" [checked]=\"role.check\"\n            (click)=\"VerificaStatusRole($event.target.checked,role)\">\n          <label class=\"custom-control-label\" for=\"role-{{role.roleId}}\">{{role.name}}</label>\n        </div>\n      </div>\n    </div>\n\n\n    <div class=\"d-flex justify-content-center\">\n      <div [class.spinner-border]=\"isLoading\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"!isLoading\">\n      <div class=\"col-md-4\">\n        <button type=\"submit\" class=\"btn btn-primary m-1 \">\n          <i class=\"fa fa-sync-alt\"></i> Editar\n        </button>\n        <button type=\"button\" class=\"btn btn-danger m-1\" (click)=\"voltarParaListagem()\">\n          <i class=\"fa fa-arrow-alt-circle-left\"></i> Voltar\n        </button>\n      </div>\n    </div>\n  </form>\n\n\n\n</div>");
 
 /***/ }),
 
@@ -839,8 +852,8 @@ let AgendaService = class AgendaService {
     salvar(agenda) {
         return this.http.post(`${this.apiURL}`, agenda);
     }
-    atualizar(agenda) {
-        return this.http.put(`${this.apiURL}/${agenda.id}`, agenda);
+    saveValidate(agenda) {
+        return this.http.post(`${this.apiURL}/validate`, agenda);
     }
     getAgendaById(id) {
         return this.http.get(`${this.apiURL}/${id}`);
@@ -1067,6 +1080,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_auth_services__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/auth.services */ "./src/app/services/auth.services.ts");
 /* harmony import */ var _agenda_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./agenda.service */ "./src/app/agenda.service.ts");
 /* harmony import */ var _anotacao_service__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./anotacao.service */ "./src/app/anotacao.service.ts");
+/* harmony import */ var primeng_api__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! primeng/api */ "./node_modules/primeng/fesm2015/primeng-api.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+/* harmony import */ var _usuarios_usuario_module__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./usuarios/usuario.module */ "./src/app/usuarios/usuario.module.ts");
+
+
+
 
 
 
@@ -1121,9 +1140,12 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _pagamento_pagamento_module__WEBPACK_IMPORTED_MODULE_18__["PagamentoModule"],
             _prestacao_prestacao_contas_module__WEBPACK_IMPORTED_MODULE_22__["PrestacaoContasModule"],
             _grafico_grafico_module__WEBPACK_IMPORTED_MODULE_23__["GraficoModule"],
+            _usuarios_usuario_module__WEBPACK_IMPORTED_MODULE_33__["UsuarioModule"],
             _util_Date_Util__WEBPACK_IMPORTED_MODULE_25__["DateUtil"],
             ngx_mask__WEBPACK_IMPORTED_MODULE_26__["NgxMaskModule"],
             ngx_pagination__WEBPACK_IMPORTED_MODULE_27__["NgxPaginationModule"],
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_32__["BrowserAnimationsModule"]
         ],
         providers: [_clientes_service__WEBPACK_IMPORTED_MODULE_8__["ClientesService"],
             _definicao_service__WEBPACK_IMPORTED_MODULE_20__["DefinicaoService"],
@@ -1134,7 +1156,9 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _token_interceptor__WEBPACK_IMPORTED_MODULE_15__["authInterceptorProviders"],
             _grafico_services__WEBPACK_IMPORTED_MODULE_24__["GraficoService"],
             _agenda_service__WEBPACK_IMPORTED_MODULE_29__["AgendaService"],
-            _anotacao_service__WEBPACK_IMPORTED_MODULE_30__["AnotacaoService"]
+            _anotacao_service__WEBPACK_IMPORTED_MODULE_30__["AnotacaoService"],
+            primeng_api__WEBPACK_IMPORTED_MODULE_31__["FilterService"],
+            primeng_api__WEBPACK_IMPORTED_MODULE_31__["PrimeNGConfig"],
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
     })
@@ -1240,6 +1264,9 @@ let ClientesService = class ClientesService {
     getClientes() {
         return this.http.get(`${this.apiURL}`);
     }
+    getClientesAll() {
+        return this.http.get(`${this.apiURL}/getAll`);
+    }
     getClientesById(id) {
         return this.http.get(`${this.apiURL}/${id}`);
     }
@@ -1306,16 +1333,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cliente__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cliente */ "./src/app/clientes/cliente.ts");
 /* harmony import */ var src_app_clientes_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/clientes.service */ "./src/app/clientes.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var src_app_services_token_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/token-storage.service */ "./src/app/services/token-storage.service.ts");
+
 
 
 
 
 
 let ClientesFormComponent = class ClientesFormComponent {
-    constructor(service, router, activatedRouter) {
+    constructor(service, router, activatedRouter, tokenStorageService) {
         this.service = service;
         this.router = router;
         this.activatedRouter = activatedRouter;
+        this.tokenStorageService = tokenStorageService;
         this.success = false;
         this.isLoading = false;
         this.cliente = new _cliente__WEBPACK_IMPORTED_MODULE_2__["Cliente"]();
@@ -1326,6 +1356,7 @@ let ClientesFormComponent = class ClientesFormComponent {
     }
     ngOnInit() {
         this.isLoading = true;
+        this.cliente.status = true;
         let params = this.activatedRouter.params;
         params.subscribe(urlParams => {
             this.id = urlParams['id'];
@@ -1340,6 +1371,14 @@ let ClientesFormComponent = class ClientesFormComponent {
             }
         });
         this.isLoading = false;
+    }
+    returnPermission() {
+        const user = this.tokenStorageService.getUser();
+        var permission = true;
+        if (user.roles.includes('ROLE_ADMIN') || user.roles.includes('ROLE_USER')) {
+            permission = false;
+        }
+        return permission;
     }
     // Metodo para atualizar e salvar cliente no Clientes-form.Component.html
     onSubmit() {
@@ -1375,6 +1414,9 @@ let ClientesFormComponent = class ClientesFormComponent {
             });
         }
     }
+    VerificaStatus(event) {
+        this.cliente.status = event;
+    }
     voltarParaListagem() {
         this.close();
         this.router.navigate(['/clientes']);
@@ -1383,7 +1425,8 @@ let ClientesFormComponent = class ClientesFormComponent {
 ClientesFormComponent.ctorParameters = () => [
     { type: src_app_clientes_service__WEBPACK_IMPORTED_MODULE_3__["ClientesService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+    { type: src_app_services_token_storage_service__WEBPACK_IMPORTED_MODULE_5__["TokenStorageService"] }
 ];
 ClientesFormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1537,7 +1580,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: 'clientes', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_3__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]], children: [
+    { path: 'clientes', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_3__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]], data: {
+            roles: ['ROLE_ADMIN', 'ROLE_USER']
+        }, children: [
             { path: 'form', component: _clientes_form_clientes_form_component__WEBPACK_IMPORTED_MODULE_4__["ClientesFormComponent"] },
             { path: 'form/:id', component: _clientes_form_clientes_form_component__WEBPACK_IMPORTED_MODULE_4__["ClientesFormComponent"] },
             { path: 'lista', component: _clientes_lista_clientes_lista_component__WEBPACK_IMPORTED_MODULE_5__["ClientesListaComponent"] },
@@ -1686,7 +1731,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: 'definicao', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_4__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], children: [
+        path: 'definicao', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_4__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], data: {
+            roles: ['ROLE_ADMIN', 'ROLE_USER']
+        }, children: [
             { path: 'tipo', component: _tipo_definicao_tipo_servico_component__WEBPACK_IMPORTED_MODULE_6__["DefinicaoTipoServico"] },
             { path: 'tipo/lista', component: _tipo_lista_definicao_tipo_lista_component__WEBPACK_IMPORTED_MODULE_5__["TipoServicoListaComponent"] },
             { path: 'tipo/:id', component: _tipo_definicao_tipo_servico_component__WEBPACK_IMPORTED_MODULE_6__["DefinicaoTipoServico"] },
@@ -2091,6 +2138,7 @@ let GraficoComponent = class GraficoComponent {
     constructor(service) {
         this.service = service;
         this.grafico = [];
+        this.isLoading = false;
         this.dataset = {
             label: '',
             data: [],
@@ -2118,9 +2166,15 @@ let GraficoComponent = class GraficoComponent {
     }
     ngOnInit() {
         this.inicializarGrafico();
+        this.close();
+    }
+    close() {
+        this.errors = [];
     }
     buscarPorData(event) {
         var ano = event.target.value;
+        this.isLoading = true;
+        this.close();
         this.inicializarGrafico();
         if (ano.length == 4) {
             var dataInicial = "01/" + "01/" + ano;
@@ -2129,12 +2183,20 @@ let GraficoComponent = class GraficoComponent {
                 .subscribe(response => {
                 this.grafico = response;
                 this.dataSelecionada = true;
-            }, reject => {
+                this.isLoading = false;
+                window.scrollTo(0, 1800);
+            }, erro => {
                 this.dataSelecionada = false;
+                this.errors = erro.error.erros;
+                if (this.errors == undefined) {
+                    this.errors = ["Ocorreu erro ao atualizar registro!"];
+                }
+                this.isLoading = false;
             });
         }
         else {
             this.dataSelecionada = false;
+            this.isLoading = false;
         }
     }
     recebido() {
@@ -2411,6 +2473,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _anotacao_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../anotacao.service */ "./src/app/anotacao.service.ts");
 /* harmony import */ var _util_Date_Util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/Date-Util */ "./src/app/util/Date-Util.ts");
 /* harmony import */ var _agenda__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./agenda */ "./src/app/home/agenda.ts");
+/* harmony import */ var src_app_services_token_storage_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/token-storage.service */ "./src/app/services/token-storage.service.ts");
+/* harmony import */ var _clientes_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../clientes.service */ "./src/app/clientes.service.ts");
+
+
 
 
 
@@ -2418,13 +2484,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HomeComponent = class HomeComponent {
-    constructor(agendaService, anotacaoService) {
+    constructor(agendaService, anotacaoService, tokenStorageService, clientService) {
         this.agendaService = agendaService;
         this.anotacaoService = anotacaoService;
+        this.tokenStorageService = tokenStorageService;
+        this.clientService = clientService;
         this.paginaAtualAgenda = 0;
         this.paginaAtualAnotacao = 0;
-        this.dateInitial = null;
-        this.dateFinal = null;
+        this.paginaAtualClient = 0;
+        this.paginaAtualClientCad = 0;
+        this.dateInitial = "";
+        this.dateFinal = "";
         this.success = false;
         this.telaEdicao = false;
         this.isLoading = false;
@@ -2434,8 +2504,18 @@ let HomeComponent = class HomeComponent {
         this.agenda = {};
         this.anotacao = {};
         this.tipoAnotacao = {};
+        this.clienteListCache = {};
     }
     ngOnInit() {
+        this.returnPermission();
+    }
+    returnPermission() {
+        const user = this.tokenStorageService.getUser();
+        var permission = true;
+        if (user.roles.includes('ROLE_ADMIN') || user.roles.includes('ROLE_USER')) {
+            permission = false;
+        }
+        return permission;
     }
     preparaDelecao(agenda) {
         this.agendaSelecionada = agenda;
@@ -2476,12 +2556,16 @@ let HomeComponent = class HomeComponent {
             });
         }
     }
+    VerificaStatusFlag(event) {
+        this.agenda.flagConfirmation = event;
+    }
     selecionarAgendaPorId(id) {
         this.close();
         this.isLoading = true;
         this.agendaService.getAgendaById(id)
             .subscribe(response => {
             this.agenda = response;
+            this.clienteListCache = this.agenda.client;
             this.telaEdicao = true;
             this.isLoading = false;
         }, erro => {
@@ -2493,36 +2577,65 @@ let HomeComponent = class HomeComponent {
         });
     }
     voltarParaListagemAgenda() {
+        this.clienteListCache = [];
         this.agenda = new _agenda__WEBPACK_IMPORTED_MODULE_5__["Agenda"]();
         this.close();
-        this.mostrarAgenda();
         this.telaEdicao = false;
+        if (this.listaAgenda) {
+            this.mostrarAgenda();
+        }
     }
     onSubmit() {
         this.isLoading = true;
         this.close();
         this.agenda.date = _util_Date_Util__WEBPACK_IMPORTED_MODULE_4__["DateUtil"].dateFormat(this.agenda.date);
-        this.agendaService.salvar(this.agenda)
-            .subscribe(response => {
-            this.success = true;
-            this.isLoading = false;
-            if (this.agenda.id > 0) {
-                this.mensagemSucesso = "Agenda editada com sucesso";
-            }
-            else {
-                this.mensagemSucesso = "Agenda salva com sucesso";
-                this.agenda = {};
-            }
-        }, erro => {
-            this.isLoading = false;
-            this.errors = erro.error.erros;
-            if (this.errors == undefined) {
-                this.errors = ["Ocorreu um erro ao salvar/editar a agenda"];
-            }
-        });
+        this.agenda.client = this.clienteListCache;
+        if (this.returnPermission()) {
+            this.agendaService.saveValidate(this.agenda)
+                .subscribe(response => {
+                this.success = true;
+                this.isLoading = false;
+                if (this.agenda.id > 0) {
+                    this.mensagemSucesso = "Agenda editada com sucesso";
+                }
+                else {
+                    this.mensagemSucesso = "Agenda salva com sucesso";
+                    this.agenda = {};
+                    this.clienteListCache = [];
+                }
+            }, erro => {
+                this.isLoading = false;
+                this.errors = erro.error.erros;
+                if (this.errors == undefined) {
+                    this.errors = ["Ocorreu um erro ao salvar/editar a agenda"];
+                }
+            });
+        }
+        else {
+            this.agendaService.salvar(this.agenda)
+                .subscribe(response => {
+                this.success = true;
+                this.isLoading = false;
+                if (this.agenda.id > 0) {
+                    this.mensagemSucesso = "Agenda editada com sucesso";
+                }
+                else {
+                    this.mensagemSucesso = "Agenda salva com sucesso";
+                    this.agenda = {};
+                    this.clienteListCache = [];
+                }
+            }, erro => {
+                this.isLoading = false;
+                this.errors = erro.error.erros;
+                if (this.errors == undefined) {
+                    this.errors = ["Ocorreu um erro ao salvar/editar a agenda"];
+                }
+            });
+        }
     }
     cadastroNovo() {
         this.close();
+        this.clienteListCache = [];
         this.telaEdicao = true;
     }
     close() {
@@ -2532,6 +2645,58 @@ let HomeComponent = class HomeComponent {
     selecionarAbaAgenda() {
         this.isLoading = false;
         this.close();
+    }
+    // modal de clientes
+    openModalComponents() {
+        this.loadingClient();
+        $("#modalComponents").modal({
+            show: true,
+            keyboard: false,
+            backdrop: 'static'
+        });
+    }
+    closeModalComponents() {
+        $("#modalComponents").on('hidden.bs.modal');
+    }
+    filtrarClientes(value) {
+        if (!value) {
+            this.clientes = this.clientesFilter;
+        }
+        else {
+            this.clientes = this.clientesFilter.filter(x => {
+                if (x.name.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
+                    String(x.id).trim().toLowerCase().includes(value.trim().toLowerCase())) {
+                    return true;
+                }
+            });
+        }
+    }
+    loadingClient() {
+        this.clientes = [];
+        this.close();
+        this.isLoading = true;
+        this.clientService.getClientesAll()
+            .subscribe(response => {
+            this.clientes = response;
+            this.clienteListCache.forEach(x => this.clientes.filter(v => v.id == x.id)
+                .map(s => s.checked = true));
+            this.clientesFilter = this.clientes;
+            this.isLoading = false;
+        }, erro => {
+            this.isLoading = false;
+            this.errors = erro.error.erros;
+            if (this.errors == undefined) {
+                this.errors = ["Ocorreu um erro ao carregar os clientes"];
+            }
+        });
+    }
+    VerificaChecked(check, client) {
+        this.clientes.filter(x => x.id == client.id).map(v => { v.checked = check; });
+    }
+    registrarAgendaCliente() {
+        this.filtrarClientes(undefined);
+        this.clienteListCache = this.clientes.filter(x => x.checked);
+        this.closeModalComponents();
     }
     // Metodos da aba anotação
     selecionarAnotacaoPorId(id) {
@@ -2559,10 +2724,11 @@ let HomeComponent = class HomeComponent {
         this.anotacaoSelecionada = anotacao;
     }
     mostrarAnotacao() {
-        // Retorna todas as anotação 
+        // Retorna todas as anotação
+        this.mostrarListaAnotacao = 1;
         this.close();
         this.anotacao = {};
-        this.anotacaoLista = [];
+        this.anotacaoLista = {};
         this.isLoading = true;
         this.anotacaoService.getAllAnotacao()
             .subscribe(response => {
@@ -2570,12 +2736,12 @@ let HomeComponent = class HomeComponent {
             this.anotacaoListaFilter = response;
             this.isLoading = false;
         }, erro => {
-            this.isLoading = false;
             this.anotacaoListaFilter = [];
             this.errors = erro.error.erros;
             if (this.errors == undefined) {
                 this.errors = ["Ocorreu um erro ao mostrar as anotações"];
             }
+            this.isLoading = false;
         });
     }
     deletarAnotacao() {
@@ -2642,6 +2808,7 @@ let HomeComponent = class HomeComponent {
     }
     // Parte de código para tratar os tipos de anotação
     mostrarTipoAnotacao() {
+        this.tipoAnotacaoLista = [];
         this.anotacaoService.getAllTipoAnotacao()
             .subscribe(response => {
             this.tipoAnotacaoLista = response;
@@ -2734,7 +2901,9 @@ let HomeComponent = class HomeComponent {
 };
 HomeComponent.ctorParameters = () => [
     { type: _agenda_service__WEBPACK_IMPORTED_MODULE_2__["AgendaService"] },
-    { type: _anotacao_service__WEBPACK_IMPORTED_MODULE_3__["AnotacaoService"] }
+    { type: _anotacao_service__WEBPACK_IMPORTED_MODULE_3__["AnotacaoService"] },
+    { type: src_app_services_token_storage_service__WEBPACK_IMPORTED_MODULE_6__["TokenStorageService"] },
+    { type: _clientes_service__WEBPACK_IMPORTED_MODULE_7__["ClientesService"] }
 ];
 HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -2873,12 +3042,23 @@ let LoginComponent = class LoginComponent {
         if (this.tokenStorage.getToken()) {
             this.isLoggedIn = true;
             this.currentUser = this.tokenStorage.getUser();
+            this.router.navigate(['/home']);
         }
         else if (this.token) {
+            this.isLoading = true;
             this.tokenStorage.saveToken(this.token);
             this.userService.getCurrentUser().subscribe(data => {
-                this.login(data);
+                if (!data.enabled) {
+                    this.isLoginFailed = true;
+                    this.errorMessage = "Usuário desabilitado, procure um administrador!";
+                    this.tokenStorage.signOut();
+                }
+                else {
+                    this.login(data);
+                }
+                this.isLoading = false;
             }, err => {
+                this.tokenStorage.signOut();
                 this.errorMessage = err.error.message;
                 this.isLoginFailed = true;
                 this.isLoading = false;
@@ -2891,7 +3071,6 @@ let LoginComponent = class LoginComponent {
         }
     }
     onSubmit() {
-        debugger;
         this.isLoading = true;
         this.authService.login(this.form).subscribe(data => {
             this.tokenStorage.saveToken(data.accessToken);
@@ -2903,8 +3082,11 @@ let LoginComponent = class LoginComponent {
             if (!this.errorMessage) {
                 this.errorMessage = "Não foi possivel se comunicar com o servidor!";
             }
-            if (err.error.status == 401) {
+            if (err.error.status == 401 && this.errorMessage != "User is disabled") {
                 this.errorMessage = "Usuário/senha incorreto!";
+            }
+            if (err.error.status == 401 && this.errorMessage == "User is disabled") {
+                this.errorMessage = "Usuário desabilitado, procure um administrador!";
             }
         });
     }
@@ -2913,8 +3095,8 @@ let LoginComponent = class LoginComponent {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.currentUser = this.tokenStorage.getUser();
+        this.isLoading = false;
         this.router.navigate(['/home']);
-        //window.location.reload();
     }
     signInWithGoogle() {
         window.location.href = this.googleURL;
@@ -3019,7 +3201,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: 'pagamento', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_4__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], children: [
+        path: 'pagamento', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_4__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], data: {
+            roles: ['ROLE_ADMIN']
+        }, children: [
             { path: 'tipo', component: _tiipo_pagamento_tipo_component__WEBPACK_IMPORTED_MODULE_5__["Pagamento"] },
             { path: 'tipo/lista', component: _tipo_lista_pagamento_tipo_lista_component__WEBPACK_IMPORTED_MODULE_6__["PagamentoTipoLista"] },
             { path: 'tipo/:id', component: _tiipo_pagamento_tipo_component__WEBPACK_IMPORTED_MODULE_5__["Pagamento"] },
@@ -3369,8 +3553,11 @@ let PrestaContasService = class PrestaContasService {
     salvar(prestacaoContas) {
         return this.http.post(`${this.apiURL}`, prestacaoContas);
     }
-    getPrestacaoContas() {
-        return this.http.get(`${this.apiURL}`);
+    getPrestacaoContas(dateInitial, dateFinal) {
+        const httpParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]()
+            .set("dateInitial", dateInitial).set("dateFinal", dateFinal);
+        const url = this.apiURL + "/date?" + httpParams.toString();
+        return this.http.get(url);
     }
     getPrestacaoContasById(id) {
         return this.http.get(`${this.apiURL}/${id}`);
@@ -3437,6 +3624,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var src_app_presta_contas_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/presta-contas.services */ "./src/app/presta-contas.services.ts");
+/* harmony import */ var src_app_util_Date_Util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/util/Date-Util */ "./src/app/util/Date-Util.ts");
+
 
 
 
@@ -3450,23 +3639,12 @@ let PrestacaoContasListaComponent = class PrestacaoContasListaComponent {
         this.prestacaoContasFiltro = [];
         this.valorPesquisado = "";
         this.isLoading = false;
+        this.isSearch = false;
+        this.dateInitial = null;
+        this.dateFinal = null;
+        this.alertInf = null;
     }
     ngOnInit() {
-        this.close();
-        this.isLoading = true;
-        this.service.getPrestacaoContas()
-            .subscribe(response => {
-            this.prestacaoContas = response;
-            this.prestacaoContasFiltro = response;
-            this.filtrar(this.valorPesquisado);
-            this.isLoading = false;
-        }, erro => {
-            this.errors = erro.error.erros;
-            this.isLoading = false;
-            if (this.errors == undefined) {
-                this.errors = ["Ocorreu um erro ao carregar os serviços prestados!"];
-            }
-        });
     }
     novoCadastro() {
         this.router.navigate(['/prestacao/conta']);
@@ -3477,15 +3655,19 @@ let PrestacaoContasListaComponent = class PrestacaoContasListaComponent {
     close() {
         this.errors = [];
         this.success = false;
+        this.alertInf = null;
+    }
+    converToDateFormat(date) {
+        return src_app_util_Date_Util__WEBPACK_IMPORTED_MODULE_4__["DateUtil"].dateFormat(date);
     }
     deletarPrestacaoConta() {
         this.close();
         this.isLoading = true;
         this.service.deletar(this.prestacaoContasSelecionado)
             .subscribe(response => {
-            this.ngOnInit();
             this.mensagemSucesso = "prestação de conta deletada com sucesso";
             this.success = true;
+            this.mostrarPrestacoes();
         }, erro => {
             this.errors = erro.error.erros;
             if (this.errors == undefined) {
@@ -3500,7 +3682,7 @@ let PrestacaoContasListaComponent = class PrestacaoContasListaComponent {
         }
         else {
             this.prestacaoContas = this.prestacaoContasFiltro.filter(x => {
-                if (x.serviceProvided.description.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
+                if (x.serviceProvided.typeService.service.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
                     String(x.id).trim().toLowerCase().includes(value.trim().toLowerCase()) ||
                     x.serviceProvided.client.name.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
                     x.typePayment.type.trim().toLowerCase().includes(value.trim().toLowerCase())) {
@@ -3509,6 +3691,36 @@ let PrestacaoContasListaComponent = class PrestacaoContasListaComponent {
             });
         }
         this.valorPesquisado = value;
+    }
+    ativarPesquisa() {
+        this.isSearch = !this.isSearch;
+    }
+    mostrarPrestacoes() {
+        this.close();
+        var dateFinalFormat = src_app_util_Date_Util__WEBPACK_IMPORTED_MODULE_4__["DateUtil"].dateFormat(this.dateFinal);
+        var dateInitialFormat = src_app_util_Date_Util__WEBPACK_IMPORTED_MODULE_4__["DateUtil"].dateFormat(this.dateInitial);
+        if ((dateFinalFormat == "" || dateInitialFormat == "")) {
+            this.errors = ["Favor informar as data corretamente!"];
+        }
+        else {
+            this.isLoading = true;
+            this.service.getPrestacaoContas(dateInitialFormat, dateFinalFormat)
+                .subscribe(response => {
+                this.prestacaoContas = response;
+                this.prestacaoContasFiltro = response;
+                this.filtrar(this.valorPesquisado);
+                this.isLoading = false;
+                if (this.prestacaoContas.length == 0) {
+                    this.alertInf = "Não foi encontrado informações para as datas informadas!";
+                }
+            }, erro => {
+                this.isLoading = false;
+                this.errors = erro.error.erros;
+                if (this.errors == undefined) {
+                    this.errors = ["Ocorreu um erro ao carregar os serviços prestados!"];
+                }
+            });
+        }
     }
 };
 PrestacaoContasListaComponent.ctorParameters = () => [
@@ -3561,6 +3773,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_pagamento_tipo_pagamento__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/pagamento/tipo-pagamento */ "./src/app/pagamento/tipo-pagamento.ts");
 /* harmony import */ var _prestacao_conta__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../prestacao-conta */ "./src/app/prestacao/prestacao-conta.ts");
 /* harmony import */ var src_app_util_Date_Util__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/util/Date-Util */ "./src/app/util/Date-Util.ts");
+/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.es.min.js");
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! jspdf-autotable */ "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js");
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_12__);
+
+
+
 
 
 
@@ -3618,6 +3836,7 @@ let PrestacaoContasComponent = class PrestacaoContasComponent {
             this.pagamentoService.getTipoPagamento()
                 .subscribe(response => {
                 this.tipoPagamento = response;
+                this.tipoPagamento.map(v => v.search = v.id + " - " + v.type);
                 this.isLoading = false;
             }, erro => {
                 this.errors = erro.error.erros;
@@ -3631,6 +3850,59 @@ let PrestacaoContasComponent = class PrestacaoContasComponent {
     close() {
         this.errors = [];
         this.success = false;
+    }
+    gerarPDF() {
+        let doc = new jspdf__WEBPACK_IMPORTED_MODULE_11__["jsPDF"]();
+        // Parte do relatório destinada a cliente
+        const clientcolumns = [['Clientes', '']];
+        const client = [
+            ['Nome', this.prestacaoContasBuscar.serviceProvided.client.name],
+            ['CPF', this.prestacaoContasBuscar.serviceProvided.client.cpf]
+        ];
+        jspdf_autotable__WEBPACK_IMPORTED_MODULE_12___default()(doc, {
+            head: clientcolumns,
+            body: client,
+            columnStyles: { 0: { cellWidth: 20 } },
+            didDrawPage: (dataArg) => {
+                doc.text('Relatório de prestação de contas', dataArg.settings.margin.left, 10);
+            }
+        });
+        // Parte do relatório destinada ao serviço prestado
+        const providerServiceColumns = [['Serviço Prestado', '']];
+        const providerService = [
+            ['ID', this.prestacaoContasBuscar.serviceProvided.id],
+            ['Descrição', this.prestacaoContasBuscar.serviceProvided.description],
+            ['Data', this.prestacaoContasBuscar.serviceProvided.date],
+            ['Tipo serviço', this.prestacaoContasBuscar.serviceProvided.typeService.service],
+            ['Valor fechado', this.prestacaoContasBuscar.serviceProvided.value]
+        ];
+        jspdf_autotable__WEBPACK_IMPORTED_MODULE_12___default()(doc, {
+            head: providerServiceColumns,
+            body: providerService,
+            columnStyles: { 0: { cellWidth: 40 } },
+            didDrawPage: (dataArg) => {
+                doc.text('', dataArg.settings.margin.left, 10);
+            }
+        });
+        // Parte do relatório destinada a prestação de contas
+        const accountabilityColumns = [['Prestação de contas', '']];
+        const accountability = [
+            ['Desconto', this.prestacaoContasBuscar.discountValue],
+            ['Acrescimo', this.prestacaoContasBuscar.additionValue],
+            ['Valor Total', this.prestacaoContasBuscar.totalValue],
+            ['Observação', this.prestacaoContasBuscar.observation],
+            ['Tipo de pagamento', this.prestacaoContasBuscar.typePayment.type],
+            ['Data Pagamento', this.retornaDatePaymentFormat(this.prestacaoContasBuscar.datePayment)]
+        ];
+        jspdf_autotable__WEBPACK_IMPORTED_MODULE_12___default()(doc, {
+            head: accountabilityColumns,
+            body: accountability,
+            columnStyles: { 0: { cellWidth: 40 } },
+            didDrawPage: (dataArg) => {
+                doc.text('', dataArg.settings.margin.left, 10);
+            }
+        });
+        doc.output("dataurlnewwindow");
     }
     emitirRelatorio() {
         this.relatorio = true;
@@ -3693,6 +3965,7 @@ let PrestacaoContasComponent = class PrestacaoContasComponent {
             this.servicoPrestadoService.buscarDate(this.dataInicial, this.dataFinal)
                 .subscribe(response => {
                 this.servicoPrestadoBusca = response;
+                this.servicoPrestadoBusca.map(v => v.search = v.id + " - " + v.client.name + " - " + v.typeService.service);
                 this.errors = null;
                 this.isLoading = false;
                 if (this.servicoPrestadoBusca.length == 0) {
@@ -3716,6 +3989,9 @@ let PrestacaoContasComponent = class PrestacaoContasComponent {
     }
     retornaDatePaymentFormat(data) {
         return src_app_util_Date_Util__WEBPACK_IMPORTED_MODULE_10__["DateUtil"].dateFormat(data);
+    }
+    clearFilter(dropdown) {
+        dropdown.resetFilter();
     }
 };
 PrestacaoContasComponent.ctorParameters = () => [
@@ -3777,6 +4053,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_mask__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-mask */ "./node_modules/ngx-mask/fesm2015/ngx-mask.js");
 /* harmony import */ var _util_Date_Util__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../util/Date-Util */ "./src/app/util/Date-Util.ts");
 /* harmony import */ var ngx_pagination__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-pagination */ "./node_modules/ngx-pagination/dist/ngx-pagination.js");
+/* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! primeng/dropdown */ "./node_modules/primeng/fesm2015/primeng-dropdown.js");
+
 
 
 
@@ -3803,7 +4081,8 @@ PrestacaoContasModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _prestacao_routing_module__WEBPACK_IMPORTED_MODULE_5__["PrestacaoContasRoutingModule"],
             ngx_mask__WEBPACK_IMPORTED_MODULE_8__["NgxMaskModule"].forRoot(),
             _util_Date_Util__WEBPACK_IMPORTED_MODULE_9__["DateUtil"],
-            ngx_pagination__WEBPACK_IMPORTED_MODULE_10__["NgxPaginationModule"]
+            ngx_pagination__WEBPACK_IMPORTED_MODULE_10__["NgxPaginationModule"],
+            primeng_dropdown__WEBPACK_IMPORTED_MODULE_11__["DropdownModule"]
         ],
         exports: [
             _contas_lista_prestacao_contas_lista_component__WEBPACK_IMPORTED_MODULE_6__["PrestacaoContasListaComponent"],
@@ -4081,15 +4360,17 @@ const httpOptions = {
 let UserService = class UserService {
     constructor(http) {
         this.http = http;
+        this.apiURL = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_BASE_URL + '/api/user';
     }
-    getPublicContent() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + 'all', { responseType: 'text' });
+    getUserAll() {
+        return this.http.get(`${this.apiURL}` + '/all');
     }
-    getUserBoard() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + 'user', { responseType: 'text' });
+    salvar(user, role) {
+        const url = this.apiURL + "/role/user/" + user.id + "/status/" + user.enabled;
+        return this.http.put(url, role);
     }
-    getAdminBoard() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + 'admin', { responseType: 'text' });
+    getRoleAll() {
+        return this.http.get(`${this.apiURL}` + '/role/all');
     }
     getCurrentUser() {
         return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + 'user/me', httpOptions);
@@ -4252,7 +4533,8 @@ let ServicoPrestadoFormComponent = class ServicoPrestadoFormComponent {
             this.clienteService
                 .getClientes()
                 .subscribe(response => {
-                this.clientes = response;
+                this.clientes = response.filter(x => x.status);
+                this.clientes.map(v => v.search = v.id + " - " + v.name);
             }, erro => {
                 this.errors = erro.error.erros;
                 if (this.errors == undefined) {
@@ -4264,6 +4546,7 @@ let ServicoPrestadoFormComponent = class ServicoPrestadoFormComponent {
             this.definicaoService.getTipoServicos()
                 .subscribe(response => {
                 this.tipoServico = response;
+                this.tipoServico.map(v => v.search = v.id + " - " + v.service);
             }, erro => {
                 this.errors = erro.error.erros;
                 if (this.errors == undefined) {
@@ -4304,6 +4587,9 @@ let ServicoPrestadoFormComponent = class ServicoPrestadoFormComponent {
         this.servico.date = response.date;
         this.servico.value = response.value;
     }
+    clearFilter(dropdown) {
+        dropdown.resetFilter();
+    }
 };
 ServicoPrestadoFormComponent.ctorParameters = () => [
     { type: src_app_clientes_service__WEBPACK_IMPORTED_MODULE_2__["ClientesService"] },
@@ -4319,6 +4605,14 @@ ServicoPrestadoFormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"](
     })
 ], ServicoPrestadoFormComponent);
 
+class Form {
+    constructor() {
+        this.clean();
+    }
+    clean() {
+        this.cliente = {};
+    }
+}
 
 
 /***/ }),
@@ -4553,7 +4847,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: 'servicos-prestados', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_4__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], children: [
+        path: 'servicos-prestados', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_4__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]], data: {
+            roles: ['ROLE_ADMIN', 'ROLE_USER']
+        }, children: [
             { path: 'form', component: _servico_prestado_form_servico_prestado_form_component__WEBPACK_IMPORTED_MODULE_5__["ServicoPrestadoFormComponent"] },
             { path: 'form/:id', component: _servico_prestado_form_servico_prestado_form_component__WEBPACK_IMPORTED_MODULE_5__["ServicoPrestadoFormComponent"] },
             { path: 'lista', component: _servico_prestado_lista_servico_prestado_lista_component__WEBPACK_IMPORTED_MODULE_6__["ServicoPrestadoListaComponent"] },
@@ -4595,6 +4891,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_mask__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-mask */ "./node_modules/ngx-mask/fesm2015/ngx-mask.js");
 /* harmony import */ var _util_Date_Util__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../util/Date-Util */ "./src/app/util/Date-Util.ts");
 /* harmony import */ var ngx_pagination__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-pagination */ "./node_modules/ngx-pagination/dist/ngx-pagination.js");
+/* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! primeng/dropdown */ "./node_modules/primeng/fesm2015/primeng-dropdown.js");
+
 
 
 
@@ -4612,7 +4910,7 @@ ServicoPrestadoModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [
             _servico_prestado_form_servico_prestado_form_component__WEBPACK_IMPORTED_MODULE_5__["ServicoPrestadoFormComponent"],
-            _servico_prestado_lista_servico_prestado_lista_component__WEBPACK_IMPORTED_MODULE_6__["ServicoPrestadoListaComponent"]
+            _servico_prestado_lista_servico_prestado_lista_component__WEBPACK_IMPORTED_MODULE_6__["ServicoPrestadoListaComponent"],
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -4621,7 +4919,8 @@ ServicoPrestadoModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_router__WEBPACK_IMPORTED_MODULE_7__["RouterModule"],
             ngx_mask__WEBPACK_IMPORTED_MODULE_8__["NgxMaskModule"].forRoot(),
             _util_Date_Util__WEBPACK_IMPORTED_MODULE_9__["DateUtil"],
-            ngx_pagination__WEBPACK_IMPORTED_MODULE_10__["NgxPaginationModule"]
+            ngx_pagination__WEBPACK_IMPORTED_MODULE_10__["NgxPaginationModule"],
+            primeng_dropdown__WEBPACK_IMPORTED_MODULE_11__["DropdownModule"],
         ],
         exports: [
             _servico_prestado_form_servico_prestado_form_component__WEBPACK_IMPORTED_MODULE_5__["ServicoPrestadoFormComponent"],
@@ -4736,16 +5035,30 @@ let SidebarComponent = class SidebarComponent {
         this.tokenStorageService = tokenStorageService;
     }
     ngOnInit() {
+        this.showUrlUser = "/clientes";
+        this.returnPermission();
+    }
+    returnPermission() {
         const user = this.tokenStorageService.getUser();
         this.usuarioLogado = user.displayName + this.roles;
         this.roles = user.roles;
         this.showRoleAdmin = this.roles.includes('ROLE_ADMIN');
+        this.showUserRole = this.roles.includes('ROLE_USER');
         if (this.showRoleAdmin) {
             this.usuarioLogado = user.displayName + "- ADMIN";
         }
-        else {
-            this.usuarioLogado = user.displayName;
+        else if (this.roles.includes('ROLE_USER')) {
+            this.usuarioLogado = user.displayName + "- AVANÇADO";
         }
+        else if (this.roles.includes('USER')) {
+            this.usuarioLogado = user.displayName + "- BÁSICO";
+            this.showUrlUser = "/clientes/form";
+        }
+        var permission = false;
+        if (this.showRoleAdmin || this.showUserRole) {
+            permission = true;
+        }
+        return permission;
     }
     logout() {
         this.tokenStorageService.signOut();
@@ -4877,6 +5190,253 @@ const authInterceptorProviders = [
 
 /***/ }),
 
+/***/ "./src/app/usuarios/usuario-lista.component.css":
+/*!******************************************************!*\
+  !*** ./src/app/usuarios/usuario-lista.component.css ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3VzdWFyaW9zL3VzdWFyaW8tbGlzdGEuY29tcG9uZW50LmNzcyJ9 */");
+
+/***/ }),
+
+/***/ "./src/app/usuarios/usuario-lista.component.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/usuarios/usuario-lista.component.ts ***!
+  \*****************************************************/
+/*! exports provided: UsuarioListaComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsuarioListaComponent", function() { return UsuarioListaComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+
+
+
+
+let UsuarioListaComponent = class UsuarioListaComponent {
+    constructor(service, router) {
+        this.service = service;
+        this.router = router;
+        this.paginaAtual = 1;
+        this.valorPesquisado = "";
+        this.isLoading = false;
+    }
+    ngOnInit() {
+        this.isLoading = true;
+        this.service.getUserAll()
+            .subscribe(response => {
+            this.usuarios = response;
+            this.usuariosFilter = response;
+            this.filtrar(this.valorPesquisado);
+            this.isLoading = false;
+        }, erro => {
+            this.isLoading = false;
+            this.errors = erro.error.erros;
+            if (this.errors == undefined) {
+                this.errors = ["Ocorreu um erro ao carregar os usuários"];
+            }
+        });
+    }
+    close() {
+        this.errors = [];
+        this.success = false;
+    }
+    returnRolesDescription(user) {
+        var response = "";
+        user.roles.forEach((x, index) => {
+            if (index == 0) {
+                response = x.name;
+            }
+            else {
+                response = response + ", " + x.name;
+            }
+        });
+        return response;
+    }
+    filtrar(value) {
+        if (!value) {
+            this.usuarios = this.usuariosFilter;
+        }
+        else {
+            this.usuarios = this.usuariosFilter.filter(x => {
+                if (x.displayName.trim().toLowerCase().includes(value.trim().toLowerCase()) ||
+                    x.email.trim().toLowerCase().includes(value.trim().toLowerCase())) {
+                    return true;
+                }
+            });
+        }
+        this.valorPesquisado = value;
+    }
+    editarUsuario(user) {
+        this.isLoading = true;
+        this.close();
+        this.service.getRoleAll()
+            .subscribe(response => {
+            this.roles = response;
+            this.usuario = user;
+            this.isLoading = false;
+            this.usuario.roles.forEach(x => this.roles.filter(v => v.roleId == x.roleId)
+                .map(s => { s.check = true; }));
+        }, erro => {
+            this.errors = erro.error.erros;
+            this.isLoading = false;
+            if (this.errors == undefined) {
+                this.errors = ["Ocorreu um erro ao carregar a lista de permissões!"];
+            }
+        });
+    }
+    voltarParaListagem() {
+        this.usuario = null;
+        this.ngOnInit();
+        this.close();
+    }
+    VerificaStatus(event) {
+        this.usuario.enabled = event;
+    }
+    VerificaStatusRole(event, role) {
+        this.roles.filter(x => x.roleId == role.roleId).map(v => v.check = event);
+    }
+    onSubmit() {
+        this.roleIdenficado = [];
+        this.roles.filter(x => x.check).forEach(v => {
+            this.roleIdenficado.push(v);
+        });
+        if (this.roleIdenficado.length == 0) {
+            this.errors = ["O usuário deve possuir pelo menos uma permissão vinculada!"];
+        }
+        else {
+            this.isLoading = true;
+            this.close();
+            this.service.salvar(this.usuario, this.roleIdenficado)
+                .subscribe(response => {
+                this.success = true;
+                this.isLoading = false;
+            }, erro => {
+                this.errors = erro.error.erros;
+                if (this.errors == undefined) {
+                    this.errors = ["Ocorreu erro ao editar usuário!"];
+                }
+                this.isLoading = false;
+            });
+        }
+    }
+};
+UsuarioListaComponent.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+UsuarioListaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-usuario-lista',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./usuario-lista.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/usuarios/usuario-lista.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./usuario-lista.component.css */ "./src/app/usuarios/usuario-lista.component.css")).default]
+    })
+], UsuarioListaComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/usuarios/usuario-routing.module.ts":
+/*!****************************************************!*\
+  !*** ./src/app/usuarios/usuario-routing.module.ts ***!
+  \****************************************************/
+/*! exports provided: UsuarioRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsuarioRoutingModule", function() { return UsuarioRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _usuario_lista_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./usuario-lista.component */ "./src/app/usuarios/usuario-lista.component.ts");
+/* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth.guard */ "./src/app/auth.guard.ts");
+/* harmony import */ var _layout_layout_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../layout/layout.component */ "./src/app/layout/layout.component.ts");
+
+
+
+
+
+
+const routes = [
+    { path: 'usuario', component: _layout_layout_component__WEBPACK_IMPORTED_MODULE_5__["LayoutComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]], data: {
+            roles: ['ROLE_ADMIN']
+        }, children: [
+            { path: 'listar', component: _usuario_lista_component__WEBPACK_IMPORTED_MODULE_3__["UsuarioListaComponent"] },
+            { path: '', redirectTo: '/usuario/lista', pathMatch: 'full' }
+        ]
+    }
+];
+let UsuarioRoutingModule = class UsuarioRoutingModule {
+};
+UsuarioRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
+    })
+], UsuarioRoutingModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/usuarios/usuario.module.ts":
+/*!********************************************!*\
+  !*** ./src/app/usuarios/usuario.module.ts ***!
+  \********************************************/
+/*! exports provided: UsuarioModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsuarioModule", function() { return UsuarioModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var ngx_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-mask */ "./node_modules/ngx-mask/fesm2015/ngx-mask.js");
+/* harmony import */ var ngx_pagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-pagination */ "./node_modules/ngx-pagination/dist/ngx-pagination.js");
+/* harmony import */ var _usuario_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./usuario-routing.module */ "./src/app/usuarios/usuario-routing.module.ts");
+/* harmony import */ var _usuario_lista_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./usuario-lista.component */ "./src/app/usuarios/usuario-lista.component.ts");
+
+
+
+
+
+
+
+
+let UsuarioModule = class UsuarioModule {
+};
+UsuarioModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        declarations: [_usuario_lista_component__WEBPACK_IMPORTED_MODULE_7__["UsuarioListaComponent"]],
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+            _usuario_routing_module__WEBPACK_IMPORTED_MODULE_6__["UsuarioRoutingModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+            ngx_mask__WEBPACK_IMPORTED_MODULE_4__["NgxMaskModule"].forRoot(),
+            ngx_pagination__WEBPACK_IMPORTED_MODULE_5__["NgxPaginationModule"]
+        ],
+        exports: [
+            _usuario_lista_component__WEBPACK_IMPORTED_MODULE_7__["UsuarioListaComponent"],
+        ]
+    })
+], UsuarioModule);
+
+
+
+/***/ }),
+
 /***/ "./src/app/util/Date-Util.ts":
 /*!***********************************!*\
   !*** ./src/app/util/Date-Util.ts ***!
@@ -4961,17 +5521,11 @@ const environment = {
     //API_URL: "http://localhost:8080/api/",
     //AUTH_API: "http://localhost:8080/api/auth/",
     //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:4200/login",
-    //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google",
-    //GOOGLE_REDIRECT: "redirect_uri=http://localhost:4200/login",
     production: true,
     API_BASE_URL: 'https://servicosprestados.herokuapp.com',
     API_URL: "https://servicosprestados.herokuapp.com/api/",
     AUTH_API: "https://servicosprestados.herokuapp.com/api/auth/",
     GOOGLE_AUTH_URL: "https://servicosprestados.herokuapp.com/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app/login",
-    //GOOGLE_AUTH_URL: "http://localhost:8080/oauth2/authorization/google?redirect_uri=https://prestacaoservicos.netlify.app",
-    ClientId: 'my-angular-app',
-    clientSecret: '@321',
-    obterTokenUrl: '/oauth/token',
 };
 
 
@@ -5012,7 +5566,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /media/OS/BKP_Alex/eclipse-workspace/projetoPos/clientes-app/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/alex/Área de Trabalho/eclipse-workspace/projetoPos/clientes-app/src/main.ts */"./src/main.ts");
 
 
 /***/ })

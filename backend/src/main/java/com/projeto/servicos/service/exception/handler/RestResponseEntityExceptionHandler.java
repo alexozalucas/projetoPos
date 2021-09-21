@@ -17,11 +17,11 @@ import com.projeto.servicos.model.entity.dto.ApiResponse;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
-
+	/*
 	public RestResponseEntityExceptionHandler() {
 		super();
 	}
-
+	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex, final HttpHeaders headers, final HttpStatus status,
 			final WebRequest request) {
@@ -36,5 +36,5 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 			}
 		}).collect(Collectors.joining(", "));
 		return handleExceptionInternal(ex, new ApiResponse(false, error), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-	}
+	}*/
 }
