@@ -75,6 +75,7 @@ export class PrestacaoContasComponent implements OnInit {
               this.servicoPrestadoBuscaSelecionado = response.serviceProvided
               this.tipoPagamentoSelecionado.id = response.typePayment.id;
               this.relatorio = this.activatedRouter.snapshot.params.relatorio;
+              this.isLoading = false;
             },
             erro => {
               this.errors = erro.error.erros;
@@ -82,10 +83,13 @@ export class PrestacaoContasComponent implements OnInit {
               if (this.errors == undefined) {
                 this.errors = ["Ocorreu um erro carregar a prestação de contas!"]
               }
+              this.isLoading = false;
             }
           );
+      }else {
+        this.isLoading = false;
       }
-      this.isLoading = false;
+      
     });
 
 

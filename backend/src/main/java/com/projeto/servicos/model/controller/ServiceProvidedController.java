@@ -136,7 +136,7 @@ public class ServiceProvidedController {
 	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("/{id}")
 	public ServiceProvided getServiceProvided(@PathVariable Integer id) {
-
+		
 		return serviceProvidedRepository.findById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Serviço prestado não encontrado"));
 	}

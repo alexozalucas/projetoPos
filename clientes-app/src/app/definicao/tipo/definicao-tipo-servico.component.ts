@@ -37,7 +37,8 @@ export class DefinicaoTipoServico implements OnInit {
           .getTipoServicoById(this.id)
           .subscribe(
             response => {
-              this.tipoServico = response
+              this.tipoServico = response;
+              this.isLoading = false;
             }
             , erro => {
               this.errors = erro.error.erros;
@@ -45,11 +46,14 @@ export class DefinicaoTipoServico implements OnInit {
                 this.errors = ["Ocorreu erro ao carregar o tipo de serviço"]
               }         
               this.tipoServico = new TipoServico();
+              this.isLoading = false;
             }
           )
+      }else {
+        this.isLoading = false;
       }
     })
-    this.isLoading = false;
+    
   }
 
   close() {

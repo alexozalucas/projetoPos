@@ -72,7 +72,7 @@ public class ServiceController {
 	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("/typeservice/{id}")
 	public TypeService getTypeServiceById(@PathVariable Long id) {
-
+		
 		return typeServiceRepository.findById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tipo de serviço não encontrado"));
 

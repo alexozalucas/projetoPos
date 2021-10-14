@@ -84,11 +84,11 @@
                   <td>{{ agenda.title }}</td>
                   <td>{{ agenda.hourInitial +" à " + agenda.hourFinal}}</td>
                   <td>{{ agenda.flagConfirmation ? 'Confirmado' : 'Falta confirmar' }}</td>
-                  <td>
-                    <button class="btn btn-primary m-1" (click)="selecionarAgendaPorId(agenda.id)">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button class="btn btn-danger m-1" (click)="preparaDelecao(agenda)" data-toggle="modal"
+                  <td>                    
+                    <button class="btn btn-primary m-1" (click)="selecionarAgendaPorId(agenda.id)" >
+                      <i class="fa fa-eye"></i>
+                    </button>                    
+                    <button class="btn btn-danger m-1" (click)="preparaDelecao(agenda)" data-toggle="modal" *ngIf="(!agenda.flagConfirmation && returnPermission()) || (!returnPermission())"
                       data-target="#modalDeSelecao">
                       <i class="fa fa-trash"></i>
                     </button>
@@ -163,7 +163,7 @@
                   Hora Inicial: *
                 </label>
                 <input type="time" class="form-control" [(ngModel)]="agenda.hourInitial" name="hourInitial"
-                  autocomplete="off" />
+                  autocomplete="off" [disabled]="!disabledAgenda()"/>
               </div>
             </div>
 
@@ -173,7 +173,7 @@
                   Hora Final: *
                 </label>
                 <input type="time" class="form-control" [(ngModel)]="agenda.hourFinal" name="hourFinal"
-                  autocomplete="off" />
+                  autocomplete="off" [disabled]="!disabledAgenda()" />
               </div>
             </div>
           </div>
@@ -186,7 +186,7 @@
                 <label>
                   Titulo: *
                 </label>
-                <input type="text" class="form-control" [(ngModel)]="agenda.title" name="title" autocomplete="off" />
+                <input type="text" class="form-control" [(ngModel)]="agenda.title" name="title" autocomplete="off" [disabled]="!disabledAgenda()"/>
               </div>
             </div>
 
@@ -197,7 +197,7 @@
               <div class="form-group">
                 <label>Descrição: </label>
                 <textarea class="form-control" Maxlength="1200" id="observation" rows="5"
-                  [ngModelOptions]="{standalone:true}" [(ngModel)]="agenda.observation"></textarea>
+                  [ngModelOptions]="{standalone:true}" [(ngModel)]="agenda.observation" [disabled]="!disabledAgenda()"></textarea>
               </div>
             </div>
           </div>
@@ -237,21 +237,21 @@
 
           <div class="row" *ngIf="!isLoading">
             <div class="col-md-5">
-              <button type="submit" class="btn btn-success m-1 " *ngIf="!agenda.id">
+              <button type="submit" class="btn btn-success m-1 " *ngIf="!agenda.id && disabledAgenda()" >
                 <i class="fa fa-save"></i> Salvar
               </button>
-              <button type="submit" class="btn btn-primary m-1 " *ngIf="agenda.id">
+              <button type="submit" class="btn btn-primary m-1 " *ngIf="agenda.id && disabledAgenda()">
                 <i class="fa fa-sync-alt"></i> Atualizar
               </button>
               <button type="button" class="btn btn-danger m-1" (click)="voltarParaListagemAgenda()">
                 <i class="fa fa-arrow-alt-circle-left"></i> Voltar
               </button>
               <button type="button" class="btn btn-warning m-1" (click)="openModalComponents()"
-                *ngIf="clienteListCache.length == 0">
+                *ngIf="clienteListCache.length == 0 && disabledAgenda()">
                 <i class="fa fa-plus"></i> Clientes
               </button>
               <button type="button" class="btn btn-primary m-1" (click)="openModalComponents()"
-                *ngIf="clienteListCache.length > 0">
+                *ngIf="clienteListCache.length > 0 && disabledAgenda()">
                 <i class="fa fa-edit"></i> Clientes
               </button>
             </div>
@@ -460,11 +460,11 @@
                 <button type="button" class="btn btn-warning ml-1" (click)="novoCadastroTipoDeAnotacao()">
                   <i class="fa fa-plus"></i>
                 </button>
-                <button type="button" class="btn btn-danger ml-1" [disabled]="!this.tipoAnotacao.id"
+                <button type="button" class="btn btn-danger ml-1" [disabled]="!anotacao.typeAnnotation.id"
                   (click)="buscarTipoDeAnotacaoPorId()" data-toggle="modal" data-target="#modalDeletarTipoAnotacao">
                   <i class="fa fa-trash"></i>
                 </button>
-                <button type="button" class="btn btn-primary ml-1" [disabled]="!this.tipoAnotacao.id"
+                <button type="button" class="btn btn-primary ml-1" [disabled]="!anotacao.typeAnnotation.id"
                   (click)="editarTipoDeAnotacao()">
                   <i class="fa fa-edit"></i>
                 </button>

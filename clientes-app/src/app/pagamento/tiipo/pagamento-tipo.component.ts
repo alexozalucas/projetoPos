@@ -38,8 +38,10 @@ export class Pagamento implements OnInit {
         this.service
           .getTipoServicoById(this.id)
           .subscribe(
-            response => this.tipoPagamento = response
-            , erro => {
+            response => {
+              this.tipoPagamento = response;
+              this.isLoading = false;
+            }, erro => {
               this.tipoPagamento = new TipoPagamento()
               this.isLoading = false;
               this.errors = erro.error.erros
@@ -47,8 +49,10 @@ export class Pagamento implements OnInit {
                 this.errors = ["Ocorreu um erro ao carregar os tipos de pagamento"]
               }
             });
+      } else {
+        this.isLoading = false;
       }
-      this.isLoading = false;
+
     })
   }
 
@@ -66,11 +70,11 @@ export class Pagamento implements OnInit {
 
       this.service.atualizar(this.tipoPagamento)
         .subscribe(response => {
-          this.success = true;    
-          this.isLoading = false;   
+          this.success = true;
+          this.isLoading = false;
           this.tipoPagamento = response;
           this.mensagemSucesso = "Tipo de pagamento atualizado com sucesso";
-        }, erro => {          
+        }, erro => {
           this.isLoading = false;
           this.errors = erro.error.erros
           if (this.errors == undefined) {
@@ -83,10 +87,10 @@ export class Pagamento implements OnInit {
       this.service.salvar(this.tipoPagamento)
         .subscribe(response => {
           this.success = true;
-          this.isLoading = false;         
+          this.isLoading = false;
           this.tipoPagamento = response;
           this.mensagemSucesso = "Tipo de pagamento salvo com sucesso";
-        }, erro => {          
+        }, erro => {
           this.isLoading = false;
           this.errors = erro.error.erros
           if (this.errors == undefined) {

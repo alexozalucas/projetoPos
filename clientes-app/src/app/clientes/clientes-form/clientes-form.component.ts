@@ -44,16 +44,20 @@ export class ClientesFormComponent implements OnInit {
           .getClientesById(this.id)
           .subscribe(
             response => {
-              this.cliente = response;              
+              this.cliente = response;    
+              this.isLoading = false;          
             }
             , reject => {
-              this.cliente = new Cliente();            
+              this.cliente = new Cliente();   
+                     
             }
           )
+      }else {
+        this.isLoading = false; 
       }
       
     });
-    this.isLoading = false;
+    
   }
 
   returnPermission() {

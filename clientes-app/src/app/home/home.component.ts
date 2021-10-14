@@ -158,6 +158,13 @@ export class HomeComponent implements OnInit {
 
   }
 
+  disabledAgenda(): boolean{
+    if((!this.agenda.flagConfirmation && this.returnPermission()) || (!this.returnPermission())){
+      return true;
+    }
+    return false;
+  }
+
   onSubmit() {
 
     this.isLoading = true;

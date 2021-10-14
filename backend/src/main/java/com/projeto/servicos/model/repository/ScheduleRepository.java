@@ -19,10 +19,10 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 	
 	@Query(" select  CASE WHEN COUNT(*) > 0 THEN TRUE ELSE FALSE END from Schedule s " +
 	" where ((hourInitial < :hourInitial and hourFinal >= :hourInitial) or (hourInitial >= :hourInitial and \n"
-	+ "			hourFinal <= :hourFinal) or (hourInitial <= :hourFinal and hourFinal > :hourFinal)) and s.date = :data ")
+	+ "			hourFinal <= :hourFinal) or (hourInitial <= :hourFinal and hourFinal > :hourFinal)) and s.date = :data and s.id <> :id ")
 	Boolean existsByHourAndDate(		
 			@Param("hourInitial") LocalTime hourInitial, @Param("hourFinal") LocalTime hourFinal,
-			@Param("data") LocalDate data);
+			@Param("data") LocalDate data ,@Param("id") Long id );
 	
 
 	

@@ -53,13 +53,18 @@ export class ServicoPrestadoFormComponent implements OnInit {
           .subscribe(
             response => {
               this.montaServicoPrestado(response);
+              this.isLoading = false;
             }, erro => {       
               this.servico = new ServicoPrestado();       
               this.errors = erro.error.erros
               if (this.errors == undefined) {
                 this.errors = ["Ocorreu um erro ao carregar serviço prestado!"]
               }
+              this.isLoading = false;
             });
+      }else {
+        this.isLoading = false;
+
       }
     });
 
@@ -91,7 +96,7 @@ export class ServicoPrestadoFormComponent implements OnInit {
         });
     }
 
-    this.isLoading = false;
+    
 
   }
 

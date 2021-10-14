@@ -142,7 +142,7 @@ public class AccountabilityController {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tipo de pagamento não encontrado"));
 		
 		if (this.accountabilityRepository.existsByTypePayment(typePayment)) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, "Tipo de pagamento vinculado a um serviço!");
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Tipo de pagamento vinculado a uma prestação de contas");
 		}
 
 		typePaymentRepository.delete(typePayment);
@@ -151,8 +151,7 @@ public class AccountabilityController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/typepayment")	
-	public List<TypePayment> obterTodos() {		
-		
+	public List<TypePayment> obterTodos() {			
 		return typePaymentRepository.findAll();
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.projeto.servicos.model.entity.dto.ApiResponse;
 import com.projeto.servicos.model.entity.dto.JwtAuthenticationResponse;
@@ -55,8 +56,9 @@ public class AuthController {
 		try {
 			userService.registerNewUser(signUpRequest);
 		} catch (UserAlreadyExistAuthenticationException e) {
-			log.error("Exception Ocurred", e);
-			return new ResponseEntity<>(new ApiResponse(false, "Endereço de email já está em uso"), HttpStatus.BAD_REQUEST);
+			log.error("Ocorreu uma exceção", e);
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Endereço de email já está em uso");
+			//return new ResponseEntity<>(new ApiResponse(false, "Endereço de email já está em uso"), HttpStatus.BAD_REQUEST);
 		}
 		return ResponseEntity.ok().body(new ApiResponse(true, "Usuário registrado com sucesso"));
 	}

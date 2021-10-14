@@ -35,7 +35,7 @@ public class ClientController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Client salve(@RequestBody @Valid Client client) {
+	public Client save(@RequestBody @Valid Client client) {
 
 		if (repository.existsByCpf(client.getCpf())) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, "CPF já cadastrado");
@@ -46,8 +46,8 @@ public class ClientController {
 
 	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
 	@GetMapping("{id}")
-	public Client getClientById(@PathVariable Integer id) {
-
+	public Client getClientById(@PathVariable Integer id) {		
+		
 		return repository.findById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "cliente não encontrado"));
 	}

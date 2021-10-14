@@ -39,6 +39,7 @@ public class ScheduleController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public void saveValidate(@RequestBody @Valid ScheduleDTO dto) {
 		
+		Long id = dto.getId();
 		LocalDate data = LocalDate.parse(dto.getDate(), formatter);
 		Schedule schedule = new Schedule();
 		schedule.setId(dto.getId());
@@ -54,8 +55,13 @@ public class ScheduleController {
 			schedule.setFlagConfirmation(dto.getFlagConfirmation());
 		}
 		
-		if(scheduleRepository.existsByHourAndDate(schedule.getHourInitial(), schedule.getHourFinal(), schedule.getDate())) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, "Nesta data e neste intervalor de horário já possui agenda cadastrada!");
+		if(id == null) {
+			id = (long) 0;
+		}
+	
+		
+		if(scheduleRepository.existsByHourAndDate(schedule.getHourInitial(), schedule.getHourFinal(), schedule.getDate(), id)) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Nesta data e neste intervalo de horário já possui agenda cadastrada!");
 		}
 		
 		if(schedule.getHourInitial().isAfter(schedule.getHourFinal())) {
@@ -70,6 +76,7 @@ public class ScheduleController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public void save(@RequestBody @Valid ScheduleDTO dto) {
 		
+		Long id = dto.getId();
 		LocalDate data = LocalDate.parse(dto.getDate(), formatter);
 		Schedule schedule = new Schedule();
 		schedule.setId(dto.getId());
@@ -82,9 +89,10 @@ public class ScheduleController {
 		
 		if(dto.getId() == null) {
 			schedule.setFlagConfirmation(false);
+			id = (long) 0;
 		}
 		
-		if(scheduleRepository.existsByHourAndDate(schedule.getHourInitial(), schedule.getHourFinal(), schedule.getDate())) {
+		if(scheduleRepository.existsByHourAndDate(schedule.getHourInitial(), schedule.getHourFinal(), schedule.getDate(), id)) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, "Nesta data e neste intervalor de horário já possui agenda cadastrada!");
 		}
 		

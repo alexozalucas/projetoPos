@@ -29,8 +29,13 @@ export class PagamentoTipoLista implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-
     this.close();
+    this.listarTipoPagamento();
+    
+  }
+
+  listarTipoPagamento(){
+   
     this.isLoading = true;
     this.service.getTipoPagamento()
       .subscribe(response => {
@@ -45,6 +50,7 @@ export class PagamentoTipoLista implements OnInit {
           this.errors = ["Ocorreu um erro ao carregar os tipos de pagamento"]
         }
       });
+
   }
 
   public novoCadastro() {
@@ -67,8 +73,9 @@ export class PagamentoTipoLista implements OnInit {
     this.service.deletar(this.tipoPagamentoSelecionado)
       .subscribe(response => {
         this.isLoading = false
-        this.mensagemSucesso = "Tipo de pagamento deletado com sucesso: "
-        this.ngOnInit();
+        this.success = true;
+        this.mensagemSucesso = "Tipo de pagamento deletado com sucesso "
+        this.listarTipoPagamento();
       }, erro => {
         this.isLoading = false;
         this.errors = erro.error.erros
